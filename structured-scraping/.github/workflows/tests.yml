@@ -1,0 +1,46 @@
+# GitHub Actions workflow for automated testing
+# Runs tests on pull requests to the master branch
+---
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [
+          ubuntu-latest,
+          # macos-latest,
+          # windows-latest
+        ]
+        python-version: ["3.12"]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+          environment-file: environment.yml
+          activate-environment: idenfo-struct-scrape
+
+      - name: Run tests with pytest
+        run: |
+          conda run -n idenfo-struct-scrape pytest tests/ -v --tb=short --cov-report=xml --cov-report=term
