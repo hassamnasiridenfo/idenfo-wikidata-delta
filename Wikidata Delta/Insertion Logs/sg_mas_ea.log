@@ -1,0 +1,4 @@
+2026-04-08 16:58:11,090-ERROR-sg_mas_ea_Insertion logs-Error inserting data into / main table: 1292 (22007): Incorrect date value: 'NULL' for column 'added_on' at row 1
+2026-04-08 16:58:11,092-ERROR-sg_mas_ea_Insertion logs-Error inserting data into / main table: 1292 (22007): Incorrect date value: 'NULL' for column 'added_on' at row 1
+2026-04-08 17:17:29,342-INFO-sg_mas_ea_Insertion logs-Successfully inserted data into 839509
+2026-04-08 17:17:29,347-INFO-sg_mas_ea_Insertion logs-Successfully inserted data into 839510
