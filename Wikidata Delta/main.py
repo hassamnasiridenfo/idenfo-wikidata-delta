@@ -2,7 +2,6 @@ import schedule
 import time
 from datetime import datetime
 import os
-
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,6 +24,7 @@ LOG_EMAIL_SUBJECT = os.getenv("log_email_subject")
 DELTA_LOG_EMAIL_CC = os.getenv("delta_log_email_cc").split(",")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOGS_DIR = os.path.join(BASE_DIR, "Logs")
 
 # Get folder names from .env
 folder_names = os.getenv("file_paths").split(",")
@@ -33,8 +33,7 @@ delta_file_path = os.getenv("delta_log_file_path")
 FILE_PATHS = [
     os.path.join(BASE_DIR, folder.strip()).replace("\\", "/") for folder in folder_names
 ]
-DELTA_LOG_FILE_PATH = os.path.join(BASE_DIR, delta_file_path.strip()).replace("\\", "/")
-
+DELTA_LOG_FILE_PATH = os.path.join(LOGS_DIR, delta_file_path.strip()).replace("\\", "/")
 
 
 import logging
@@ -49,8 +48,7 @@ from insertion_script import insertion_code
 from cities_extractor import cities_extractor
 from qatar_pep_scrapper import qatar_pep_scrapper
 from oman_pep_scrapper import oman_pep_scrapper
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOGS_DIR = os.path.join(BASE_DIR, "Logs")
+
 INSERTION_LOGS_DIR = os.path.join(BASE_DIR, "Insertion Logs")
 
 

@@ -21,11 +21,44 @@ import sys
 import time 
 from pathlib import Path 
 from datetime import datetime
-from dotenv import load_dotenv 
+from sending_delta_excel_email import send_emails
+from sending_delta_log_file import send_main_delta_logs
+from dotenv import load_dotenv
 
-  
+load_dotenv()
+HOST_NAME = os.getenv("host")
+USER = os.getenv("user")
+PASSWORD = os.getenv("password")
+DATABASE = os.getenv("database")
+DB_PORT = os.getenv("db_port")
+SMTP_PORT = os.getenv("smtp_port")
+SMTP_SERVER = os.getenv("smtp_server")
+SMTP_USER = os.getenv("smtp_user")
+SMTP_PASSWORD = os.getenv("smtp_pswd")
+EMAIL_FROM = os.getenv("email_from")
+EMAIL_NAME = os.getenv("email_name")
+EMAIL_TO = os.getenv("email_to").split(",")
+EMAIL_CC = os.getenv("email_cc").split(",")
+EMAIL_SUBJECT = os.getenv("email_subject")
+ERROR_LOG_EMAIL_SUBJECT = os.getenv("error_log_email_subject")
+LOG_EMAIL_SUBJECT = os.getenv("log_email_subject")
+DELTA_LOG_EMAIL_CC = os.getenv("delta_log_email_cc").split(",")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-load_dotenv() 
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+LOGS_DIR = os.path.join(BASE_DIR, "Logs")
+
+# Get folder names from .env
+folder_names = os.getenv("file_paths").split(",")
+delta_file_path = os.getenv("delta_log_file_path")
+# Join base directory with each folder name
+FILE_PATHS = [
+    os.path.join(BASE_DIR, folder.strip()).replace("\\", "/") for folder in folder_names
+]
+
+DELTA_LOG_FILE_PATH = LOGS_DIR
+
 
 logging.basicConfig(level=logging.INFO, 
 
@@ -34,8 +67,7 @@ logging.basicConfig(level=logging.INFO,
 logger = logging.getLogger('orchestrator')
 
 # Add FileHandler to log to Logs folder
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LOGS_DIR = os.path.join(BASE_DIR, "Logs")
+
 os.makedirs(LOGS_DIR, exist_ok=True)
 
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s')
@@ -402,6 +434,32 @@ if __name__ == '__main__':
         raw_file_path=sys.argv[2] if len(sys.argv) > 2 else None, 
 
     ) 
+
+    send_emails(
+        EMAIL_FROM,
+        EMAIL_NAME,
+        EMAIL_TO,
+        EMAIL_CC,
+        SMTP_SERVER,
+        SMTP_PORT,
+        SMTP_USER,
+        SMTP_PASSWORD,
+        EMAIL_SUBJECT,
+        FILE_PATHS,
+    )
+    send_main_delta_logs(
+        EMAIL_FROM,
+        EMAIL_NAME,
+        EMAIL_TO,
+        DELTA_LOG_EMAIL_CC,
+        SMTP_SERVER,
+        SMTP_PORT,
+        SMTP_USER,
+        SMTP_PASSWORD,
+        LOG_EMAIL_SUBJECT,
+        ERROR_LOG_EMAIL_SUBJECT,
+        LOGS_DIR,
+    )
 
     sys.exit(0 if success else 1) 
 
