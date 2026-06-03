@@ -1,0 +1,1122 @@
+2026-06-02 16:00:33,906 - INFO - orchestrator - ============================================================
+2026-06-02 16:00:33,907 - INFO - orchestrator - country=Uzbekistan | tag=uz_gen | file=pep_uzbekistan_living_relevant_20260602_104802.xlsx
+2026-06-02 16:00:33,907 - INFO - orchestrator - ============================================================
+2026-06-02 16:01:26,966 - INFO - orchestrator - [DELTA] Processing record #0: 'Oybek Kasimov'
+2026-06-02 16:01:26,970 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781029. Checking child tables...
+2026-06-02 16:01:26,975 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Касимов Ойбек Омілович', 'Касимов Ойбек Омилович', 'Oybek Kasimov Omilovich', 'Oybek Omilovich Kasimov', 'Oybek Kasimov']
+      Scraper=['Oybek Kasimov', 'Oybek Omilovich Kasimov', 'Oybek Kasimov Omilovich']
+      To remove=['Касимов Ойбек Омілович', 'Касимов Ойбек Омилович']  To add=[]
+2026-06-02 16:01:26,995 - INFO - orchestrator - [DELTA]   'Oybek Kasimov' (main_id=781029) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:26,996 - INFO - orchestrator - [DELTA] Processing record #1: 'Robaxon Mahmudova'
+2026-06-02 16:01:26,999 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:28,823 - INFO - orchestrator - [DELTA]   'Robaxon Mahmudova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:28,824 - INFO - orchestrator - [DELTA] Processing record #2: 'Ilhom Mahkamov'
+2026-06-02 16:01:28,829 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781031. Checking child tables...
+2026-06-02 16:01:28,830 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Илхом Махкамов', 'Ilhom Rustamovich Mahkamov', 'Ilhom Mahkamov', '伊尔霍姆·鲁斯塔莫维奇·马赫卡莫夫', 'Махкамов Илхом Рустамович']
+      Scraper=['Ilhom Mahkamov', 'Илхом Махкамов', 'Ilhom Rustamovich Mahkamov']
+      To remove=['伊尔霍姆·鲁斯塔莫维奇·马赫卡莫夫', 'Махкамов Илхом Рустамович']  To add=[]
+2026-06-02 16:01:28,836 - INFO - orchestrator - [DELTA]   'Ilhom Mahkamov' (main_id=781031) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:28,837 - INFO - orchestrator - [DELTA] Processing record #3: 'Murat Kamalov'
+2026-06-02 16:01:28,838 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781032. Checking child tables...
+2026-06-02 16:01:28,839 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Murod Kallibekovich Kamolov', 'Murat Kamalov', 'Камалов Мурат Каллибекович', 'ムラート・カマロフ', 'مراد كاليبيكوفيتش كمالوف', 'Murat Kallimbekovich Kamalov', 'Murat Kallibekovich Kamalov', 'Murod Kamolov', 'مراد كمالوف']
+      Scraper=['مراد كاليبيكوفيتش كمالوف', 'Murat Kamalov', 'Murat Kallibekovich Kamalov', 'Murat Kallimbekovich Kamalov', 'Murod Kallibekovich Kamolov']
+      To remove=['Камалов Мурат Каллибекович', 'ムラート・カマロフ', 'Murod Kamolov', 'مراد كمالوف']  To add=[]
+2026-06-02 16:01:28,841 - INFO - orchestrator - [DELTA]   'Murat Kamalov' (main_id=781032) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:28,842 - INFO - orchestrator - [DELTA] Processing record #4: 'Maqsuda Vorisova'
+2026-06-02 16:01:28,843 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781033. Checking child tables...
+2026-06-02 16:01:28,844 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Maqsuda Azizovna Vorisova', 'Варисова Максуда Азизовна', 'Maqsuda Varisova', 'مقصودة فوريسوف', 'Մաքսուդա Վարիսովա', '马克苏达·瓦里索娃', 'Maqsuda Vorisova']
+      Scraper=['مقصوده عزیزوونا وارثوا', 'Maqsuda Varisova', 'Maqsuda Azizovna Vorisova']
+      To remove=['Варисова Максуда Азизовна', 'مقصودة فوريسوف', 'Մաքսուդա Վարիսովա', '马克苏达·瓦里索娃', 'Maqsuda Vorisova']  To add=['مقصوده عزیزوونا وارثوا']
+2026-06-02 16:01:28,846 - INFO - orchestrator - [DELTA]   'Maqsuda Vorisova' (main_id=781033) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:28,847 - INFO - orchestrator - [DELTA] Processing record #5: 'General'
+2026-06-02 16:01:28,849 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:30,681 - INFO - orchestrator - [DELTA]   'General' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:30,682 - INFO - orchestrator - [DELTA] Processing record #6: 'Nazir Sobirov'
+2026-06-02 16:01:30,689 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:32,483 - INFO - orchestrator - [DELTA]   'Nazir Sobirov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:32,484 - INFO - orchestrator - [DELTA] Processing record #7: 'Dilshod Xamzayev'
+2026-06-02 16:01:32,490 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781035:
+2026-06-02 16:01:32,491 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      gender: DB='NULL' vs Scraper='Male'
+2026-06-02 16:01:34,494 - INFO - orchestrator - [DELTA]   'Dilshod Xamzayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:34,495 - INFO - orchestrator - [DELTA] Processing record #8: 'Ravshanbek Qurbonov'
+2026-06-02 16:01:34,500 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781036. Checking child tables...
+2026-06-02 16:01:34,502 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Qurbonov Ravshanbek Davletovich', 'Курбанов Равшанбек Давлетович', 'Ravshanbek Qurbonov', 'Ravshanbek Davletovich Qurbonov']
+      Scraper=['Ravshanbek Davletovich Qurbonov', 'Qurbonov Ravshanbek Davletovich']
+      To remove=['Курбанов Равшанбек Давлетович', 'Ravshanbek Qurbonov']  To add=[]
+2026-06-02 16:01:34,510 - INFO - orchestrator - [DELTA]   'Ravshanbek Qurbonov' (main_id=781036) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:34,510 - INFO - orchestrator - [DELTA] Processing record #9: 'Shoumarov Gayrat Baxromovich'
+2026-06-02 16:01:34,512 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781038. Checking child tables...
+2026-06-02 16:01:34,512 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Шоумаров Гайрат Бахромович', 'Gʻayrat Shoumarov', "Shoumarov G'ayrat Baxromovich"]
+      Scraper=["Shoumarov G'ayrat Baxromovich", '[Gʻayrat Shoumarov]']
+      To remove=['Шоумаров Гайрат Бахромович', 'Gʻayrat Shoumarov']  To add=['[Gʻayrat Shoumarov]']
+2026-06-02 16:01:34,515 - INFO - orchestrator - [DELTA]   'Shoumarov Gayrat Baxromovich' (main_id=781038) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:34,516 - INFO - orchestrator - [DELTA] Processing record #10: 'Bakhtiyor Fazilov'
+2026-06-02 16:01:34,517 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781039. Checking child tables...
+2026-06-02 16:01:34,517 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Baxtiyor Fozilov', 'Bakhtiyor Fazylov', 'Bakhtiyor Fazilov', 'Фазылов Бахтиёр Шухратович', 'Bakhtiyor Shukhratovich Fazilov', 'Baxtiyor Shuhratovich Fozilov']
+      Scraper=['Baxtiyor Shuhratovich Fozilov', 'Bakhtiyor Fazilov', 'Bakhtiyor Shukhratovich Fazilov']
+      To remove=['Baxtiyor Fozilov', 'Bakhtiyor Fazylov', 'Фазылов Бахтиёр Шухратович']  To add=[]
+2026-06-02 16:01:34,520 - INFO - orchestrator - [DELTA]   'Bakhtiyor Fazilov' (main_id=781039) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:34,520 - INFO - orchestrator - [DELTA] Processing record #11: 'Navruz Ibodullayevich Rizayev'
+2026-06-02 16:01:34,522 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:36,319 - INFO - orchestrator - [DELTA]   'Navruz Ibodullayevich Rizayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:36,320 - INFO - orchestrator - [DELTA] Processing record #12: 'Risboy Jorayev'
+2026-06-02 16:01:36,325 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781041. Checking child tables...
+2026-06-02 16:01:36,327 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Risboy Joʻrayev', 'Джураев Рисбай Хайдарович']
+      Scraper=['[Risboy Joʻrayev]']
+      To remove=['Risboy Joʻrayev', 'Джураев Рисбай Хайдарович']  To add=['[Risboy Joʻrayev]']
+2026-06-02 16:01:36,335 - INFO - orchestrator - [DELTA]   'Risboy Jorayev' (main_id=781041) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:36,336 - INFO - orchestrator - [DELTA] Processing record #13: 'Dilnozaxon Kattaxonova'
+2026-06-02 16:01:36,337 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781042. Checking child tables...
+2026-06-02 16:01:36,338 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['ديلنوزاخون كاتاخونوفا', 'Dilnozaxon Kattaxonova', 'ディルノザホン・カッタホノヴァ', 'Дилнозахон Каттахонова', 'Дільнозахон Каттахонова']
+      Scraper=['Dilnozaxon Kattaxanova']
+      To remove=['ديلنوزاخون كاتاخونوفا', 'Dilnozaxon Kattaxonova', 'ディルノザホン・カッタホノヴァ', 'Дилнозахон Каттахонова', 'Дільнозахон Каттахонова']  To add=['Dilnozaxon Kattaxanova']
+2026-06-02 16:01:36,340 - INFO - orchestrator - [DELTA]   'Dilnozaxon Kattaxonova' (main_id=781042) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:36,341 - INFO - orchestrator - [DELTA] Processing record #14: 'Zokir Almatov'
+2026-06-02 16:01:36,343 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781043:
+2026-06-02 16:01:36,344 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='NULL' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/b/b9/Zakir_Almatov.jpg'
+2026-06-02 16:01:38,263 - INFO - orchestrator - [DELTA]   'Zokir Almatov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:38,264 - INFO - orchestrator - [DELTA] Processing record #15: 'Zulaykho Makhkamova'
+2026-06-02 16:01:38,270 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781044:
+2026-06-02 16:01:38,271 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='NULL' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/c/c2/Zulayho_Mahkamova_2026.jpg'
+2026-06-02 16:01:40,104 - INFO - orchestrator - [DELTA]   'Zulaykho Makhkamova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:40,105 - INFO - orchestrator - [DELTA] Processing record #16: 'Rustam Jorayev'
+2026-06-02 16:01:40,112 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781045:
+2026-06-02 16:01:40,113 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='https://upload.wikimedia.org/wikipedia/commons/b/b6/NOC_Uzbekistan_Archery_2_(cropped).jpg' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/b/bd/Rustam_Juraev.jpg'
+2026-06-02 16:01:42,032 - INFO - orchestrator - [DELTA]   'Rustam Jorayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:42,033 - INFO - orchestrator - [DELTA] Processing record #17: 'Ruslan Mirzaev'
+2026-06-02 16:01:42,039 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781046:
+2026-06-02 16:01:42,039 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      desc: DB='NULL' vs Scraper='Uzbek Politician'
+2026-06-02 16:01:43,788 - INFO - orchestrator - [DELTA]   'Ruslan Mirzaev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:43,789 - INFO - orchestrator - [DELTA] Processing record #18: 'Odil Abdurakhmanov'
+2026-06-02 16:01:43,794 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781047. Checking child tables...
+2026-06-02 16:01:43,796 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Одил Каландарович Абдурахманов', 'Odil Abdurakhmanov', 'Odil Abdurahmonov', 'ओडिल अब्दुरखमानोव्ह']
+      Scraper=['Odil Abdurahmonov']
+      To remove=['Одил Каландарович Абдурахманов', 'Odil Abdurakhmanov', 'ओडिल अब्दुरखमानोव्ह']  To add=[]
+2026-06-02 16:01:43,802 - INFO - orchestrator - [DELTA]   'Odil Abdurakhmanov' (main_id=781047) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:43,803 - INFO - orchestrator - [DELTA] Processing record #19: 'Aziz Voitov'
+2026-06-02 16:01:43,804 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781048. Checking child tables...
+2026-06-02 16:01:43,805 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Aziz Voitov', 'Воитов Азиз Ботирович', 'Азиз Воитов']
+      Scraper=['Aziz Voitov', 'Азиз Воитов']
+      To remove=['Воитов Азиз Ботирович']  To add=[]
+2026-06-02 16:01:43,807 - INFO - orchestrator - [DELTA]   'Aziz Voitov' (main_id=781048) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:43,807 - INFO - orchestrator - [DELTA] Processing record #20: 'Zhurabek Mirzamakhmudov'
+2026-06-02 16:01:43,809 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781049:
+2026-06-02 16:01:43,810 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='https://upload.wikimedia.org/wikipedia/commons/3/31/Bilateral_Meeting_Uzbekistan_(gc67_0428)_(cropped).jpg' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/3/3d/Mirzamahmudov_Jo‘rabek_Tursunpo‘latovich_(cropped).jpg'
+2026-06-02 16:01:45,780 - INFO - orchestrator - [DELTA]   'Zhurabek Mirzamakhmudov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:45,781 - INFO - orchestrator - [DELTA] Processing record #21: 'Akbar Tashkulov'
+2026-06-02 16:01:45,786 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781050. Checking child tables...
+2026-06-02 16:01:45,788 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Toshqulov Akbar Joraboyevich', 'Akbar Toshqulov', 'Ташкулов Акбар Джурабаевич Акбар Ташкулов', 'Toshqulov Akbar', 'Акбар Ташкулов', 'Akbar Tashkulov', 'Ташкулов Акбар Джурабаевич']
+      Scraper=['Toshqulov Akbar Joraboyevich', 'Акбар Ташкулов', 'Ташкулов Акбар Джурабаевич Акбар Ташкулов', 'Toshqulov Akbar', 'Akbar Tashkulov']
+      To remove=['Akbar Toshqulov', 'Ташкулов Акбар Джурабаевич']  To add=[]
+2026-06-02 16:01:45,795 - INFO - orchestrator - [DELTA]   'Akbar Tashkulov' (main_id=781050) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:45,796 - INFO - orchestrator - [DELTA] Processing record #22: 'Anvar Salihbayev'
+2026-06-02 16:01:45,799 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:47,740 - INFO - orchestrator - [DELTA]   'Anvar Salihbayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:47,741 - INFO - orchestrator - [DELTA] Processing record #23: 'Polat Maxsetbaev'
+2026-06-02 16:01:47,746 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781051. Checking child tables...
+2026-06-02 16:01:47,748 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Полат Махсетбаев', 'Polat Maxsetbayev', 'Пўлат Махсетбаэв', "Po'lat Maxsetbaev", 'Maxsetbaev Polat Maxsetbay Uli', 'Maxsetbaev Poʻlat Maxsetbay oʻgʻli', 'Махсетбаэв Пўлат Махсетбай ўғли', 'Polat Maxsetbaev']
+      Scraper=['Polat Maxsetbaev', 'Maxsetbaev Polat Maxsetbay Uli', 'Maxsetbaev Poʻlat Maxsetbay oʻgʻli', 'Polat Maxsetbayev', 'Махсетбаэв Пўлат Махсетбай ўғли']
+      To remove=['Полат Махсетбаев', 'Пўлат Махсетбаэв', "Po'lat Maxsetbaev"]  To add=[]
+2026-06-02 16:01:47,754 - INFO - orchestrator - [DELTA]   'Polat Maxsetbaev' (main_id=781051) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:47,755 - INFO - orchestrator - [DELTA] Processing record #24: 'Hasanboy Burxonov'
+2026-06-02 16:01:47,756 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781052:
+2026-06-02 16:01:47,757 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='NULL' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/5/5d/Хасанбой_Бурханов_в_ОБСЕ.jpg'
+2026-06-02 16:01:49,599 - INFO - orchestrator - [DELTA]   'Hasanboy Burxonov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:49,600 - INFO - orchestrator - [DELTA] Processing record #25: 'Shavkat Umurzakov'
+2026-06-02 16:01:49,605 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781053. Checking child tables...
+2026-06-02 16:01:49,607 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Shavkat Umurzoqov', 'Умурзаков Шавкат Буранович', 'Szawkat Umurzakov']
+      Scraper=['Shavkat Umurzoqov']
+      To remove=['Умурзаков Шавкат Буранович', 'Szawkat Umurzakov']  To add=[]
+2026-06-02 16:01:49,613 - INFO - orchestrator - [DELTA]   'Shavkat Umurzakov' (main_id=781053) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:49,614 - INFO - orchestrator - [DELTA] Processing record #26: 'Qutbiddin Burxonov'
+2026-06-02 16:01:49,616 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:51,631 - INFO - orchestrator - [DELTA]   'Qutbiddin Burxonov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:51,633 - INFO - orchestrator - [DELTA] Processing record #27: 'Sardor Rustamboyev'
+2026-06-02 16:01:51,642 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:53,571 - INFO - orchestrator - [DELTA]   'Sardor Rustamboyev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:53,573 - INFO - orchestrator - [DELTA] Processing record #28: 'Kamaliddin Babaev'
+2026-06-02 16:01:53,578 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781054. Checking child tables...
+2026-06-02 16:01:53,580 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Камалиддин Бабаев', 'Komoliddin Babayev', 'Kamaliddin Babaev']
+      Scraper=['Kamaliddin Babaev']
+      To remove=['Камалиддин Бабаев', 'Komoliddin Babayev']  To add=[]
+2026-06-02 16:01:53,587 - INFO - orchestrator - [DELTA]   'Kamaliddin Babaev' (main_id=781054) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:53,588 - INFO - orchestrator - [DELTA] Processing record #29: 'Firuz Allayev'
+2026-06-02 16:01:53,590 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:55,584 - INFO - orchestrator - [DELTA]   'Firuz Allayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:55,585 - INFO - orchestrator - [DELTA] Processing record #30: 'Bekhzod Akhmedov'
+2026-06-02 16:01:55,591 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781055. Checking child tables...
+2026-06-02 16:01:55,593 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Bekhzod Bakhodirovich Akhmedov', 'بيخزود اخميدوڤ', 'Bechsod Achmedow', 'Ахмедов Бехзод Баходирович', 'Bekhzod V Akhmedov', 'Bekhzod Akhmedov', 'Бехзод Баходирович Ахмедов']
+      Scraper=['Бехзод Баходирович Ахмедов', 'Bekhzod Bakhodirovich Akhmedov', 'Bechsod Achmedow']
+      To remove=['بيخزود اخميدوڤ', 'Ахмедов Бехзод Баходирович', 'Bekhzod V Akhmedov', 'Bekhzod Akhmedov']  To add=[]
+2026-06-02 16:01:55,599 - INFO - orchestrator - [DELTA]   'Bekhzod Akhmedov' (main_id=781055) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:55,600 - INFO - orchestrator - [DELTA] Processing record #31: 'Otakhodjayev Anvar Khojakhanovich'
+2026-06-02 16:01:55,601 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781056. Checking child tables...
+2026-06-02 16:01:55,604 - INFO - orchestrator - [DELTA]   'Otakhodjayev Anvar Khojakhanovich' (main_id=781056) — SAME. Added to is_del_list_1.
+2026-06-02 16:01:55,604 - INFO - orchestrator - [DELTA] Processing record #32: 'Sanjar Bekov'
+2026-06-02 16:01:55,606 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781057:
+2026-06-02 16:01:55,607 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      desc: DB='NULL' vs Scraper='Uzbekistani Businessperson'
+2026-06-02 16:01:57,440 - INFO - orchestrator - [DELTA]   'Sanjar Bekov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:57,441 - INFO - orchestrator - [DELTA] Processing record #33: 'Nusrat Hikmatov'
+2026-06-02 16:01:57,446 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781058. Checking child tables...
+2026-06-02 16:01:57,454 - INFO - orchestrator - [DELTA]   'Nusrat Hikmatov' (main_id=781058) — SAME. Added to is_del_list_1.
+2026-06-02 16:01:57,454 - INFO - orchestrator - [DELTA] Processing record #34: 'Rahmonbek Usmonov'
+2026-06-02 16:01:57,455 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781059. Checking child tables...
+2026-06-02 16:01:57,456 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Рахмонбек Усманов', 'Рахмонбек Джахонгирович Усманов', 'Раҳмонқул Жаҳонгирович Усмонов', 'Rahmonbek Usmanov', 'Rahmonqul Jahongirovich Usmonov', 'Rahmonbek Usmonov', 'Усманов Рахмонбек Джахонгирович']
+      Scraper=['Rahmonqul Jahongirovich Usmonov', 'Rahmonbek Usmanov', 'Раҳмонқул Жаҳонгирович Усмонов', 'Усманов Рахмонбек Джахонгирович', 'Рахмонбек Усманов']
+      To remove=['Рахмонбек Джахонгирович Усманов', 'Rahmonbek Usmonov']  To add=[]
+2026-06-02 16:01:57,458 - INFO - orchestrator - [DELTA]   'Rahmonbek Usmonov' (main_id=781059) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:57,459 - INFO - orchestrator - [DELTA] Processing record #35: 'Gulomov Saidahror Saidaxmedovich'
+2026-06-02 16:01:57,461 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781060. Checking child tables...
+2026-06-02 16:01:57,461 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Саидахрор Саидахмедович Гулямов', "G'ulomov Saidahror Saidaxmedovich", 'Саидахрор Гулямов', "Saidahror G'ulomov", '사이다흐로르 굴리야모프', 'Гулямов Саидахрор Саидахмедович']
+      Scraper=["G'ulomov Saidahror Saidaxmedovich", "[Saidahror G'ulomov]", 'Саидахрор Гулямов', 'Гулямов Саидахрор Саидахмедович']
+      To remove=['Саидахрор Саидахмедович Гулямов', "Saidahror G'ulomov", '사이다흐로르 굴리야모프']  To add=["[Saidahror G'ulomov]"]
+2026-06-02 16:01:57,464 - INFO - orchestrator - [DELTA]   'Gulomov Saidahror Saidaxmedovich' (main_id=781060) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:01:57,465 - INFO - orchestrator - [DELTA] Processing record #36: 'Klara Jumamuratova'
+2026-06-02 16:01:57,467 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:01:59,398 - INFO - orchestrator - [DELTA]   'Klara Jumamuratova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:01:59,399 - INFO - orchestrator - [DELTA] Processing record #37: 'Djavlon Kamolov'
+2026-06-02 16:01:59,405 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781062:
+2026-06-02 16:01:59,405 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      desc: DB='NULL' vs Scraper='Producer'
+2026-06-02 16:02:01,205 - INFO - orchestrator - [DELTA]   'Djavlon Kamolov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:01,206 - INFO - orchestrator - [DELTA] Processing record #38: 'Tulkin Abdusattarov'
+2026-06-02 16:02:01,212 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781063:
+2026-06-02 16:02:01,213 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      desc: DB='NULL' vs Scraper='Uzbekistani Politician'
+2026-06-02 16:02:02,995 - INFO - orchestrator - [DELTA]   'Tulkin Abdusattarov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:02,996 - INFO - orchestrator - [DELTA] Processing record #39: 'Dilorom Yuldosheva'
+2026-06-02 16:02:03,001 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781064. Checking child tables...
+2026-06-02 16:02:03,003 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Dilorom Yuldasheva', 'Dilorom Yoʻldosheva', 'دلوروم یلدوشیوا', 'Dilorom Yuldosheva']
+      Scraper=['[Dilorom Yoʻldosheva]', 'Dilorom Yoʻldosheva', 'Dilorom Yuldasheva']
+      To remove=['دلوروم یلدوشیوا', 'Dilorom Yuldosheva']  To add=['[Dilorom Yoʻldosheva]']
+2026-06-02 16:02:03,010 - INFO - orchestrator - [DELTA]   'Dilorom Yuldosheva' (main_id=781064) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:03,011 - INFO - orchestrator - [DELTA] Processing record #40: 'Dilfuza Uralova'
+2026-06-02 16:02:03,012 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781065. Checking child tables...
+2026-06-02 16:02:03,015 - INFO - orchestrator - [DELTA]   'Dilfuza Uralova' (main_id=781065) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:03,015 - INFO - orchestrator - [DELTA] Processing record #41: 'Farhodjon Ortiqovich Shermatov'
+2026-06-02 16:02:03,017 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781066. Checking child tables...
+2026-06-02 16:02:03,019 - INFO - orchestrator - [DELTA]   'Farhodjon Ortiqovich Shermatov' (main_id=781066) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:03,020 - INFO - orchestrator - [DELTA] Processing record #42: 'Aziz Anvarovich Toshpulatov'
+2026-06-02 16:02:03,022 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:02:04,926 - INFO - orchestrator - [DELTA]   'Aziz Anvarovich Toshpulatov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:04,927 - INFO - orchestrator - [DELTA] Processing record #43: 'Ulugbek Shadmanov'
+2026-06-02 16:02:04,932 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781067. Checking child tables...
+2026-06-02 16:02:04,934 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Ulugbek Shadmanov', 'Улугбек Шадманов', 'Улугбек Миррустамович Шадманов', 'Шадманов Улугбек']
+      Scraper=['Ulugbek Shadmanov', 'Улугбек Шадманов', 'Шадманов Улугбек']
+      To remove=['Улугбек Миррустамович Шадманов']  To add=[]
+2026-06-02 16:02:04,941 - INFO - orchestrator - [DELTA]   'Ulugbek Shadmanov' (main_id=781067) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:04,942 - INFO - orchestrator - [DELTA] Processing record #44: 'Merey Erali Qizi Amanbayeva'
+2026-06-02 16:02:04,943 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781068. Checking child tables...
+2026-06-02 16:02:04,946 - INFO - orchestrator - [DELTA]   'Merey Erali Qizi Amanbayeva' (main_id=781068) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:04,946 - INFO - orchestrator - [DELTA] Processing record #45: 'Shuhrat Sobirov'
+2026-06-02 16:02:04,948 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781069. Checking child tables...
+2026-06-02 16:02:04,951 - INFO - orchestrator - [DELTA]   'Shuhrat Sobirov' (main_id=781069) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:04,951 - INFO - orchestrator - [DELTA] Processing record #46: 'Baxtiyor Mamatkarimov'
+2026-06-02 16:02:04,953 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:02:06,804 - INFO - orchestrator - [DELTA]   'Baxtiyor Mamatkarimov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:06,805 - INFO - orchestrator - [DELTA] Processing record #47: 'Otabek Mahkamov'
+2026-06-02 16:02:06,810 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781071. Checking child tables...
+2026-06-02 16:02:06,811 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Otabek Mahkamov', 'Отабек Махкамов']
+      Scraper=['Otabek Mahkamov']
+      To remove=['Отабек Махкамов']  To add=[]
+2026-06-02 16:02:06,817 - INFO - orchestrator - [DELTA]   'Otabek Mahkamov' (main_id=781071) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:06,818 - INFO - orchestrator - [DELTA] Processing record #48: 'Sanjar Xamidullayev'
+2026-06-02 16:02:06,820 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:02:08,644 - INFO - orchestrator - [DELTA]   'Sanjar Xamidullayev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:08,645 - INFO - orchestrator - [DELTA] Processing record #49: 'Yulduz Usmonova'
+2026-06-02 16:02:08,650 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781072. Checking child tables...
+2026-06-02 16:02:08,652 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Yulduz', 'Усмонова Юлдуз', 'یولدوز عثمانوا', 'Γιουλντούζ Ουσμάνοβα', 'Yıldız Usmonova', 'Yulduz Urayimohunovna Usmanova', 'Usmanova', 'Usmonova', 'Julduz Usmonova', 'Юлдуз Урайимохуновна Усмонова', 'Юлдуз Усмонова', 'Юлдуз Усманова', 'Yıldız Usmanova', 'عثمانوا', 'Յուլդուզ Ուսմանովա', '율드 우스모노바', 'Yulduz Oʻrayimoxunovna Usmonova', 'ユルドゥズ・ウスマノヴァ', 'Γιουλντούζ Ουραϊμοχούνοβνα Ουσμάνοβα', 'Yulduz Usmanova', 'Γιουλντούζ Ιμπραγκίμοβνα Ουσμάνοβα', '尤杜茲·烏絲莫諾娃', 'Yulduz Urayimohunovna Usmonova', 'Юлдуз Урайимохуновна Усманова', 'Yulduz Usmonova', 'Усмонова', '尤爾杜茲·烏斯莫諾娃', 'Усманова Юлдуз Урайимохуновна', 'Усмонова Юлдуз Урайимохуновна']
+      Scraper=['Юлдуз Урайимохуновна Усманова', 'Yulduz', 'Yıldız Usmanova', 'Julduz Usmonova', 'Γιουλντούζ Ουραϊμοχούνοβνα Ουσμάνοβα', 'Усмонова Юлдуз', 'Усманова Юлдуз Урайимохуновна', 'Yulduz Urayimohunovna Usmanova', 'عثمانوا', 'Yulduz Usmanova', 'Юлдуз Усмонова', 'Усмонова Юлдуз Урайимохуновна', 'Юлдуз Урайимохуновна Усмонова', 'Усмонова', 'Yıldız Usmonova', 'Γιουλντούζ Ιμπραγκίμοβνα Ουσμάνοβα', 'Usmonova', 'Yulduz Oʻrayimoxunovna Usmonova', 'Yulduz Usmonova', 'Usmanova', 'Yulduz Urayimohunovna Usmonova']
+      To remove=['یولدوز عثمانوا', 'Γιουλντούζ Ουσμάνοβα', 'Юлдуз Усманова', 'Յուլդուզ Ուսմանովա', '율드 우스모노바', 'ユルドゥズ・ウスマノヴァ', '尤杜茲·烏絲莫諾娃', '尤爾杜茲·烏斯莫諾娃']  To add=[]
+2026-06-02 16:02:08,660 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Film Actor', None, None, None), ('Politician', None, None, None), ('Singer', None, None, None), ('Singer-Songwriter', None, None, None)]
+      Scraper tuples: [('Composer', None, None, None), ('Film Actor', None, None, None), ('Musician', None, None, None), ('Politician', None, None, None), ('Singer', None, None, None), ('Singer-Songwriter', None, None, None)]
+      To remove=[]  To add=[('Composer', None, None, None), ('Musician', None, None, None)]
+2026-06-02 16:02:08,660 - INFO - orchestrator - [DELTA]   'Yulduz Usmonova' (main_id=781072) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[], to_add=[('Composer', None, None, None), ('Musician', None, None, None)])"]. Added to new_df.
+2026-06-02 16:02:08,661 - INFO - orchestrator - [DELTA] Processing record #50: 'Shahlo Mahmudova'
+2026-06-02 16:02:08,662 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781073. Checking child tables...
+2026-06-02 16:02:08,663 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Махмудова Шахло Насімовна', '샥슬로 막스무도바', 'Shahlo Mahmudova', 'Махмудова Шахло Насимовна']
+      Scraper=['Shahlo Mahmudova']
+      To remove=['Махмудова Шахло Насімовна', '샥슬로 막스무도바', 'Махмудова Шахло Насимовна']  To add=[]
+2026-06-02 16:02:08,665 - INFO - orchestrator - [DELTA]   'Shahlo Mahmudova' (main_id=781073) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,666 - INFO - orchestrator - [DELTA] Processing record #51: 'Komil Allamjonov'
+2026-06-02 16:02:08,668 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781074. Checking child tables...
+2026-06-02 16:02:08,668 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Комил Исмоилович Алламжонов', 'Komil Allamjonov', 'كوميل اللامجونوف', 'Комил Алламжонов', 'Komil Ismoilovich Allamjonov', 'Komil Allamžonov']
+      Scraper=['Komil Ismoilovič Allamžonov', 'Комил Исмоилович Алламжонов', 'Komil Allamjonov', 'Komil Ismoilovich Allamjonov', 'Komil Allamzhonov']
+      To remove=['كوميل اللامجونوف', 'Комил Алламжонов', 'Komil Allamžonov']  To add=['Komil Ismoilovič Allamžonov', 'Komil Allamzhonov']
+2026-06-02 16:02:08,671 - INFO - orchestrator - [DELTA]   'Komil Allamjonov' (main_id=781074) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,672 - INFO - orchestrator - [DELTA] Processing record #52: 'Hotamjon Ketmonov'
+2026-06-02 16:02:08,673 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781075. Checking child tables...
+2026-06-02 16:02:08,674 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['哈塔姆江·克塔曼诺夫', '哈塔姆江·克塔曼諾夫', 'Hatemcan Ketmanov', 'Chotamschon Abdurachmanowitsch Ketmonow', 'Хатамжон Абдурахманович Кетмонов', 'Хотамжон Абдурахмонович Кетмонов', 'Хотамжон Кетмонов', 'Chotamschon Ketmonow', 'Кетмонов Хотамжон Абдурахмонович', 'Hotamjon Ketmonov', 'Hotamjon Abdurahmonovich Ketmonov', 'Hatemcan Abdurrahmanoviç Ketmanov']
+      Scraper=['Hotamjon Abdurahmonovich Ketmonov', 'Chotamschon Abdurachmanowitsch Ketmonow', 'Chotamschon Ketmonow', 'Hatemcan Abdurrahmanoviç Ketmanov', 'Хатамжон Абдурахманович Кетмонов', 'Кетмонов Хотамжон Абдурахмонович', 'Хотамжон Кетмонов']
+      To remove=['哈塔姆江·克塔曼诺夫', '哈塔姆江·克塔曼諾夫', 'Hatemcan Ketmanov', 'Хотамжон Абдурахмонович Кетмонов', 'Hotamjon Ketmonov']  To add=[]
+2026-06-02 16:02:08,676 - INFO - orchestrator - [DELTA]   'Hotamjon Ketmonov' (main_id=781075) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,677 - INFO - orchestrator - [DELTA] Processing record #53: 'Alimzhan Tokhtakhunov'
+2026-06-02 16:02:08,678 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781076. Checking child tables...
+2026-06-02 16:02:08,679 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Алимжан Тохтатунов', 'Alimzhan Tokhtakhounov', 'Alimzjan Tursunovitsj Tokhtakhunov', 'Тахтахунов', '알림잔 투르수노비치 토흐타후노프', 'Alimzjan Tokhtakhunov', 'Тахтахунов Алимжан', 'Alimzjan Tursunovitj Tochtachunov', 'Тайванчик', 'Тохтахунов', 'Тохтахунов Алимжан', 'Тахтахунов Алимжан Турсунович', 'アリムジャン・トフマフノフ', 'Алимжан Турсунович Тохтахунов', 'Alimzjan Tochtachunov', 'Alimzhan Tokhtakhunov', 'Тохтахунов Алимжан Турсунович', 'Olimjon Toʻxtaoxunov', 'Алимжан Тахтахунов', '알림잔 토흐타후노프', 'Alimzhan Tursunovich Tokhtakhounov', 'اليمزهان توختاخونوڤ', 'Тохтахунов Алымжан Турсунович', 'Алимжан Тохтахунов', '阿里木江·吐尔逊诺维奇·托合塔洪诺夫', 'Алимжан Урсулович Тахтахунов', 'Tochtachunov', 'Тахтахунов Алимжан Урсулович', 'אלימזאן טוחטחונוב']
+      Scraper=['Тохтахунов', 'Tochtachunov', 'Тахтахунов Алимжан Турсунович', '알림잔 투르수노비치 토흐타후노프', 'Тохтахунов Алимжан', 'Тахтахунов Алимжан', 'Алимжан Тохтахунов', 'Тахтахунов Алимжан Урсулович', 'Alimzjan Tursunovitj Tochtachunov', 'Алимжан Турсунович Тохтахунов', 'عالمجان تورسونویچ تختهخانوف', 'Тохтахунов Алымжан Турсунович', 'Алимжан Тохтатунов', 'Alimzhan Tursunovich Tokhtakhounov', 'Алимжан Тахтахунов', 'Тахтахунов', 'Алимжан Урсулович Тахтахунов', 'Тохтахунов Алимжан Турсунович', 'Alimzjan Tursunovitsj Tokhtakhunov', 'Alimzhan Tokhtakhounov', 'Тайванчик']
+      To remove=['Alimzjan Tokhtakhunov', 'アリムジャン・トフマフノフ', 'Alimzjan Tochtachunov', 'Alimzhan Tokhtakhunov', 'Olimjon Toʻxtaoxunov', '알림잔 토흐타후노프', 'اليمزهان توختاخونوڤ', '阿里木江·吐尔逊诺维奇·托合塔洪诺夫', 'אלימזאן טוחטחונוב']  To add=['عالمجان تورسونویچ تختهخانوف']
+2026-06-02 16:02:08,682 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Actor', None, None, None), ('Businessperson', None, None, None), ('Entrepreneur', None, None, None)]
+      Scraper tuples: [('Actor', None, None, None), ('Athlete', None, None, None), ('Businessperson', None, None, None), ('Entrepreneur', None, None, None)]
+      To remove=[]  To add=[('Athlete', None, None, None)]
+2026-06-02 16:02:08,682 - INFO - orchestrator - [DELTA]   'Alimzhan Tokhtakhunov' (main_id=781076) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[], to_add=[('Athlete', None, None, None)])"]. Added to new_df.
+2026-06-02 16:02:08,683 - INFO - orchestrator - [DELTA] Processing record #54: 'Adham Ahmedbaev'
+2026-06-02 16:02:08,684 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781077. Checking child tables...
+2026-06-02 16:02:08,685 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Adham Ahmedbaev', 'Ахмедбаев Адхам Акрамович', 'Adham Ahmadboyev', 'ادهم احمدبائف', 'ادهم احمد بايف']
+      Scraper=['Adham Ahmadboyev']
+      To remove=['Adham Ahmedbaev', 'Ахмедбаев Адхам Акрамович', 'ادهم احمدبائف', 'ادهم احمد بايف']  To add=[]
+2026-06-02 16:02:08,687 - INFO - orchestrator - [DELTA]   'Adham Ahmedbaev' (main_id=781077) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,688 - INFO - orchestrator - [DELTA] Processing record #55: 'Rustam Atsimov'
+2026-06-02 16:02:08,689 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781078. Checking child tables...
+2026-06-02 16:02:08,690 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Rustam Sadykovich Asimov', 'Азімов Рустам Содікович', 'رستم عظیموف', 'Rustam Atsimov', 'Rustam Sodiqovich Azimov', 'Азимов Рустам Содикович', 'ルスタム・アジモフ', 'Rustam Asimow', 'Rustam Azimov']
+      Scraper=['Rustam Sodiqovich Azimov', 'Rustam Sadykovich Asimov', 'Rustam Asimow', 'Rustam Atsimov']
+      To remove=['Азімов Рустам Содікович', 'رستم عظیموف', 'Азимов Рустам Содикович', 'ルスタム・アジモフ', 'Rustam Azimov']  To add=[]
+2026-06-02 16:02:08,692 - INFO - orchestrator - [DELTA]   'Rustam Atsimov' (main_id=781078) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,693 - INFO - orchestrator - [DELTA] Processing record #56: 'Nigmatilla Yuldashev'
+2026-06-02 16:02:08,694 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781079. Checking child tables...
+2026-06-02 16:02:08,695 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['نيغماتولا يولداشيف', 'Нығметолла Юлдашев', 'Нығметолла Толқынұлы Юлдашев', '尼格馬季拉·尤爾多舍夫', 'निगमतिल्ला युल्दाशेव', 'Нигматилла Юлдашев', 'Nimetullah Yoldaşev', 'Nigmatilla Tolqinovich Yoldoshev', 'ნიგმატილა იულდაშევი', 'Nigmatilla Juldaschew', 'Niqmatilla Yoldaşov', 'نعمه الله يولداشيف', 'Нігматыла Юлдашаў', 'Nigmatilla Yoldoshev', 'ニグマティッラ・ユルダシェフ', '尼格马季拉·尤尔多舍夫', 'Неъматулло Юлдошев', 'Юлдашев Нигматилла Тулкинович', 'Nigmatilla Yuldașev', 'Ниғматилла Тулкинович Юлдашев', 'Nigmatilla Juldasjev', 'Нігмаціла Тулкінавіч Юлдашаў', 'Nigmatilla Yuldashev', 'Nimetullah Tulkinoğlu Yoldaşev', 'Nigmatilla Tulkinowitsch Juldaschew', 'Նիգմատիլա Յուլդոշև', 'ניגמטילה יולדאשב', 'Нігматілла Юлдашев', 'Юлдашев Нығметолла Толқынұлы', 'Nigʻmatilla Yoʻldoshev', '尼格瑪迪亞·尤爾達舍夫', 'نعمتالله یولداشف', 'نعمة الله يولداشيف', '니그마틸라 율다세프', 'Нигматилла Тулкинович Юлдашев', 'Nigʻmatilla Toʻlqinovich Yoʻldoshev', 'ニグマティラ・ユルダシェフ', "Nig'matilla To'lqinovich Yo'ldoshev", 'Nigmatilla Ioldoshev', 'Nigmatilla Tulkinovich Yuldashev', 'นึฆมาตึลลา โยลดอชิฟ']
+      Scraper=['Ниғматилла Тулкинович Юлдашев', 'Нығметолла Юлдашев', 'نيغماتولا يولداشيف', 'Nigʻmatilla Toʻlqinovich Yoʻldoshev', 'Нигматилла Юлдашев', "Nig'matilla To'lqinovich Yo'ldoshev", '尼格瑪迪亞·尤爾達舍夫', 'Юлдашев Нигматилла Тулкинович', 'ニグマティッラ・ユルダシェフ', 'Nigmatilla Tulkinovich Yuldashev', 'Nimetullah Tulkinoğlu Yoldaşev', 'Nigmatilla Tulkinowitsch Juldaschew', 'Юлдашев Нығметолла Толқынұлы', 'Nigmatilla Ioldoshev', 'Nigmatilla Tolqinovich Yoldoshev']
+      To remove=['Нығметолла Толқынұлы Юлдашев', '尼格馬季拉·尤爾多舍夫', 'निगमतिल्ला युल्दाशेव', 'Nimetullah Yoldaşev', 'ნიგმატილა იულდაშევი', 'Nigmatilla Juldaschew', 'Niqmatilla Yoldaşov', 'نعمه الله يولداشيف', 'Нігматыла Юлдашаў', 'Nigmatilla Yoldoshev', '尼格马季拉·尤尔多舍夫', 'Неъматулло Юлдошев', 'Nigmatilla Yuldașev', 'Nigmatilla Juldasjev', 'Нігмаціла Тулкінавіч Юлдашаў', 'Nigmatilla Yuldashev', 'Նիգմատիլա Յուլդոշև', 'ניגמטילה יולדאשב', 'Нігматілла Юлдашев', 'Nigʻmatilla Yoʻldoshev', 'نعمتالله یولداشف', 'نعمة الله يولداشيف', '니그마틸라 율다세프', 'Нигматилла Тулкинович Юлдашев', 'ニグマティラ・ユルダシェフ', 'นึฆมาตึลลา โยลดอชิฟ']  To add=[]
+2026-06-02 16:02:08,698 - INFO - orchestrator - [DELTA]   'Nigmatilla Yuldashev' (main_id=781079) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,699 - INFO - orchestrator - [DELTA] Processing record #57: 'Diloram Tashmukhamedova'
+2026-06-02 16:02:08,700 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781080. Checking child tables...
+2026-06-02 16:02:08,701 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['迪洛羅姆·塔什穆罕梅多娃', 'Diloram Tashmukhamedova', 'Дилором Тошмуҳамедова', '迪洛罗姆·塔什穆罕梅多娃', 'Dilarem Gafurcanovna Taşmuhammedova', 'Ташмухамедова Дилором Гафурджановна', 'Dilorom Toshmuhamedova', 'Dilorom Taschmukhamedova', 'ديلورام تاشموخاميدوفا', '딜로람 타슈무하메도바', 'Diloram Gafurjanovna Tashmukhamedova', 'Dilorom Gʻofurjonovna Toshmuhamedova', 'Toshmuhamedova Dilorom Gofurjonovna']
+      Scraper=['Dilorom Gʻofurjonovna Toshmuhamedova', 'Diloram Gafurjanovna Tashmukhamedova', 'Toshmuhamedova Dilorom Gofurjonovna', '[Dilarem Gafurcanovna Taşmuhammedova]']
+      To remove=['迪洛羅姆·塔什穆罕梅多娃', 'Diloram Tashmukhamedova', 'Дилором Тошмуҳамедова', '迪洛罗姆·塔什穆罕梅多娃', 'Dilarem Gafurcanovna Taşmuhammedova', 'Ташмухамедова Дилором Гафурджановна', 'Dilorom Toshmuhamedova', 'Dilorom Taschmukhamedova', 'ديلورام تاشموخاميدوفا', '딜로람 타슈무하메도바']  To add=['[Dilarem Gafurcanovna Taşmuhammedova]']
+2026-06-02 16:02:08,703 - INFO - orchestrator - [DELTA]   'Diloram Tashmukhamedova' (main_id=781080) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,704 - INFO - orchestrator - [DELTA] Processing record #58: 'Erkinjon Turdimov'
+2026-06-02 16:02:08,705 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781081. Checking child tables...
+2026-06-02 16:02:08,706 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Erkinjan Turdimov', 'Эркинжон Турдимов', 'Erkinjon Turdimov', 'Эркинжон Окбутаевич Турдимов']
+      Scraper=['Erkinjan Turdimov', 'Erkinjon Turdimov']
+      To remove=['Эркинжон Турдимов', 'Эркинжон Окбутаевич Турдимов']  To add=[]
+2026-06-02 16:02:08,708 - INFO - orchestrator - [DELTA]   'Erkinjon Turdimov' (main_id=781081) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,709 - INFO - orchestrator - [DELTA] Processing record #59: 'Qobul Berdiyev'
+2026-06-02 16:02:08,710 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781082. Checking child tables...
+2026-06-02 16:02:08,711 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Qobul Berdijew', 'Qobul Berdiyev', 'Kabul Raimoğlu Berdiyev', 'カブール・ベルディエフ', 'كوبول بيرديڤ', 'Кабул Раимович Бердиев', 'Qobul Raimowitch Berdijew', 'Kabul Berdiyev', 'Qobul Raimovich Berdiev']
+      Scraper=['Qobul Raimovich Berdiev', 'Qobul Raimowitch Berdijew', 'Kabul Raimoğlu Berdiyev', 'Kabul Berdiyev']
+      To remove=['Qobul Berdijew', 'Qobul Berdiyev', 'カブール・ベルディエフ', 'كوبول بيرديڤ', 'Кабул Раимович Бердиев']  To add=[]
+2026-06-02 16:02:08,713 - INFO - orchestrator - [DELTA]   'Qobul Berdiyev' (main_id=781082) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,714 - INFO - orchestrator - [DELTA] Processing record #60: 'Ilgizar Sobirov'
+2026-06-02 16:02:08,715 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781083. Checking child tables...
+2026-06-02 16:02:08,716 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Собиров Илгизар Матякубович', 'Ilgizar Sobirov', 'Ilgizar Matyoqubovich Sobirov']
+      Scraper=['Ilgizar Matyoqubovich Sobirov', 'Ilgizar Sobirov']
+      To remove=['Собиров Илгизар Матякубович']  To add=[]
+2026-06-02 16:02:08,718 - INFO - orchestrator - [DELTA]   'Ilgizar Sobirov' (main_id=781083) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,719 - INFO - orchestrator - [DELTA] Processing record #61: 'Ikhtiyor Abdullayev'
+2026-06-02 16:02:08,720 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781084. Checking child tables...
+2026-06-02 16:02:08,721 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Իխտիոր Աբդուլաև', 'Абдуллаев Ихтиёр Бахтиёрович', 'İhtiyar Bahtiyaroviç Abdullayev', 'Ixtiyor Baxtiyorovich Abdullayev', 'İhtiyar Abdullayev', 'Ixtiyor Abdullayev', 'اختیار عبداللهاف', 'Ikhtiyor Abdullayev', 'Ikhtiyor Bakhtiyorovich Abdullayev']
+      Scraper=['Ixtiyor Baxtiyorovich Abdullayev', 'İhtiyar Bahtiyaroviç Abdullayev', 'Ikhtiyor Bakhtiyorovich Abdullayev', 'Ikhtiyor Abdullayev']
+      To remove=['Իխտիոր Աբդուլաև', 'Абдуллаев Ихтиёр Бахтиёрович', 'İhtiyar Abdullayev', 'Ixtiyor Abdullayev', 'اختیار عبداللهاف']  To add=[]
+2026-06-02 16:02:08,724 - INFO - orchestrator - [DELTA]   'Ikhtiyor Abdullayev' (main_id=781084) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,724 - INFO - orchestrator - [DELTA] Processing record #62: 'Sodiq Safoyev'
+2026-06-02 16:02:08,726 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781085. Checking child tables...
+2026-06-02 16:02:08,727 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Sadyk Safajew', 'Sadik Safaiev', 'Sodiq Solihovich Safoyev', 'Sodiq Safoev', 'Sadyk Safayev', 'Садык Салихович Сафаев', 'Safoyev', 'سوديك سافويڤ', 'Sodiq Solihovič Safoev', 'Sadyk Salichovič Safaev', 'صدیق صفایف', 'サディク・サファエフ', 'Sadyk Safaev', 'Сафаев Садык Салихович', 'Содиқ Солиҳович Сафоев', 'Sodiq Safoyev']
+      Scraper=['Sadyk Safayev', 'Sadyk Salichovič Safaev', 'Садык Салихович Сафаев', 'Sadyk Safaev', 'Sodiq Safoev', 'Safoyev', 'Содиқ Солиҳович Сафоев', 'Sodiq Solihovich Safoyev', 'Sodiq Solihovič Safoev', 'Sadyk Safajew', 'Sadik Safaiev']
+      To remove=['سوديك سافويڤ', 'صدیق صفایف', 'サディク・サファエフ', 'Сафаев Садык Салихович', 'Sodiq Safoyev']  To add=[]
+2026-06-02 16:02:08,730 - INFO - orchestrator - [DELTA]   'Sodiq Safoyev' (main_id=781085) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,731 - INFO - orchestrator - [DELTA] Processing record #63: 'Abdullaev Saidullo Parxodbekovich'
+2026-06-02 16:02:08,732 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781086. Checking child tables...
+2026-06-02 16:02:08,732 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Saydullo Abdullayev', 'Abdullaev Saidullo Parxodbekovich', 'Saidullo Parxodbekovich Abdullaev', 'Saidullo Abdullaev']
+      Scraper=['Saidullo Abdullaev', 'Abdullaev Saidullo Parxodbekovich']
+      To remove=['Saydullo Abdullayev', 'Saidullo Parxodbekovich Abdullaev']  To add=[]
+2026-06-02 16:02:08,735 - INFO - orchestrator - [DELTA]   'Abdullaev Saidullo Parxodbekovich' (main_id=781086) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,736 - INFO - orchestrator - [DELTA] Processing record #64: 'Galina Saidova'
+2026-06-02 16:02:08,737 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781087. Checking child tables...
+2026-06-02 16:02:08,737 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Galina Saidova', 'Galina Karimovna Saidova', 'Саидова Галина Каримовна']
+      Scraper=['Galina Karimovna Saidova', 'Galina Saidova']
+      To remove=['Саидова Галина Каримовна']  To add=[]
+2026-06-02 16:02:08,740 - INFO - orchestrator - [DELTA]   'Galina Saidova' (main_id=781087) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,741 - INFO - orchestrator - [DELTA] Processing record #65: 'Muzraf Ikramov'
+2026-06-02 16:02:08,742 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781088. Checking child tables...
+2026-06-02 16:02:08,742 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Ікрамов Музраф Муборакходжайович', 'Muzraf Ikramov', 'Икрамов Музраф Муборакходжаевич', 'Muzrob Ikromov']
+      Scraper=['Muzraf Ikramov']
+      To remove=['Ікрамов Музраф Муборакходжайович', 'Икрамов Музраф Муборакходжаевич', 'Muzrob Ikromov']  To add=[]
+2026-06-02 16:02:08,745 - INFO - orchestrator - [DELTA]   'Muzraf Ikramov' (main_id=781088) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,746 - INFO - orchestrator - [DELTA] Processing record #66: 'Tursinkhon Khudayberganov'
+2026-06-02 16:02:08,747 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781089. Checking child tables...
+2026-06-02 16:02:08,747 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Tursinkhon Khudayberganov', 'Худайбергенов Турсинхан Айдарович', 'Турсинхан Худайбергенов', 'Tursinxon Xudayberganov', 'Tursinkhan Khudaibergenov', 'Tursinxon Xudoyberganov', 'Тұрсынхан Айдарұлы Құдайбергенов']
+      Scraper=['Турсинхан Худайбергенов', 'Тұрсынхан Айдарұлы Құдайбергенов', 'Tursinkhon Khudayberganov', 'Tursinkhan Khudaibergenov']
+      To remove=['Худайбергенов Турсинхан Айдарович', 'Tursinxon Xudayberganov', 'Tursinxon Xudoyberganov']  To add=[]
+2026-06-02 16:02:08,750 - INFO - orchestrator - [DELTA]   'Tursinkhon Khudayberganov' (main_id=781089) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,751 - INFO - orchestrator - [DELTA] Processing record #67: 'Anvar Alimov Barnoevich'
+2026-06-02 16:02:08,752 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781090. Checking child tables...
+2026-06-02 16:02:08,752 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Алимов Анвар Барноевич', 'Anvar Alimov Barnoevich', 'Anvar Alimov']
+      Scraper=['Anvar Alimov']
+      To remove=['Алимов Анвар Барноевич', 'Anvar Alimov Barnoevich']  To add=[]
+2026-06-02 16:02:08,755 - INFO - orchestrator - [DELTA]   'Anvar Alimov Barnoevich' (main_id=781090) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,756 - INFO - orchestrator - [DELTA] Processing record #68: 'Alina Kabaeva'
+2026-06-02 16:02:08,757 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781091. Checking child tables...
+2026-06-02 16:02:08,758 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Αλίνα Καμπάεβα', 'Аліна Кабаева', 'Кабаева Алина', 'Alina Maratovna Kabaïeva', 'আলিনা মারাতোভনা কাবায়েভা', 'Alina Marátovna Kabáyeva', 'Аліна Кабаєва', 'الينا كاباييفا', '알리나 카바예바', 'Alina Maratovna Kabaeva', 'Eline Kabayeva', 'الىينا قابايەۆا', 'Кабаева Алина Маратовна', 'אלינה קבייבה', 'Kabajevová', 'Алина Қабаева', 'Кабаева А', 'Eline Muratkızı Kabayeva', 'Alina Maratowna Kabajewa', 'Alina Kabaieva', 'Қабаева Алина Маратқызы', 'Әлинә Марат кызы Кабаева', 'อลินา คาบาเอวา', 'อาลีนา คาบาเอวา', 'Alina Kabáyeva', 'Алина Ҡабаева', 'Alina Kabajewa', 'Алина Марат ҡыҙы Ҡабаева', 'Alina Kabajevová', 'Alina Kabaïeva', 'Кабаева', 'Алина Маратқызы Қабаева', '卡巴耶娃', 'آلینا کابیوا', 'ألينا كاباييفا', 'Кабаєва Аліна Маратівна', 'Alina Kabaeva', 'Ҡабаева Алина Марат ҡыҙы', 'Aļina Kabajeva', 'Alina Maratovna Kabayeva', 'Alina Qabayeva', 'Alïna Qabayeva', 'Аліна Маратаўна Кабаева', 'Кабаєва Аліна', 'Кабаева А М', 'Kabajewa', 'Alina Martovna Kabajeva', 'Alina Kabajeva', 'Әлинә Кабаева', 'Алина Маратовна Кабаева', 'Alina Kabayeva', 'আলিনা কাবায়েভা', 'Alina Maratovna Kabaieva', 'アリーナ・カバエワ', '阿林娜·卡巴耶娃', 'Ալինա Կաբաևա', 'Қабаева', 'Alina Maratovna Kabajeva', 'Alīna Kabajeva', 'Қабаева Алина', 'ალინა კაბაევა', 'Älinä Marat qızı Qabayeva', 'Алина Кабаева']
+      Scraper=['Кабаева Алина', 'อาลีนา คาบาเอวา', 'Alina Qabayeva', 'Kabajewa', 'Әлинә Марат кызы Кабаева', 'Қабаева Алина Маратқызы', 'Alina Martovna Kabajeva', 'Кабаєва Аліна', 'Alina Maratovna Kabaeva', 'Kabajevová', 'Alina Kabajewa', 'Алина Қабаева', 'Alina Maratovna Kabajeva', 'আলিনা মারাতোভনা কাবায়েভা', 'Älinä Marat qızı Qabayeva', 'อลินา คาบาเอวา', 'Alina Kabayeva', 'Алина Маратовна Кабаева', 'Алина Марат ҡыҙы Ҡабаева', 'Alina Kabaieva', 'Alina Marátovna Kabáyeva', 'Alina Kabajeva', 'Кабаева', 'Alina Maratowna Kabajewa', 'Аліна Кабаєва', '卡巴耶娃', 'Alīna Kabajeva', 'Alina Kabaeva', 'Алина Кабаева', 'Кабаева А', 'Қабаева Алина', 'Alina Maratovna Kabaieva', 'Алина Ҡабаева', 'Қабаева', 'Аліна Кабаева', 'Alina Maratovna Kabayeva', 'Eline Muratkızı Kabayeva', 'Кабаева А М', 'Alina Maratovna Kabaïeva', 'Кабаева Алина Маратовна']
+      To remove=['Αλίνα Καμπάεβα', 'الينا كاباييفا', '알리나 카바예바', 'Eline Kabayeva', 'الىينا قابايەۆا', 'אלינה קבייבה', 'Alina Kabáyeva', 'Alina Kabajevová', 'Alina Kabaïeva', 'Алина Маратқызы Қабаева', 'آلینا کابیوا', 'ألينا كاباييفا', 'Кабаєва Аліна Маратівна', 'Ҡабаева Алина Марат ҡыҙы', 'Aļina Kabajeva', 'Alïna Qabayeva', 'Аліна Маратаўна Кабаева', 'Әлинә Кабаева', 'আলিনা কাবায়েভা', 'アリーナ・カバエワ', '阿林娜·卡巴耶娃', 'Ալինա Կաբաևա', 'ალინა კაბაევა']  To add=[]
+2026-06-02 16:02:08,761 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Film Actor', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Model', 'Member of United Russia', None, None), ('Politician', None, None, None), ('Rhythmic Gymnast', None, None, None)]
+      Scraper tuples: [('Athlete', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Film Actor', 'Member of United Russia', None, None), ('Model', None, None, None), ('Politician', None, None, None), ('Rhythmic Gymnast', None, None, None)]
+      To remove=[('Film Actor', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Model', 'Member of United Russia', None, None)]  To add=[('Athlete', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Film Actor', 'Member of United Russia', None, None), ('Model', None, None, None)]
+2026-06-02 16:02:08,761 - INFO - orchestrator - [DELTA]   'Alina Kabaeva' (main_id=781091) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[('Film Actor', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Model', 'Member of United Russia', None, None)], to_add=[('Athlete', 'Member Of The State Duma', '2007-12-24', '2014-09-15'), ('Film Actor', 'Member of United Russia', None, None), ('Model', None, None, None)])"]. Added to new_df.
+2026-06-02 16:02:08,762 - INFO - orchestrator - [DELTA] Processing record #69: 'Tatyana Karimova'
+2026-06-02 16:02:08,763 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781092. Checking child tables...
+2026-06-02 16:02:08,764 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Tatyana Kerimova', 'Тетяна Акбарівна Каримова', 'تاتيانا كاريموڤا', 'تاتیانا کریمووا', 'タチヤーナ・カリモヴァ', 'Tatjana Akbarowna Karimowa', 'Татьяна Каримова', 'Tatjana Karimowa', '타치야나 카리모바', 'Tatyana Karimova', 'Tatyana Akbarovna Karimova', 'تاتيانا كريموفا', 'Tatiana Karimova', 'Tatyana Ekberovna Kerimova', 'ტატიანა ქარიმოვა', 'Каримова Татьяна Акбаровна', '塔季揚娜·卡里莫娃', 'Татьяна Акбаровна Каримова', 'טטיאנה קרימובה', 'Татьяна Акбарқызы Кәрімова', 'Татяна Каримова', 'Таццяна Акбараўна Карымава']
+      Scraper=['Татьяна Акбаровна Каримова', 'Каримова Татьяна Акбаровна', 'Tatyana Ekberovna Kerimova', 'Tatjana Karimowa', 'Татьяна Каримова', 'Tatjana Akbarowna Karimowa', 'Tatiana Karimova', 'Tatyana Akbarovna Karimova']
+      To remove=['Tatyana Kerimova', 'Тетяна Акбарівна Каримова', 'تاتيانا كاريموڤا', 'تاتیانا کریمووا', 'タチヤーナ・カリモヴァ', '타치야나 카리모바', 'Tatyana Karimova', 'تاتيانا كريموفا', 'ტატიანა ქარიმოვა', '塔季揚娜·卡里莫娃', 'טטיאנה קרימובה', 'Татьяна Акбарқызы Кәрімова', 'Татяна Каримова', 'Таццяна Акбараўна Карымава']  To add=[]
+2026-06-02 16:02:08,766 - INFO - orchestrator - [DELTA]   'Tatyana Karimova' (main_id=781092) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,767 - INFO - orchestrator - [DELTA] Processing record #70: 'Abdulla Aripov'
+2026-06-02 16:02:08,768 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781093. Checking child tables...
+2026-06-02 16:02:08,769 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Абдулла Ниғматович Арипов', 'Abdulla Aripov', 'Арипов Абдулла Ниғмәт улы', 'عبد الله عارفوف', '압둘라 아리포프', 'Абдулла Ниғматұлы Әріпов', '阿卜杜拉·阿里波夫', 'Абдулла Нигъмәт улы Арипов', 'Abdulla Nigmatovich Aripov', 'Абдулла Аріпов', 'Abdulla Nigmatovitj Aripov', 'עבדולה אריפוב', 'Абдулла Нигматович Арипов', 'Abdulla Oripov', 'アブドゥラ・アリポフ', 'Абдулла Орипов', 'アブドゥッラー・アリポフ', 'Абдула Арыпаў', 'عبدالله عارفوف', 'Աբդուլա Արիպով', 'Абдулла Нығматұлы Әріпов', 'Абдулла Әріпов', 'عبداللہ عاریپوف', 'Abdulla Nigmatowitsch Aripow', 'አብዱላ ኦርፖቭ', 'Abdulla Nigʻmatovich Oripov', 'อับดุลลา อารีปัฟ', 'Αμπντουλά Aρίποφ', 'عبد الله نجماتوفيتش اريبوف', 'Абдулла Арипов', 'Абдулло Орипов', 'Абдула Арипов', 'Арипов Абдулла Нигматович', 'Abdulla Aripow']
+      Scraper=['Abdulla Oripov', 'Абдулла Нигъмәт улы Арипов', 'Арипов Абдулла Нигматович', 'Abdulla Aripow', 'Абдулла Орипов', 'アブドゥラ・アリポフ', 'Абдулла Арипов', 'Abdulla Nigmatovich Aripov', 'Abdulla Nigmatovitj Aripov', 'Абдулла Нығматұлы Әріпов', 'Абдулла Әріпов', 'Abdulla Aripov', '阿里波夫', 'Abdulla Nigmatowitsch Aripow', 'Абдулла Ниғматович Арипов']
+      To remove=['Арипов Абдулла Ниғмәт улы', 'عبد الله عارفوف', '압둘라 아리포프', 'Абдулла Ниғматұлы Әріпов', '阿卜杜拉·阿里波夫', 'Абдулла Аріпов', 'עבדולה אריפוב', 'Абдулла Нигматович Арипов', 'アブドゥッラー・アリポフ', 'Абдула Арыпаў', 'عبدالله عارفوف', 'Աբդուլա Արիպով', 'عبداللہ عاریپوف', 'አብዱላ ኦርፖቭ', 'Abdulla Nigʻmatovich Oripov', 'อับดุลลา อารีปัฟ', 'Αμπντουλά Aρίποφ', 'عبد الله نجماتوفيتش اريبوف', 'Абдулло Орипов', 'Абдула Арипов']  To add=['阿里波夫']
+2026-06-02 16:02:08,772 - INFO - orchestrator - [DELTA]   'Abdulla Aripov' (main_id=781093) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,772 - INFO - orchestrator - [DELTA] Processing record #71: 'Adkham Ikramov'
+2026-06-02 16:02:08,774 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781094. Checking child tables...
+2026-06-02 16:02:08,774 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Adxam Ikramov', 'Adham Ikromov', 'Икрамов Адхам Ильхамович', 'Адхам Икрамов', 'Ікрамов Адхам Ільхамович', 'Adxam Ilxamovich Ikramov']
+      Scraper=['Адхам Икрамов', 'Adxam Ilxamovich Ikramov', 'Adham Ikromov']
+      To remove=['Adxam Ikramov', 'Икрамов Адхам Ильхамович', 'Ікрамов Адхам Ільхамович']  To add=[]
+2026-06-02 16:02:08,777 - INFO - orchestrator - [DELTA]   'Adkham Ikramov' (main_id=781094) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,777 - INFO - orchestrator - [DELTA] Processing record #72: 'Alisher Shodmonov'
+2026-06-02 16:02:08,779 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781095. Checking child tables...
+2026-06-02 16:02:08,779 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Алишер Қаюмович Шадманов / Alisher Qayumovich Shadmanov', 'Alisher Shodmonov', 'Алишер Каюмович Шадманов']
+      Scraper=['Alisher Shodmonov', 'Алишер Қаюмович Шадманов / Alisher Qayumovich Shadmanov']
+      To remove=['Алишер Каюмович Шадманов']  To add=[]
+2026-06-02 16:02:08,782 - INFO - orchestrator - [DELTA]   'Alisher Shodmonov' (main_id=781095) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,783 - INFO - orchestrator - [DELTA] Processing record #73: 'Vyacheslav Yurievich Elistratov'
+2026-06-02 16:02:08,784 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781096. Checking child tables...
+2026-06-02 16:02:08,787 - INFO - orchestrator - [DELTA]   'Vyacheslav Yurievich Elistratov' (main_id=781096) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:08,787 - INFO - orchestrator - [DELTA] Processing record #74: 'Nurdinjon Ismoilov'
+2026-06-02 16:02:08,788 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781097. Checking child tables...
+2026-06-02 16:02:08,789 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Nureddincan İsmailov', 'Nuriddinjon Ismailov', 'Nuriddin Ismoilov', 'Nuriddin Moʻydinxonovich Ismoilov', 'ヌーリッディーンジョン・イスマイロフ', 'Nureddincan Muhiddinhanoviç İsmailov', 'Исмоилов Нурдинжон', 'Nurdinjon Moʻydinxonovich Ismailov', 'نورالدینجان اسماعیلاف', 'Нуриддин Исмоилов', 'Нурдинжон Исмоилов', 'Nurdinjon Ismoilov', 'Исмоилов Нурдинжон Муйдинханович', 'Нурдинджон Исмаилов']
+      Scraper=['Nuriddin Moʻydinxonovich Ismoilov', 'Исмоилов Нурдинжон Муйдинханович', 'Nurdinjon Ismoilov', 'Исмоилов Нурдинжон', 'Nurdinjon Moʻydinxonovich Ismailov', 'Nuriddin Ismoilov', 'Nureddincan Muhiddinhanoviç İsmailov', 'Нурдинджон Исмаилов', 'Nuriddinjon Ismailov']
+      To remove=['Nureddincan İsmailov', 'ヌーリッディーンジョン・イスマイロフ', 'نورالدینجان اسماعیلاف', 'Нуриддин Исмоилов', 'Нурдинжон Исмоилов']  To add=[]
+2026-06-02 16:02:08,792 - INFO - orchestrator - [DELTA]   'Nurdinjon Ismoilov' (main_id=781097) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,792 - INFO - orchestrator - [DELTA] Processing record #75: 'Erkin Halilov'
+2026-06-02 16:02:08,793 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781098. Checking child tables...
+2026-06-02 16:02:08,794 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Erkin Hamdanoviç Halilov', 'Erkin Halilov', 'Erkin Hamdanovich Khalilov', 'Erkin Hamdamovich Halilov', 'এরকিন খলিলভ']
+      Scraper=['Erkin Hamdamovich Halilov', 'Erkin Hamdanoviç Halilov', 'Erkin Hamdanovich Khalilov', 'Erkin Halilov']
+      To remove=['এরকিন খলিলভ']  To add=[]
+2026-06-02 16:02:08,797 - INFO - orchestrator - [DELTA]   'Erkin Halilov' (main_id=781098) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:08,798 - INFO - orchestrator - [DELTA] Processing record #76: 'Abdulhashim Mutalov'
+2026-06-02 16:02:08,800 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781099:
+2026-06-02 16:02:08,801 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='NULL' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/4/4d/Abdulhoshim_Mutalov.jpg'
+2026-06-02 16:02:10,853 - INFO - orchestrator - [DELTA]   'Abdulhashim Mutalov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:10,854 - INFO - orchestrator - [DELTA] Processing record #77: 'Feruz Nazirov'
+2026-06-02 16:02:10,860 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781100. Checking child tables...
+2026-06-02 16:02:10,862 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Feruz Nazirov', 'Назыров Феруз Гофурович']
+      Scraper=['Feruz Nazirov']
+      To remove=['Назыров Феруз Гофурович']  To add=[]
+2026-06-02 16:02:10,872 - INFO - orchestrator - [DELTA]   'Feruz Nazirov' (main_id=781100) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:10,873 - INFO - orchestrator - [DELTA] Processing record #78: 'Botir Xojayev'
+2026-06-02 16:02:10,874 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781101. Checking child tables...
+2026-06-02 16:02:10,875 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Botir Xoʻjayev', 'Ходжаев Ботир Асадиллаевич']
+      Scraper=['[Botir Xoʻjayev]', 'Botir Xoʻjayev']
+      To remove=['Ходжаев Ботир Асадиллаевич']  To add=['[Botir Xoʻjayev]']
+2026-06-02 16:02:10,878 - INFO - orchestrator - [DELTA]   'Botir Xojayev' (main_id=781101) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:10,879 - INFO - orchestrator - [DELTA] Processing record #79: 'Vladimir Norov'
+2026-06-02 16:02:10,880 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781102. Checking child tables...
+2026-06-02 16:02:10,881 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Vladimir Imamovich Norov', 'Vladimir Imanovich Norov', 'Норов Владимир Имамович', 'Владимир Норов', 'Norov', '弗拉基米尔·诺罗夫', '弗拉迪米爾·諾羅夫', '弗拉基米爾·諾羅夫', 'Władimir Norow', 'Vladimir Imomovich Norov', 'Vladimir Norov', 'ولادیمیر نوروف', 'Wladimir Norow', 'ウラジーミル・ノロフ']
+      Scraper=['Владимир Норов', 'Vladimir Norov', 'Vladimir Imamovich Norov', 'Vladimir Imomovich Norov', 'Wladimir Norow', 'Norov', 'Vladimir Imanovich Norov']
+      To remove=['Норов Владимир Имамович', '弗拉基米尔·诺罗夫', '弗拉迪米爾·諾羅夫', '弗拉基米爾·諾羅夫', 'Władimir Norow', 'ولادیمیر نوروف', 'ウラジーミル・ノロフ']  To add=[]
+2026-06-02 16:02:10,884 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01')]
+      Scraper tuples: [('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30')]
+      To remove=[('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01')]  To add=[('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30')]
+2026-06-02 16:02:10,884 - INFO - orchestrator - [DELTA]   'Vladimir Norov' (main_id=781102) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01')], to_add=[('Diplomat', 'Minister Of Foreign Affairs Of Uzbekistan', '2006-07-12', '2010-12-01'), ('Politician', 'Minister Of Foreign Affairs Of Uzbekistan', '2022-04-27', '2022-09-09'), (None, 'Minister Of Foreign Affairs Of Uzbekistan', '2022-09-09', '2022-12-30')])"]. Added to new_df.
+2026-06-02 16:02:10,885 - INFO - orchestrator - [DELTA] Processing record #80: 'Sunatilla Bekenov'
+2026-06-02 16:02:10,886 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781103. Checking child tables...
+2026-06-02 16:02:10,889 - INFO - orchestrator - [DELTA]   'Sunatilla Bekenov' (main_id=781103) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:10,890 - INFO - orchestrator - [DELTA] Processing record #81: 'Polat Bobojonov'
+2026-06-02 16:02:10,891 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781104. Checking child tables...
+2026-06-02 16:02:10,892 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Poʻlat Bobojonov', 'Бабаджанов Пулат Раззакович', 'Pólat Bobojonov', 'Пулат Бобожонов']
+      Scraper=['Poʻlat Bobojonov', 'Пулат Бобожонов', '[Poʻlat Bobojonov]']
+      To remove=['Бабаджанов Пулат Раззакович', 'Pólat Bobojonov']  To add=['[Poʻlat Bobojonov]']
+2026-06-02 16:02:10,895 - INFO - orchestrator - [DELTA]   'Polat Bobojonov' (main_id=781104) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:10,896 - INFO - orchestrator - [DELTA] Processing record #82: 'Abdusalom Azizov'
+2026-06-02 16:02:10,897 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781105. Checking child tables...
+2026-06-02 16:02:10,898 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Abdusalam Azizow', 'Abdussalom Abdumawlonowitsch Asisow', 'عبدالسلام عزیزوف', 'Abdussalom Asisow', 'Abdüsselam Abdülmevlanoğlu Azizov', 'Abdüsselam Azizov', 'Abdusalom Abdumavlonovich Azizov', 'عبد السلام عزيزوف', 'Абдусалом Абдумавлонович Азизов', 'Abdusalom Azizov']
+      Scraper=['Abdusalom Abdumavlonovich Azizov', 'Abdusalam Azizow', 'Abdusalom Azizov', 'Abdussalom Asisow', 'Abdussalom Abdumawlonowitsch Asisow', 'Abdüsselam Abdülmevlanoğlu Azizov']
+      To remove=['عبدالسلام عزیزوف', 'Abdüsselam Azizov', 'عبد السلام عزيزوف', 'Абдусалом Абдумавлонович Азизов']  To add=[]
+2026-06-02 16:02:10,900 - INFO - orchestrator - [DELTA]   'Abdusalom Azizov' (main_id=781105) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:10,901 - INFO - orchestrator - [DELTA] Processing record #83: 'Svetlana Gerasimova'
+2026-06-02 16:02:10,903 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781106. Checking child tables...
+2026-06-02 16:02:10,903 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Svetlana Gerasimova', 'Светлана Ивановна Герасимова', 'Герасимова Светлана Ивановна']
+      Scraper=['Светлана Ивановна Герасимова', 'Svetlana Gerasimova']
+      To remove=['Герасимова Светлана Ивановна']  To add=[]
+2026-06-02 16:02:10,906 - INFO - orchestrator - [DELTA]   'Svetlana Gerasimova' (main_id=781106) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:10,907 - INFO - orchestrator - [DELTA] Processing record #84: 'Jabbarov Ismail'
+2026-06-02 16:02:10,910 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:02:12,912 - INFO - orchestrator - [DELTA]   'Jabbarov Ismail' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:12,913 - INFO - orchestrator - [DELTA] Processing record #85: 'Rustam Inoyatov'
+2026-06-02 16:02:12,918 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781108. Checking child tables...
+2026-06-02 16:02:12,919 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Inoyatov Rustam Rasulovich', 'Rüstəm İnayətov', 'Rustam Rasulovich Inoyatov', 'Рустам Расулович Иноятов', 'Rüstem İnayetov', 'رستم عنایتوف', 'Rustam Inoyatov', 'روستام اينوياتوڤ', 'Іноятов Рустам Расулович', 'ルスタム・イノヤトフ', 'Иноятов Рустам Расулович', 'Rüstem Resuloviç İnayetov']
+      Scraper=['Rüstem Resuloviç İnayetov', 'Rustam Rasulovich Inoyatov', 'Рустам Расулович Иноятов', 'Rustam Inoyatov', 'Inoyatov Rustam Rasulovich']
+      To remove=['Rüstəm İnayətov', 'Rüstem İnayetov', 'رستم عنایتوف', 'روستام اينوياتوڤ', 'Іноятов Рустам Расулович', 'ルスタム・イノヤトフ', 'Иноятов Рустам Расулович']  To add=[]
+2026-06-02 16:02:12,926 - INFO - orchestrator - [DELTA]   'Rustam Inoyatov' (main_id=781108) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,927 - INFO - orchestrator - [DELTA] Processing record #86: 'Bahodir Matlyubov'
+2026-06-02 16:02:12,928 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781109. Checking child tables...
+2026-06-02 16:02:12,928 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Bahodir Matlyubov', 'Матлюбов Баҳодир Аҳмедович', 'Баходыр Ахмедович Матлюбов', 'バホディル・マトリュボフ', 'Матлюбов Баходыр Ахмедович', 'Баходыр Матлюбов', 'Баҳодир Аҳмедович Матлюбов']
+      Scraper=['Баходыр Ахмедович Матлюбов', 'Bahodir Matlyubov', 'Матлюбов Баходыр Ахмедович', 'Баҳодир Аҳмедович Матлюбов']
+      To remove=['Матлюбов Баҳодир Аҳмедович', 'バホディル・マトリュボフ', 'Баходыр Матлюбов']  To add=[]
+2026-06-02 16:02:12,931 - INFO - orchestrator - [DELTA]   'Bahodir Matlyubov' (main_id=781109) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,932 - INFO - orchestrator - [DELTA] Processing record #87: 'Akmal Saidov'
+2026-06-02 16:02:12,933 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781110. Checking child tables...
+2026-06-02 16:02:12,934 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Akmal Holmatovitsj Saidov', 'Akmalʹ Kholmatovich', 'Саидов Акмаль', 'Akmal Xolmatovich Saidov', '阿克馬勒·塞多夫', 'Akmal Saidov', 'Саидов Акмаль Холматович', 'Акмаль Саидов', 'A Kh Saidov', 'Акмаль Холматович Саидов', '阿克马勒·塞多夫']
+      Scraper=['Akmal Xolmatovich Saidov', 'Akmalʹ Kholmatovich', 'A Kh Saidov', 'Акмаль Холматович Саидов', 'Саидов Акмаль', 'Акмаль Саидов', 'Саидов Акмаль Холматович']
+      To remove=['Akmal Holmatovitsj Saidov', '阿克馬勒·塞多夫', 'Akmal Saidov', '阿克马勒·塞多夫']  To add=[]
+2026-06-02 16:02:12,937 - INFO - orchestrator - [DELTA]   'Akmal Saidov' (main_id=781110) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,937 - INFO - orchestrator - [DELTA] Processing record #88: 'Oqil Salimov'
+2026-06-02 16:02:12,938 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781111. Checking child tables...
+2026-06-02 16:02:12,939 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Салимов Акил Умурзакович', '阿基尔·乌穆尔扎科维奇·萨利莫夫', 'Акыл Сәлимов', 'Salimov Oqil Umrzoqovich', 'Oqil Salimov', 'Oqil Umrzoqovich Salimov', 'Акил Умурзакович Салимов', 'Салімов Акіл Умурзакович']
+      Scraper=['Салимов Акил Умурзакович', 'Oqil Salimov', 'Oqil Umrzoqovich Salimov']
+      To remove=['阿基尔·乌穆尔扎科维奇·萨利莫夫', 'Акыл Сәлимов', 'Salimov Oqil Umrzoqovich', 'Акил Умурзакович Салимов', 'Салімов Акіл Умурзакович']  To add=[]
+2026-06-02 16:02:12,941 - INFO - orchestrator - [DELTA]   'Oqil Salimov' (main_id=781111) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,942 - INFO - orchestrator - [DELTA] Processing record #89: 'Baxtiyor Rahimov'
+2026-06-02 16:02:12,943 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781112. Checking child tables...
+2026-06-02 16:02:12,944 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Baxtiyor Rahimov', 'Бахтыяр Рахімаў', 'Бахтыёр Рахімаў']
+      Scraper=['Бахтыяр Рахімаў', 'Baxtiyor Rahimov']
+      To remove=['Бахтыёр Рахімаў']  To add=[]
+2026-06-02 16:02:12,946 - INFO - orchestrator - [DELTA]   'Baxtiyor Rahimov' (main_id=781112) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,947 - INFO - orchestrator - [DELTA] Processing record #90: 'Shavkat Karimov'
+2026-06-02 16:02:12,948 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781113. Checking child tables...
+2026-06-02 16:02:12,949 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Karimov Shavkat Ibrohimovich', 'Shavkat Karimov']
+      Scraper=['Karimov Shavkat Ibrohimovich']
+      To remove=['Shavkat Karimov']  To add=[]
+2026-06-02 16:02:12,951 - INFO - orchestrator - [DELTA]   'Shavkat Karimov' (main_id=781113) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,952 - INFO - orchestrator - [DELTA] Processing record #91: 'Artur Taymazov'
+2026-06-02 16:02:12,953 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781114. Checking child tables...
+2026-06-02 16:02:12,954 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['アルトゥール・タイマゾフ', 'ارتور تایمازوف', 'Артур Таймазов', 'Таймазты Артур', 'Артур Борисович Таймазов', 'Taimasow', 'Jajejijujo', 'Артур Тајмазов', 'Artur Borisovich Taymazov', 'Artur Taimasow', 'Arthur Taymazov', 'Artur Taimazow', '阿爾圖爾·泰馬佐夫', 'Artur Tajmazow', 'Artur Taymazow', 'Artur Taimazov', 'ארתור טאימזוב', 'Artur Taymasow', 'Artur Taimàzov', 'آرتور تایمازوف', 'Tajmazty Barisy Fyrt Artur', 'ارتور تایمازف', 'ارتور تايمازوف', '아르투르 타이마조프', 'Artur Taimasov', 'Arthur Taimazov', 'No She Is Not Chinnese', 'Taymazov', 'Artur Tajmazov', 'آرتور تایمازف', 'არტურ ტაიმაზოვი', 'Artur Taymazov', 'Таймазов Артур Борисович']
+      Scraper=['Артур Борисович Таймазов', 'Taimasow', 'ارتور تایمازف', 'Arthur Taymazov', 'Artur Taymasow', 'Artur Taimasov', '阿爾圖爾·泰馬佐夫', 'Artur Taymazow', 'Artur Tajmazov', 'Artur Taymazov', 'ارتور تایمازوف', 'Artur Taimasow', 'آرتور تایمازف', 'Tajmazty Barisy Fyrt Artur', 'Artur Taimazov', 'Artur Borisovich Taymazov', 'Artur Taimazow', 'Артур Таймазов', 'Arthur Taimazov', 'Taymazov']
+      To remove=['アルトゥール・タイマゾフ', 'Таймазты Артур', 'Jajejijujo', 'Артур Тајмазов', 'Artur Tajmazow', 'ארתור טאימזוב', 'Artur Taimàzov', 'آرتور تایمازوف', 'ارتور تايمازوف', '아르투르 타이마조프', 'No She Is Not Chinnese', 'არტურ ტაიმაზოვი', 'Таймазов Артур Борисович']  To add=[]
+2026-06-02 16:02:12,958 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Amateur Wrestler', 'Member Of The State Duma', None, None), ('Member Of The State Duma', 'Member of United Russia', None, None), ('Politician', None, None, None)]
+      Scraper tuples: [('Amateur Wrestler', 'Member Of The State Duma', None, None), ('Politician', 'Member of United Russia', None, None)]
+      To remove=[('Member Of The State Duma', 'Member of United Russia', None, None), ('Politician', None, None, None)]  To add=[('Politician', 'Member of United Russia', None, None)]
+2026-06-02 16:02:12,958 - INFO - orchestrator - [DELTA]   'Artur Taymazov' (main_id=781114) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[('Member Of The State Duma', 'Member of United Russia', None, None), ('Politician', None, None, None)], to_add=[('Politician', 'Member of United Russia', None, None)])"]. Added to new_df.
+2026-06-02 16:02:12,959 - INFO - orchestrator - [DELTA] Processing record #92: 'Akmal Burxanov'
+2026-06-02 16:02:12,960 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781115. Checking child tables...
+2026-06-02 16:02:12,960 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Akmal Burxanov', 'Бурханов Акмал Эшондедаевич', 'Акмал Эшондедаевич Бурханов', 'Akmal Burxanov Eshondedayevich']
+      Scraper=['Akmal Burxanov', 'Бурханов Акмал Эшондедаевич', 'Akmal Burxanov Eshondedayevich']
+      To remove=['Акмал Эшондедаевич Бурханов']  To add=[]
+2026-06-02 16:02:12,963 - INFO - orchestrator - [DELTA]   'Akmal Burxanov' (main_id=781115) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:12,963 - INFO - orchestrator - [DELTA] Processing record #93: 'Gulnara Karimova'
+2026-06-02 16:02:12,965 - INFO - orchestrator - [DELTA]   AND-query missed — found 2 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781116:
+2026-06-02 16:02:12,966 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      desc: DB='Uzbek Businesswoman And Social Activist' vs Scraper='Uzbek Businesswoman And Social Activist, Daughter Of The Former President'
+2026-06-02 16:02:15,304 - INFO - orchestrator - [DELTA]   'Gulnara Karimova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:15,305 - INFO - orchestrator - [DELTA] Processing record #94: 'Sherzod Qudbiyev'
+2026-06-02 16:02:15,311 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781117. Checking child tables...
+2026-06-02 16:02:15,312 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Sherzod Kudbiev', 'Sherzod Qudbiyev', 'Кудбиев Шерзод Давлятович', 'Sherzod Davlyatovich Qudbiyev']
+      Scraper=['Sherzod Davlyatovich Qudbiyev', 'Sherzod Kudbiev']
+      To remove=['Sherzod Qudbiyev', 'Кудбиев Шерзод Давлятович']  To add=[]
+2026-06-02 16:02:15,319 - INFO - orchestrator - [DELTA]   'Sherzod Qudbiyev' (main_id=781117) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,320 - INFO - orchestrator - [DELTA] Processing record #95: 'Rasul Kusherbayev'
+2026-06-02 16:02:15,321 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781119. Checking child tables...
+2026-06-02 16:02:15,322 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Кушербаев Расул Хидралиевич', 'Rasul Kusherbaev', 'Rasul Kusherbayev', 'Расул Кӯшербоев', 'Расул Қыдыралиұлы Көшербаев', 'Кушербаєв Расул Кгідралійович']
+      Scraper=['Rasul Kusherbaev']
+      To remove=['Кушербаев Расул Хидралиевич', 'Rasul Kusherbayev', 'Расул Кӯшербоев', 'Расул Қыдыралиұлы Көшербаев', 'Кушербаєв Расул Кгідралійович']  To add=[]
+2026-06-02 16:02:15,323 - INFO - orchestrator - [DELTA]   nationality MISMATCH:
+      DB=['Soviet Union', 'Uzbekistan']
+      Scraper=['Uzbekistan']
+      To remove=['Soviet Union']  To add=[]
+2026-06-02 16:02:15,325 - INFO - orchestrator - [DELTA]   'Rasul Kusherbayev' (main_id=781119) — CHANGED. Failing check(s): ['alias', 'nationality']. Added to new_df.
+2026-06-02 16:02:15,325 - INFO - orchestrator - [DELTA] Processing record #96: 'Shavkat Mirziyoyev'
+2026-06-02 16:02:15,327 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781120. Checking child tables...
+2026-06-02 16:02:15,329 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Mirziyoyev', 'Мирзиёев Шавкат Мираманович', 'Shavkat Miromonovich Mirziyoyev', '샵카트 미르지요예프', 'Шаўкат Мірзіяеў', 'शौकत मिर्ज़िएव', 'Chavkat Mirziyoyev', 'Šavkat Mirzijajev', 'Mirziyoyev Shavkat Miromonovich', 'Шәүкәт Мираман улы Мирзияев', 'Šavkats Mirzijojevs', 'شوكت ميرضيايف', 'Σαβκάτ Μιρζιγιάγιεφ', 'Szawkat Miromonowicz Mirzijojew', 'Szawkat Mirzijajew', 'Mirziyayev Shavkat Miramanovich', 'Shovqat Mirziyoyev', 'Sjavkat Miromonovitj Mirzijajev', 'শাভকাত মির্জিয়োয়েভ', 'Шаўкат Мірамонавіч Мірзіяеў', 'شوکت میرضیایئف', 'Şövkət Mirzəyev', '샵카트 미로모노비치 미르지요예프', 'ഷൌക്കത്ത് മിർസിയോയേവ്', '肖開提·米爾則亞耶夫', 'Шәукет Міраманұлы Мірзияев', 'シャフカット・ミルジョーエフ', 'شەوکەت میرزیایێڤ', 'Шавкат Мирзияев', 'Šavkat Miromonovič Mirzijojev', 'Шавкат Мирзиёев', 'Şevket Mirziyoyev', 'Шавкат Мирзијојев', '米尔济约耶夫', 'شوکت میرضیایف', 'Sjavkat Miromonovitj Mirzijojev', 'Shavkat Miromon Filius Mirziyoyev', 'Шәүкәт Мирзияев', 'Shavkat Mirziyayev', 'Шавқат Миромонович Мирзиёев', 'ساۋكات مىرزىيويەۋ', 'シャヴカト・ミルズィヤエフ', '肖開提·米爾濟約耶夫', 'Šavkatas Mirzijajevas', '沙夫卡特·米尔济约耶夫', 'შავკათ მირზიიოევი', 'Şavkat Mirziyoyev', 'Мирзиёев Шавкат', 'சவ்காத் மிர்சியோயெவ்', 'Sjavkat Mirzijajev', 'শ্বাভকত মিৰ্জিয়েভ', 'Ŝavkat Mirzijojev', 'Sjavkat Mirzijojev', 'Chavkat Mirzioïev', 'Šavkat Mirzijojev', '米爾濟約耶夫', 'Șavkat Miromonovici Mirziyoyev', 'Schawkat Miromonowitsch Mirsijojew', 'Şevket Miramanoviç Mirziyoyev', 'Schawkat Mirsijojew', 'Շավկաթ Միրզիյոև', 'ชัฟแกต มือร์ซียอยิฟ', 'Shavkat Mirziyoyev', 'שבקט מירזייאיב', 'Шавкат Миромонович Мирзиёев', 'シャフカット・ミルジヨエ', 'ሻቭካት ሚርዚዮየቭ', 'Шавкат Міромонович Мірзійоєв', 'Шавкат Мірзійоєв', 'Мирзиёев', 'Şöwket Mirziýoýew', 'Ŝavkat Miromonoviĉ Mirzijojev']
+      Scraper=['Ŝavkat Miromonoviĉ Mirzijojev', 'Мирзиёев Шавкат', 'Шавкат Мирзиёев', 'Mirziyayev Shavkat Miramanovich', 'Шаўкат Мірзіяеў', 'Shovqat Mirziyoyev', 'Sjavkat Mirzijojev', 'Шәукет Міраманұлы Мірзияев', 'Chavkat Mirziyoyev', 'Shavkat Mirziyoyev', '샵카트 미로모노비치 미르지요예프', 'Шавкат Мирзияев', 'Шәүкәт Мираман улы Мирзияев', 'Şevket Miramanoviç Mirziyoyev', 'Szawkat Miromonowicz Mirzijojew', 'シャフカット・ミルジョーエフ', 'Mirziyoyev', 'Szawkat Mirzijajew', 'Sjavkat Mirzijajev', 'Shavkat Miromonovich Mirziyoyev', 'Shavkat Miromon Filius Mirziyoyev', '[Chavkat Mirzioïev]', 'Мирзиёев', 'Мирзиёев Шавкат Мираманович', 'Šavkat Miromonovič Mirzijojev', 'Шавқат Миромонович Мирзиёев', 'Şövkət Mirzəyev', 'Шавкат Миромонович Мирзиёев', 'シャフカット・ミルジヨエ', 'Sjavkat Miromonovitj Mirzijajev', 'Šavkat Mirzijojev', 'Schawkat Miromonowitsch Mirsijojew', '米尔济约耶夫', 'Shavkat Mirziyayev', 'Mirziyoyev Shavkat Miromonovich', 'Шавкат Міромонович Мірзійоєв', 'Sjavkat Miromonovitj Mirzijojev']
+      To remove=['샵카트 미르지요예프', 'शौकत मिर्ज़िएव', 'Šavkat Mirzijajev', 'Šavkats Mirzijojevs', 'شوكت ميرضيايف', 'Σαβκάτ Μιρζιγιάγιεφ', 'শাভকাত মির্জিয়োয়েভ', 'Шаўкат Мірамонавіч Мірзіяеў', 'شوکت میرضیایئف', 'ഷൌക്കത്ത് മിർസിയോയേവ്', '肖開提·米爾則亞耶夫', 'شەوکەت میرزیایێڤ', 'Şevket Mirziyoyev', 'Шавкат Мирзијојев', 'شوکت میرضیایف', 'Шәүкәт Мирзияев', 'ساۋكات مىرزىيويەۋ', 'シャヴカト・ミルズィヤエフ', '肖開提·米爾濟約耶夫', 'Šavkatas Mirzijajevas', '沙夫卡特·米尔济约耶夫', 'შავკათ მირზიიოევი', 'Şavkat Mirziyoyev', 'சவ்காத் மிர்சியோயெவ்', 'শ্বাভকত মিৰ্জিয়েভ', 'Ŝavkat Mirzijojev', 'Chavkat Mirzioïev', '米爾濟約耶夫', 'Șavkat Miromonovici Mirziyoyev', 'Schawkat Mirsijojew', 'Շավկաթ Միրզիյոև', 'ชัฟแกต มือร์ซียอยิฟ', 'שבקט מירזייאיב', 'ሻቭካት ሚርዚዮየቭ', 'Шавкат Мірзійоєв', 'Şöwket Mirziýoýew']  To add=['[Chavkat Mirzioïev]']
+2026-06-02 16:02:15,332 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Engineer', 'President Of Uzbekistan', '2016-12-14', None), ('Politician', 'President Of Uzbekistan', '2016-09-08', '2016-12-14'), ('University Teacher', 'Prime Minister Of Uzbekistan', '2003-12-12', '2016-12-14'), (None, 'Member of Communist Party of the Soviet Union', None, None), (None, 'Member of Peoples Democratic Party of Uzbekistan', None, None), (None, 'Member of Self-Sacrifice National Democratic Party', None, None), (None, 'Member of Uzbekistan Liberal Democratic Party', None, None), (None, 'Member of Uzbekistan National Revival Democratic Party', None, None)]
+      Scraper tuples: [('Engineer', 'President Of Uzbekistan', '2016-09-08', '2016-12-14'), ('Politician', 'President Of Uzbekistan', '2016-12-14', None), ('University Teacher', 'Prime Minister Of Uzbekistan', '2003-12-12', '2016-12-14'), (None, 'Member of Communist Party of the Soviet Union', None, None), (None, 'Member of Peoples Democratic Party of Uzbekistan', None, None), (None, 'Member of Self-Sacrifice National Democratic Party', None, None), (None, 'Member of Uzbekistan Liberal Democratic Party', None, None), (None, 'Member of Uzbekistan National Revival Democratic Party', None, None)]
+      To remove=[('Engineer', 'President Of Uzbekistan', '2016-12-14', None), ('Politician', 'President Of Uzbekistan', '2016-09-08', '2016-12-14')]  To add=[('Engineer', 'President Of Uzbekistan', '2016-09-08', '2016-12-14'), ('Politician', 'President Of Uzbekistan', '2016-12-14', None)]
+2026-06-02 16:02:15,332 - INFO - orchestrator - [DELTA]   'Shavkat Mirziyoyev' (main_id=781120) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[('Engineer', 'President Of Uzbekistan', '2016-12-14', None), ('Politician', 'President Of Uzbekistan', '2016-09-08', '2016-12-14')], to_add=[('Engineer', 'President Of Uzbekistan', '2016-09-08', '2016-12-14'), ('Politician', 'President Of Uzbekistan', '2016-12-14', None)])"]. Added to new_df.
+2026-06-02 16:02:15,333 - INFO - orchestrator - [DELTA] Processing record #97: 'Elyor Ganiyev'
+2026-06-02 16:02:15,335 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781121. Checking child tables...
+2026-06-02 16:02:15,335 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Elyor Qəniyev', 'اليور جانييف', '叶瘳尔·加尼耶夫', 'Elyor Ganiyev', 'Ганиев Элёр Маджидович', 'Ganiyev', 'エリョール・ガニエフ', '叶瘳尔·马吉多维奇·加尼耶夫', 'Elyor Gʻaniyev']
+      Scraper=['叶瘳尔·马吉多维奇·加尼耶夫', 'Elyor Ganiyev', 'Ganiyev']
+      To remove=['Elyor Qəniyev', 'اليور جانييف', '叶瘳尔·加尼耶夫', 'Ганиев Элёр Маджидович', 'エリョール・ガニエフ', 'Elyor Gʻaniyev']  To add=[]
+2026-06-02 16:02:15,338 - INFO - orchestrator - [DELTA]   'Elyor Ganiyev' (main_id=781121) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,339 - INFO - orchestrator - [DELTA] Processing record #98: 'Alisher Abdualiev'
+2026-06-02 16:02:15,341 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781122. Checking child tables...
+2026-06-02 16:02:15,341 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Абдуалієв Алішер Хабібуллаєвич', 'Абдуалиев Алишер Хабибуллаевич', 'Alisher Abdualiyev', 'Alisher Abdualiev']
+      Scraper=['Alisher Abdualiev']
+      To remove=['Абдуалієв Алішер Хабібуллаєвич', 'Абдуалиев Алишер Хабибуллаевич', 'Alisher Abdualiyev']  To add=[]
+2026-06-02 16:02:15,344 - INFO - orchestrator - [DELTA]   'Alisher Abdualiev' (main_id=781122) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,345 - INFO - orchestrator - [DELTA] Processing record #99: 'Ismatilla Ergashev'
+2026-06-02 16:02:15,346 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781123. Checking child tables...
+2026-06-02 16:02:15,347 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['İsmətulla İrqaşev', '伊斯马季拉·埃尔加捨夫', '伊斯馬季拉·埃爾加舍夫', 'Ismatilla Ergashev', 'عصمتيلا ارجاشيف', '伊斯马季拉·埃尔加舍夫']
+      Scraper=['Ismatilla Ergashev', '伊斯马季拉·埃尔加捨夫']
+      To remove=['İsmətulla İrqaşev', '伊斯馬季拉·埃爾加舍夫', 'عصمتيلا ارجاشيف', '伊斯马季拉·埃尔加舍夫']  To add=[]
+2026-06-02 16:02:15,349 - INFO - orchestrator - [DELTA]   'Ismatilla Ergashev' (main_id=781123) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,350 - INFO - orchestrator - [DELTA] Processing record #100: 'Bakhodir Kurbanov'
+2026-06-02 16:02:15,352 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781125. Checking child tables...
+2026-06-02 16:02:15,353 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Баходир Курбанов', 'Bakhodir Nizamovich Kurbanov', 'Bahadır Nizamoğlu Kurbanov', 'Bahadır Kurbanov', 'Bakhodir Kurbanov', 'Bahodir Qurbonov', 'Баходир Низамович Курбанов', 'Bahodir Nizomovich Qurbonov', 'バホディル・クルバノフ', 'باخودیر کوربانف']
+      Scraper=['Bahadır Nizamoğlu Kurbanov', 'Баходир Курбанов', 'Bakhodir Nizamovich Kurbanov', 'Bahodir Nizomovich Qurbonov', '[Bahadır Kurbanov]']
+      To remove=['Bahadır Kurbanov', 'Bakhodir Kurbanov', 'Bahodir Qurbonov', 'Баходир Низамович Курбанов', 'バホディル・クルバノフ', 'باخودیر کوربانف']  To add=['[Bahadır Kurbanov]']
+2026-06-02 16:02:15,356 - INFO - orchestrator - [DELTA]   'Bakhodir Kurbanov' (main_id=781125) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,356 - INFO - orchestrator - [DELTA] Processing record #101: 'Tanzila Narbaeva'
+2026-06-02 16:02:15,358 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781126. Checking child tables...
+2026-06-02 16:02:15,359 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Тәнзилә Норбаева', 'Тәнзилә Камалқызы Нарбаева', 'Tanzila Kamalovna Narbaeva', '탄질라 나르바예바', 'Tanzila Narbaeva', 'Тәнзилә Нарбаева', 'تنزیلا نورباوا', 'Танзила Норбоева', 'Tənzila Kamalovna Narbayeva', 'Танзила Норбаева', 'Танзила Камаловна Нарбаева', 'タンジラ・ノルバエヴァ', 'Tenzile Narbayeva', 'Tenzile Kemalkızı Narbayeva', 'Танзила Нарбаева', 'Тәнзила Камалқызы Норбаева', 'Tanzila Norbaeva', 'ტანზილა ნარბაევა', 'Tənzilə Narbayeva', 'Tanzila Norboeva', 'タンジナ・ナルバーエバ', 'Танзила Камалқызы Нарбаева', 'タンジラ・ナルバーエバ', 'Tanzila Kamalovna Narbayeva', 'Tanzila Norboyeva']
+      Scraper=['Tanzila Kamalovna Narbayeva', 'Tanzila Kamalovna Narbaeva', 'Tenzile Kemalkızı Narbayeva', 'Тәнзилә Норбаева', 'タンジラ・ナルバーエバ', 'Тәнзилә Камалқызы Нарбаева', 'タンジラ・ノルバエヴァ', 'Танзила Норбаева', 'Танзила Нарбаева', 'Тәнзила Камалқызы Норбаева', 'Tanzila Narbaeva', 'Тәнзилә Нарбаева', 'Tanzila Norboeva', 'Tənzila Kamalovna Narbayeva']
+      To remove=['탄질라 나르바예바', 'تنزیلا نورباوا', 'Танзила Норбоева', 'Танзила Камаловна Нарбаева', 'Tenzile Narbayeva', 'Tanzila Norbaeva', 'ტანზილა ნარბაევა', 'Tənzilə Narbayeva', 'タンジナ・ナルバーエバ', 'Танзила Камалқызы Нарбаева', 'Tanzila Norboyeva']  To add=[]
+2026-06-02 16:02:15,362 - INFO - orchestrator - [DELTA]   'Tanzila Narbaeva' (main_id=781126) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,362 - INFO - orchestrator - [DELTA] Processing record #102: 'Murad Nazarov'
+2026-06-02 16:02:15,364 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781127. Checking child tables...
+2026-06-02 16:02:15,365 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Мурад Назаров', 'ムロド・ナザロフ', 'Murad Nazarov', 'Murod Nazarov', 'Назаров Мурад']
+      Scraper=['Murad Nazarov', 'Murod Nazarov', 'Назаров Мурад']
+      To remove=['Мурад Назаров', 'ムロド・ナザロフ']  To add=[]
+2026-06-02 16:02:15,367 - INFO - orchestrator - [DELTA]   'Murad Nazarov' (main_id=781127) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,368 - INFO - orchestrator - [DELTA] Processing record #103: 'Sanjar Umarov'
+2026-06-02 16:02:15,370 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781128. Checking child tables...
+2026-06-02 16:02:15,373 - INFO - orchestrator - [DELTA]   'Sanjar Umarov' (main_id=781128) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:15,373 - INFO - orchestrator - [DELTA] Processing record #104: 'Muhammad Salih'
+2026-06-02 16:02:15,375 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781129. Checking child tables...
+2026-06-02 16:02:15,375 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['محمد صالح', 'Muhammad SolihМуҳаммад Солиҳ', '穆罕默德·薩利赫', 'Muhammad Solih', 'محمد ساليه', 'Мухаммад Салих', '穆罕默德·萨利赫', 'Muhammed Salih', 'Muhammad Salih']
+      Scraper=['Muhammad SolihМуҳаммад Солиҳ', 'Muhammad Salih']
+      To remove=['محمد صالح', '穆罕默德·薩利赫', 'Muhammad Solih', 'محمد ساليه', 'Мухаммад Салих', '穆罕默德·萨利赫', 'Muhammed Salih']  To add=[]
+2026-06-02 16:02:15,378 - INFO - orchestrator - [DELTA]   'Muhammad Salih' (main_id=781129) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,379 - INFO - orchestrator - [DELTA] Processing record #105: 'Ubaydullayev Khikmatilla'
+2026-06-02 16:02:15,381 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781130. Checking child tables...
+2026-06-02 16:02:15,382 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Hikmetilla Ubaydullaev', 'Пулатов Хикматилла', 'Hikmat Ubaydullaev', 'Убайдуллаев Хикматилла', 'Хикмат Пулатов', 'Хікматілла Убайдуллаєв', 'Ubaydullayev Khikmatilla', 'Ubaydullaev Hikmat', 'Убайдуллаєв Хікматілла', 'Ubaydullayev Khikmat', 'Polatov Hikmatilla', 'Пулатов Хикмат', 'Khikmat Pulatov', 'Хикмат Убайдуллаев', 'Убайдуллаев Хикматилла Шухратиллаевич', 'Hikmat Polatov', 'Хикматилла Пулатов', 'Убайдуллаєв Хікматілла Шухратіллаєвич', 'Убайдуллаев Хикмат', 'Хикматулла Убайдуллаев', 'Ҳикматилла Шухратиллаевич Убайдуллаев', 'Убайдуллаев Хикматулла', 'Pulatov Khikmat', 'Хикматилла Убайдуллаев', 'Убайдуллаєв Хікмат', 'Pulatov Khikmatilla', 'Khikmatilla Pulatov', 'Ubaydullaev Hikmatilla']
+      Scraper=['Polatov Hikmatilla', 'Hikmat Ubaydullaev', 'Пулатов Хикмат', 'Хикматилла Пулатов', 'Hikmetilla Ubaydullaev', 'Убайдуллаев Хикмат', 'Pulatov Khikmat', 'Хикмат Пулатов', 'Ubaydullayev Khikmat', 'Хікматілла Убайдуллаєв', 'Убайдуллаєв Хікматілла', 'Hikmat Polatov', 'Ҳикматилла Шухратиллаевич Убайдуллаев', 'Убайдуллаев Хикматулла', 'Хикматулла Убайдуллаев', 'Хикмат Убайдуллаев', 'Khikmat Pulatov', 'Pulatov Khikmatilla', 'Khikmatilla Pulatov', 'Убайдуллаєв Хікмат', 'Ubaydullaev Hikmat', 'Пулатов Хикматилла', 'Убайдуллаев Хикматилла', 'Хикматилла Убайдуллаев']
+      To remove=['Ubaydullayev Khikmatilla', 'Убайдуллаев Хикматилла Шухратиллаевич', 'Убайдуллаєв Хікматілла Шухратіллаєвич', 'Ubaydullaev Hikmatilla']  To add=[]
+2026-06-02 16:02:15,384 - INFO - orchestrator - [DELTA]   'Ubaydullayev Khikmatilla' (main_id=781130) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,385 - INFO - orchestrator - [DELTA] Processing record #106: 'Boriy Alikhanov'
+2026-06-02 16:02:15,387 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781131. Checking child tables...
+2026-06-02 16:02:15,388 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Борий Батырович Алиханов', 'Алиханов Борий Батырович', 'Борий Батырұлы Әлиханов', 'Boriy Alixanov', 'Boriy Alikhanov']
+      Scraper=['Boriy Alikhanov', 'Алиханов Борий Батырович']
+      To remove=['Борий Батырович Алиханов', 'Борий Батырұлы Әлиханов', 'Boriy Alixanov']  To add=[]
+2026-06-02 16:02:15,390 - INFO - orchestrator - [DELTA]   'Boriy Alikhanov' (main_id=781131) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,391 - INFO - orchestrator - [DELTA] Processing record #107: 'Umarov Otabek'
+2026-06-02 16:02:15,393 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781132. Checking child tables...
+2026-06-02 16:02:15,393 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Otabek Umarov', 'Умаров Отабек Мухаммадалиеви', 'Umarov Otabek', 'Умаров Отабек Мухаммадалиевич']
+      Scraper=['Otabek Umarov']
+      To remove=['Умаров Отабек Мухаммадалиеви', 'Umarov Otabek', 'Умаров Отабек Мухаммадалиевич']  To add=[]
+2026-06-02 16:02:15,396 - INFO - orchestrator - [DELTA]   'Umarov Otabek' (main_id=781132) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,397 - INFO - orchestrator - [DELTA] Processing record #108: 'Zamira Mutalova'
+2026-06-02 16:02:15,399 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781133. Checking child tables...
+2026-06-02 16:02:15,399 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Zamira Mutalova', 'Моталова Замира', 'Замира Муталова', 'Муталова Замира']
+      Scraper=['Zamira Mutalova', 'Муталова Замира']
+      To remove=['Моталова Замира', 'Замира Муталова']  To add=[]
+2026-06-02 16:02:15,402 - INFO - orchestrator - [DELTA]   'Zamira Mutalova' (main_id=781133) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,403 - INFO - orchestrator - [DELTA] Processing record #109: 'Reszat Ablajew'
+2026-06-02 16:02:15,404 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781134. Checking child tables...
+2026-06-02 16:02:15,408 - INFO - orchestrator - [DELTA]   'Reszat Ablajew' (main_id=781134) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:15,408 - INFO - orchestrator - [DELTA] Processing record #110: 'Saida Mirziyoyeva'
+2026-06-02 16:02:15,409 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781135. Checking child tables...
+2026-06-02 16:02:15,410 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Saide Mirziyoyeva', 'Saida Mirzijojevová', 'Саида Мирзиёева', '赛义达·米尔济约耶娃', 'Saida Šavkatovna Mirzijojevová', 'Saide Şevketovna Mirziyoyeva', '사이다 미르지요예바', 'Saida Mirzijojeva', 'Saida Mirziyoyeva', 'Mirziyoyeva Saida', 'Saida Shavkatovna Mirziyoyeva', 'Саида Шавкатқызы Мирзиёева']
+      Scraper=['Saida Mirziyoyeva', 'Saida Shavkatovna Mirziyoyeva', 'Mirziyoyeva Saida', 'Saida Mirzijojevová', 'Saide Şevketovna Mirziyoyeva']
+      To remove=['Saide Mirziyoyeva', 'Саида Мирзиёева', '赛义达·米尔济约耶娃', 'Saida Šavkatovna Mirzijojevová', '사이다 미르지요예바', 'Saida Mirzijojeva', 'Саида Шавкатқызы Мирзиёева']  To add=[]
+2026-06-02 16:02:15,413 - INFO - orchestrator - [DELTA]   'Saida Mirziyoyeva' (main_id=781135) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-06-02 16:02:15,414 - INFO - orchestrator - [DELTA] Processing record #111: 'Nodirjon Abduvaliev'
+2026-06-02 16:02:15,416 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:02:17,521 - INFO - orchestrator - [DELTA]   'Nodirjon Abduvaliev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:02:17,522 - INFO - orchestrator - [DELTA] Processing record #112: 'Nilufar Usmonova'
+2026-06-02 16:02:17,527 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781146. Checking child tables...
+2026-06-02 16:02:17,535 - INFO - orchestrator - [DELTA]   'Nilufar Usmonova' (main_id=781146) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,536 - INFO - orchestrator - [DELTA] Processing record #113: 'Ivan Putin'
+2026-06-02 16:02:17,537 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781147. Checking child tables...
+2026-06-02 16:02:17,540 - INFO - orchestrator - [DELTA]   'Ivan Putin' (main_id=781147) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,540 - INFO - orchestrator - [DELTA] Processing record #114: 'Vladimir Putin Jr'
+2026-06-02 16:02:17,541 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781148. Checking child tables...
+2026-06-02 16:02:17,544 - INFO - orchestrator - [DELTA]   'Vladimir Putin Jr' (main_id=781148) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,544 - INFO - orchestrator - [DELTA] Processing record #115: 'Gulnara Karimova'
+2026-06-02 16:02:17,545 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781149. Checking child tables...
+2026-06-02 16:02:17,548 - INFO - orchestrator - [DELTA]   'Gulnara Karimova' (main_id=781149) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,549 - INFO - orchestrator - [DELTA] Processing record #116: 'Lola Karimova Tillyaeva'
+2026-06-02 16:02:17,550 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781141. Checking child tables...
+2026-06-02 16:02:17,552 - INFO - orchestrator - [DELTA]   'Lola Karimova Tillyaeva' (main_id=781141) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,552 - INFO - orchestrator - [DELTA] Processing record #117: 'Saida Mirziyoyeva'
+2026-06-02 16:02:17,554 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781150. Checking child tables...
+2026-06-02 16:02:17,556 - INFO - orchestrator - [DELTA]   'Saida Mirziyoyeva' (main_id=781150) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,556 - INFO - orchestrator - [DELTA] Processing record #118: 'Shakhnoza Mirziyoyeva'
+2026-06-02 16:02:17,557 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781142. Checking child tables...
+2026-06-02 16:02:17,560 - INFO - orchestrator - [DELTA]   'Shakhnoza Mirziyoyeva' (main_id=781142) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,561 - INFO - orchestrator - [DELTA] Processing record #119: 'Ibrohim Hakimov'
+2026-06-02 16:02:17,562 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781143. Checking child tables...
+2026-06-02 16:02:17,565 - INFO - orchestrator - [DELTA]   'Ibrohim Hakimov' (main_id=781143) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,565 - INFO - orchestrator - [DELTA] Processing record #120: 'Islam Karimov'
+2026-06-02 16:02:17,566 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781144. Checking child tables...
+2026-06-02 16:02:17,569 - INFO - orchestrator - [DELTA]   'Islam Karimov' (main_id=781144) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,569 - INFO - orchestrator - [DELTA] Processing record #121: 'Ziroat Mirziyoyeva'
+2026-06-02 16:02:17,570 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781139. Checking child tables...
+2026-06-02 16:02:17,573 - INFO - orchestrator - [DELTA]   'Ziroat Mirziyoyeva' (main_id=781139) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,573 - INFO - orchestrator - [DELTA] Processing record #122: 'Oybek Tursunov'
+2026-06-02 16:02:17,574 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781145. Checking child tables...
+2026-06-02 16:02:17,577 - INFO - orchestrator - [DELTA]   'Oybek Tursunov' (main_id=781145) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,577 - INFO - orchestrator - [DELTA] Processing record #123: 'Lyubov Kabaeva'
+2026-06-02 16:02:17,578 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781137. Checking child tables...
+2026-06-02 16:02:17,581 - INFO - orchestrator - [DELTA]   'Lyubov Kabaeva' (main_id=781137) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,582 - INFO - orchestrator - [DELTA] Processing record #124: 'Tatyana Karimova'
+2026-06-02 16:02:17,583 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781138. Checking child tables...
+2026-06-02 16:02:17,585 - INFO - orchestrator - [DELTA]   'Tatyana Karimova' (main_id=781138) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:17,586 - INFO - orchestrator - [DELTA] Processing record #125: 'Timur Taymazov'
+2026-06-02 16:02:17,587 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781140. Checking child tables...
+2026-06-02 16:02:17,589 - INFO - orchestrator - [DELTA]   'Timur Taymazov' (main_id=781140) — SAME. Added to is_del_list_1.
+2026-06-02 16:02:50,967 - INFO - orchestrator - Delta: 102 new records in 123.9s
+2026-06-02 16:03:12,637 - INFO - orchestrator - Inserted 102 records for uz_gen
+2026-06-02 16:22:03,630 - INFO - orchestrator - ============================================================
+2026-06-02 16:22:03,631 - INFO - orchestrator - country=Uzbekistan | tag=uz_gen | file=pep_uzbekistan_living_relevant_20260602_111007.xlsx
+2026-06-02 16:22:03,631 - INFO - orchestrator - ============================================================
+2026-06-02 16:22:52,717 - INFO - orchestrator - [DELTA] Processing record #0: 'Oybek Kasimov'
+2026-06-02 16:22:52,721 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862063. Checking child tables...
+2026-06-02 16:22:52,738 - INFO - orchestrator - [DELTA]   'Oybek Kasimov' (main_id=862063) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:52,738 - INFO - orchestrator - [DELTA] Processing record #1: 'Robaxon Anvarovna Maxmudova'
+2026-06-02 16:22:52,742 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:22:54,393 - INFO - orchestrator - [DELTA]   'Robaxon Anvarovna Maxmudova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:22:54,394 - INFO - orchestrator - [DELTA] Processing record #2: 'Ilhom Mahkamov'
+2026-06-02 16:22:54,399 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862065. Checking child tables...
+2026-06-02 16:22:54,405 - INFO - orchestrator - [DELTA]   'Ilhom Mahkamov' (main_id=862065) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:54,405 - INFO - orchestrator - [DELTA] Processing record #3: 'Murat Kamalov'
+2026-06-02 16:22:54,406 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862066. Checking child tables...
+2026-06-02 16:22:54,409 - INFO - orchestrator - [DELTA]   'Murat Kamalov' (main_id=862066) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:54,409 - INFO - orchestrator - [DELTA] Processing record #4: 'Maqsuda Vorisova'
+2026-06-02 16:22:54,410 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862067. Checking child tables...
+2026-06-02 16:22:54,413 - INFO - orchestrator - [DELTA]   'Maqsuda Vorisova' (main_id=862067) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:54,413 - INFO - orchestrator - [DELTA] Processing record #5: 'Davron Nazarmuhamedov'
+2026-06-02 16:22:54,415 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:22:56,273 - INFO - orchestrator - [DELTA]   'Davron Nazarmuhamedov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:22:56,274 - INFO - orchestrator - [DELTA] Processing record #6: 'Nazir Sobirov'
+2026-06-02 16:22:56,280 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862069. Checking child tables...
+2026-06-02 16:22:56,286 - INFO - orchestrator - [DELTA]   'Nazir Sobirov' (main_id=862069) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:56,286 - INFO - orchestrator - [DELTA] Processing record #7: 'Dilshod Xamzayev'
+2026-06-02 16:22:56,288 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862070. Checking child tables...
+2026-06-02 16:22:56,291 - INFO - orchestrator - [DELTA]   'Dilshod Xamzayev' (main_id=862070) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:56,291 - INFO - orchestrator - [DELTA] Processing record #8: 'Ravshanbek Qurbonov'
+2026-06-02 16:22:56,293 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862071. Checking child tables...
+2026-06-02 16:22:56,296 - INFO - orchestrator - [DELTA]   'Ravshanbek Qurbonov' (main_id=862071) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:56,296 - INFO - orchestrator - [DELTA] Processing record #9: 'Shoumarov Gayrat Baxromovich'
+2026-06-02 16:22:56,297 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862072. Checking child tables...
+2026-06-02 16:22:56,300 - INFO - orchestrator - [DELTA]   'Shoumarov Gayrat Baxromovich' (main_id=862072) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:56,300 - INFO - orchestrator - [DELTA] Processing record #10: 'Bakhtiyor Fazilov'
+2026-06-02 16:22:56,303 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862073. Checking child tables...
+2026-06-02 16:22:56,305 - INFO - orchestrator - [DELTA]   'Bakhtiyor Fazilov' (main_id=862073) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:56,306 - INFO - orchestrator - [DELTA] Processing record #11: 'Navroz Rizaev'
+2026-06-02 16:22:56,309 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:22:58,228 - INFO - orchestrator - [DELTA]   'Navroz Rizaev' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:22:58,229 - INFO - orchestrator - [DELTA] Processing record #12: 'Risboy Jorayev'
+2026-06-02 16:22:58,235 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862075. Checking child tables...
+2026-06-02 16:22:58,246 - INFO - orchestrator - [DELTA]   'Risboy Jorayev' (main_id=862075) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,246 - INFO - orchestrator - [DELTA] Processing record #13: 'Dilnozaxon Kattaxonova'
+2026-06-02 16:22:58,248 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862076. Checking child tables...
+2026-06-02 16:22:58,251 - INFO - orchestrator - [DELTA]   'Dilnozaxon Kattaxonova' (main_id=862076) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,251 - INFO - orchestrator - [DELTA] Processing record #14: 'Zokir Almatov'
+2026-06-02 16:22:58,253 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862077. Checking child tables...
+2026-06-02 16:22:58,256 - INFO - orchestrator - [DELTA]   'Zokir Almatov' (main_id=862077) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,256 - INFO - orchestrator - [DELTA] Processing record #15: 'Zulaykho Makhkamova'
+2026-06-02 16:22:58,257 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862078. Checking child tables...
+2026-06-02 16:22:58,260 - INFO - orchestrator - [DELTA]   'Zulaykho Makhkamova' (main_id=862078) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,260 - INFO - orchestrator - [DELTA] Processing record #16: 'Rustam Jorayev'
+2026-06-02 16:22:58,262 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862079. Checking child tables...
+2026-06-02 16:22:58,265 - INFO - orchestrator - [DELTA]   'Rustam Jorayev' (main_id=862079) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,265 - INFO - orchestrator - [DELTA] Processing record #17: 'Ruslan Mirzaev'
+2026-06-02 16:22:58,267 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862080. Checking child tables...
+2026-06-02 16:22:58,270 - INFO - orchestrator - [DELTA]   'Ruslan Mirzaev' (main_id=862080) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,270 - INFO - orchestrator - [DELTA] Processing record #18: 'Odil Abdurakhmanov'
+2026-06-02 16:22:58,272 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862081. Checking child tables...
+2026-06-02 16:22:58,275 - INFO - orchestrator - [DELTA]   'Odil Abdurakhmanov' (main_id=862081) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,275 - INFO - orchestrator - [DELTA] Processing record #19: 'Aziz Voitov'
+2026-06-02 16:22:58,277 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862082. Checking child tables...
+2026-06-02 16:22:58,280 - INFO - orchestrator - [DELTA]   'Aziz Voitov' (main_id=862082) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,281 - INFO - orchestrator - [DELTA] Processing record #20: 'Zhurabek Mirzamakhmudov'
+2026-06-02 16:22:58,282 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862083. Checking child tables...
+2026-06-02 16:22:58,286 - INFO - orchestrator - [DELTA]   'Zhurabek Mirzamakhmudov' (main_id=862083) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,286 - INFO - orchestrator - [DELTA] Processing record #21: 'Akbar Tashkulov'
+2026-06-02 16:22:58,288 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862084. Checking child tables...
+2026-06-02 16:22:58,291 - INFO - orchestrator - [DELTA]   'Akbar Tashkulov' (main_id=862084) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,291 - INFO - orchestrator - [DELTA] Processing record #22: 'Anvar Salihbayev'
+2026-06-02 16:22:58,293 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862085. Checking child tables...
+2026-06-02 16:22:58,296 - INFO - orchestrator - [DELTA]   'Anvar Salihbayev' (main_id=862085) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,297 - INFO - orchestrator - [DELTA] Processing record #23: 'Polat Maxsetbaev'
+2026-06-02 16:22:58,298 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862086. Checking child tables...
+2026-06-02 16:22:58,302 - INFO - orchestrator - [DELTA]   'Polat Maxsetbaev' (main_id=862086) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,302 - INFO - orchestrator - [DELTA] Processing record #24: 'Hasanboy Burxonov'
+2026-06-02 16:22:58,304 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862087. Checking child tables...
+2026-06-02 16:22:58,308 - INFO - orchestrator - [DELTA]   'Hasanboy Burxonov' (main_id=862087) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,308 - INFO - orchestrator - [DELTA] Processing record #25: 'Shavkat Umurzakov'
+2026-06-02 16:22:58,310 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862088. Checking child tables...
+2026-06-02 16:22:58,313 - INFO - orchestrator - [DELTA]   'Shavkat Umurzakov' (main_id=862088) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,313 - INFO - orchestrator - [DELTA] Processing record #26: 'Qutbiddin Burxonov'
+2026-06-02 16:22:58,315 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862089. Checking child tables...
+2026-06-02 16:22:58,318 - INFO - orchestrator - [DELTA]   'Qutbiddin Burxonov' (main_id=862089) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,319 - INFO - orchestrator - [DELTA] Processing record #27: 'Sardor Rustamboyev'
+2026-06-02 16:22:58,320 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862090. Checking child tables...
+2026-06-02 16:22:58,324 - INFO - orchestrator - [DELTA]   'Sardor Rustamboyev' (main_id=862090) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,324 - INFO - orchestrator - [DELTA] Processing record #28: 'Kamaliddin Babaev'
+2026-06-02 16:22:58,326 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862091. Checking child tables...
+2026-06-02 16:22:58,329 - INFO - orchestrator - [DELTA]   'Kamaliddin Babaev' (main_id=862091) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,330 - INFO - orchestrator - [DELTA] Processing record #29: 'Firuz Allayev'
+2026-06-02 16:22:58,331 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862092. Checking child tables...
+2026-06-02 16:22:58,335 - INFO - orchestrator - [DELTA]   'Firuz Allayev' (main_id=862092) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,335 - INFO - orchestrator - [DELTA] Processing record #30: 'Bekhzod Akhmedov'
+2026-06-02 16:22:58,337 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862093. Checking child tables...
+2026-06-02 16:22:58,340 - INFO - orchestrator - [DELTA]   'Bekhzod Akhmedov' (main_id=862093) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,340 - INFO - orchestrator - [DELTA] Processing record #31: 'Otakhodjayev Anvar Khojakhanovich'
+2026-06-02 16:22:58,342 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781056. Checking child tables...
+2026-06-02 16:22:58,352 - INFO - orchestrator - [DELTA]   'Otakhodjayev Anvar Khojakhanovich' (main_id=781056) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,353 - INFO - orchestrator - [DELTA] Processing record #32: 'Sanjar Bekov'
+2026-06-02 16:22:58,355 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862094. Checking child tables...
+2026-06-02 16:22:58,358 - INFO - orchestrator - [DELTA]   'Sanjar Bekov' (main_id=862094) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,358 - INFO - orchestrator - [DELTA] Processing record #33: 'Nusrat Hikmatov'
+2026-06-02 16:22:58,360 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781058. Checking child tables...
+2026-06-02 16:22:58,363 - INFO - orchestrator - [DELTA]   'Nusrat Hikmatov' (main_id=781058) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,364 - INFO - orchestrator - [DELTA] Processing record #34: 'Rahmonbek Usmonov'
+2026-06-02 16:22:58,366 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862095. Checking child tables...
+2026-06-02 16:22:58,369 - INFO - orchestrator - [DELTA]   'Rahmonbek Usmonov' (main_id=862095) — SAME. Added to is_del_list_1.
+2026-06-02 16:22:58,369 - INFO - orchestrator - [DELTA] Processing record #35: 'Saidahror Gulomov'
+2026-06-02 16:22:58,372 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:23:00,329 - INFO - orchestrator - [DELTA]   'Saidahror Gulomov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:23:00,330 - INFO - orchestrator - [DELTA] Processing record #36: 'Klara Jumamuratova'
+2026-06-02 16:23:00,335 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862097. Checking child tables...
+2026-06-02 16:23:00,343 - INFO - orchestrator - [DELTA]   'Klara Jumamuratova' (main_id=862097) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:00,343 - INFO - orchestrator - [DELTA] Processing record #37: 'Djavlon Kamolov'
+2026-06-02 16:23:00,345 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862098. Checking child tables...
+2026-06-02 16:23:00,348 - INFO - orchestrator - [DELTA]   'Djavlon Kamolov' (main_id=862098) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:00,348 - INFO - orchestrator - [DELTA] Processing record #38: 'Tulkin Abdusattarov'
+2026-06-02 16:23:00,350 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862099. Checking child tables...
+2026-06-02 16:23:00,353 - INFO - orchestrator - [DELTA]   'Tulkin Abdusattarov' (main_id=862099) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:00,353 - INFO - orchestrator - [DELTA] Processing record #39: 'Dilorom Yuldosheva'
+2026-06-02 16:23:00,354 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862100. Checking child tables...
+2026-06-02 16:23:00,359 - INFO - orchestrator - [DELTA]   'Dilorom Yuldosheva' (main_id=862100) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:00,360 - INFO - orchestrator - [DELTA] Processing record #40: 'Dilfuza Djumanovna Uralova'
+2026-06-02 16:23:00,362 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:23:02,212 - INFO - orchestrator - [DELTA]   'Dilfuza Djumanovna Uralova' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:23:02,213 - INFO - orchestrator - [DELTA] Processing record #41: 'Farhodjon Shermatov'
+2026-06-02 16:23:02,220 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:23:03,974 - INFO - orchestrator - [DELTA]   'Farhodjon Shermatov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:23:03,975 - INFO - orchestrator - [DELTA] Processing record #42: 'Aziz Anvarovich Toshpulatov'
+2026-06-02 16:23:03,980 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862101. Checking child tables...
+2026-06-02 16:23:03,987 - INFO - orchestrator - [DELTA]   'Aziz Anvarovich Toshpulatov' (main_id=862101) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:03,988 - INFO - orchestrator - [DELTA] Processing record #43: 'Ulugbek Shadmanov'
+2026-06-02 16:23:03,989 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862102. Checking child tables...
+2026-06-02 16:23:03,992 - INFO - orchestrator - [DELTA]   'Ulugbek Shadmanov' (main_id=862102) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:03,992 - INFO - orchestrator - [DELTA] Processing record #44: 'Merey Erali Qizi Amanbayeva'
+2026-06-02 16:23:03,994 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781068. Checking child tables...
+2026-06-02 16:23:04,000 - INFO - orchestrator - [DELTA]   'Merey Erali Qizi Amanbayeva' (main_id=781068) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:04,000 - INFO - orchestrator - [DELTA] Processing record #45: 'Shuhrat Sobirov'
+2026-06-02 16:23:04,003 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781069. Checking child tables...
+2026-06-02 16:23:04,006 - INFO - orchestrator - [DELTA]   'Shuhrat Sobirov' (main_id=781069) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:04,006 - INFO - orchestrator - [DELTA] Processing record #46: 'Mamatkarimov Baxtiyor Rustamovich'
+2026-06-02 16:23:04,009 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:23:05,956 - INFO - orchestrator - [DELTA]   'Mamatkarimov Baxtiyor Rustamovich' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:23:05,957 - INFO - orchestrator - [DELTA] Processing record #47: 'Otabek Mahkamov'
+2026-06-02 16:23:05,963 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862104. Checking child tables...
+2026-06-02 16:23:05,971 - INFO - orchestrator - [DELTA]   'Otabek Mahkamov' (main_id=862104) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,972 - INFO - orchestrator - [DELTA] Processing record #48: 'Sanjar Xamidullayev'
+2026-06-02 16:23:05,973 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862105. Checking child tables...
+2026-06-02 16:23:05,977 - INFO - orchestrator - [DELTA]   'Sanjar Xamidullayev' (main_id=862105) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,977 - INFO - orchestrator - [DELTA] Processing record #49: 'Yulduz Usmonova'
+2026-06-02 16:23:05,978 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862106. Checking child tables...
+2026-06-02 16:23:05,982 - INFO - orchestrator - [DELTA]   'Yulduz Usmonova' (main_id=862106) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,983 - INFO - orchestrator - [DELTA] Processing record #50: 'Shahlo Mahmudova'
+2026-06-02 16:23:05,984 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862107. Checking child tables...
+2026-06-02 16:23:05,987 - INFO - orchestrator - [DELTA]   'Shahlo Mahmudova' (main_id=862107) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,988 - INFO - orchestrator - [DELTA] Processing record #51: 'Komil Allamjonov'
+2026-06-02 16:23:05,989 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862108. Checking child tables...
+2026-06-02 16:23:05,992 - INFO - orchestrator - [DELTA]   'Komil Allamjonov' (main_id=862108) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,993 - INFO - orchestrator - [DELTA] Processing record #52: 'Hotamjon Ketmonov'
+2026-06-02 16:23:05,994 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862109. Checking child tables...
+2026-06-02 16:23:05,997 - INFO - orchestrator - [DELTA]   'Hotamjon Ketmonov' (main_id=862109) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:05,997 - INFO - orchestrator - [DELTA] Processing record #53: 'Alimzhan Tokhtakhunov'
+2026-06-02 16:23:05,999 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862110. Checking child tables...
+2026-06-02 16:23:06,002 - INFO - orchestrator - [DELTA]   'Alimzhan Tokhtakhunov' (main_id=862110) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,003 - INFO - orchestrator - [DELTA] Processing record #54: 'Adham Ahmedbaev'
+2026-06-02 16:23:06,005 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862111. Checking child tables...
+2026-06-02 16:23:06,008 - INFO - orchestrator - [DELTA]   'Adham Ahmedbaev' (main_id=862111) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,008 - INFO - orchestrator - [DELTA] Processing record #55: 'Rustam Atsimov'
+2026-06-02 16:23:06,010 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862112. Checking child tables...
+2026-06-02 16:23:06,013 - INFO - orchestrator - [DELTA]   'Rustam Atsimov' (main_id=862112) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,013 - INFO - orchestrator - [DELTA] Processing record #56: 'Nigmatilla Yuldashev'
+2026-06-02 16:23:06,015 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862113. Checking child tables...
+2026-06-02 16:23:06,018 - INFO - orchestrator - [DELTA]   'Nigmatilla Yuldashev' (main_id=862113) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,018 - INFO - orchestrator - [DELTA] Processing record #57: 'Diloram Tashmukhamedova'
+2026-06-02 16:23:06,020 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862114. Checking child tables...
+2026-06-02 16:23:06,023 - INFO - orchestrator - [DELTA]   'Diloram Tashmukhamedova' (main_id=862114) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,023 - INFO - orchestrator - [DELTA] Processing record #58: 'Erkinjon Turdimov'
+2026-06-02 16:23:06,024 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862115. Checking child tables...
+2026-06-02 16:23:06,027 - INFO - orchestrator - [DELTA]   'Erkinjon Turdimov' (main_id=862115) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,027 - INFO - orchestrator - [DELTA] Processing record #59: 'Qobul Berdiyev'
+2026-06-02 16:23:06,029 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862116. Checking child tables...
+2026-06-02 16:23:06,031 - INFO - orchestrator - [DELTA]   'Qobul Berdiyev' (main_id=862116) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,031 - INFO - orchestrator - [DELTA] Processing record #60: 'Ilgizar Sobirov'
+2026-06-02 16:23:06,033 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862117. Checking child tables...
+2026-06-02 16:23:06,036 - INFO - orchestrator - [DELTA]   'Ilgizar Sobirov' (main_id=862117) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,037 - INFO - orchestrator - [DELTA] Processing record #61: 'Ikhtiyor Abdullayev'
+2026-06-02 16:23:06,038 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862118. Checking child tables...
+2026-06-02 16:23:06,041 - INFO - orchestrator - [DELTA]   'Ikhtiyor Abdullayev' (main_id=862118) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,041 - INFO - orchestrator - [DELTA] Processing record #62: 'Sodiq Safoyev'
+2026-06-02 16:23:06,042 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862119. Checking child tables...
+2026-06-02 16:23:06,046 - INFO - orchestrator - [DELTA]   'Sodiq Safoyev' (main_id=862119) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,046 - INFO - orchestrator - [DELTA] Processing record #63: 'Abdullaev Saidullo Parxodbekovich'
+2026-06-02 16:23:06,047 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862120. Checking child tables...
+2026-06-02 16:23:06,050 - INFO - orchestrator - [DELTA]   'Abdullaev Saidullo Parxodbekovich' (main_id=862120) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,050 - INFO - orchestrator - [DELTA] Processing record #64: 'Galina Saidova'
+2026-06-02 16:23:06,052 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862121. Checking child tables...
+2026-06-02 16:23:06,054 - INFO - orchestrator - [DELTA]   'Galina Saidova' (main_id=862121) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,054 - INFO - orchestrator - [DELTA] Processing record #65: 'Muzraf Ikramov'
+2026-06-02 16:23:06,056 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862122. Checking child tables...
+2026-06-02 16:23:06,058 - INFO - orchestrator - [DELTA]   'Muzraf Ikramov' (main_id=862122) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,058 - INFO - orchestrator - [DELTA] Processing record #66: 'Tursinkhon Khudayberganov'
+2026-06-02 16:23:06,060 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862123. Checking child tables...
+2026-06-02 16:23:06,062 - INFO - orchestrator - [DELTA]   'Tursinkhon Khudayberganov' (main_id=862123) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,062 - INFO - orchestrator - [DELTA] Processing record #67: 'Anvar Alimov Barnoevich'
+2026-06-02 16:23:06,064 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862124. Checking child tables...
+2026-06-02 16:23:06,067 - INFO - orchestrator - [DELTA]   'Anvar Alimov Barnoevich' (main_id=862124) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,067 - INFO - orchestrator - [DELTA] Processing record #68: 'Alina Kabaeva'
+2026-06-02 16:23:06,069 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862125. Checking child tables...
+2026-06-02 16:23:06,072 - INFO - orchestrator - [DELTA]   'Alina Kabaeva' (main_id=862125) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,072 - INFO - orchestrator - [DELTA] Processing record #69: 'Tatyana Karimova'
+2026-06-02 16:23:06,075 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862126. Checking child tables...
+2026-06-02 16:23:06,078 - INFO - orchestrator - [DELTA]   'Tatyana Karimova' (main_id=862126) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,079 - INFO - orchestrator - [DELTA] Processing record #70: 'Abdulla Aripov'
+2026-06-02 16:23:06,081 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862127. Checking child tables...
+2026-06-02 16:23:06,084 - INFO - orchestrator - [DELTA]   'Abdulla Aripov' (main_id=862127) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,085 - INFO - orchestrator - [DELTA] Processing record #71: 'Adkham Ikramov'
+2026-06-02 16:23:06,087 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862128. Checking child tables...
+2026-06-02 16:23:06,090 - INFO - orchestrator - [DELTA]   'Adkham Ikramov' (main_id=862128) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,090 - INFO - orchestrator - [DELTA] Processing record #72: 'Alisher Shodmonov'
+2026-06-02 16:23:06,092 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862129. Checking child tables...
+2026-06-02 16:23:06,095 - INFO - orchestrator - [DELTA]   'Alisher Shodmonov' (main_id=862129) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,095 - INFO - orchestrator - [DELTA] Processing record #73: 'Vyacheslav Yurievich Elistratov'
+2026-06-02 16:23:06,097 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781096. Checking child tables...
+2026-06-02 16:23:06,104 - INFO - orchestrator - [DELTA]   'Vyacheslav Yurievich Elistratov' (main_id=781096) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,104 - INFO - orchestrator - [DELTA] Processing record #74: 'Nurdinjon Ismoilov'
+2026-06-02 16:23:06,106 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862130. Checking child tables...
+2026-06-02 16:23:06,109 - INFO - orchestrator - [DELTA]   'Nurdinjon Ismoilov' (main_id=862130) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,109 - INFO - orchestrator - [DELTA] Processing record #75: 'Erkin Halilov'
+2026-06-02 16:23:06,112 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862131. Checking child tables...
+2026-06-02 16:23:06,115 - INFO - orchestrator - [DELTA]   'Erkin Halilov' (main_id=862131) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,115 - INFO - orchestrator - [DELTA] Processing record #76: 'Abdulhashim Mutalov'
+2026-06-02 16:23:06,118 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862132. Checking child tables...
+2026-06-02 16:23:06,121 - INFO - orchestrator - [DELTA]   'Abdulhashim Mutalov' (main_id=862132) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,121 - INFO - orchestrator - [DELTA] Processing record #77: 'Feruz Nazirov'
+2026-06-02 16:23:06,123 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862133. Checking child tables...
+2026-06-02 16:23:06,126 - INFO - orchestrator - [DELTA]   'Feruz Nazirov' (main_id=862133) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,126 - INFO - orchestrator - [DELTA] Processing record #78: 'Botir Xojayev'
+2026-06-02 16:23:06,129 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862134. Checking child tables...
+2026-06-02 16:23:06,132 - INFO - orchestrator - [DELTA]   'Botir Xojayev' (main_id=862134) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,132 - INFO - orchestrator - [DELTA] Processing record #79: 'Vladimir Norov'
+2026-06-02 16:23:06,134 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862135. Checking child tables...
+2026-06-02 16:23:06,138 - INFO - orchestrator - [DELTA]   'Vladimir Norov' (main_id=862135) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,138 - INFO - orchestrator - [DELTA] Processing record #80: 'Sunatilla Bekenov'
+2026-06-02 16:23:06,140 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781103. Checking child tables...
+2026-06-02 16:23:06,143 - INFO - orchestrator - [DELTA]   'Sunatilla Bekenov' (main_id=781103) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,143 - INFO - orchestrator - [DELTA] Processing record #81: 'Polat Bobojonov'
+2026-06-02 16:23:06,145 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862136. Checking child tables...
+2026-06-02 16:23:06,148 - INFO - orchestrator - [DELTA]   'Polat Bobojonov' (main_id=862136) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,149 - INFO - orchestrator - [DELTA] Processing record #82: 'Abdusalom Azizov'
+2026-06-02 16:23:06,150 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862137. Checking child tables...
+2026-06-02 16:23:06,153 - INFO - orchestrator - [DELTA]   'Abdusalom Azizov' (main_id=862137) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,154 - INFO - orchestrator - [DELTA] Processing record #83: 'Svetlana Gerasimova'
+2026-06-02 16:23:06,155 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862138. Checking child tables...
+2026-06-02 16:23:06,159 - INFO - orchestrator - [DELTA]   'Svetlana Gerasimova' (main_id=862138) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:06,159 - INFO - orchestrator - [DELTA] Processing record #84: 'Ismail Jabbarov'
+2026-06-02 16:23:06,162 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-06-02 16:23:07,981 - INFO - orchestrator - [DELTA]   'Ismail Jabbarov' — No match at all (truly new record). Added to new_df.
+2026-06-02 16:23:07,982 - INFO - orchestrator - [DELTA] Processing record #85: 'Rustam Inoyatov'
+2026-06-02 16:23:07,987 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862140. Checking child tables...
+2026-06-02 16:23:07,996 - INFO - orchestrator - [DELTA]   'Rustam Inoyatov' (main_id=862140) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:07,996 - INFO - orchestrator - [DELTA] Processing record #86: 'Bahodir Matlyubov'
+2026-06-02 16:23:07,998 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862141. Checking child tables...
+2026-06-02 16:23:08,001 - INFO - orchestrator - [DELTA]   'Bahodir Matlyubov' (main_id=862141) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,001 - INFO - orchestrator - [DELTA] Processing record #87: 'Akmal Saidov'
+2026-06-02 16:23:08,003 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862142. Checking child tables...
+2026-06-02 16:23:08,006 - INFO - orchestrator - [DELTA]   'Akmal Saidov' (main_id=862142) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,006 - INFO - orchestrator - [DELTA] Processing record #88: 'Oqil Salimov'
+2026-06-02 16:23:08,007 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862143. Checking child tables...
+2026-06-02 16:23:08,010 - INFO - orchestrator - [DELTA]   'Oqil Salimov' (main_id=862143) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,011 - INFO - orchestrator - [DELTA] Processing record #89: 'Baxtiyor Rahimov'
+2026-06-02 16:23:08,012 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862144. Checking child tables...
+2026-06-02 16:23:08,015 - INFO - orchestrator - [DELTA]   'Baxtiyor Rahimov' (main_id=862144) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,015 - INFO - orchestrator - [DELTA] Processing record #90: 'Shavkat Karimov'
+2026-06-02 16:23:08,017 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862145. Checking child tables...
+2026-06-02 16:23:08,020 - INFO - orchestrator - [DELTA]   'Shavkat Karimov' (main_id=862145) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,020 - INFO - orchestrator - [DELTA] Processing record #91: 'Artur Taymazov'
+2026-06-02 16:23:08,022 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862146. Checking child tables...
+2026-06-02 16:23:08,028 - INFO - orchestrator - [DELTA]   'Artur Taymazov' (main_id=862146) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,028 - INFO - orchestrator - [DELTA] Processing record #92: 'Akmal Burxanov'
+2026-06-02 16:23:08,030 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862147. Checking child tables...
+2026-06-02 16:23:08,033 - INFO - orchestrator - [DELTA]   'Akmal Burxanov' (main_id=862147) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,033 - INFO - orchestrator - [DELTA] Processing record #93: 'Gulnara Karimova'
+2026-06-02 16:23:08,034 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862148. Checking child tables...
+2026-06-02 16:23:08,038 - INFO - orchestrator - [DELTA]   'Gulnara Karimova' (main_id=862148) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,038 - INFO - orchestrator - [DELTA] Processing record #94: 'Sherzod Qudbiyev'
+2026-06-02 16:23:08,040 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862149. Checking child tables...
+2026-06-02 16:23:08,043 - INFO - orchestrator - [DELTA]   'Sherzod Qudbiyev' (main_id=862149) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,043 - INFO - orchestrator - [DELTA] Processing record #95: 'Rasul Kusherbayev'
+2026-06-02 16:23:08,044 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862150. Checking child tables...
+2026-06-02 16:23:08,047 - INFO - orchestrator - [DELTA]   'Rasul Kusherbayev' (main_id=862150) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,048 - INFO - orchestrator - [DELTA] Processing record #96: 'Shavkat Mirziyoyev'
+2026-06-02 16:23:08,049 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862151. Checking child tables...
+2026-06-02 16:23:08,052 - INFO - orchestrator - [DELTA]   'Shavkat Mirziyoyev' (main_id=862151) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,053 - INFO - orchestrator - [DELTA] Processing record #97: 'Elyor Ganiyev'
+2026-06-02 16:23:08,054 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862152. Checking child tables...
+2026-06-02 16:23:08,057 - INFO - orchestrator - [DELTA]   'Elyor Ganiyev' (main_id=862152) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,058 - INFO - orchestrator - [DELTA] Processing record #98: 'Alisher Abdualiev'
+2026-06-02 16:23:08,060 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862153. Checking child tables...
+2026-06-02 16:23:08,063 - INFO - orchestrator - [DELTA]   'Alisher Abdualiev' (main_id=862153) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,063 - INFO - orchestrator - [DELTA] Processing record #99: 'Ismatilla Ergashev'
+2026-06-02 16:23:08,065 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862154. Checking child tables...
+2026-06-02 16:23:08,067 - INFO - orchestrator - [DELTA]   'Ismatilla Ergashev' (main_id=862154) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,068 - INFO - orchestrator - [DELTA] Processing record #100: 'Bakhodir Kurbanov'
+2026-06-02 16:23:08,069 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862155. Checking child tables...
+2026-06-02 16:23:08,072 - INFO - orchestrator - [DELTA]   'Bakhodir Kurbanov' (main_id=862155) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,072 - INFO - orchestrator - [DELTA] Processing record #101: 'Tanzila Narbaeva'
+2026-06-02 16:23:08,074 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862156. Checking child tables...
+2026-06-02 16:23:08,077 - INFO - orchestrator - [DELTA]   'Tanzila Narbaeva' (main_id=862156) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,077 - INFO - orchestrator - [DELTA] Processing record #102: 'Murad Nazarov'
+2026-06-02 16:23:08,079 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862157. Checking child tables...
+2026-06-02 16:23:08,082 - INFO - orchestrator - [DELTA]   'Murad Nazarov' (main_id=862157) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,082 - INFO - orchestrator - [DELTA] Processing record #103: 'Sanjar Umarov'
+2026-06-02 16:23:08,083 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781128. Checking child tables...
+2026-06-02 16:23:08,090 - INFO - orchestrator - [DELTA]   'Sanjar Umarov' (main_id=781128) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,090 - INFO - orchestrator - [DELTA] Processing record #104: 'Muhammad Salih'
+2026-06-02 16:23:08,091 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862158. Checking child tables...
+2026-06-02 16:23:08,094 - INFO - orchestrator - [DELTA]   'Muhammad Salih' (main_id=862158) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,095 - INFO - orchestrator - [DELTA] Processing record #105: 'Ubaydullayev Khikmatilla'
+2026-06-02 16:23:08,096 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862159. Checking child tables...
+2026-06-02 16:23:08,099 - INFO - orchestrator - [DELTA]   'Ubaydullayev Khikmatilla' (main_id=862159) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,099 - INFO - orchestrator - [DELTA] Processing record #106: 'Boriy Alikhanov'
+2026-06-02 16:23:08,101 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862160. Checking child tables...
+2026-06-02 16:23:08,104 - INFO - orchestrator - [DELTA]   'Boriy Alikhanov' (main_id=862160) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,104 - INFO - orchestrator - [DELTA] Processing record #107: 'Umarov Otabek'
+2026-06-02 16:23:08,106 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862161. Checking child tables...
+2026-06-02 16:23:08,108 - INFO - orchestrator - [DELTA]   'Umarov Otabek' (main_id=862161) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,108 - INFO - orchestrator - [DELTA] Processing record #108: 'Zamira Mutalova'
+2026-06-02 16:23:08,110 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862162. Checking child tables...
+2026-06-02 16:23:08,113 - INFO - orchestrator - [DELTA]   'Zamira Mutalova' (main_id=862162) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,113 - INFO - orchestrator - [DELTA] Processing record #109: 'Reszat Ablajew'
+2026-06-02 16:23:08,116 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781134. Checking child tables...
+2026-06-02 16:23:08,118 - INFO - orchestrator - [DELTA]   'Reszat Ablajew' (main_id=781134) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,119 - INFO - orchestrator - [DELTA] Processing record #110: 'Saida Mirziyoyeva'
+2026-06-02 16:23:08,121 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862163. Checking child tables...
+2026-06-02 16:23:08,124 - INFO - orchestrator - [DELTA]   'Saida Mirziyoyeva' (main_id=862163) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,124 - INFO - orchestrator - [DELTA] Processing record #111: 'Nodirjon Abduvaliev'
+2026-06-02 16:23:08,126 - INFO - orchestrator - [DELTA]   AND-query matched main_id=862164. Checking child tables...
+2026-06-02 16:23:08,129 - INFO - orchestrator - [DELTA]   'Nodirjon Abduvaliev' (main_id=862164) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,129 - INFO - orchestrator - [DELTA] Processing record #112: 'Nilufar Usmonova'
+2026-06-02 16:23:08,131 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781146. Checking child tables...
+2026-06-02 16:23:08,134 - INFO - orchestrator - [DELTA]   'Nilufar Usmonova' (main_id=781146) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,134 - INFO - orchestrator - [DELTA] Processing record #113: 'Ivan Putin'
+2026-06-02 16:23:08,136 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781147. Checking child tables...
+2026-06-02 16:23:08,139 - INFO - orchestrator - [DELTA]   'Ivan Putin' (main_id=781147) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,139 - INFO - orchestrator - [DELTA] Processing record #114: 'Vladimir Putin Jr'
+2026-06-02 16:23:08,141 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781148. Checking child tables...
+2026-06-02 16:23:08,143 - INFO - orchestrator - [DELTA]   'Vladimir Putin Jr' (main_id=781148) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,143 - INFO - orchestrator - [DELTA] Processing record #115: 'Gulnara Karimova'
+2026-06-02 16:23:08,144 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781149. Checking child tables...
+2026-06-02 16:23:08,147 - INFO - orchestrator - [DELTA]   'Gulnara Karimova' (main_id=781149) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,147 - INFO - orchestrator - [DELTA] Processing record #116: 'Lola Karimova Tillyaeva'
+2026-06-02 16:23:08,148 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781141. Checking child tables...
+2026-06-02 16:23:08,151 - INFO - orchestrator - [DELTA]   'Lola Karimova Tillyaeva' (main_id=781141) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,151 - INFO - orchestrator - [DELTA] Processing record #117: 'Saida Mirziyoyeva'
+2026-06-02 16:23:08,152 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781150. Checking child tables...
+2026-06-02 16:23:08,155 - INFO - orchestrator - [DELTA]   'Saida Mirziyoyeva' (main_id=781150) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,155 - INFO - orchestrator - [DELTA] Processing record #118: 'Shakhnoza Mirziyoyeva'
+2026-06-02 16:23:08,157 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781142. Checking child tables...
+2026-06-02 16:23:08,159 - INFO - orchestrator - [DELTA]   'Shakhnoza Mirziyoyeva' (main_id=781142) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,159 - INFO - orchestrator - [DELTA] Processing record #119: 'Ibrohim Hakimov'
+2026-06-02 16:23:08,160 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781143. Checking child tables...
+2026-06-02 16:23:08,163 - INFO - orchestrator - [DELTA]   'Ibrohim Hakimov' (main_id=781143) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,163 - INFO - orchestrator - [DELTA] Processing record #120: 'Islam Karimov'
+2026-06-02 16:23:08,164 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781144. Checking child tables...
+2026-06-02 16:23:08,166 - INFO - orchestrator - [DELTA]   'Islam Karimov' (main_id=781144) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,167 - INFO - orchestrator - [DELTA] Processing record #121: 'Ziroat Mirziyoyeva'
+2026-06-02 16:23:08,168 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781139. Checking child tables...
+2026-06-02 16:23:08,171 - INFO - orchestrator - [DELTA]   'Ziroat Mirziyoyeva' (main_id=781139) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,172 - INFO - orchestrator - [DELTA] Processing record #122: 'Oybek Tursunov'
+2026-06-02 16:23:08,174 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781145. Checking child tables...
+2026-06-02 16:23:08,176 - INFO - orchestrator - [DELTA]   'Oybek Tursunov' (main_id=781145) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,177 - INFO - orchestrator - [DELTA] Processing record #123: 'Lyubov Kabaeva'
+2026-06-02 16:23:08,178 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781137. Checking child tables...
+2026-06-02 16:23:08,180 - INFO - orchestrator - [DELTA]   'Lyubov Kabaeva' (main_id=781137) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,181 - INFO - orchestrator - [DELTA] Processing record #124: 'Tatyana Karimova'
+2026-06-02 16:23:08,182 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781138. Checking child tables...
+2026-06-02 16:23:08,185 - INFO - orchestrator - [DELTA]   'Tatyana Karimova' (main_id=781138) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:08,185 - INFO - orchestrator - [DELTA] Processing record #125: 'Timur Taymazov'
+2026-06-02 16:23:08,187 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781140. Checking child tables...
+2026-06-02 16:23:08,189 - INFO - orchestrator - [DELTA]   'Timur Taymazov' (main_id=781140) — SAME. Added to is_del_list_1.
+2026-06-02 16:23:41,232 - INFO - orchestrator - Delta: 8 new records in 88.4s
+2026-06-02 16:24:01,760 - INFO - orchestrator - Inserted 8 records for uz_gen

@@ -94,17 +94,15 @@ SELECT ?person ?personLabel ?personDescription
 
 # Living politicians query filtered by nationality - optimized for batch processing
 MAIN_QUERY = """
-SELECT (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
-  (?personLabelPreferred AS ?personLabel) ?fatherLabel ?genderLabel
-  ?birthPlaceLabel ?image ?educatedAtLabel ?academicDegreeLabel ?workLocationLabel
-  ?ownerOfLabel ?affiliationString
-  (GROUP_CONCAT(DISTINCT STR(?personLabelNonEnRaw); separator="; ") AS ?nonEnglishLabel)
-
-  WHERE {
+SELECT DISTINCT
+  (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
+  (COALESCE(?personLabelEn, STRAFTER(STR(?person), "http://www.wikidata.org/entity/")) AS ?personLabel)
+  ?image
+WHERE {
   ?person wdt:P31 wd:Q5 .        # Instance of human
   ?person wdt:P569 ?birthDate . date_filter
+  ?person wdt:P106 ?occupation .
   {
-    ?person wdt:P106 ?occupation .
     VALUES ?occupation {
       wd:Q82955   # Politician
       wd:Q43845   # Businessperson
@@ -116,7 +114,7 @@ SELECT (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
   }
   UNION
   {
-  ?occupation wdt:P425 wd:Q1551985 .  # Field of bureaucracy
+    ?occupation wdt:P425 wd:Q1551985 .  # Field of bureaucracy
   }
   ?person wdt:P27 wd:nationality_qid .  # Country of citizenship (specific nationality)
 
@@ -125,39 +123,11 @@ SELECT (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
   
   OPTIONAL { ?person wdt:P18 ?image. }  # main image (if available)
 
-  OPTIONAL { ?person wdt:P21 ?gender . }          # Gender
-  OPTIONAL { ?person wdt:P19 ?birthPlace . }      # Place of birth
-  OPTIONAL { ?person wdt:P22 ?father . }          # Father Name
-  OPTIONAL { ?person wdt:P69 ?educatedAt . }      # Educated At
-  OPTIONAL { ?person wdt:P512 ?academicDegree . }   # Academic Degree
-  OPTIONAL { ?person wdt:P937 ?workLocation . }     # Work Location
-  OPTIONAL { ?person wdt:P1830 ?ownerOf . }         # Owner Of
-  OPTIONAL { ?person wdt:P6424 ?affiliationString . }  # Affiliation String
-
   OPTIONAL {
     ?person rdfs:label ?personLabelEn .
     FILTER (LANG(?personLabelEn) = "en")
   }
-  OPTIONAL {
-    ?person rdfs:label ?personLabelNonEnRaw .
-    FILTER (LANG(?personLabelNonEnRaw) != "en" && LANG(?personLabelNonEnRaw) != "")
-  }
-  OPTIONAL {
-    ?enArticle schema:about ?person ;
-               schema:isPartOf <https://en.wikipedia.org/> ;
-               schema:name ?enWikiTitle .
-  }
-  
-  
-  
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul".
-  }
-  BIND(COALESCE(?personLabelEn, ?enWikiTitle, ?personLabel) AS ?personLabelPreferred)
 }
-GROUP BY ?ID ?person ?personLabel ?personLabelEn ?personLabelPreferred ?enWikiTitle
-       ?fatherLabel ?genderLabel ?birthPlaceLabel ?image ?educatedAtLabel
-       ?academicDegreeLabel ?workLocationLabel ?ownerOfLabel ?affiliationString
 """
 
 DOB_POLITICIANS_QUERY = """
@@ -168,10 +138,7 @@ SELECT DISTINCT
 WHERE {
   BIND(wd:person_qid AS ?person)
   OPTIONAL { ?person wdt:P569 ?birthDate . }
-  
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul".
-  }
+  OPTIONAL { ?person rdfs:label ?personLabel . FILTER (LANG(?personLabel) = "en") }
 }
 """
 NATIONALITY_POLITICIANS_QUERY = """
@@ -180,10 +147,12 @@ SELECT DISTINCT
   ?nationalityLabel
 WHERE {
   BIND(wd:person_qid AS ?person)
-  OPTIONAL { ?person wdt:P27 ?nationality . }
-  
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul".
+  OPTIONAL {
+    ?person wdt:P27 ?nationality .
+    OPTIONAL {
+      ?nationality rdfs:label ?nationalityLabel .
+      FILTER (LANG(?nationalityLabel) = "en")
+    }
   }
 }
 """
@@ -196,26 +165,11 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 
 SELECT DISTINCT (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
-       ?AKA ?nativeName ?birthName ?nonEnglishLabel
+       ?AKA
 WHERE {
-  VALUES ?person { wd:person_qid }
+  BIND(wd:person_qid AS ?person)
 
-  OPTIONAL { ?person schema:alternateName ?AKA . }
-  OPTIONAL { ?person skos:altLabel ?AKA . }
-  OPTIONAL { ?person wdt:P1559 ?nativeName }
-  OPTIONAL { ?person wdt:P1477 ?birthName }
-  OPTIONAL {
-    ?person rdfs:label ?nonEnglishLabel .
-    FILTER (LANG(?nonEnglishLabel) != "en" && LANG(?nonEnglishLabel) != "")
-  }
-
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul" .
-  }
-
-  FILTER(
-    BOUND(?AKA) || BOUND(?nativeName) || BOUND(?birthName) || BOUND(?nonEnglishLabel)
-  )
+  ?person skos:altLabel ?AKA .
 }
 """
 RESIDENCE_POLITICIANS_QUERY = """
@@ -224,9 +178,7 @@ SELECT DISTINCT ?ID ?residenceLabel WHERE {
 
   ?person wdt:P551 ?residence .
 
-    SERVICE wikibase:label {
-      bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul" .
-    }
+  OPTIONAL { ?residence rdfs:label ?residenceLabel . FILTER (LANG(?residenceLabel) = "en") }
 
   BIND(STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
 }
@@ -237,17 +189,26 @@ SELECT DISTINCT
   ?convictedOfLabel
   ?placeOfDetentionLabel
 WHERE {
-  VALUES ?person { wd:person_qid }
+  BIND(wd:person_qid AS ?person)
 
-    OPTIONAL { ?person wdt:P1399 ?convictedOf .  }      # Convicted of
-    OPTIONAL { ?person wdt:P2632 ?placeOfDetention . }  # Place of detention
+  OPTIONAL {
+    ?person wdt:P1399 ?convictedOf .  # Convicted of
+    OPTIONAL {
+      ?convictedOf rdfs:label ?convictedOfLabel .
+      FILTER (LANG(?convictedOfLabel) = "en")
+    }
+  }
+  OPTIONAL {
+    ?person wdt:P2632 ?placeOfDetention .  # Place of detention
+    OPTIONAL {
+      ?placeOfDetention rdfs:label ?placeOfDetentionLabel .
+      FILTER (LANG(?placeOfDetentionLabel) = "en")
+    }
+  }
 
   FILTER(
     BOUND(?convictedOf) || BOUND(?placeOfDetention)
     )
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul" .
-  }
 }
   """
 
@@ -256,19 +217,29 @@ SELECT DISTINCT
   (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
   ?positionLabel ?startTime ?endTime ?politicalPartyLabel ?personDescription ?occupationLabel
 WHERE {
-  VALUES ?person { wd:person_qid }  # Replace with actual QID or multiple QIDs
+  BIND(wd:person_qid AS ?person)
+  ?person wdt:P106 ?occupation .
+
   OPTIONAL {
     ?person p:P39 ?positionStatement .
     ?positionStatement ps:P39 ?position .
-    ?person wdt:P106 ?occupation .
     OPTIONAL { ?positionStatement pq:P580 ?startTime . }
     OPTIONAL { ?positionStatement pq:P582 ?endTime . }
+    OPTIONAL {
+      ?position rdfs:label ?positionLabel .
+      FILTER (LANG(?positionLabel) = "en")
+    }
+  }
+  OPTIONAL {
+    ?person wdt:P102 ?politicalParty .
+    OPTIONAL {
+      ?politicalParty rdfs:label ?politicalPartyLabel .
+      FILTER (LANG(?politicalPartyLabel) = "en")
+    }
   }
 
-  OPTIONAL { ?person wdt:P102 ?politicalParty . }
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en,en-gb,en-ca,fr,de,es,it,pt,ga,ro,pl,uk,arz,mul".
-  }
+  OPTIONAL { ?occupation rdfs:label ?occupationLabel . FILTER (LANG(?occupationLabel) = "en") }
+  OPTIONAL { ?person schema:description ?personDescription . FILTER (LANG(?personDescription) = "en") }
 }
 
   """
@@ -279,24 +250,38 @@ SELECT DISTINCT
   ?fatherLabel ?motherLabel ?siblingLabel
   ?spouseLabel ?childLabel ?relativeLabel
 WHERE {
-  VALUES ?person { wd:person_qid }
+  BIND(wd:person_qid AS ?person)
 
-  OPTIONAL { ?person wdt:P22 ?father. }
-  OPTIONAL { ?person wdt:P25 ?mother. }
-  OPTIONAL { ?person wdt:P3373 ?sibling. }
-  OPTIONAL { ?person wdt:P26 ?spouse. }
-  OPTIONAL { ?person wdt:P40 ?child. }
-  OPTIONAL { ?person wdt:P1038 ?relative. }
-
-
-  FILTER(
-    BOUND(?father) || BOUND(?mother) || BOUND(?sibling) ||
-    BOUND(?spouse) || BOUND(?child) || BOUND(?relative) || BOUND(?family)
-  )
-
-  SERVICE wikibase:label {
-    bd:serviceParam wikibase:language "en".
+  {
+    ?person wdt:P22 ?father.
+    OPTIONAL { ?father rdfs:label ?fatherLabel . FILTER (LANG(?fatherLabel) = "en") }
   }
+  UNION
+  {
+    ?person wdt:P25 ?mother.
+    OPTIONAL { ?mother rdfs:label ?motherLabel . FILTER (LANG(?motherLabel) = "en") }
+  }
+  UNION
+  {
+    ?person wdt:P3373 ?sibling.
+    OPTIONAL { ?sibling rdfs:label ?siblingLabel . FILTER (LANG(?siblingLabel) = "en") }
+  }
+  UNION
+  {
+    ?person wdt:P26 ?spouse.
+    OPTIONAL { ?spouse rdfs:label ?spouseLabel . FILTER (LANG(?spouseLabel) = "en") }
+  }
+  UNION
+  {
+    ?person wdt:P40 ?child.
+    OPTIONAL { ?child rdfs:label ?childLabel . FILTER (LANG(?childLabel) = "en") }
+  }
+  UNION
+  {
+    ?person wdt:P1038 ?relative.
+    OPTIONAL { ?relative rdfs:label ?relativeLabel . FILTER (LANG(?relativeLabel) = "en") }
+  }
+
 }
 """
 
@@ -353,7 +338,7 @@ SELECT ?person ?personLabel ?personDescription
        ?occupation ?occupationLabel ?positionHeld ?positionHeldLabel ?employer ?employerLabel
        ?fieldOfWork ?fieldOfWorkLabel ?workLocation ?workLocationLabel ?ownerOf ?ownerOfLabel
        ?educatedAt ?educatedAtLabel ?academicDegree ?academicDegreeLabel ?affiliationString WHERE {
-  VALUES ?person { wd:person_qid }.        # Instance of human
+  BIND(wd:person_qid AS ?person)
   
   # Filter out deceased politicians (no death date)
   FILTER NOT EXISTS { ?person wdt:P570 ?deathDate . }

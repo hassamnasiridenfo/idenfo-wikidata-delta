@@ -141,7 +141,6 @@ def query_sparql_endpoint_with_retry(
             # Try to extract Retry-After header from the original HTTPError
             original_error = e.__cause__
             retry_after_used = False
-            
             if isinstance(original_error, HTTPError) and hasattr(original_error, "headers") and original_error.headers:
                 retry_after = original_error.headers.get("Retry-After")
                 if retry_after:

@@ -5,12 +5,18 @@ This module tests SPARQL query templates for PEP data.
 
 import re
 
-import pytest
-
 from structured_scraping.wikidata.queries.pep import (
+    ALIAS_POLITICIANS_QUERY,
     BASIC_POLITICIANS_QUERY,
+    CRIMINAL_POLITICIANS_QUERY,
+    DOB_POLITICIANS_QUERY,
     EXTENDED_POLITICIANS_BY_NATIONALITY_QUERY,
     EXTENDED_POLITICIANS_QUERY,
+    MAIN_QUERY,
+    NATIONALITY_POLITICIANS_QUERY,
+    RCA_POLITICIANS_QUERY,
+    RESIDENCE_POLITICIANS_QUERY,
+    ROLE_POLITICIANS_QUERY,
 )
 
 
@@ -154,3 +160,32 @@ class TestPepQueries:
             
         # Nationality-specific query should have P27 (country of citizenship)
         assert "wdt:P27" in EXTENDED_POLITICIANS_BY_NATIONALITY_QUERY
+
+    def test_main_query_ties_occupation_to_person_before_union(self) -> None:
+        """Test the Main query avoids a Cartesian product for bureaucracy occupations."""
+        assert re.search(
+            r"\?person\s+wdt:P106\s+\?occupation\s*\.\s*\{\s*VALUES\s+\?occupation",
+            MAIN_QUERY,
+            flags=re.DOTALL,
+        )
+        assert not re.search(
+            r"\{\s*\?person\s+wdt:P106\s+\?occupation\s*\.\s*VALUES\s+\?occupation",
+            MAIN_QUERY,
+            flags=re.DOTALL,
+        )
+
+    def test_excel_scrape_queries_do_not_use_wdqs_label_service(self) -> None:
+        """Test QLever-facing Excel scrape queries use explicit label lookups."""
+        excel_scrape_queries = [
+            MAIN_QUERY,
+            DOB_POLITICIANS_QUERY,
+            NATIONALITY_POLITICIANS_QUERY,
+            ALIAS_POLITICIANS_QUERY,
+            RESIDENCE_POLITICIANS_QUERY,
+            CRIMINAL_POLITICIANS_QUERY,
+            ROLE_POLITICIANS_QUERY,
+            RCA_POLITICIANS_QUERY,
+        ]
+
+        for query in excel_scrape_queries:
+            assert "SERVICE wikibase:label" not in query

@@ -181,7 +181,6 @@ def insertion_code(new_df, cursor, cnx, log_file):
         logger.info(f'Successfully inserted data into {main_id}')
         cnx.commit()
 
-
     disable_safe_updates_query = "SET SQL_SAFE_UPDATES = 0;"
     cursor.execute(disable_safe_updates_query)
     cnx.commit()

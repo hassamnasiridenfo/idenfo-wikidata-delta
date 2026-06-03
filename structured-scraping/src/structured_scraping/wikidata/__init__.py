@@ -21,11 +21,16 @@ from .filters import (
 
 logger = logging.getLogger(__name__)
 
-# Wikidata Query Service endpoint
-WDQS_ENDPOINT = "https://query.wikidata.org/sparql"
+# # Wikidata Query Service endpoint
+# WDQS_ENDPOINT = "https://query.wikidata.org/sparql"
+# # Default user agent for Wikidata queries (recommended by Wikidata)
+# DEFAULT_USER_AGENT = "structured-scraping/1.0.0 (https://github.com/Idenfo/structured-scraping/; solomon@idenfo.com)"
+# # DEFAULT_USER_AGENT = "IdenfoWikidataScraper/1.0 (https://idenfo.com; hassam.nasir@idenfo.com) python-requests/2.31.0"
+
+WDQS_ENDPOINT = "https://qlever.cs.uni-freiburg.de/api/wikidata"
 
 # Default user agent for Wikidata queries (recommended by Wikidata)
-DEFAULT_USER_AGENT = "structured-scraping/1.0.0 (https://github.com/Idenfo/structured-scraping/; solomon@idenfo.com)"
+DEFAULT_USER_AGENT = "structured-scraping/1.0.0 (https://github.com/Idenfo/structured-scraping/; hassam.nasir@idenfo.com)"
 
 def query_wdqs(
     sparql: str,

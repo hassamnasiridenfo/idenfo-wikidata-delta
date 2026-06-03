@@ -1,0 +1,505 @@
+2026-05-21 19:30:32,064 - INFO - orchestrator - ============================================================
+2026-05-21 19:30:32,064 - INFO - orchestrator - country=qatar | tag=qa_gen | file=pep_qatar_living_relevant_20260505_155124.xlsx
+2026-05-21 19:30:32,064 - INFO - orchestrator - ============================================================
+2026-05-21 19:31:31,684 - INFO - orchestrator - [DELTA] Processing record #0: 'Muhammad Al Emadi'
+2026-05-21 19:31:31,686 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781215. Checking child tables...
+2026-05-21 19:31:31,696 - INFO - orchestrator - [DELTA]   'Muhammad Al Emadi' (main_id=781215) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,696 - INFO - orchestrator - [DELTA] Processing record #1: 'Hind Abdul Rahman Al Muftah'
+2026-05-21 19:31:31,698 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781216. Checking child tables...
+2026-05-21 19:31:31,701 - INFO - orchestrator - [DELTA]   'Hind Abdul Rahman Al Muftah' (main_id=781216) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,702 - INFO - orchestrator - [DELTA] Processing record #2: 'Aisha Yousef Al Mannai'
+2026-05-21 19:31:31,703 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781217. Checking child tables...
+2026-05-21 19:31:31,706 - INFO - orchestrator - [DELTA]   'Aisha Yousef Al Mannai' (main_id=781217) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,706 - INFO - orchestrator - [DELTA] Processing record #3: 'Reem Al Mansoori'
+2026-05-21 19:31:31,708 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781218. Checking child tables...
+2026-05-21 19:31:31,711 - INFO - orchestrator - [DELTA]   'Reem Al Mansoori' (main_id=781218) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,711 - INFO - orchestrator - [DELTA] Processing record #4: 'Abdul Rahman Bin Muhammad Suleiman Al Khulaifi'
+2026-05-21 19:31:31,713 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781220. Checking child tables...
+2026-05-21 19:31:31,720 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,721 - INFO - orchestrator - [DELTA]   'Abdul Rahman Bin Muhammad Suleiman Al Khulaifi' (main_id=781220) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,722 - INFO - orchestrator - [DELTA] Processing record #5: 'Sharida Saad Gibran Al Kaabi'
+2026-05-21 19:31:31,724 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781221. Checking child tables...
+2026-05-21 19:31:31,729 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,729 - INFO - orchestrator - [DELTA]   'Sharida Saad Gibran Al Kaabi' (main_id=781221) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,731 - INFO - orchestrator - [DELTA] Processing record #6: 'Badr Payment'
+2026-05-21 19:31:31,737 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781222. Checking child tables...
+2026-05-21 19:31:31,743 - INFO - orchestrator - [DELTA]   'Badr Payment' (main_id=781222) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,744 - INFO - orchestrator - [DELTA] Processing record #7: 'Ali Bin Hassan Al Hammadi'
+2026-05-21 19:31:31,747 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781223. Checking child tables...
+2026-05-21 19:31:31,753 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,754 - INFO - orchestrator - [DELTA]   'Ali Bin Hassan Al Hammadi' (main_id=781223) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,756 - INFO - orchestrator - [DELTA] Processing record #8: 'Saad Bin Nasser Al Humaidi'
+2026-05-21 19:31:31,758 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781224. Checking child tables...
+2026-05-21 19:31:31,763 - INFO - orchestrator - [DELTA]   'Saad Bin Nasser Al Humaidi' (main_id=781224) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,764 - INFO - orchestrator - [DELTA] Processing record #9: 'Mubarak Bin Kleefikh Al Hajri'
+2026-05-21 19:31:31,766 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781225. Checking child tables...
+2026-05-21 19:31:31,771 - INFO - orchestrator - [DELTA]   'Mubarak Bin Kleefikh Al Hajri' (main_id=781225) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,772 - INFO - orchestrator - [DELTA] Processing record #10: 'Ali Bin Ahmed Al Kuwari'
+2026-05-21 19:31:31,775 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781226. Checking child tables...
+2026-05-21 19:31:31,780 - INFO - orchestrator - [DELTA]   'Ali Bin Ahmed Al Kuwari' (main_id=781226) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:31,781 - INFO - orchestrator - [DELTA] Processing record #11: 'Abdul Razzaq Abdul Jalil Al Abdul Ghani'
+2026-05-21 19:31:31,783 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781227. Checking child tables...
+2026-05-21 19:31:31,798 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,799 - INFO - orchestrator - [DELTA]   'Abdul Razzaq Abdul Jalil Al Abdul Ghani' (main_id=781227) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,801 - INFO - orchestrator - [DELTA] Processing record #12: 'Fahd Bin Mohammed Al Attiyah'
+2026-05-21 19:31:31,805 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781228. Checking child tables...
+2026-05-21 19:31:31,810 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,811 - INFO - orchestrator - [DELTA]   'Fahd Bin Mohammed Al Attiyah' (main_id=781228) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,813 - INFO - orchestrator - [DELTA] Processing record #13: 'Abdullah Falah Al Dosari'
+2026-05-21 19:31:31,815 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781229. Checking child tables...
+2026-05-21 19:31:31,823 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,824 - INFO - orchestrator - [DELTA]   'Abdullah Falah Al Dosari' (main_id=781229) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,826 - INFO - orchestrator - [DELTA] Processing record #14: 'Muhammad Hamad Saad Al Fuhaid Al Hajri'
+2026-05-21 19:31:31,829 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781230. Checking child tables...
+2026-05-21 19:31:31,835 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:31,835 - INFO - orchestrator - [DELTA]   'Muhammad Hamad Saad Al Fuhaid Al Hajri' (main_id=781230) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:31,837 - INFO - orchestrator - [DELTA] Processing record #15: 'Mana Abdul Hadi Al Hajri'
+2026-05-21 19:31:31,839 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781231. Checking child tables...
+2026-05-21 19:31:31,842 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Man A Abdul Hadi Al Hajri', 'مانع بن عبد الهادي الهاجري', 'مانع عبد الهادي الهاجري', 'مانع بن عبد الهادي مانع الشهواني الهاجري']
+      Scraper=['مانع بن عبد الهادي الهاجري', 'Man A Abdul Hadi Al Hajri', 'مانع عبد الهادي الهاجري', 'مانع بن عبد الہادی ہاجری', 'مانع بن عبد الهادي مانع الشهواني الهاجري']
+      To remove=[]  To add=['مانع بن عبد الہادی ہاجری']
+2026-05-21 19:31:31,848 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-AMAASAH-SVQ9K-RCA-1', 'QA-GEN-AABMAH-1KXBS-RCA-1']
+      Scraper=['QA-GEN-AMAASAH-HQUCP-RCA-1', 'QA-GEN-AABMAH-B7RCA-RCA-1']
+      To remove=['QA-GEN-AMAASAH-SVQ9K-RCA-1', 'QA-GEN-AABMAH-1KXBS-RCA-1']  To add=['QA-GEN-AMAASAH-HQUCP-RCA-1', 'QA-GEN-AABMAH-B7RCA-RCA-1']
+2026-05-21 19:31:31,851 - INFO - orchestrator - [DELTA]   'Mana Abdul Hadi Al Hajri' (main_id=781231) — CHANGED. Failing check(s): ['alias', 'rca']. Added to new_df.
+2026-05-21 19:31:31,854 - INFO - orchestrator - [DELTA] Processing record #16: 'Ali Bin Abdullah Zayed Al Mahmoud'
+2026-05-21 19:31:31,857 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:34,608 - INFO - orchestrator - [DELTA]   'Ali Bin Abdullah Zayed Al Mahmoud' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:34,609 - INFO - orchestrator - [DELTA] Processing record #17: 'Ibrahim Bin Abdul Aziz Al Sahlawi'
+2026-05-21 19:31:34,619 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781233. Checking child tables...
+2026-05-21 19:31:34,634 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:34,635 - INFO - orchestrator - [DELTA]   'Ibrahim Bin Abdul Aziz Al Sahlawi' (main_id=781233) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:34,637 - INFO - orchestrator - [DELTA] Processing record #18: 'Saad Bin Ali Al Muhannadi'
+2026-05-21 19:31:34,641 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781234. Checking child tables...
+2026-05-21 19:31:34,648 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:34,650 - INFO - orchestrator - [DELTA]   'Saad Bin Ali Al Muhannadi' (main_id=781234) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:34,653 - INFO - orchestrator - [DELTA] Processing record #19: 'Salem Bin Mubarak Al Shafi'
+2026-05-21 19:31:34,658 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781235. Checking child tables...
+2026-05-21 19:31:34,668 - INFO - orchestrator - [DELTA]   'Salem Bin Mubarak Al Shafi' (main_id=781235) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:34,669 - INFO - orchestrator - [DELTA] Processing record #20: 'Hanadi Bint Nasser Al Thani'
+2026-05-21 19:31:34,673 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781236. Checking child tables...
+2026-05-21 19:31:34,680 - INFO - orchestrator - [DELTA]   'Hanadi Bint Nasser Al Thani' (main_id=781236) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:34,681 - INFO - orchestrator - [DELTA] Processing record #21: 'Buthaina Al Ansari'
+2026-05-21 19:31:34,685 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781237. Checking child tables...
+2026-05-21 19:31:34,691 - INFO - orchestrator - [DELTA]   'Buthaina Al Ansari' (main_id=781237) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:34,692 - INFO - orchestrator - [DELTA] Processing record #22: 'Aysha Al Mudahka'
+2026-05-21 19:31:34,696 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781238. Checking child tables...
+2026-05-21 19:31:34,703 - INFO - orchestrator - [DELTA]   'Aysha Al Mudahka' (main_id=781238) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:34,703 - INFO - orchestrator - [DELTA] Processing record #23: 'Ahlam Salem Al Mana'
+2026-05-21 19:31:34,706 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781239. Checking child tables...
+2026-05-21 19:31:34,712 - INFO - orchestrator - [DELTA]   'Ahlam Salem Al Mana' (main_id=781239) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:34,713 - INFO - orchestrator - [DELTA] Processing record #24: 'Ghanem Bin Shaheen Bin Ghanem Al Ghanim'
+2026-05-21 19:31:34,719 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:37,626 - INFO - orchestrator - [DELTA]   'Ghanem Bin Shaheen Bin Ghanem Al Ghanim' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:37,628 - INFO - orchestrator - [DELTA] Processing record #25: 'Mariam Bint Ali Bin Nasser Al Misnad'
+2026-05-21 19:31:37,645 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781241. Checking child tables...
+2026-05-21 19:31:37,653 - INFO - orchestrator - [DELTA]   'Mariam Bint Ali Bin Nasser Al Misnad' (main_id=781241) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,654 - INFO - orchestrator - [DELTA] Processing record #26: 'Mira Al Attiyah'
+2026-05-21 19:31:37,657 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781242. Checking child tables...
+2026-05-21 19:31:37,663 - INFO - orchestrator - [DELTA]   'Mira Al Attiyah' (main_id=781242) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,664 - INFO - orchestrator - [DELTA] Processing record #27: 'Hamda Bint Hassan Al Sulaiti'
+2026-05-21 19:31:37,667 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781243. Checking child tables...
+2026-05-21 19:31:37,674 - INFO - orchestrator - [DELTA]   'Hamda Bint Hassan Al Sulaiti' (main_id=781243) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,675 - INFO - orchestrator - [DELTA] Processing record #28: 'Fatima Abdullah Al Mal'
+2026-05-21 19:31:37,680 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781244. Checking child tables...
+2026-05-21 19:31:37,689 - INFO - orchestrator - [DELTA]   'Fatima Abdullah Al Mal' (main_id=781244) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,692 - INFO - orchestrator - [DELTA] Processing record #29: 'Aisha Hassan Al Emadi'
+2026-05-21 19:31:37,697 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781245. Checking child tables...
+2026-05-21 19:31:37,705 - INFO - orchestrator - [DELTA]   'Aisha Hassan Al Emadi' (main_id=781245) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,706 - INFO - orchestrator - [DELTA] Processing record #30: 'Shams Al Qassabi'
+2026-05-21 19:31:37,710 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781246. Checking child tables...
+2026-05-21 19:31:37,716 - INFO - orchestrator - [DELTA]   'Shams Al Qassabi' (main_id=781246) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,717 - INFO - orchestrator - [DELTA] Processing record #31: 'Amal Dahawi Al Shammri'
+2026-05-21 19:31:37,721 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781247. Checking child tables...
+2026-05-21 19:31:37,729 - INFO - orchestrator - [DELTA]   'Amal Dahawi Al Shammri' (main_id=781247) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,731 - INFO - orchestrator - [DELTA] Processing record #32: 'Fatma Al Remaihi'
+2026-05-21 19:31:37,734 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781248. Checking child tables...
+2026-05-21 19:31:37,740 - INFO - orchestrator - [DELTA]   'Fatma Al Remaihi' (main_id=781248) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,742 - INFO - orchestrator - [DELTA] Processing record #33: 'Ebtesam Saleh Al Mannai'
+2026-05-21 19:31:37,745 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781249. Checking child tables...
+2026-05-21 19:31:37,753 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Businessperson', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Businessperson', None, None, None)]  To add=[]
+2026-05-21 19:31:37,754 - INFO - orchestrator - [DELTA]   'Ebtesam Saleh Al Mannai' (main_id=781249) — CHANGED. Failing check(s): ["role_type (to_remove=[('Businessperson', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:37,755 - INFO - orchestrator - [DELTA] Processing record #34: 'Alanoud Bint Hamad Al Thani'
+2026-05-21 19:31:37,758 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781250. Checking child tables...
+2026-05-21 19:31:37,760 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Alanoud Bint Hamad Al Thani', 'Alanoud Al Thani', 'Алануд бінт Хамад Аль Тані', 'العنود بنت حمد آل ثاني']
+      Scraper=['अलानौद बिन्त हमद अल थानी', 'Alanoud Bint Hamad Al Thani', 'Алануд бінт Хамад Аль Тані', 'Alanoud Al Thani', 'العنود بنت حمد آل ثاني']
+      To remove=[]  To add=['अलानौद बिन्त हमद अल थानी']
+2026-05-21 19:31:37,766 - INFO - orchestrator - [DELTA]   'Alanoud Bint Hamad Al Thani' (main_id=781250) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-05-21 19:31:37,768 - INFO - orchestrator - [DELTA] Processing record #35: 'Sheikha Al Mahoud'
+2026-05-21 19:31:37,775 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781251. Checking child tables...
+2026-05-21 19:31:37,785 - INFO - orchestrator - [DELTA]   'Sheikha Al Mahoud' (main_id=781251) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,787 - INFO - orchestrator - [DELTA] Processing record #36: 'Sheikha Hessa Bint Khalifa Al Thani'
+2026-05-21 19:31:37,790 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781252. Checking child tables...
+2026-05-21 19:31:37,796 - INFO - orchestrator - [DELTA]   'Sheikha Hessa Bint Khalifa Al Thani' (main_id=781252) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,798 - INFO - orchestrator - [DELTA] Processing record #37: 'Youssef Al Jiffri'
+2026-05-21 19:31:37,802 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781253. Checking child tables...
+2026-05-21 19:31:37,808 - INFO - orchestrator - [DELTA]   'Youssef Al Jiffri' (main_id=781253) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,809 - INFO - orchestrator - [DELTA] Processing record #38: 'Ghada Al Subaey'
+2026-05-21 19:31:37,813 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781254. Checking child tables...
+2026-05-21 19:31:37,818 - INFO - orchestrator - [DELTA]   'Ghada Al Subaey' (main_id=781254) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,819 - INFO - orchestrator - [DELTA] Processing record #39: 'Aisha Alfardan'
+2026-05-21 19:31:37,821 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781255. Checking child tables...
+2026-05-21 19:31:37,825 - INFO - orchestrator - [DELTA]   'Aisha Alfardan' (main_id=781255) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,826 - INFO - orchestrator - [DELTA] Processing record #40: 'Sarah Alfardan'
+2026-05-21 19:31:37,828 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781256. Checking child tables...
+2026-05-21 19:31:37,833 - INFO - orchestrator - [DELTA]   'Sarah Alfardan' (main_id=781256) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,833 - INFO - orchestrator - [DELTA] Processing record #41: 'Zohour Alfardan'
+2026-05-21 19:31:37,835 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781257. Checking child tables...
+2026-05-21 19:31:37,839 - INFO - orchestrator - [DELTA]   'Zohour Alfardan' (main_id=781257) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,840 - INFO - orchestrator - [DELTA] Processing record #42: 'Ibtihaj Al Ahmadan'
+2026-05-21 19:31:37,842 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781258. Checking child tables...
+2026-05-21 19:31:37,846 - INFO - orchestrator - [DELTA]   'Ibtihaj Al Ahmadan' (main_id=781258) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,846 - INFO - orchestrator - [DELTA] Processing record #43: 'Mubarak Bin Ali Al Khatir'
+2026-05-21 19:31:37,848 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781259. Checking child tables...
+2026-05-21 19:31:37,853 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:37,853 - INFO - orchestrator - [DELTA]   'Mubarak Bin Ali Al Khatir' (main_id=781259) — CHANGED. Failing check(s): ["role_type (to_remove=[('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:37,854 - INFO - orchestrator - [DELTA] Processing record #44: 'Masoud Bin Mohammed Al Ameri'
+2026-05-21 19:31:37,859 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781260. Checking child tables...
+2026-05-21 19:31:37,865 - INFO - orchestrator - [DELTA]   'Masoud Bin Mohammed Al Ameri' (main_id=781260) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,865 - INFO - orchestrator - [DELTA] Processing record #45: 'Sultan Bin Rashid Al Khater'
+2026-05-21 19:31:37,867 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781261. Checking child tables...
+2026-05-21 19:31:37,868 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=[]
+      Scraper=['Sultan Bin Rashid Al Khater']
+      To remove=[]  To add=['Sultan Bin Rashid Al Khater']
+2026-05-21 19:31:37,872 - INFO - orchestrator - [DELTA]   'Sultan Bin Rashid Al Khater' (main_id=781261) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-05-21 19:31:37,874 - INFO - orchestrator - [DELTA] Processing record #46: 'Rabea Mechernane'
+2026-05-21 19:31:37,876 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781262. Checking child tables...
+2026-05-21 19:31:37,880 - INFO - orchestrator - [DELTA]   'Rabea Mechernane' (main_id=781262) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:37,881 - INFO - orchestrator - [DELTA] Processing record #47: 'Sultan Bin Saad Bin Sultan Al Muraikhi'
+2026-05-21 19:31:37,884 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:40,341 - INFO - orchestrator - [DELTA]   'Sultan Bin Saad Bin Sultan Al Muraikhi' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:40,342 - INFO - orchestrator - [DELTA] Processing record #48: 'Mohammed Bin Khalifa Al Thani'
+2026-05-21 19:31:40,349 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:43,385 - INFO - orchestrator - [DELTA]   'Mohammed Bin Khalifa Al Thani' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:43,387 - INFO - orchestrator - [DELTA] Processing record #49: 'Abdullah Hassan Al Sulaiti'
+2026-05-21 19:31:43,397 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781263. Checking child tables...
+2026-05-21 19:31:43,420 - INFO - orchestrator - [DELTA]   'Abdullah Hassan Al Sulaiti' (main_id=781263) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:43,421 - INFO - orchestrator - [DELTA] Processing record #50: 'Khalid Bin Mohammad Al Attiyah'
+2026-05-21 19:31:43,428 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781264. Checking child tables...
+2026-05-21 19:31:43,440 - INFO - orchestrator - [DELTA]   'Khalid Bin Mohammad Al Attiyah' (main_id=781264) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:43,441 - INFO - orchestrator - [DELTA] Processing record #51: 'Ali Al Thawadi'
+2026-05-21 19:31:43,445 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781265. Checking child tables...
+2026-05-21 19:31:43,453 - INFO - orchestrator - [DELTA]   'Ali Al Thawadi' (main_id=781265) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:43,457 - INFO - orchestrator - [DELTA] Processing record #52: 'Hassan Al Thawadi'
+2026-05-21 19:31:43,466 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:46,542 - INFO - orchestrator - [DELTA]   'Hassan Al Thawadi' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:46,544 - INFO - orchestrator - [DELTA] Processing record #53: 'Tamim Bin Hamad Al'
+2026-05-21 19:31:46,555 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781266. Checking child tables...
+2026-05-21 19:31:46,560 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Sheikh Tamim Bin Hamad Bin Khalifa Al Thani Emir Of Qatar', 'Tamim Ben Hamad Ben Khalifa Ben Hamad Ben Abdullah Ben Jassim Ben Mohammed Al Thani', 'Tamim Bin Hamad', "השייח' תמים בן חמד השני", 'Tamím bin Hamad Ál Thání', "תמים בן חמד אאל ת'אני", 'تَمِيم بِن حَمَد بِن خَلِيفَة آل ثَانِي', 'الشيخ تميم بن حمد ال ثاني', '타밈 빈 하마드 알사니', 'Éimír Chatar', 'თამიმ ბინ ჰამად ბინ ხალიფა ალ თანი', 'Tamim ibn Hàmad ibn Khalifa Al Thani', 'تمیم بن حمد بن خلیفه آل ثانی', 'تميم بن حمد آل ثانى', 'تميم بن حمد آل ثاني', 'Tamim Bin Hamad Al Thani', 'Tamim Ben Hamad Al Thani', 'タミーム', 'Տամիմ Բին Համիդ Ալ Տհանի', "תמים בן חמד אאל ת'אני אמיר קטר", 'Тамим бин Хамад ал Тани', 'Тамим бин Ҳамад Оли Танӣ', 'Tamimus Hamidi filius gentis Ṯānī', 'Tamim Bin Hamad Al Tani', 'Tamim Ibn Hamad Al Sani', 'Tamim I De Catar', 'تەمیم کوڕی حەمەدی دووەم', 'تمیم بن حمد الثانی', 'Тамим бин Хамад ел Тани', 'Tamim Bin Hamad Bin Khalifa Al Thani', '塔米姆·本·哈邁德·阿勒薩尼', 'Tamimas Bin Hamadas Al Tanis', 'Tamim Bin Hamad Al Tsani', "תמים בן חמד אל ת'אני", 'Temim Bin Hamad Es Sani', '따밈 빈 하마드 알 타니', 'Tamim bin Hamad Chalífa Sání', '塔米姆·本·哈马德·阿勒萨尼', 'तमीम बिन हमद अल थानी', 'ตะมีม บิน ฮะมัด อาล ษานี', 'Тамим бин Хамад Аль Тани', '塔米姆', 'তামিম বিন হামাদ আল সানি', 'Temim Bin Hamad Al Sani', 'تمیم بن حمد آل ثانی', 'Tamīm ibn Ḩamad Āl Thānī', 'Тамим ибн Хамад ел Тани', 'Тамім бін Хамад Аль Тані', 'タミーム・ビン・ハマド・アール＝サーニー', 'Tamím katari emír', 'Ταμίμ μπιν Χαμάντ', 'Temim Bin Hamed Es Sani']
+      Scraper=['塔米姆', 'الشيخ تميم بن حمد ال ثاني', 'Tamim Bin Hamad Al Thani', 'Տամիմ Բին Համիդ Ալ Տհանի', 'तमीम बिन हमद अल थानी', 'Tamim Bin Hamad', 'თამიმ ბინ ჰამად ბინ ხალიფა ალ თანი', 'Тамим бин Ҳамад Оли Танӣ', "תמים בן חמד אאל ת'אני", 'タミーム・ビン・ハマド・アール＝サーニー', 'Temim Bin Hamad Al Sani', 'Tamim bin Hamad Chalífa Sání', '타밈 빈 하마드 알사니', 'タミーム', 'Тамим ибн Хамад ел Тани', 'Tamim Ibn Hamad Al Sani', 'تمیم بن حمد الثانی', 'Tamimas Bin Hamadas Al Tanis', 'تَمیٖم بِن حَمَد آل ثانی"]', 'Tamim Ben Hamad Al Thani', 'Тамим бин Хамад ал Тани', "השייח' תמים בן חמד השני", "תמים בן חמד אאל ת'אני אמיר קטר", 'Tamim I De Catar', 'Tamim ibn Hàmad ibn Khalifa Al Thani', 'Tamimus Hamidi filius gentis Ṯānī', 'Тамім бін Хамад Аль Тані', 'تميم بن حمد آل ثاني', 'Tamím katari emír', 'তামিম বিন হামাদ আল সানি', 'Tamim Ben Hamad Ben Khalifa Ben Hamad Ben Abdullah Ben Jassim Ben Mohammed Al Thani', 'Tamim Bin Hamad Al Tsani', 'Ταμίμ μπιν Χαμάντ', 'تمیم بن حمد بن خلیفه آل ثانی', 'Tamīm ibn Ḩamad Āl Thānī', '따밈 빈 하마드 알 타니', '塔米姆·本·哈邁德·阿勒薩尼', 'Tamim Bin Hamad Bin Khalifa Al Thani', "תמים בן חמד אל ת'אני", 'تَمِيم بِن حَمَد بِن خَلِيفَة آل ثَانِي', 'Təmim ibn Həməd Ali Sani', '塔米姆·本·哈马德·阿勒萨尼', 'Тамим бин Хамад ел Тани', 'تمیم بن حمد آل ثانی', 'Тамим ибн Хамад Аль Тани', 'تەمیم کوڕی حەمەدی دووەم', 'تميم بن حمد آل ثانى', 'Tamim Bin Hamad Al Tani', 'Temim Bin Hamad Es Sani', 'Tamím bin Hamad Ál Thání', 'Éimír Chatar', 'Temim Bin Hamed Es Sani', 'ตะมีม บิน ฮะมัด อาล ษานี', 'Sheikh Tamim Bin Hamad Bin Khalifa Al Thani Emir Of Qatar']
+      To remove=['Тамим бин Хамад Аль Тани']  To add=['تَمیٖم بِن حَمَد آل ثانی"]', 'Təmim ibn Həməd Ali Sani', 'Тамим ибн Хамад Аль Тани']
+2026-05-21 19:31:46,569 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-HBSAT-LEUBZ-RCA-1', 'QA-GEN-KBHAT-ND19D-RCA-1', 'QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHBKAT-A7NJG-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-PNKIK-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHAT-28KU2-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1', 'QA-GEN-AABMAH-1KXBS-RCA-1', 'QA-GEN-JBHAT-EB0Z0-RCA-1', 'QA-GEN-NBHAD-JGB3R-RCA-1']
+      Scraper=['QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHBKAT-QCWJJ-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-DX0NT-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHAT-4GA73-RCA-1', 'QA-GEN-AABMAH-B7RCA-RCA-1', 'QA-GEN-JBHAT-CBNIM-RCA-1', 'QA-GEN-NBHAD-YKZTI-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1', 'QA-GEN-HBSAT-2HWYX-RCA-1', 'QA-GEN-KBHAT-GIXP2-RCA-1']
+      To remove=['QA-GEN-HBSAT-LEUBZ-RCA-1', 'QA-GEN-KBHAT-ND19D-RCA-1', 'QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHBKAT-A7NJG-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-PNKIK-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHAT-28KU2-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1', 'QA-GEN-AABMAH-1KXBS-RCA-1', 'QA-GEN-JBHAT-EB0Z0-RCA-1', 'QA-GEN-NBHAD-JGB3R-RCA-1']  To add=['QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHBKAT-QCWJJ-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-DX0NT-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHAT-4GA73-RCA-1', 'QA-GEN-AABMAH-B7RCA-RCA-1', 'QA-GEN-JBHAT-CBNIM-RCA-1', 'QA-GEN-NBHAD-YKZTI-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1', 'QA-GEN-HBSAT-2HWYX-RCA-1', 'QA-GEN-KBHAT-GIXP2-RCA-1']
+2026-05-21 19:31:46,576 - INFO - orchestrator - [DELTA]   'Tamim Bin Hamad Al' (main_id=781266) — CHANGED. Failing check(s): ['alias', 'rca']. Added to new_df.
+2026-05-21 19:31:46,578 - INFO - orchestrator - [DELTA] Processing record #54: 'Wissam Al Mana'
+2026-05-21 19:31:46,581 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781267. Checking child tables...
+2026-05-21 19:31:46,583 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['威薩姆·阿爾·馬納', '威萨姆·阿尔·马纳', 'وسام المانع', 'Wissam Al Mana']
+      Scraper=['Wissam Al Mana', 'Γουισάμ Αλ Μάνα', '威薩姆·阿爾·馬納', 'وسام المانع', '威萨姆·阿尔·马纳']
+      To remove=[]  To add=['Γουισάμ Αλ Μάνα']
+2026-05-21 19:31:46,587 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-EAM-L9PZJ-RCA-1', 'QA-GEN-JJ-OM38T-RCA-1']
+      Scraper=['QA-GEN-JJ-OBV6I-RCA-1', 'QA-GEN-EAM-5GYYU-RCA-1']
+      To remove=['QA-GEN-EAM-L9PZJ-RCA-1', 'QA-GEN-JJ-OM38T-RCA-1']  To add=['QA-GEN-JJ-OBV6I-RCA-1', 'QA-GEN-EAM-5GYYU-RCA-1']
+2026-05-21 19:31:46,590 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Businessperson', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Businessperson', None, None, None)]  To add=[]
+2026-05-21 19:31:46,590 - INFO - orchestrator - [DELTA]   'Wissam Al Mana' (main_id=781267) — CHANGED. Failing check(s): ['alias', 'rca', "role_type (to_remove=[('Businessperson', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:46,592 - INFO - orchestrator - [DELTA] Processing record #55: 'Abdulla Bin Mohammed Bin Saud Al Thani'
+2026-05-21 19:31:46,598 - INFO - orchestrator - [DELTA]   AND-query missed — found 1 record(s) by name+scraper_tag. Checking which main-table field(s) differ for main_id=781268:
+2026-05-21 19:31:46,600 - INFO - orchestrator - [DELTA]   Differing main-table fields:
+      img_tag: DB='https://upload.wikimedia.org/wikipedia/commons/9/9a/Abdullah_Bin_Mohammed_Bin_Saud_Al_Thani.png' vs Scraper='https://upload.wikimedia.org/wikipedia/commons/5/55/Steven_Mnuchin_meets_with_Abdulla_Bin_Saoud_Al-Thani_at_Doha.jpg'
+2026-05-21 19:31:48,955 - INFO - orchestrator - [DELTA]   'Abdulla Bin Mohammed Bin Saud Al Thani' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:48,956 - INFO - orchestrator - [DELTA] Processing record #56: 'Alya Ahmed Saif Al Thani'
+2026-05-21 19:31:48,962 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781269. Checking child tables...
+2026-05-21 19:31:48,969 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:48,970 - INFO - orchestrator - [DELTA]   'Alya Ahmed Saif Al Thani' (main_id=781269) — CHANGED. Failing check(s): ["role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:48,971 - INFO - orchestrator - [DELTA] Processing record #57: 'Abdullah Bin Hamad Bin Khalifa Al Thani'
+2026-05-21 19:31:48,973 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781270. Checking child tables...
+2026-05-21 19:31:48,974 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Abduallah Althani', 'Abdullah bin Hamad bin Chalífa Ál Thání', 'アブドッラー・ビン・ハマド・アール＝サーニー', 'Abdallah Ben Hamad Al Thani', 'アブドゥッラー', 'Abdullah Bin Hamad Bin Khalifa Al Thani', 'アブドゥッラー・ビン・ハマド・ビン・ハリーファ・アール＝サーニー', 'アブドゥッラー・ビン・ハマド・アール＝サーニー', 'আবদুল্লাহ বিন হামাদ বিন খলিফা আল থানি', 'عبدالله بن حمد بن خلیفه آل ثانی', 'Աբդուլլահ Բին Համադ Բին Խալիֆա Ալ Տհանի', 'عبد الله بن حمد آل ثاني', 'عبد اللہ بن حمد آل ثانی', 'Abdullah Bin Hamad Al Thani', '阿卜杜拉·本·哈馬德·本·哈利法·阿勒薩尼', 'Абдаллах ибн Хамад Аль Тани', 'Abdullah Bin Hamad Al Tsani', 'عبدالله بن حمد آل ثاني', 'Sheikh Abdualla Althani']
+      Scraper=['عبد اللہ بن حمد آل ثانی', 'Աբդուլլահ Բին Համադ Բին Խալիֆա Ալ Տհանի', 'Абдаллах ибн Хамад Аль Тани', 'Abdullah bin Hamad bin Ĥalifa Al Thani', 'アブドゥッラー', 'Abdullah bin Hamad bin Chalífa Ál Thání', 'Abduallah Althani', 'عبدالله بن حمد بن خلیفه آل ثانی', 'アブドゥッラー・ビン・ハマド・アール＝サーニー', 'Abdullah Bin Hamad Al Thani', 'আবদুল্লাহ বিন হামাদ বিন খলিফা আল থানি', 'Abdullah Bin Hamad Bin Khalifa Al Thani', "עבדאללה בן חמד אאל ת'אני", '阿卜杜拉·本·哈馬德·本·哈利法·阿勒薩尼', 'アブドゥッラー・ビン・ハマド・ビン・ハリーファ・アール＝サーニー', 'عبدالله بن حمد آل ثاني', 'アブドッラー・ビン・ハマド・アール＝サーニー', 'Sheikh Abdualla Althani', 'Abdullah Bin Hamad Al Tsani', 'عبد الله بن حمد آل ثاني', 'Abdallah Ben Hamad Al Thani']
+      To remove=[]  To add=['Abdullah bin Hamad bin Ĥalifa Al Thani', "עבדאללה בן חמד אאל ת'אני"]
+2026-05-21 19:31:48,977 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-TBHA-K036O-RCA-1']
+      Scraper=['QA-GEN-TBHA-21G61-RCA-1']
+      To remove=['QA-GEN-TBHA-K036O-RCA-1']  To add=['QA-GEN-TBHA-21G61-RCA-1']
+2026-05-21 19:31:48,978 - INFO - orchestrator - [DELTA]   'Abdullah Bin Hamad Bin Khalifa Al Thani' (main_id=781270) — CHANGED. Failing check(s): ['alias', 'rca']. Added to new_df.
+2026-05-21 19:31:48,979 - INFO - orchestrator - [DELTA] Processing record #58: 'Maha Mansour Salman Jassim Al Thani'
+2026-05-21 19:31:48,981 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781271. Checking child tables...
+2026-05-21 19:31:48,985 - INFO - orchestrator - [DELTA]   'Maha Mansour Salman Jassim Al Thani' (main_id=781271) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:48,986 - INFO - orchestrator - [DELTA] Processing record #59: 'Ahmad Bin Eid Al Thani'
+2026-05-21 19:31:48,989 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:51,685 - INFO - orchestrator - [DELTA]   'Ahmad Bin Eid Al Thani' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:51,687 - INFO - orchestrator - [DELTA] Processing record #60: 'Mohammed Bin Abdulrahman Al Thani'
+2026-05-21 19:31:51,702 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781272. Checking child tables...
+2026-05-21 19:31:51,714 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-HBJBJAT-W665T-RCA-1']
+      Scraper=['QA-GEN-HBJBJAT-TJV5M-RCA-1']
+      To remove=['QA-GEN-HBJBJAT-W665T-RCA-1']  To add=['QA-GEN-HBJBJAT-TJV5M-RCA-1']
+2026-05-21 19:31:51,718 - INFO - orchestrator - [DELTA]   'Mohammed Bin Abdulrahman Al Thani' (main_id=781272) — CHANGED. Failing check(s): ['rca']. Added to new_df.
+2026-05-21 19:31:51,720 - INFO - orchestrator - [DELTA] Processing record #61: 'Ali Bin Saeed Bin Smaikh Al Marri'
+2026-05-21 19:31:51,723 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781273. Checking child tables...
+2026-05-21 19:31:51,732 - INFO - orchestrator - [DELTA]   'Ali Bin Saeed Bin Smaikh Al Marri' (main_id=781273) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:51,733 - INFO - orchestrator - [DELTA] Processing record #62: 'Abdullah Bin Hamad Al Attiyah'
+2026-05-21 19:31:51,738 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781274. Checking child tables...
+2026-05-21 19:31:51,740 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['عبدالله بن حمد العطیه', 'عبد اللَّه بن حمد العطية', 'Abdallah Ben Hamad Al Attiyah', 'عبدالله بن حمد العطية', 'アブドラ・ビン・ハマド・アル・アティヤ', 'อับดุลละห์ บิน ฮะมัด อัล อัตติยาห์', 'عبد الله بن حمد العطية', 'Abdulla Bin Hamad Al Attiyah', '阿卜杜拉·本·哈马德·阿尔·阿蒂亚', 'Abdullah Bin Hamad Al Attiyah', '阿卜杜拉·本·哈馬德·艾爾·阿蒂亞', 'Абдуллах бин Хамад Аль Аттиях']
+      Scraper=['عبدالله بن حمد العطية', 'Abdullah Bin Hamad Al Attiyah', 'عبد الله بن حمد العطية', 'عبدالله بن حمد العطیه', 'عبد اللَّه بن حمد العطية', '阿卜杜拉·本·哈马德·阿尔·阿蒂亚', 'Abdulla Bin Hamad Al Attiyah', '阿卜杜拉·本·哈馬德·艾爾·阿蒂亞', 'アブドラ・ビン・ハマド・アル・アティヤ', 'Abdallah Ben Hamad Al Attiyah', 'อับดุลละห์ บิน ฮะมัด อัล อัตติยาห์', 'Абдуллах бин Хамад Аль Аттиях', 'عبد اللہ بن حمد العطیہ']
+      To remove=[]  To add=['عبد اللہ بن حمد العطیہ']
+2026-05-21 19:31:51,748 - INFO - orchestrator - [DELTA]   'Abdullah Bin Hamad Al Attiyah' (main_id=781274) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-05-21 19:31:51,751 - INFO - orchestrator - [DELTA] Processing record #63: 'Abdulrahman Bin Hamad Al Attiyah'
+2026-05-21 19:31:51,755 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781275. Checking child tables...
+2026-05-21 19:31:51,762 - INFO - orchestrator - [DELTA]   'Abdulrahman Bin Hamad Al Attiyah' (main_id=781275) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:51,763 - INFO - orchestrator - [DELTA] Processing record #64: 'Abdullah Bin Khalifa Al Thani'
+2026-05-21 19:31:51,767 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781276. Checking child tables...
+2026-05-21 19:31:51,775 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-HBKAT-0TKTJ-RCA-1', 'QA-GEN-LBJBH-RUAHV-RCA-1']
+      Scraper=['QA-GEN-HBKAT-RCTL1-RCA-1', 'QA-GEN-LBJBH-J40IB-RCA-1']
+      To remove=['QA-GEN-HBKAT-0TKTJ-RCA-1', 'QA-GEN-LBJBH-RUAHV-RCA-1']  To add=['QA-GEN-HBKAT-RCTL1-RCA-1', 'QA-GEN-LBJBH-J40IB-RCA-1']
+2026-05-21 19:31:51,778 - INFO - orchestrator - [DELTA]   'Abdullah Bin Khalifa Al Thani' (main_id=781276) — CHANGED. Failing check(s): ['rca']. Added to new_df.
+2026-05-21 19:31:51,780 - INFO - orchestrator - [DELTA] Processing record #65: 'Abdullah Bin Khalid Al Thani'
+2026-05-21 19:31:51,783 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781277. Checking child tables...
+2026-05-21 19:31:51,788 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-AAKHAT-U7E8Q-RCA-1']
+      Scraper=['QA-GEN-AAKHAT-MG9TG-RCA-1']
+      To remove=['QA-GEN-AAKHAT-U7E8Q-RCA-1']  To add=['QA-GEN-AAKHAT-MG9TG-RCA-1']
+2026-05-21 19:31:51,792 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Diplomat', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Diplomat', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:51,793 - INFO - orchestrator - [DELTA]   'Abdullah Bin Khalid Al Thani' (main_id=781277) — CHANGED. Failing check(s): ['rca', "role_type (to_remove=[('Diplomat', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:51,795 - INFO - orchestrator - [DELTA] Processing record #66: 'Abdullah Bin Nasser Bin Khalifa Al Thani'
+2026-05-21 19:31:51,799 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781278. Checking child tables...
+2026-05-21 19:31:51,811 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-HBKBAAT-ZM37Z-RCA-1']
+      Scraper=['QA-GEN-HBKBAAT-LL2HY-RCA-1']
+      To remove=['QA-GEN-HBKBAAT-ZM37Z-RCA-1']  To add=['QA-GEN-HBKBAAT-LL2HY-RCA-1']
+2026-05-21 19:31:51,813 - INFO - orchestrator - [DELTA]   'Abdullah Bin Nasser Bin Khalifa Al Thani' (main_id=781278) — CHANGED. Failing check(s): ['rca']. Added to new_df.
+2026-05-21 19:31:51,815 - INFO - orchestrator - [DELTA] Processing record #67: 'Salah Bin Ghanim Al Ali'
+2026-05-21 19:31:51,819 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781279. Checking child tables...
+2026-05-21 19:31:51,829 - INFO - orchestrator - [DELTA]   'Salah Bin Ghanim Al Ali' (main_id=781279) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:51,830 - INFO - orchestrator - [DELTA] Processing record #68: 'Nassir Abdulaziz Al Nasser'
+2026-05-21 19:31:51,833 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781280. Checking child tables...
+2026-05-21 19:31:51,843 - INFO - orchestrator - [DELTA]   'Nassir Abdulaziz Al Nasser' (main_id=781280) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:51,845 - INFO - orchestrator - [DELTA] Processing record #69: 'Ali Bin Fetais Al Marri'
+2026-05-21 19:31:51,851 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:54,719 - INFO - orchestrator - [DELTA]   'Ali Bin Fetais Al Marri' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:54,722 - INFO - orchestrator - [DELTA] Processing record #70: 'Hamad Bin Khalifa Al Thani'
+2026-05-21 19:31:54,738 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781281. Checking child tables...
+2026-05-21 19:31:54,747 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['Hamad Khalifa Bin Al Thani', 'حمد بن خلیفهٔ آل ثانی', 'Hamad Bin Khalifa Al Tsani', 'Χαμάντ μπιν Χαλίφα', 'Hammad Bin Khalifa Al Thani', 'Hamad Bin Halife Es Sani', 'Hamads bin Halīfa', 'Хамад Бин Халифа', 'Хамад бин Халифа аль Тани', '哈马德·本·哈利法·阿勒萨尼', 'Hamad bin Chalífa', 'হামাদ বিন খলিফা আল থানী', 'حمد بن خلیفه ال ثانی', 'เชคฮามัด บิน คอลีฟะห์ อัลตานี', 'হামাদ বিন খলিফা আল থানি', 'Хамад бин Халифа Аль Тани', 'Hamads Bin Halifa', '셰이크 하마드 이븐 할리파 알 타니', 'Хамад бин Халифа ал Тани', 'Hamad bin Khalifa   حمد بن خليفة ال ثاني', 'Hamad Bin Khalifa', 'Mohammed Bin Khalifa Al Thani', 'حمد بن خلیفه آل ثانی', 'Hamad Ibn Khalifah Al Thani', 'சேக் அமத் பின் கலீபா அல் தானி', 'Hamad Ben Khalifa Al Thani', 'حمد بن خليفة ال ثانى', 'เอมีร์เชคฮามัด บิน คอลีฟะห์ อัลตานี', '하마드 빈 칼리파', 'Sheikh Hamad Bin Khalifa Al Thani', 'حمد آل ثاني', 'ハマド・ビン・ハリーファ・アル＝サーニ', 'Hamidus Chalifae filius gentis Ṯānī', 'Hamid Bin Halife El Sani', 'حمد بن خلیفهٔ آلثانی', 'Σεΐχης Χαμάντ μπιν Χαλίφα', "חמד בן ח'ליפה אאל ת'אני", 'حمد بن خليفه آل ثاني', 'Hamad Bin Khalifa Al Tani', 'Хамад бин Халифа аль Сани', 'حمد بن خلیفهٔ ال ثانی', 'Hamadas Bin Chalifa Al Tanis', 'Хамад бін Халіфа Аль Тані', 'Hamad Ibn Khalifa Al Thani', 'حمد بن خليفة آل ثاني', 'Hammad Al Thani', 'Hamad Bin Kalifa Al Tani', 'حمد بن خلیفه ال دوم', 'Hamad Bin Jalifa Al Thani', 'Hamad Bin Halifa', 'Hamad Bin Xəlifə Al Tani', 'Համադ բին Խալիֆա ալ Թանի', 'Hamad ibn Halífa Ál Táni', 'حمد بن خليفة ال ثاني', 'Хамад бин Халифа ат Тани', 'حمد بن خلیفہ آل ثانی', 'Hamad Bin Khalifa Al Thani', 'Hamad Al Tani', 'Hamád Ibn Chalífa as Sání', 'Hamed Bin Halife El Sani', 'Hamad Bin Chalifa Al Thani', 'حمد بن خلیفه آل دوم', 'Hamad Al Thani', 'حمد بن خلیفہ الثانی', 'ハマド・ビン・ハリーファ・アール＝サーニー', "חמד בן ח'ליפה", 'الشيخ حمد بن خليفة آل ثاني', 'Hamad Bin Halifa Al Tani', 'حمد بن خلیفهٔ آل دوم', 'Hamadas Bin Chalifa', '하마드 빈 할리파 알 사니', 'Хамад бин Халифа', 'Hameds bin Halīfa al Tānī', 'Hàmad ibn Khalifa Al Thani', 'Hamad Bin Khalifa Bin Hamad Bin Abdullah Bin Dschasim Bin Muhammed Al Thani', 'Ḩamad ibn Khalīfah Āl Thānī', '하마드 빈 할리파', 'Χαμάντ μπιν Χαλίφα αλ Θανί', 'Хамад бин Халифа аc Cани', 'حمد بن خلیفه الثانی', 'حمد بن خليفة', 'Ҳамад бин Халифа Оли Танӣ', 'Hamad Ibn Chalifa', 'Hamad bin Chalífa Ál Thání', 'Hamad Ál Thání', '哈迈德·本·哈利法·阿勒萨尼', 'Гамад бін Халіфа аль Тані', 'Khalifa Hamad Bin', 'ฮะมัด บิน เคาะลีฟะฮ์ อาล ษานี', 'Sheikh Hamad Bin Khalifa Al Tsani', '하마드 빈 할리파 알사니', 'ഹമദ് ബിൻ ഖലീഫ അൽതാനി', 'Хамад ибн Халифа аль Тани', 'Σεΐχης Χαμάντ ιμπν Χαλίφα αλ Θανί', 'Hamad bin Ĥalifa Al Thani', 'シェイク・ハマド・ビン・ハリーファ・アール・サーニ', 'Hamad Bin Chalifa', 'Mohammed Bin Hamad Bin Khalifa Al Thani', 'Hamad Ibn Chalifa Al Sani', 'حمد بن خلیفه آلثانی', 'ჰამად ბინ ხალიფა ალ თანი', 'Hamad bin Xəlifə Al Sani', '하마드 빈 칼리파 알사니', 'Hamad Ibn Khalifa', 'Cheikh Hamad Ben Khalifa Al Thani', 'हमद बिन खलीफा अल थानी']
+      Scraper=['Hamad Bin Khalifa Al Tani', '하마드 빈 할리파', 'ฮะมัด บิน เคาะลีฟะฮ์ อาล ษานี', 'Hameds bin Halīfa al Tānī', 'الشيخ حمد بن خليفة آل ثاني', 'Hamad bin Ĥalifa Al Thani', 'Hamad Ibn Chalifa', 'Хамад бин Халифа аc Cани', '하마드 빈 할리파 알 사니', 'เอมีร์เชคฮามัด บิน คอลีฟะห์ อัลตานี', 'Hamad Bin Halifa Al Tani', "חמד בן ח'ליפה", 'حمد بن خلیفه ال دوم', 'Hamad Ben Khalifa Al Thani', 'Hamad Ál Thání', 'Hamád Ibn Chalífa as Sání', 'Hamad bin Chalífa', 'Hamad Ibn Chalifa Al Sani', 'حمد بن خليفة آل ثاني', 'Hamads Bin Halifa', 'Hamad Bin Halife Es Sani', 'حمد بن خلیفه الثانی', 'হামাদ বিন খলিফা আল থানী', 'حمد بن خلیفهٔ آل ثانی', 'சேக் அமத் பின் கலீபா அல் தானி', 'Гамад бін Халіфа аль Тані', '哈马德·本·哈利法·阿勒萨尼', 'Hamad Bin Halifa', 'حمد بن خلیفہ الثانی', 'Hamad Al Thani', 'حمد بن خليفة ال ثانى', 'Hamad ibn Halífa Ál Táni', 'Hamad Bin Kalifa Al Tani', 'Mohammed Bin Hamad Bin Khalifa Al Thani', 'Χαμάντ μπιν Χαλίφα', '하마드 빈 칼리파 알사니', 'Hamad bin Chalífa Ál Thání', 'Hamadas Bin Chalifa', 'Hamad Ibn Khalifa Al Thani', 'Хамад бин Халифа аль Сани', 'Hamad Bin Khalifa Bin Hamad Bin Abdullah Bin Dschasim Bin Muhammed Al Thani', 'Sheikh Hamad Bin Khalifa Al Thani', '셰이크 하마드 이븐 할리파 알 타니', 'حمد بن خلیفهٔ آل دوم', 'Hàmad ibn Khalifa Al Thani', 'Hamad Khalifa Bin Al Thani', 'Hamad Bin Xəlifə Al Tani', 'Hamad bin Khalifa   حمد بن خليفة ال ثاني', 'เชคฮามัด บิน คอลีฟะห์ อัลตานี', 'Хамад бін Халіфа Аль Тані', 'Σεΐχης Χαμάντ ιμπν Χαλίφα αλ Θανί', 'Ḩamad ibn Khalīfah Āl Thānī', 'Hamad Bin Khalifa Al Tsani', 'حمد بن خلیفه ال ثانی', 'Hamad Al Tani', 'Hamidus Chalifae filius gentis Ṯānī', '하마드 빈 할리파 알사니', 'حمد بن خليفة', 'Hamadas Bin Chalifa Al Tanis', 'হামাদ বিন খলিফা আল থানি', 'Χαμάντ μπιν Χαλίφα αλ Θανί', 'Cheikh Hamad Ben Khalifa Al Thani', 'Hammad Al Thani', 'حمد بن خلیفه آل دوم', 'Hammad Bin Khalifa Al Thani', 'Mohammed Bin Khalifa Al Thani', 'Хамад бин Халифа аль Тани', 'Ҳамад бин Халифа Оли Танӣ', 'Hamad Ibn Khalifa', 'حمد بن خلیفه آلثانی', "חמד בן ח'ליפה אאל ת'אני", 'Хамад бин Халифа', 'Sheikh Hamad Bin Khalifa Al Tsani', 'حمد بن خلیفه آل ثانی', 'حمد آل ثاني', 'Hamad Bin Chalifa Al Thani', 'Хамад ибн Халифа аль Тани', 'Hamad Bin Khalifa Al Thani', 'Hamad Ibn Khalifah Al Thani', 'Хамад Бин Халифа', 'Hamad Bin Khalifa', 'حمد بن خلیفہ آل ثانی', 'حمد بن خلیفهٔ ال ثانی', 'Hamad Bin Chalifa', 'हमद बिन खलीफा अल थानी', 'Həməd ibn Xəlifə Ali Sani', 'حمد بن خليفة ال ثاني', 'Хамад бин Халифа Аль Тани', 'Hamed Bin Halife El Sani', 'حمد بن خلیفهٔ آلثانی', 'ഹമദ് ബിൻ ഖലീഫ അൽതാനി', 'ჰამად ბინ ხალიფა ალ თანი', 'ハマド・ビン・ハリーファ・アル＝サーニ', 'Σεΐχης Χαμάντ μπιν Χαλίφα', 'Hamad Bin Khalifa Bin Hamad Bin Abdullah Bin Jassim Bin Mohammed Al Thani', 'Համադ բին Խալիֆա ալ Թանի', 'Khalifa Hamad Bin', 'Хамад бин Халифа ат Тани', 'Hamads bin Halīfa', 'ハマド・ビン・ハリーファ・アール＝サーニー', 'Hamad Bin Jalifa Al Thani', 'シェイク・ハマド・ビン・ハリーファ・アール・サーニ', 'Hamid Bin Halife El Sani', '哈迈德·本·哈利法·阿勒萨尼', 'Хамад бин Халифа ал Тани', '하마드 빈 칼리파', 'حمد بن خليفه آل ثاني']
+      To remove=['Hamad bin Xəlifə Al Sani']  To add=['Həməd ibn Xəlifə Ali Sani', 'Hamad Bin Khalifa Bin Hamad Bin Abdullah Bin Jassim Bin Mohammed Al Thani']
+2026-05-21 19:31:54,761 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHAT-OL3FU-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-PNKIK-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHA-K036O-RCA-1', 'QA-GEN-TBHAT-28KU2-RCA-1', 'QA-GEN-HBSAT-LEUBZ-RCA-1', 'QA-GEN-SBHAT-GX4H3-RCA-1', 'QA-GEN-ABKAT-KXNJ5-RCA-1', 'QA-GEN-ABKAT-7QHEU-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1']
+      Scraper=['QA-GEN-ABKAT-BLWYP-RCA-1', 'QA-GEN-ABKAT-2QOBB-RCA-1', 'QA-GEN-MBKAT-PDBKF-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1', 'QA-GEN-HBSAT-2HWYX-RCA-1', 'QA-GEN-SBHAT-ZJGMZ-RCA-1', 'QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHAT-1101Q-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-DX0NT-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHA-21G61-RCA-1', 'QA-GEN-TBHAT-4GA73-RCA-1']
+      To remove=['QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHAT-OL3FU-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-PNKIK-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHA-K036O-RCA-1', 'QA-GEN-TBHAT-28KU2-RCA-1', 'QA-GEN-HBSAT-LEUBZ-RCA-1', 'QA-GEN-SBHAT-GX4H3-RCA-1', 'QA-GEN-ABKAT-KXNJ5-RCA-1', 'QA-GEN-ABKAT-7QHEU-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1']  To add=['QA-GEN-ABKAT-BLWYP-RCA-1', 'QA-GEN-ABKAT-2QOBB-RCA-1', 'QA-GEN-MBKAT-PDBKF-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1', 'QA-GEN-HBSAT-2HWYX-RCA-1', 'QA-GEN-SBHAT-ZJGMZ-RCA-1', 'QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHAT-1101Q-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-DX0NT-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHA-21G61-RCA-1', 'QA-GEN-TBHAT-4GA73-RCA-1']
+2026-05-21 19:31:54,766 - INFO - orchestrator - [DELTA]   'Hamad Bin Khalifa Al Thani' (main_id=781281) — CHANGED. Failing check(s): ['alias', 'rca']. Added to new_df.
+2026-05-21 19:31:54,769 - INFO - orchestrator - [DELTA] Processing record #71: 'Hessa Al Jaber'
+2026-05-21 19:31:54,776 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781282. Checking child tables...
+2026-05-21 19:31:54,791 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Engineer', None, None, None), ('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Engineer', None, None, None), ('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:54,793 - INFO - orchestrator - [DELTA]   'Hessa Al Jaber' (main_id=781282) — CHANGED. Failing check(s): ["role_type (to_remove=[('Engineer', None, None, None), ('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:54,796 - INFO - orchestrator - [DELTA] Processing record #72: 'Hamad Bin Jassim Bin Jaber Al Thani'
+2026-05-21 19:31:54,800 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781283. Checking child tables...
+2026-05-21 19:31:54,817 - INFO - orchestrator - [DELTA]   'Hamad Bin Jassim Bin Jaber Al Thani' (main_id=781283) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,818 - INFO - orchestrator - [DELTA] Processing record #73: 'Jassim Bin Saif Al Sulaiti'
+2026-05-21 19:31:54,827 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781284. Checking child tables...
+2026-05-21 19:31:54,836 - INFO - orchestrator - [DELTA]   'Jassim Bin Saif Al Sulaiti' (main_id=781284) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,838 - INFO - orchestrator - [DELTA] Processing record #74: 'Prince Jassim Bin Hamad Of Qatar'
+2026-05-21 19:31:54,841 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781285. Checking child tables...
+2026-05-21 19:31:54,848 - INFO - orchestrator - [DELTA]   rca MISMATCH:
+      DB=['QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHBKAT-A7NJG-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHA-K036O-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1', 'QA-GEN-BBHAT-FD404-RCA-1']
+      Scraper=['QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHBKAT-QCWJJ-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHA-21G61-RCA-1', 'QA-GEN-BBHAT-EAHTE-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1']
+      To remove=['QA-GEN-ABHBKAT-87DYX-RCA-1', 'QA-GEN-KBHBKAT-A7NJG-RCA-1', 'QA-GEN-MBHBKAT-XHR18-RCA-1', 'QA-GEN-MBHBKAT-LRHZY-RCA-1', 'QA-GEN-MBHBKAT-C3NWO-RCA-1', 'QA-GEN-PJBHOQ-B78MR-RCA-1', 'QA-GEN-PKBHOQ-B6NQQ-RCA-1', 'QA-GEN-PAMBHOQ-3MSTL-RCA-1', 'QA-GEN-PHBHOQ-MJ0UC-RCA-1', 'QA-GEN-TBHA-K036O-RCA-1', 'QA-GEN-MBNAM-IN51I-RCA-1', 'QA-GEN-BBHAT-FD404-RCA-1']  To add=['QA-GEN-ABHBKAT-SKJIQ-RCA-1', 'QA-GEN-KBHBKAT-QCWJJ-RCA-1', 'QA-GEN-MBHBKAT-IJ80D-RCA-1', 'QA-GEN-MBHBKAT-XSD2P-RCA-1', 'QA-GEN-MBHBKAT-MLVZ1-RCA-1', 'QA-GEN-PJBHOQ-48318-RCA-1', 'QA-GEN-PKBHOQ-DJE0E-RCA-1', 'QA-GEN-PAMBHOQ-U8E92-RCA-1', 'QA-GEN-PHBHOQ-555R5-RCA-1', 'QA-GEN-TBHA-21G61-RCA-1', 'QA-GEN-BBHAT-EAHTE-RCA-1', 'QA-GEN-MBNAM-N7UOH-RCA-1']
+2026-05-21 19:31:54,851 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:54,852 - INFO - orchestrator - [DELTA]   'Prince Jassim Bin Hamad Of Qatar' (main_id=781285) — CHANGED. Failing check(s): ['rca', "role_type (to_remove=[('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:54,854 - INFO - orchestrator - [DELTA] Processing record #75: 'Ali Al Qaradaghi'
+2026-05-21 19:31:54,857 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781286. Checking child tables...
+2026-05-21 19:31:54,860 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['علي محي الدين القرة داغي', 'علي مُحيي الدين القره داغي', 'Али аль Карадаги', 'Әли әл Қарадағи', 'Ali Muhyiddin Ali Al Qaradaghi', 'Ali Qeredaxi', 'علي محيي الدين القره داغي', 'علی قرهداغی', 'Ali Al Qaradaghi', 'على محيي الدين القره داغي', 'علي القرة داغي', 'عەلی قەرەداغی', 'Алі аль Карадагі', 'علي محيي الدين القرة داغي', 'على محي الدين القرة داغي']
+      Scraper=['على محيي الدين القره داغي', 'Ali Muhyiddin Ali Al Qaradaghi', 'على محي الدين القرة داغي', 'علي محي الدين القرة داغي', 'علی محیی الدین القرہ داغی', 'Әли әл Қарадағи', 'Али аль Карадаги', 'علی قرهداغی', 'Алі аль Карадагі', 'Ali Al Qaradaghi', 'עלי אל קרה דאגי', 'علي محيي الدين القرة داغي', 'علي القرة داغي', 'علي مُحيي الدين القره داغي', 'عەلی قەرەداغی', 'علي محيي الدين القره داغي', 'Ali Qeredaxi']
+      To remove=[]  To add=['علی محیی الدین القرہ داغی', 'עלי אל קרה דאגי']
+2026-05-21 19:31:54,877 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Politician', None, None, None), ('University Teacher', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Politician', None, None, None), ('University Teacher', None, None, None)]  To add=[]
+2026-05-21 19:31:54,878 - INFO - orchestrator - [DELTA]   'Ali Al Qaradaghi' (main_id=781286) — CHANGED. Failing check(s): ['alias', "role_type (to_remove=[('Politician', None, None, None), ('University Teacher', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:54,880 - INFO - orchestrator - [DELTA] Processing record #76: 'Mohammed Saleh Al Sada'
+2026-05-21 19:31:54,885 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781287. Checking child tables...
+2026-05-21 19:31:54,886 - INFO - orchestrator - [DELTA]   alias MISMATCH:
+      DB=['穆罕默德·萨利赫 萨达', 'Mohammed Saleh Al Sada', 'محمد بن صالح السادة', 'モハメド・ビン・サレハ・アル＝サダ', '穆罕默德·薩利赫 薩達', 'Мохаммед Салех аль Сада', 'محمد صالح السادة']
+      Scraper=['モハメド・ビン・サレハ・アル＝サダ', 'Mohammed Saleh Al Sada', 'محمد بن صالح السادة', 'محمد صالح السادہ', 'Мохаммед Салех аль Сада', 'محمد صالح السادة', '穆罕默德·萨利赫 萨达', '穆罕默德·薩利赫 薩達']
+      To remove=[]  To add=['محمد صالح السادہ']
+2026-05-21 19:31:54,891 - INFO - orchestrator - [DELTA]   'Mohammed Saleh Al Sada' (main_id=781287) — CHANGED. Failing check(s): ['alias']. Added to new_df.
+2026-05-21 19:31:54,893 - INFO - orchestrator - [DELTA] Processing record #77: 'Sheikha Yousuf Hasan Al Jufairi'
+2026-05-21 19:31:54,898 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781288. Checking child tables...
+2026-05-21 19:31:54,905 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Politician', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Politician', None, None, None)]  To add=[]
+2026-05-21 19:31:54,905 - INFO - orchestrator - [DELTA]   'Sheikha Yousuf Hasan Al Jufairi' (main_id=781288) — CHANGED. Failing check(s): ["role_type (to_remove=[('Politician', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:54,907 - INFO - orchestrator - [DELTA] Processing record #78: 'Khalid Bin Khalifa Bin Abdul Aziz Al Thani'
+2026-05-21 19:31:54,909 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781289. Checking child tables...
+2026-05-21 19:31:54,915 - INFO - orchestrator - [DELTA]   'Khalid Bin Khalifa Bin Abdul Aziz Al Thani' (main_id=781289) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,916 - INFO - orchestrator - [DELTA] Processing record #79: 'Ahmed Abdulla Kh H Al Thani'
+2026-05-21 19:31:54,918 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781290. Checking child tables...
+2026-05-21 19:31:54,926 - INFO - orchestrator - [DELTA]   role_type MISMATCH:
+      DB tuples:      [('Businessperson', None, None, None), ('Rider', None, None, None)]
+      Scraper tuples: []
+      To remove=[('Businessperson', None, None, None), ('Rider', None, None, None)]  To add=[]
+2026-05-21 19:31:54,927 - INFO - orchestrator - [DELTA]   'Ahmed Abdulla Kh H Al Thani' (main_id=781290) — CHANGED. Failing check(s): ["role_type (to_remove=[('Businessperson', None, None, None), ('Rider', None, None, None)], to_add=[])"]. Added to new_df.
+2026-05-21 19:31:54,929 - INFO - orchestrator - [DELTA] Processing record #80: 'Lolwah Al Khater'
+2026-05-21 19:31:54,931 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781291. Checking child tables...
+2026-05-21 19:31:54,938 - INFO - orchestrator - [DELTA]   'Lolwah Al Khater' (main_id=781291) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,938 - INFO - orchestrator - [DELTA] Processing record #81: 'Ahmad bin Abdullah Al Mahmoud'
+2026-05-21 19:31:54,943 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781313. Checking child tables...
+2026-05-21 19:31:54,948 - INFO - orchestrator - [DELTA]   'Ahmad bin Abdullah Al Mahmoud' (main_id=781313) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,949 - INFO - orchestrator - [DELTA] Processing record #82: 'Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,952 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781315. Checking child tables...
+2026-05-21 19:31:54,956 - INFO - orchestrator - [DELTA]   'Hamad bin Khalifa Al Thani' (main_id=781315) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,956 - INFO - orchestrator - [DELTA] Processing record #83: 'Abdullah bin Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,958 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781296. Checking child tables...
+2026-05-21 19:31:54,961 - INFO - orchestrator - [DELTA]   'Abdullah bin Hamad bin Khalifa Al Thani' (main_id=781296) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,962 - INFO - orchestrator - [DELTA] Processing record #84: 'Khalifa bin Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,964 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781314. Checking child tables...
+2026-05-21 19:31:54,968 - INFO - orchestrator - [DELTA]   'Khalifa bin Hamad bin Khalifa Al Thani' (main_id=781314) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,969 - INFO - orchestrator - [DELTA] Processing record #85: 'Maha bint Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,971 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781298. Checking child tables...
+2026-05-21 19:31:54,981 - INFO - orchestrator - [DELTA]   'Maha bint Hamad bin Khalifa Al Thani' (main_id=781298) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,981 - INFO - orchestrator - [DELTA] Processing record #86: 'Mishaal bin Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,984 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781299. Checking child tables...
+2026-05-21 19:31:54,990 - INFO - orchestrator - [DELTA]   'Mishaal bin Hamad bin Khalifa Al Thani' (main_id=781299) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:54,991 - INFO - orchestrator - [DELTA] Processing record #87: 'Mohammed bin Hamad bin Khalifa Al Thani'
+2026-05-21 19:31:54,994 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781300. Checking child tables...
+2026-05-21 19:31:54,999 - INFO - orchestrator - [DELTA]   'Mohammed bin Hamad bin Khalifa Al Thani' (main_id=781300) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,000 - INFO - orchestrator - [DELTA] Processing record #88: 'Prince Jassim bin Hamad of Qatar'
+2026-05-21 19:31:55,002 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781301. Checking child tables...
+2026-05-21 19:31:55,007 - INFO - orchestrator - [DELTA]   'Prince Jassim bin Hamad of Qatar' (main_id=781301) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,007 - INFO - orchestrator - [DELTA] Processing record #89: 'Prince Joaan bin Hamad of Qatar'
+2026-05-21 19:31:55,009 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781302. Checking child tables...
+2026-05-21 19:31:55,013 - INFO - orchestrator - [DELTA]   'Prince Joaan bin Hamad of Qatar' (main_id=781302) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,014 - INFO - orchestrator - [DELTA] Processing record #90: 'Prince Khalifa bin Hamad of Qatar'
+2026-05-21 19:31:55,016 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781303. Checking child tables...
+2026-05-21 19:31:55,019 - INFO - orchestrator - [DELTA]   'Prince Khalifa bin Hamad of Qatar' (main_id=781303) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,019 - INFO - orchestrator - [DELTA] Processing record #91: 'Princess Al Mayassa bint Hamad of Qatar'
+2026-05-21 19:31:55,022 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781304. Checking child tables...
+2026-05-21 19:31:55,026 - INFO - orchestrator - [DELTA]   'Princess Al Mayassa bint Hamad of Qatar' (main_id=781304) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,026 - INFO - orchestrator - [DELTA] Processing record #92: 'Princess Hind bint Hamad of Qatar'
+2026-05-21 19:31:55,028 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781305. Checking child tables...
+2026-05-21 19:31:55,032 - INFO - orchestrator - [DELTA]   'Princess Hind bint Hamad of Qatar' (main_id=781305) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,032 - INFO - orchestrator - [DELTA] Processing record #93: 'Thani bin Hamad Al Thani'
+2026-05-21 19:31:55,034 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781307. Checking child tables...
+2026-05-21 19:31:55,038 - INFO - orchestrator - [DELTA]   'Thani bin Hamad Al Thani' (main_id=781307) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,038 - INFO - orchestrator - [DELTA] Processing record #94: 'Tamim bin Hamad Al'
+2026-05-21 19:31:55,039 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781306. Checking child tables...
+2026-05-21 19:31:55,043 - INFO - orchestrator - [DELTA]   'Tamim bin Hamad Al' (main_id=781306) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,044 - INFO - orchestrator - [DELTA] Processing record #95: 'Abdelaziz bin Khalifa Al Thani'
+2026-05-21 19:31:55,046 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781316. Checking child tables...
+2026-05-21 19:31:55,049 - INFO - orchestrator - [DELTA]   'Abdelaziz bin Khalifa Al Thani' (main_id=781316) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,050 - INFO - orchestrator - [DELTA] Processing record #96: 'Abdullah bin Khalifa Al Thani'
+2026-05-21 19:31:55,052 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781317. Checking child tables...
+2026-05-21 19:31:55,056 - INFO - orchestrator - [DELTA]   'Abdullah bin Khalifa Al Thani' (main_id=781317) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:55,056 - INFO - orchestrator - [DELTA] Processing record #97: 'Mohammed bin Khalifa Al Thani'
+2026-05-21 19:31:55,060 - INFO - orchestrator - [DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.
+2026-05-21 19:31:57,239 - INFO - orchestrator - [DELTA]   'Mohammed bin Khalifa Al Thani' — No match at all (truly new record). Added to new_df.
+2026-05-21 19:31:57,240 - INFO - orchestrator - [DELTA] Processing record #98: 'Al Anoud bint Mana Al Hajri'
+2026-05-21 19:31:57,246 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781293. Checking child tables...
+2026-05-21 19:31:57,260 - INFO - orchestrator - [DELTA]   'Al Anoud bint Mana Al Hajri' (main_id=781293) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,260 - INFO - orchestrator - [DELTA] Processing record #99: 'Jawaher bint Hamad Al Thani'
+2026-05-21 19:31:57,263 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781319. Checking child tables...
+2026-05-21 19:31:57,270 - INFO - orchestrator - [DELTA]   'Jawaher bint Hamad Al Thani' (main_id=781319) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,271 - INFO - orchestrator - [DELTA] Processing record #100: 'Noora bint Hathal Al Dosari'
+2026-05-21 19:31:57,273 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781320. Checking child tables...
+2026-05-21 19:31:57,277 - INFO - orchestrator - [DELTA]   'Noora bint Hathal Al Dosari' (main_id=781320) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,278 - INFO - orchestrator - [DELTA] Processing record #101: 'Janet Jackson'
+2026-05-21 19:31:57,280 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781321. Checking child tables...
+2026-05-21 19:31:57,284 - INFO - orchestrator - [DELTA]   'Janet Jackson' (main_id=781321) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,285 - INFO - orchestrator - [DELTA] Processing record #102: 'Lolwa bint Jassim bin Hamad'
+2026-05-21 19:31:57,287 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781322. Checking child tables...
+2026-05-21 19:31:57,290 - INFO - orchestrator - [DELTA]   'Lolwa bint Jassim bin Hamad' (main_id=781322) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,291 - INFO - orchestrator - [DELTA] Processing record #103: 'Moza bint Nasser Al Missned'
+2026-05-21 19:31:57,294 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781318. Checking child tables...
+2026-05-21 19:31:57,299 - INFO - orchestrator - [DELTA]   'Moza bint Nasser Al Missned' (main_id=781318) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,299 - INFO - orchestrator - [DELTA] Processing record #104: 'Buthaina bint Hamad Al Thani'
+2026-05-21 19:31:57,301 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781323. Checking child tables...
+2026-05-21 19:31:57,306 - INFO - orchestrator - [DELTA]   'Buthaina bint Hamad Al Thani' (main_id=781323) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,306 - INFO - orchestrator - [DELTA] Processing record #105: 'Hamad bin Suhaim Al Thani'
+2026-05-21 19:31:57,308 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781308. Checking child tables...
+2026-05-21 19:31:57,313 - INFO - orchestrator - [DELTA]   'Hamad bin Suhaim Al Thani' (main_id=781308) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,313 - INFO - orchestrator - [DELTA] Processing record #106: 'Khalifa bin Hamad Al Thani'
+2026-05-21 19:31:57,315 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781309. Checking child tables...
+2026-05-21 19:31:57,320 - INFO - orchestrator - [DELTA]   'Khalifa bin Hamad Al Thani' (main_id=781309) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,324 - INFO - orchestrator - [DELTA] Processing record #107: 'Hamad bin Jassim bin Jaber Al Thani'
+2026-05-21 19:31:57,326 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781310. Checking child tables...
+2026-05-21 19:31:57,331 - INFO - orchestrator - [DELTA]   'Hamad bin Jassim bin Jaber Al Thani' (main_id=781310) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,332 - INFO - orchestrator - [DELTA] Processing record #108: 'Hamad Bin Khalifa Bin Ahmed Al Thani'
+2026-05-21 19:31:57,336 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781311. Checking child tables...
+2026-05-21 19:31:57,346 - INFO - orchestrator - [DELTA]   'Hamad Bin Khalifa Bin Ahmed Al Thani' (main_id=781311) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,347 - INFO - orchestrator - [DELTA] Processing record #109: 'Suhaim bin Hamad Al Thani'
+2026-05-21 19:31:57,349 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781312. Checking child tables...
+2026-05-21 19:31:57,357 - INFO - orchestrator - [DELTA]   'Suhaim bin Hamad Al Thani' (main_id=781312) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,358 - INFO - orchestrator - [DELTA] Processing record #110: 'Abdulhadi Mana Abdulhadi Al Shawani Al Hajri'
+2026-05-21 19:31:57,360 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781292. Checking child tables...
+2026-05-21 19:31:57,365 - INFO - orchestrator - [DELTA]   'Abdulhadi Mana Abdulhadi Al Shawani Al Hajri' (main_id=781292) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,365 - INFO - orchestrator - [DELTA] Processing record #111: 'Eissa Al Mana'
+2026-05-21 19:31:57,367 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781294. Checking child tables...
+2026-05-21 19:31:57,373 - INFO - orchestrator - [DELTA]   'Eissa Al Mana' (main_id=781294) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,373 - INFO - orchestrator - [DELTA] Processing record #112: 'Ahmed Abdulla KH H Al Thani'
+2026-05-21 19:31:57,376 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781295. Checking child tables...
+2026-05-21 19:31:57,381 - INFO - orchestrator - [DELTA]   'Ahmed Abdulla KH H Al Thani' (main_id=781295) — SAME. Added to is_del_list_1.
+2026-05-21 19:31:57,382 - INFO - orchestrator - [DELTA] Processing record #113: 'Khalid bin Hamad Al Thani'
+2026-05-21 19:31:57,384 - INFO - orchestrator - [DELTA]   AND-query matched main_id=781297. Checking child tables...
+2026-05-21 19:31:57,389 - INFO - orchestrator - [DELTA]   'Khalid bin Hamad Al Thani' (main_id=781297) — SAME. Added to is_del_list_1.
+2026-05-21 19:32:37,092 - INFO - orchestrator - Delta: 39 new records in 110.0s
+2026-05-21 19:33:01,152 - INFO - orchestrator - Inserted 39 records for qa_gen

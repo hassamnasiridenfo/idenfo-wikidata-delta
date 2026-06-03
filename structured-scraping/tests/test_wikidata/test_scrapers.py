@@ -13,9 +13,12 @@ import pytest
 from structured_scraping.wikidata.scrapers import (
     PEPScraperConfig,
     count_country_politicians,
+    main_query_format,
     scrape_country_politicians,
+    scrape_country_politicians_by_decade,
     scrape_living_politicians,
 )
+from structured_scraping.wikidata.queries.pep import MAIN_QUERY
 
 
 class TestPEPScraperConfig:
@@ -310,3 +313,32 @@ class TestScraperErrorHandling:
             )
             
             assert count == 0
+
+    def test_decade_scrape_fails_clearly_when_all_queries_empty(self) -> None:
+        """Test empty Excel exports fail before OpenPyXL raises a workbook error."""
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".xlsx", delete=False) as f:
+            output_file = f.name
+
+        Path(output_file).unlink(missing_ok=True)
+
+        try:
+            config = PEPScraperConfig(use_decades=False, use_batching=False)
+            with patch("structured_scraping.wikidata.scrapers.attempt_period", return_value=None):
+                with pytest.raises(ValueError, match="No records were collected from Wikidata"):
+                    scrape_country_politicians_by_decade(
+                        country="Q846",
+                        output_file=output_file,
+                        config=config,
+                    )
+
+            assert not Path(output_file).exists()
+
+        finally:
+            Path(output_file).unlink(missing_ok=True)
+
+    def test_main_query_format_uses_valid_datetime_literals(self) -> None:
+        """Test QLever-compatible date windows use full xsd:dateTime values."""
+        query = main_query_format(1950, 1960, MAIN_QUERY, "Q846")
+
+        assert '"1950-01-01T00:00:00Z"^^xsd:dateTime <= ?birthDate' in query
+        assert '?birthDate < "1960-01-01T00:00:00Z"^^xsd:dateTime' in query

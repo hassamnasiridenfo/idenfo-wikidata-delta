@@ -12,7 +12,7 @@ from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from numbers import Real
 from pathlib import Path
-from time import perf_counter
+from time import perf_counter, sleep
 from urllib.parse import unquote, urlparse
 
 import pandas as pd
@@ -500,11 +500,12 @@ def scrape_country_politicians_by_decade(  # noqa: C901, PLR0912, PLR0915
         tracker_label = f"{query_name} SPARQL attempts"
         if config.use_decades:
             decade_attempts = _estimate_decade_attempts(start_decade, end_decade)
-            multiplier = 1 if query == MAIN_QUERY else max(len(collected_ids), 1)
-            tracker = QueryProgressTracker(decade_attempts * multiplier, tracker_label)
+            if query == MAIN_QUERY:
+                tracker = QueryProgressTracker(decade_attempts, tracker_label)
+            else:
+                tracker = QueryProgressTracker(max(len(dict.fromkeys(collected_ids)), 1), tracker_label)
 
             logger.info("IF LOOP WORKED")
-            logger.info("Querying for people without a registered DOB")
 
             if query == MAIN_QUERY:
                 results = decade_loop(
@@ -520,14 +521,14 @@ def scrape_country_politicians_by_decade(  # noqa: C901, PLR0912, PLR0915
                     ids = [extract_qid(r) for r in results if extract_qid(r)]
                     collected_ids.extend(ids)
             else:
-                results = decade_loop(
+                results = attempt_period(
                     country,
                     query,
-                    start_decade,
-                    end_decade,
                     collected_ids=collected_ids,
                     config=config,
                     tracker=tracker,
+                    start_year=0,
+                    end_year=0,
                 )
 
                 if results:
@@ -536,39 +537,33 @@ def scrape_country_politicians_by_decade(  # noqa: C901, PLR0912, PLR0915
         elif query == MAIN_QUERY:
             tracker = QueryProgressTracker(2, tracker_label)
             results = attempt_period(country, query, 0, 0, config=config, tracker=tracker)
+            candidate_results: list[dict[str, str]] = []
             if results is not None:
-                all_results.extend(results)
-            results = attempt_period(
-                country,
-                query,
-                start_decade,
-                end_decade,
-                config=config,
-                tracker=tracker,
-            )
-            if results is not None:
-                all_results.extend(results)
+                candidate_results.extend(results)
                 ids = [extract_qid(r) for r in results if extract_qid(r)]
                 collected_ids.extend(ids)
-        else:
-            attempts = max(len(collected_ids), 1) * 2
-            tracker = QueryProgressTracker(attempts, tracker_label)
-            results = attempt_period(
-                country,
-                query,
-                0,
-                0,
-                config=config,
-                collected_ids=collected_ids,
-                tracker=tracker,
-            )
-            if results is not None:
-                all_results.extend(results)
             results = attempt_period(
                 country,
                 query,
                 start_decade,
                 end_decade,
+                config=config,
+                tracker=tracker,
+            )
+            if results is not None:
+                candidate_results.extend(results)
+                ids = [extract_qid(r) for r in results if extract_qid(r)]
+                collected_ids.extend(ids)
+
+            if collected_ids:
+                all_results.extend(candidate_results)
+        else:
+            tracker = QueryProgressTracker(max(len(dict.fromkeys(collected_ids)), 1), tracker_label)
+            results = attempt_period(
+                country,
+                query,
+                0,
+                0,
                 config=config,
                 collected_ids=collected_ids,
                 tracker=tracker,
@@ -589,6 +584,9 @@ def scrape_country_politicians_by_decade(  # noqa: C901, PLR0912, PLR0915
         else:
             final_results = all_results
 
+        if query == MAIN_QUERY and final_results:
+            final_results = _enrich_main_results(final_results, config)
+
         # Sort results by person name
         logger.info("Sorting results...")
         sorted_results = sorted(
@@ -602,6 +600,12 @@ def scrape_country_politicians_by_decade(  # noqa: C901, PLR0912, PLR0915
         query_durations.append(query_duration)
         logger.info("Completed query %s in %.2f seconds", query_name, query_duration)
         _log_query_progress(query_index, total_queries, query_durations)
+
+    if not any(results_by_query.values()):
+        raise ValueError(
+            "No records were collected from Wikidata, so no Excel sheets were written. "
+            "Check the earlier SPARQL errors for the root cause.",
+        )
 
     with ExcelWriter(output_path, engine="openpyxl") as writer:
         for query_name, results in results_by_query.items():
@@ -976,6 +980,7 @@ def decade_loop(
     collected_ids: list[str] | None = None,
     config: PEPScraperConfig | None = None,
     tracker: QueryProgressTracker | None = None,
+    include_missing_birth_date: bool = True,
 ) -> list[dict[str, str]]:
     """Execute a query across decade windows with progressively smaller retries.
 
@@ -987,6 +992,8 @@ def decade_loop(
         collected_ids (list[str] | None): Optional list of QIDs scoped to the query.
         config (PEPScraperConfig | None): Optional scraper configuration overrides.
         tracker (QueryProgressTracker | None): Optional progress tracker for attempts.
+        include_missing_birth_date (bool): Whether to run the expensive
+            no-birth-date window before decade windows.
 
     Returns:
         list[dict[str, str]]: Aggregated records across all attempted windows.
@@ -998,18 +1005,19 @@ def decade_loop(
     all_results: list[dict[str, str]] = []
     active_config = config or PEPScraperConfig()
 
-    # Search for those without a date of birth.
-    results = attempt_period(
-        country,
-        query,
-        0,
-        0,
-        config=active_config,
-        collected_ids=collected_ids,
-        tracker=tracker,
-    )
-    if results is not None:
-        all_results.extend(results)
+    # Search for those without a date of birth only when explicitly requested.
+    if include_missing_birth_date:
+        results = attempt_period(
+            country,
+            query,
+            0,
+            0,
+            config=active_config,
+            collected_ids=collected_ids,
+            tracker=tracker,
+        )
+        if results is not None:
+            all_results.extend(results)
         
     # Loop over each decade, with retries using smaller ranges if needed
     for decade in range(start_decade, end_decade + 1, 10):
@@ -1249,7 +1257,11 @@ def _execute_person_queries(
 
     """
     results: list[dict[str, str]] = []
-    parallel_batch_size = 10
+    person_ids = list(dict.fromkeys(collected_ids))
+    if base_query == ALIAS_POLITICIANS_QUERY:
+        return _execute_alias_queries(config, person_ids, tracker)
+
+    parallel_batch_size = 5
 
     def run_single_person_query(person_id: str) -> tuple[str, list[dict[str, str]], float, Exception | None]:
         attempt_start = perf_counter()
@@ -1271,8 +1283,8 @@ def _execute_person_queries(
         duration = perf_counter() - attempt_start
         return person_id, individual_results, duration, None
 
-    for batch_start in range(0, len(collected_ids), parallel_batch_size):
-        batch_ids = collected_ids[batch_start : batch_start + parallel_batch_size]
+    for batch_start in range(0, len(person_ids), parallel_batch_size):
+        batch_ids = person_ids[batch_start : batch_start + parallel_batch_size]
         with ThreadPoolExecutor(max_workers=len(batch_ids)) as executor:
             futures = [executor.submit(run_single_person_query, person_id) for person_id in batch_ids]
             for future in as_completed(futures):
@@ -1284,6 +1296,166 @@ def _execute_person_queries(
                     continue
                 if individual_results:
                     results.extend(individual_results)
+        next_batch_start = batch_start + parallel_batch_size
+        if config.pause_s > 0 and next_batch_start < len(person_ids):
+            sleep(config.pause_s)
+    return results
+
+
+def _enrich_main_results(
+    main_results: list[dict[str, str]],
+    config: PEPScraperConfig,
+) -> list[dict[str, str]]:
+    """Add Main sheet detail fields using simple QLever-friendly batch queries.
+
+    Args:
+        main_results (list[dict[str, str]]): Main discovery rows.
+        config (PEPScraperConfig): Active scraper configuration values.
+
+    Returns:
+        list[dict[str, str]]: Original rows plus detail rows for aggregation.
+
+    """
+    person_ids = list(dict.fromkeys(qid for row in main_results if (qid := extract_qid(row))))
+    if not person_ids:
+        return main_results
+
+    enrichment_results: list[dict[str, str]] = []
+    enrichment_batch_size = 50
+    query_specs = [
+        ("genderLabel", '?person wdt:P21 ?value . ?value rdfs:label ?genderLabel . FILTER (LANG(?genderLabel) = "en")'),
+        (
+            "birthPlaceLabel",
+            '?person wdt:P19 ?value . ?value rdfs:label ?birthPlaceLabel . FILTER (LANG(?birthPlaceLabel) = "en")',
+        ),
+        ("fatherLabel", '?person wdt:P22 ?value . ?value rdfs:label ?fatherLabel . FILTER (LANG(?fatherLabel) = "en")'),
+        (
+            "educatedAtLabel",
+            '?person wdt:P69 ?value . ?value rdfs:label ?educatedAtLabel . FILTER (LANG(?educatedAtLabel) = "en")',
+        ),
+        (
+            "academicDegreeLabel",
+            '?person wdt:P512 ?value . ?value rdfs:label ?academicDegreeLabel . FILTER (LANG(?academicDegreeLabel) = "en")',
+        ),
+        (
+            "workLocationLabel",
+            '?person wdt:P937 ?value . ?value rdfs:label ?workLocationLabel . FILTER (LANG(?workLocationLabel) = "en")',
+        ),
+        ("ownerOfLabel", '?person wdt:P1830 ?value . ?value rdfs:label ?ownerOfLabel . FILTER (LANG(?ownerOfLabel) = "en")'),
+        ("affiliationString", "?person wdt:P6424 ?affiliationString ."),
+        (
+            "nonEnglishLabel",
+            '?person rdfs:label ?nonEnglishLabel . FILTER (LANG(?nonEnglishLabel) != "en" && LANG(?nonEnglishLabel) != "")',
+        ),
+    ]
+
+    for batch_start in range(0, len(person_ids), enrichment_batch_size):
+        batch_ids = person_ids[batch_start : batch_start + enrichment_batch_size]
+        values = " ".join(f"wd:{person_id}" for person_id in batch_ids)
+        if not values:
+            continue
+
+        for variable_name, pattern in query_specs:
+            query = f"""
+SELECT DISTINCT
+  (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
+  ?{variable_name}
+WHERE {{
+  VALUES ?person {{ {values} }}
+  {pattern}
+}}
+"""
+            try:
+                sparql_results = query_sparql_endpoint_with_retry(
+                    endpoint_url=WDQS_ENDPOINT,
+                    query=query,
+                    return_format="json",
+                    timeout=config.timeout,
+                    user_agent=DEFAULT_USER_AGENT,
+                )
+            except Exception as exc:  # noqa: BLE001 # Keep Main export useful if one enrichment field fails
+                logger.warning("Main enrichment failed for %s: %s", variable_name, str(exc))
+                continue
+
+            enrichment_results.extend(extract_bindings(sparql_results))
+
+        next_batch_start = batch_start + enrichment_batch_size
+        if config.pause_s > 0 and next_batch_start < len(person_ids):
+            sleep(config.pause_s)
+
+    return [*main_results, *enrichment_results]
+
+
+def _execute_alias_queries(
+    config: PEPScraperConfig,
+    person_ids: list[str],
+    tracker: QueryProgressTracker | None,
+) -> list[dict[str, str]]:
+    """Fetch Alias sheet fields with simple property-batch queries.
+
+    Args:
+        config (PEPScraperConfig): Active scraper configuration values.
+        person_ids (list[str]): QIDs to include in the alias lookup.
+        tracker (QueryProgressTracker | None): Optional progress tracker.
+
+    Returns:
+        list[dict[str, str]]: Combined alias rows for the provided people.
+
+    """
+    results: list[dict[str, str]] = []
+    alias_batch_size = 50
+    query_specs = [
+        ("AKA", "?person schema:alternateName ?AKA ."),
+        ("AKA", "?person skos:altLabel ?AKA ."),
+        ("nativeName", "?person wdt:P1559 ?nativeName ."),
+        ("birthName", "?person wdt:P1477 ?birthName ."),
+        (
+            "nonEnglishLabel",
+            '?person rdfs:label ?nonEnglishLabel . FILTER (LANG(?nonEnglishLabel) != "en" && LANG(?nonEnglishLabel) != "")',
+        ),
+    ]
+
+    for batch_start in range(0, len(person_ids), alias_batch_size):
+        batch_ids = person_ids[batch_start : batch_start + alias_batch_size]
+        values = " ".join(f"wd:{person_id}" for person_id in batch_ids)
+        if not values:
+            continue
+
+        for variable_name, pattern in query_specs:
+            query = f"""
+SELECT DISTINCT
+  (STRAFTER(STR(?person), "http://www.wikidata.org/entity/") AS ?ID)
+  ?{variable_name}
+WHERE {{
+  VALUES ?person {{ {values} }}
+  {pattern}
+}}
+"""
+            attempt_start = perf_counter()
+            try:
+                sparql_results = query_sparql_endpoint_with_retry(
+                    endpoint_url=WDQS_ENDPOINT,
+                    query=query,
+                    return_format="json",
+                    timeout=config.timeout,
+                    user_agent=DEFAULT_USER_AGENT,
+                )
+            except Exception as exc:  # noqa: BLE001 # Keep alias scrape resilient if one property fails
+                duration = perf_counter() - attempt_start
+                if tracker is not None:
+                    tracker.record_attempt(duration)
+                logger.warning("Alias query failed for %s: %s", variable_name, str(exc))
+                continue
+
+            duration = perf_counter() - attempt_start
+            if tracker is not None:
+                tracker.record_attempt(duration)
+            results.extend(extract_bindings(sparql_results))
+
+        next_batch_start = batch_start + alias_batch_size
+        if config.pause_s > 0 and next_batch_start < len(person_ids):
+            sleep(config.pause_s)
+
     return results
 
 def attempt_period(
@@ -1372,8 +1544,8 @@ def main_query_format(
         if "date_filter" in base_query:
             query = base_query.replace(
                 "date_filter",
-                f'FILTER ("{start_year}-01-01"^^xsd:dateTime <= ?birthDate && '
-                f'?birthDate < "{end_year}-01-01"^^xsd:dateTime).',
+                f'FILTER ("{start_year}-01-01T00:00:00Z"^^xsd:dateTime <= ?birthDate && '
+                f'?birthDate < "{end_year}-01-01T00:00:00Z"^^xsd:dateTime).',
             ).replace("nationality_qid", country_id)
         else:
             query = base_query.replace("nationality_qid", country_id)

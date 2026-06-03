@@ -5,13 +5,59 @@ and core exception classes for the sparql_utils package.
 """
 
 import logging
+import re
 import time
 from pathlib import Path
 from typing import Any
+#Changes
+# core.py ke TOP pe imports mein add karo
+# import os
+# import requests
+# from dotenv import load_dotenv
+# load_dotenv()
 
 from SPARQLWrapper import CSV, JSON, TSV, XML, SPARQLWrapper
 
 logger = logging.getLogger(__name__)
+
+_QLEVER_WIKIDATA_ENDPOINT_MARKER = "qlever.cs.uni-freiburg.de/api/wikidata"
+_WIKIDATA_PREFIX_DECLARATIONS = {
+    "bd": "PREFIX bd: <http://www.bigdata.com/rdf#>",
+    "p": "PREFIX p: <http://www.wikidata.org/prop/>",
+    "pq": "PREFIX pq: <http://www.wikidata.org/prop/qualifier/>",
+    "ps": "PREFIX ps: <http://www.wikidata.org/prop/statement/>",
+    "rdfs": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
+    "schema": "PREFIX schema: <http://schema.org/>",
+    "skos": "PREFIX skos: <http://www.w3.org/2004/02/skos/core#>",
+    "wd": "PREFIX wd: <http://www.wikidata.org/entity/>",
+    "wdt": "PREFIX wdt: <http://www.wikidata.org/prop/direct/>",
+    "wikibase": "PREFIX wikibase: <http://wikiba.se/ontology#>",
+    "xsd": "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>",
+}
+
+
+def _prepare_query_for_endpoint(endpoint_url: str, query: str) -> str:
+    """Apply endpoint-specific query compatibility fixes before execution."""
+    if _QLEVER_WIKIDATA_ENDPOINT_MARKER not in endpoint_url:
+        return query
+
+    declared_prefixes = {
+        match.group(1).lower()
+        for match in re.finditer(
+            r"^\s*PREFIX\s+([A-Za-z][\w-]*):",
+            query,
+            flags=re.IGNORECASE | re.MULTILINE,
+        )
+    }
+    missing_declarations = [
+        declaration
+        for prefix, declaration in _WIKIDATA_PREFIX_DECLARATIONS.items()
+        if prefix not in declared_prefixes
+    ]
+    if not missing_declarations:
+        return query
+
+    return "\n".join(missing_declarations) + "\n\n" + query.lstrip()
 
 
 class SPARQLError(Exception):
@@ -293,6 +339,62 @@ def _handle_sparql_error(
     
     raise SPARQLError(error_info.message, endpoint_url, query) from exception
 
+# PROXY FUNCTION BY HASSAM NASIR
+# def _query_with_proxy(
+#     endpoint_url: str,
+#     query: str,
+#     user_agent: str | None,
+#     timeout: int | None,
+#     proxy_url: str,
+# ) -> dict:
+#     """
+#     Execute SPARQL query via HTTP directly using proxy.
+#     SPARQLWrapper does not support proxies natively — 
+#     this bypasses it using requests library.
+#     """
+#     headers = {
+#         "Accept": "application/sparql-results+json",
+#         "Content-Type": "application/x-www-form-urlencoded",
+#     }
+#     if user_agent:
+#         headers["User-Agent"] = user_agent
+
+#     proxies = {
+#         "http":  proxy_url,
+#         "https": proxy_url,
+#     }
+
+#     params = {"query": query, "format": "json"}
+
+#     logger.info("Executing SPARQL query via proxy")
+#     logger.debug("Proxy: %s", proxy_url[:40] + "...")  # partial log for security
+
+#     response = requests.post(
+#         endpoint_url,
+#         data=params,
+#         headers=headers,
+#         proxies=proxies,
+#         timeout=timeout or 60,
+#     )
+
+#     if response.status_code == 429:
+#         from urllib.error import HTTPError
+#         raise HTTPError(
+#             url=endpoint_url,
+#             code=429,
+#             msg=response.text[:200],
+#             hdrs=response.headers,  # type: ignore
+#             fp=None,
+#         )
+
+#     if response.status_code != 200:
+#         raise SPARQLError(
+#             f"HTTP {response.status_code}: {response.text[:200]}",
+#             endpoint_url,
+#             query,
+#         )
+
+#     return response.json()
 
 def query_sparql_endpoint(
     endpoint_url: str,
@@ -324,31 +426,56 @@ def query_sparql_endpoint(
     """
     # Validate return format
     format_mapping = _validate_return_format(return_format)
+    prepared_query = _prepare_query_for_endpoint(endpoint_url, query)
     
     start_time = time.time()
     try:
         # Set up the SPARQL wrapper
         sparql = _setup_sparql_wrapper(
-            endpoint_url, query, return_format, timeout, user_agent, format_mapping,
+            endpoint_url, prepared_query, return_format, timeout, user_agent, format_mapping,
         )
         
         # Execute the query with timing
         logger.info("Executing SPARQL query against %s", endpoint_url)
-        logger.debug("Query: %s", query)
+        logger.debug("Query: %s", prepared_query)
         logger.debug("User-Agent: %s", user_agent or "Default SPARQL User-Agent")
         
         # Execute query with enhanced error handling and raw response capture
         try:
             result = sparql.query().convert()
         except Exception as e:
-            _save_debug_info(e, endpoint_url, query)
+            _save_debug_info(e, endpoint_url, prepared_query)
             # Re-raise the original error
             raise
+#Hassam Change
+        # try:
+        #   # Proxy use karo agar set hai — Wikidata throttling bypass
+        #      proxy_url = os.getenv("my_http_proxy")
+    
+        #      if proxy_url:
+        # # Direct requests call with proxy — SPARQLWrapper bypass
+        #         result = _query_with_proxy(
+        #         endpoint_url=endpoint_url,
+        #         query=query,
+        #         user_agent=user_agent,
+        #         timeout=timeout,
+        #         proxy_url=proxy_url,
+        #                            )
+        #      else:
+        #        result = sparql.query().convert()
+        
+        # except Exception as e:
+        #        _save_debug_info(e, endpoint_url, query)
+
+        #        raise
+
+
+
         
     except Exception as e:  # noqa: BLE001  # Need broad exception handling for SPARQL errors
         elapsed_time = time.time() - start_time
         return _handle_sparql_error(
-            e, elapsed_time, endpoint_url, query, return_format,
+            e, elapsed_time, endpoint_url, prepared_query, return_format,
             timeout, user_agent, _disable_resilient_fallback,
         )
     else:

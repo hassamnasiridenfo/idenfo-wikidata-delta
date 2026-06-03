@@ -39,6 +39,7 @@ def delta_code(df, cursor, cnx,logger):
         name = row["Name"]
         logger.info(f"[DELTA] Processing record #{index}: '{name}'")
 
+        
         query_check = "SELECT main_id FROM main WHERE (name = %s) AND (father_name = %s) AND (gender = %s) AND (category = %s) AND (`desc` = %s) AND (source_list = %s) AND (list_category = %s) AND (list_type = %s) AND (img_tag = %s) AND (scraper_tag = %s) AND (date_exclusion = %s) AND (date_inclusion = %s) AND (deceased_dissolved_status = %s) AND (deceased_dissolved_date = %s) AND (reg_date = %s) AND (status = %s) AND (pob = %s)"
         values_check = (
             row["Name"],

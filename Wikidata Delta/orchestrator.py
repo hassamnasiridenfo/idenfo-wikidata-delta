@@ -405,6 +405,32 @@ def run_delta_for_country(
 
         logger.info('Inserted %d records for %s', len(cleaned_df), scraper_tag) 
 
+        send_emails(
+        EMAIL_FROM,
+        EMAIL_NAME,
+        EMAIL_TO,
+        EMAIL_CC,
+        SMTP_SERVER,
+        SMTP_PORT,
+        SMTP_USER,
+        SMTP_PASSWORD,
+        EMAIL_SUBJECT,
+        FILE_PATHS,
+    )
+        send_main_delta_logs(
+        EMAIL_FROM,
+        EMAIL_NAME,
+        EMAIL_TO,
+        DELTA_LOG_EMAIL_CC,
+        SMTP_SERVER,
+        SMTP_PORT,
+        SMTP_USER,
+        SMTP_PASSWORD,
+        LOG_EMAIL_SUBJECT,
+        ERROR_LOG_EMAIL_SUBJECT,
+        LOGS_DIR,
+    )
+
         return True 
 
     except Exception as e: 
@@ -414,7 +440,7 @@ def run_delta_for_country(
         return False 
 
   
-
+    
   
 
 # ── Manual entry point ──────────────────────────────────────────── 
@@ -432,34 +458,10 @@ if __name__ == '__main__':
         country=sys.argv[1], 
 
         raw_file_path=sys.argv[2] if len(sys.argv) > 2 else None, 
+        
+        
+
 
     ) 
 
-    send_emails(
-        EMAIL_FROM,
-        EMAIL_NAME,
-        EMAIL_TO,
-        EMAIL_CC,
-        SMTP_SERVER,
-        SMTP_PORT,
-        SMTP_USER,
-        SMTP_PASSWORD,
-        EMAIL_SUBJECT,
-        FILE_PATHS,
-    )
-    send_main_delta_logs(
-        EMAIL_FROM,
-        EMAIL_NAME,
-        EMAIL_TO,
-        DELTA_LOG_EMAIL_CC,
-        SMTP_SERVER,
-        SMTP_PORT,
-        SMTP_USER,
-        SMTP_PASSWORD,
-        LOG_EMAIL_SUBJECT,
-        ERROR_LOG_EMAIL_SUBJECT,
-        LOGS_DIR,
-    )
-
-    sys.exit(0 if success else 1) 
 

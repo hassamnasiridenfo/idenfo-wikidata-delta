@@ -1,6 +1,5 @@
 """Tests for the core SPARQL utilities."""
 import json
-from typing import Any, Dict
 from unittest.mock import Mock, patch, mock_open
 
 import pytest
@@ -19,6 +18,7 @@ from structured_scraping.sparql_utils.core import (
     _reconstruct_sparql_result,
     _try_resilient_fallback,
     _handle_sparql_error,
+    _prepare_query_for_endpoint,
 )
 
 
@@ -66,6 +66,23 @@ class TestQuerySparqlEndpoint:
         assert result == mock_result
         mock_sparql_wrapper.assert_called_once_with("http://example.com/sparql")
         mock_instance.setQuery.assert_called_once_with("SELECT * WHERE { ?s ?p ?o }")
+
+    @patch("structured_scraping.sparql_utils.core.SPARQLWrapper")
+    def test_qlever_wikidata_query_gets_prefixes(self, mock_sparql_wrapper: Mock) -> None:
+        """Test QLever Wikidata queries are sent with explicit prefixes."""
+        mock_instance = Mock()
+        mock_sparql_wrapper.return_value = mock_instance
+        mock_instance.query.return_value.convert.return_value = {}
+
+        query_sparql_endpoint(
+            endpoint_url="https://qlever.cs.uni-freiburg.de/api/wikidata",
+            query="SELECT * WHERE { ?person wdt:P31 wd:Q5 }",
+        )
+
+        sent_query = mock_instance.setQuery.call_args.args[0]
+        assert "PREFIX wd: <http://www.wikidata.org/entity/>" in sent_query
+        assert "PREFIX wdt: <http://www.wikidata.org/prop/direct/>" in sent_query
+        assert "SELECT * WHERE { ?person wdt:P31 wd:Q5 }" in sent_query
 
     @patch("structured_scraping.sparql_utils.core.SPARQLWrapper")
     def test_with_timeout_and_user_agent(self, mock_sparql_wrapper: Mock) -> None:
@@ -226,7 +243,7 @@ class TestCountResults:
 class TestCountSparqlQuery:
     """Test the count_sparql_query function."""
 
-    @patch("structured_scraping.sparql_utils.core.query_sparql_endpoint")
+    @patch("structured_scraping.sparql_utils.retry.query_sparql_endpoint")
     def test_successful_count(self, mock_query: Mock) -> None:
         """Test successful count query execution."""
         mock_query.return_value = {
@@ -248,7 +265,7 @@ class TestCountSparqlQuery:
             assert count == 42
             mock_convert.assert_called_once_with("SELECT * WHERE { ?s ?p ?o }")
 
-    @patch("structured_scraping.sparql_utils.core.query_sparql_endpoint")
+    @patch("structured_scraping.sparql_utils.retry.query_sparql_endpoint")
     def test_empty_count_result(self, mock_query: Mock) -> None:
         """Test count query with empty results."""
         mock_query.return_value = {"results": {"bindings": []}}
@@ -261,7 +278,7 @@ class TestCountSparqlQuery:
             
             assert count == 0
 
-    @patch("structured_scraping.sparql_utils.core.query_sparql_endpoint")
+    @patch("structured_scraping.sparql_utils.retry.query_sparql_endpoint")
     def test_invalid_count_result(self, mock_query: Mock) -> None:
         """Test count query with invalid result structure."""
         mock_query.return_value = {"results": {"bindings": [{"invalid": {"value": "test"}}]}}
@@ -311,6 +328,33 @@ class TestValidateReturnFormat:
         """Test that empty format raises ValueError."""
         with pytest.raises(ValueError, match="Unsupported return format"):
             _validate_return_format("")
+
+
+class TestPrepareQueryForEndpoint:
+    """Test endpoint-specific query preparation."""
+
+    def test_non_qlever_endpoint_is_unchanged(self) -> None:
+        """Test ordinary SPARQL endpoints receive the original query."""
+        query = "SELECT * WHERE { ?s ?p ?o }"
+
+        result = _prepare_query_for_endpoint("http://example.com/sparql", query)
+
+        assert result == query
+
+    def test_existing_prefixes_are_not_duplicated(self) -> None:
+        """Test missing Wikidata prefixes are added without duplicates."""
+        query = """
+        PREFIX wd: <http://www.wikidata.org/entity/>
+        SELECT * WHERE { ?person wdt:P31 wd:Q5 }
+        """
+
+        result = _prepare_query_for_endpoint(
+            "https://qlever.cs.uni-freiburg.de/api/wikidata",
+            query,
+        )
+
+        assert result.count("PREFIX wd:") == 1
+        assert "PREFIX wdt: <http://www.wikidata.org/prop/direct/>" in result
 
 
 class TestSetupSparqlWrapper:
