@@ -289,7 +289,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["om_gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2025-12-27"] * num_rows,
+            "Added On": ["2026-01-26"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -800,27 +800,34 @@ def get_aliases(
     nativeName_list = parse_list_entries(nativeName)
     nonEngLabel_list = []
     paren_pattern = r"\((.*?)\)"
+
+    # ── OLD nonEngLabel parsing (commented out — was only extracting index [0],
+    #    discarding all Arabic/Urdu/Bengali aliases after the first English entry)
+    # if nonEngLabel and not pd.isna(nonEngLabel):
+    #     if not isinstance(nonEngLabel, str):
+    #         nonEngLabel = str(nonEngLabel)
+    #     if nonEngLabel.startswith('["') and nonEngLabel.endswith('"]'):
+    #         try:
+    #             nonEngLabel = literal_eval(nonEngLabel)
+    #             if isinstance(nonEngLabel, (list, tuple)):
+    #                 nonEngLabel = nonEngLabel[0]   # ← bug: drops all but first entry
+    #         except (SyntaxError, ValueError):
+    #             nonEngLabel = nonEngLabel[2:-2]    # Remove [" and "]
+    #     if not isinstance(nonEngLabel, str):
+    #         nonEngLabel = str(nonEngLabel)
+    #     nonEngLabel = re.sub(paren_pattern, "", nonEngLabel).strip()
+    #     if ";" in nonEngLabel:
+    #         parts = [part.strip() for part in nonEngLabel.split(";") if part.strip()]
+    #         nonEngLabel_list.extend(parts)
+    #     else:
+    #         nonEngLabel_list.append(nonEngLabel)
+
+    # ── NEW nonEngLabel parsing ───────────────────────────────────────────────
+    # raw format: '["alias1"], ["Arabic alias"], ["Urdu alias"], ...'
+    # re.findall extracts EVERY entry individually — no Arabic/non-English loss
     if nonEngLabel and not pd.isna(nonEngLabel):
-        # Convert to string if not already
-        if not isinstance(nonEngLabel, str):
-            nonEngLabel = str(nonEngLabel)
-        if nonEngLabel.startswith('["') and nonEngLabel.endswith('"]'):
-            try:
-                nonEngLabel = literal_eval(nonEngLabel)
-                if isinstance(nonEngLabel, (list, tuple)):
-                    nonEngLabel = nonEngLabel[0]
-            except (SyntaxError, ValueError):
-                # If literal_eval fails, strip the brackets and quotes manually
-                nonEngLabel = nonEngLabel[2:-2]  # Remove [" and "]
-        # Ensure it's a string before regex operations
-        if not isinstance(nonEngLabel, str):
-            nonEngLabel = str(nonEngLabel)
-        nonEngLabel = re.sub(paren_pattern, "", nonEngLabel).strip()
-        if ";" in nonEngLabel:
-            parts = [part.strip() for part in nonEngLabel.split(";") if part.strip()]
-            nonEngLabel_list.extend(parts)
-        else:
-            nonEngLabel_list.append(nonEngLabel)
+        extracted = re.findall(r'\["([^"]+?)"\]', str(nonEngLabel))
+        nonEngLabel_list.extend([e.strip() for e in extracted if e.strip()])
 
     aka_list = [re.sub(paren_pattern, "", alias).strip() for alias in aka_list]
     complete_aliases = set()

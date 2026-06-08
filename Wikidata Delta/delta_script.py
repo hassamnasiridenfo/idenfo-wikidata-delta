@@ -39,8 +39,9 @@ def delta_code(df, cursor, cnx,logger):
         name = row["Name"]
         logger.info(f"[DELTA] Processing record #{index}: '{name}'")
 
-        
-        query_check = "SELECT main_id FROM main WHERE (name = %s) AND (father_name = %s) AND (gender = %s) AND (category = %s) AND (`desc` = %s) AND (source_list = %s) AND (list_category = %s) AND (list_type = %s) AND (img_tag = %s) AND (scraper_tag = %s) AND (date_exclusion = %s) AND (date_inclusion = %s) AND (deceased_dissolved_status = %s) AND (deceased_dissolved_date = %s) AND (reg_date = %s) AND (status = %s) AND (pob = %s)"
+        query_check = "SELECT main_id FROM main WHERE (name = %s) AND (father_name = %s) AND (gender = %s) AND (category = %s) AND (`desc` = %s) AND (source_list = %s) AND (list_category = %s) AND (list_type = %s)  AND (scraper_tag = %s) AND (date_exclusion = %s) AND (date_inclusion = %s) AND (deceased_dissolved_status = %s) AND (deceased_dissolved_date = %s) AND (reg_date = %s) AND (status = %s) AND (pob = %s)"
+
+        # query_check = "SELECT main_id FROM main WHERE (name = %s) AND (father_name = %s) AND (gender = %s) AND (category = %s) AND (`desc` = %s) AND (source_list = %s) AND (list_category = %s) AND (list_type = %s) AND (img_tag = %s) AND (scraper_tag = %s) AND (date_exclusion = %s) AND (date_inclusion = %s) AND (deceased_dissolved_status = %s) AND (deceased_dissolved_date = %s) AND (reg_date = %s) AND (status = %s) AND (pob = %s)"
         values_check = (
             row["Name"],
             row["Father Name"],
@@ -50,7 +51,7 @@ def delta_code(df, cursor, cnx,logger):
             row["Source List"],
             row["List Category"],
             row["List Type"],
-            row["Image Tag"],
+            # row["Image Tag"],
             row["Scraper Tag"],
             row["Date of Exclusion"],
             row["Date of Inclusion"],
@@ -74,7 +75,7 @@ def delta_code(df, cursor, cnx,logger):
                 "source_list":             row["Source List"],
                 "list_category":           row["List Category"],
                 "list_type":               row["List Type"],
-                "img_tag":                 row["Image Tag"],
+                # "img_tag":                 row["Image Tag"],
                 "scraper_tag":             row["Scraper Tag"],
                 "date_exclusion":          row["Date of Exclusion"],
                 "date_inclusion":          row["Date of Inclusion"],
@@ -112,7 +113,7 @@ def delta_code(df, cursor, cnx,logger):
                         "source_list":             db_row[4],
                         "list_category":           db_row[5],
                         "list_type":               db_row[6],
-                        "img_tag":                 db_row[7],
+                        # "img_tag":                 db_row[7],
                         "date_exclusion":          db_row[8],
                         "date_inclusion":          db_row[9],
                         "deceased_dissolved_status": db_row[10],

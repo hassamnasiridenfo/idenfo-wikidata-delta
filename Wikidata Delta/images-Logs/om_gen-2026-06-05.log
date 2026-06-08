@@ -1,0 +1,92 @@
+2026-06-05 20:01:03,274 - INFO - ============================================================
+2026-06-05 20:01:03,274 - INFO - START process_new_images | scraper_tag=om_gen | rows=36
+2026-06-05 20:01:03,274 - INFO - Local image folder: /home/idenfo-ns-hassam/idenfo-wikidata-delta/Wikidata Delta/om_gen_excels/om_gen
+2026-06-05 20:01:03,915 - INFO - [IMAGE] S3 folder already exists: namescreening-images/om_gen/
+2026-06-05 20:01:04,016 - INFO - DOWNLOAD | OM-GEN-I-52 | https://upload.wikimedia.org/wikipedia/commons/e/e2/Lujaina_Mohsin.jpg
+2026-06-05 20:01:12,135 - INFO - DOWNLOAD OK | OM-GEN-I-52 | took 5.12s (delay=3.00s)
+2026-06-05 20:01:12,135 - INFO - UPLOAD   | om_gen/OM-GEN-I-52.jpg
+2026-06-05 20:01:18,539 - INFO - UPLOAD OK | om_gen/OM-GEN-I-52.jpg
+2026-06-05 20:01:18,741 - INFO - DOWNLOAD | OM-GEN-I-62 | https://upload.wikimedia.org/wikipedia/commons/b/b8/Dr-Rahma-bint-Ibrahim-bin-Said-Almahrouqiyah-200x273.jpg
+2026-06-05 20:01:21,918 - INFO - DOWNLOAD OK | OM-GEN-I-62 | took 0.68s (delay=2.50s)
+2026-06-05 20:01:21,918 - INFO - UPLOAD   | om_gen/OM-GEN-I-62.jpg
+2026-06-05 20:01:22,199 - INFO - UPLOAD OK | om_gen/OM-GEN-I-62.jpg
+2026-06-05 20:01:22,297 - INFO - DOWNLOAD | OM-GEN-I-63 | https://upload.wikimedia.org/wikipedia/commons/3/37/Qais_Mohammed_Al_Yousef_of_Oman_in_2024_(cropped).jpg
+2026-06-05 20:01:24,884 - INFO - DOWNLOAD OK | OM-GEN-I-63 | took 0.59s (delay=2.00s)
+2026-06-05 20:01:24,884 - INFO - UPLOAD   | om_gen/OM-GEN-I-63.jpg
+2026-06-05 20:01:25,165 - INFO - UPLOAD OK | om_gen/OM-GEN-I-63.jpg
+2026-06-05 20:01:25,275 - INFO - DOWNLOAD | OM-GEN-I-64 | https://upload.wikimedia.org/wikipedia/commons/5/54/Salim_bin_Nasser_Al_Aufi,_Omani_Minister_for_Energy_and_Minerals_-_2025_(cropped).jpg
+2026-06-05 20:01:28,107 - INFO - DOWNLOAD OK | OM-GEN-I-64 | took 1.33s (delay=1.50s)
+2026-06-05 20:01:28,107 - INFO - UPLOAD   | om_gen/OM-GEN-I-64.jpg
+2026-06-05 20:01:28,391 - INFO - UPLOAD OK | om_gen/OM-GEN-I-64.jpg
+2026-06-05 20:01:28,485 - INFO - DOWNLOAD | OM-GEN-I-65 | https://upload.wikimedia.org/wikipedia/commons/5/5e/Salim-bin-Mohammed-bin-Said-Almahrouqi-200x273.jpg
+2026-06-05 20:01:29,758 - INFO - DOWNLOAD OK | OM-GEN-I-65 | took 0.27s (delay=1.00s)
+2026-06-05 20:01:29,758 - INFO - UPLOAD   | om_gen/OM-GEN-I-65.jpg
+2026-06-05 20:01:29,949 - INFO - UPLOAD OK | om_gen/OM-GEN-I-65.jpg
+2026-06-05 20:01:30,042 - INFO - DOWNLOAD | OM-GEN-I-72 | https://upload.wikimedia.org/wikipedia/commons/c/ce/Haitham_bin_Tariq_Al_Said.jpg
+2026-06-05 20:01:31,322 - INFO - DOWNLOAD OK | OM-GEN-I-72 | took 0.78s (delay=0.50s)
+2026-06-05 20:01:31,322 - INFO - UPLOAD   | om_gen/OM-GEN-I-72.jpg
+2026-06-05 20:01:31,616 - INFO - UPLOAD OK | om_gen/OM-GEN-I-72.jpg
+2026-06-05 20:01:31,710 - INFO - DOWNLOAD | OM-GEN-I-73 | https://upload.wikimedia.org/wikipedia/commons/0/02/Abdullah_Khamis_Al_Raisi_(2023)_(cropped).jpg
+2026-06-05 20:01:36,348 - INFO - DOWNLOAD OK | OM-GEN-I-73 | took 4.14s (delay=0.50s)
+2026-06-05 20:01:36,348 - INFO - UPLOAD   | om_gen/OM-GEN-I-73.jpg
+2026-06-05 20:01:36,621 - INFO - UPLOAD OK | om_gen/OM-GEN-I-73.jpg
+2026-06-05 20:01:36,714 - INFO - DOWNLOAD | OM-GEN-I-77 | https://upload.wikimedia.org/wikipedia/commons/6/67/26-11-2013_Ministra_da_educação_do_Sultanato_de_Omã,_Madeeha_bint_Ahmed_al_Shivaniyia_é_recebida_pelo_vice-presidente_Michel_Temer_-_11067460114.jpg
+2026-06-05 20:01:40,529 - INFO - DOWNLOAD OK | OM-GEN-I-77 | took 3.31s (delay=0.50s)
+2026-06-05 20:01:40,529 - INFO - UPLOAD   | om_gen/OM-GEN-I-77.jpg
+2026-06-05 20:01:40,800 - INFO - UPLOAD OK | om_gen/OM-GEN-I-77.jpg
+2026-06-05 20:01:40,889 - INFO - DOWNLOAD | OM-GEN-I-78 | https://upload.wikimedia.org/wikipedia/commons/e/e1/Dr-Abdullah-bin-Mohammed-bin-Said-Alsaeedi-200x273.jpg
+2026-06-05 20:01:41,663 - INFO - DOWNLOAD OK | OM-GEN-I-78 | took 0.27s (delay=0.50s)
+2026-06-05 20:01:41,663 - INFO - UPLOAD   | om_gen/OM-GEN-I-78.jpg
+2026-06-05 20:01:41,851 - INFO - UPLOAD OK | om_gen/OM-GEN-I-78.jpg
+2026-06-05 20:01:41,942 - INFO - DOWNLOAD | OM-GEN-I-79 | https://upload.wikimedia.org/wikipedia/commons/7/72/Minister_Responsible_for_Foreign_Affairs,_Sultanate_of_Oman_(8657089041)_(cropped).jpg
+2026-06-05 20:01:42,965 - INFO - DOWNLOAD OK | OM-GEN-I-79 | took 0.52s (delay=0.50s)
+2026-06-05 20:01:42,965 - INFO - UPLOAD   | om_gen/OM-GEN-I-79.jpg
+2026-06-05 20:01:43,244 - INFO - UPLOAD OK | om_gen/OM-GEN-I-79.jpg
+2026-06-05 20:01:43,337 - INFO - DOWNLOAD | OM-GEN-I-80 | https://upload.wikimedia.org/wikipedia/commons/4/44/Asa'ad_bin_Tariq_Al_Said_at_the_Enthronement_of_Naruhito_(1).jpg
+2026-06-05 20:01:44,402 - INFO - DOWNLOAD OK | OM-GEN-I-80 | took 0.57s (delay=0.50s)
+2026-06-05 20:01:44,402 - INFO - UPLOAD   | om_gen/OM-GEN-I-80.jpg
+2026-06-05 20:01:44,679 - INFO - UPLOAD OK | om_gen/OM-GEN-I-80.jpg
+2026-06-05 20:01:44,773 - INFO - DOWNLOAD | OM-GEN-I-82 | https://upload.wikimedia.org/wikipedia/commons/9/99/Shihab_bin_Tariq_Al_Said_2008.jpg
+2026-06-05 20:01:46,215 - INFO - DOWNLOAD OK | OM-GEN-I-82 | took 0.94s (delay=0.50s)
+2026-06-05 20:01:46,215 - INFO - UPLOAD   | om_gen/OM-GEN-I-82.jpg
+2026-06-05 20:01:46,494 - INFO - UPLOAD OK | om_gen/OM-GEN-I-82.jpg
+2026-06-05 20:01:46,598 - INFO - DOWNLOAD | OM-GEN-I-83 | https://upload.wikimedia.org/wikipedia/commons/8/82/Dr_Hilal_bin_Ali_Al_Sabti.png
+2026-06-05 20:01:50,223 - INFO - DOWNLOAD OK | OM-GEN-I-83 | took 3.12s (delay=0.50s)
+2026-06-05 20:01:50,223 - INFO - UPLOAD   | om_gen/OM-GEN-I-83.jpg
+2026-06-05 20:01:50,414 - INFO - UPLOAD OK | om_gen/OM-GEN-I-83.jpg
+2026-06-05 20:01:50,507 - INFO - DOWNLOAD | OM-GEN-I-85 | https://upload.wikimedia.org/wikipedia/commons/e/e4/UK-Oman_Joint_Working_Group_(10154028623)_(cropped).jpg
+2026-06-05 20:01:51,768 - INFO - DOWNLOAD OK | OM-GEN-I-85 | took 0.76s (delay=0.50s)
+2026-06-05 20:01:51,768 - INFO - UPLOAD   | om_gen/OM-GEN-I-85.jpg
+2026-06-05 20:01:52,045 - INFO - UPLOAD OK | om_gen/OM-GEN-I-85.jpg
+2026-06-05 20:01:52,045 - INFO - DONE process_new_images | uploaded=14 copied=0 skipped=0 failed=0 final_delay=0.5s
+2026-06-05 20:01:52,046 - INFO - ============================================================
+2026-06-05 20:02:06,203 - INFO - ============================================================
+2026-06-05 20:02:06,203 - INFO - START delete_inactive_images | scraper_tag=om_gen
+2026-06-05 20:02:07,907 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-3.jpg
+2026-06-05 20:02:08,017 - INFO - DELETE OK | om_gen/OM-GEN-I-3.jpg
+2026-06-05 20:02:08,119 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-16.jpg
+2026-06-05 20:02:08,225 - INFO - DELETE OK | om_gen/OM-GEN-I-16.jpg
+2026-06-05 20:02:08,318 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-17.jpg
+2026-06-05 20:02:08,423 - INFO - DELETE OK | om_gen/OM-GEN-I-17.jpg
+2026-06-05 20:02:08,539 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-18.jpg
+2026-06-05 20:02:08,644 - INFO - DELETE OK | om_gen/OM-GEN-I-18.jpg
+2026-06-05 20:02:08,897 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-19.jpg
+2026-06-05 20:02:08,998 - INFO - DELETE OK | om_gen/OM-GEN-I-19.jpg
+2026-06-05 20:02:09,094 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-29.jpg
+2026-06-05 20:02:09,535 - INFO - DELETE OK | om_gen/OM-GEN-I-29.jpg
+2026-06-05 20:02:09,631 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-30.jpg
+2026-06-05 20:02:09,742 - INFO - DELETE OK | om_gen/OM-GEN-I-30.jpg
+2026-06-05 20:02:09,910 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-38.jpg
+2026-06-05 20:02:10,412 - INFO - DELETE OK | om_gen/OM-GEN-I-38.jpg
+2026-06-05 20:02:10,556 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-39.jpg
+2026-06-05 20:02:10,668 - INFO - DELETE OK | om_gen/OM-GEN-I-39.jpg
+2026-06-05 20:02:10,769 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-40.jpg
+2026-06-05 20:02:10,886 - INFO - DELETE OK | om_gen/OM-GEN-I-40.jpg
+2026-06-05 20:02:10,989 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-42.jpg
+2026-06-05 20:02:11,094 - INFO - DELETE OK | om_gen/OM-GEN-I-42.jpg
+2026-06-05 20:02:11,188 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-47.jpg
+2026-06-05 20:02:11,293 - INFO - DELETE OK | om_gen/OM-GEN-I-47.jpg
+2026-06-05 20:02:11,391 - INFO - DELETE   | status=0 | om_gen/OM-GEN-I-49.jpg
+2026-06-05 20:02:11,498 - INFO - DELETE OK | om_gen/OM-GEN-I-49.jpg
+2026-06-05 20:02:11,501 - INFO - DONE delete_inactive_images | deleted=13 not_found=0
+2026-06-05 20:02:11,502 - INFO - ============================================================

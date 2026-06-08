@@ -2,6 +2,10 @@ import pandas as pd
 import json
 import datetime
 import os
+import logging
+
+_log = logging.getLogger(__name__)
+
 
 
 def delta_excel_df_creator(log_file, cursor_dict, cnx_dict):
@@ -151,6 +155,14 @@ def delta_excel_df_creator(log_file, cursor_dict, cnx_dict):
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     output_dir = os.path.join(BASE_DIR, f"{log_file}_excels")
     os.makedirs(output_dir, exist_ok=True)
+
+
+    # ── S3: delete images for status=0 records ─────────────────────
+    try:
+        from image_handler import delete_inactive_images
+        delete_inactive_images(df2, log_file, _log)
+    except Exception as _img_exc:
+        _log.warning('[IMAGE] delete_inactive_images failed: %s', _img_exc)
 
     df2.to_excel(os.path.join(output_dir, f"{log_file}_DELTA_{updated_on}.xlsx"),index=False
 )

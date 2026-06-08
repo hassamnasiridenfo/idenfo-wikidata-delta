@@ -385,19 +385,33 @@ def run_delta_for_country(
 
   
 
-    # ── Step 5: Insertion ────────────────────────────────────────── 
 
-    try: 
 
-        from new_df_cleaner import new_df_cleaner 
+    # ── Step 5: Insertion ──────────────────────────────────────────
 
-        from insertion_script import insertion_code 
+    try:
 
-        from delta_records_excel import delta_excel_df_creator 
+        from new_df_cleaner import new_df_cleaner
 
-        cleaned_df = new_df_cleaner(new_df, cursor, cnx) 
+        from insertion_script import insertion_code
 
-        insertion_code(cleaned_df, cursor, cnx, scraper_tag) 
+        from delta_records_excel import delta_excel_df_creator
+
+        cleaned_df = new_df_cleaner(new_df, cursor, cnx)
+
+        # ── Step 4.5: Image download & S3 upload ─────────────────────
+        # Must run AFTER new_df_cleaner so process_new_images uses the
+        # final reassigned IDs (e.g. OM-GEN-I-52) not the scrapper's
+        # temporary IDs (e.g. OM-GEN-I-3). This ensures S3 key and
+        # Image Tag both use the correct final ID before DB insertion.
+        try:
+            from image_handler import process_new_images
+            cleaned_df = process_new_images(cleaned_df, scraper_tag, logger)
+            logger.info('[IMAGE] Image processing complete for new records')
+        except Exception as e:
+            logger.error('image_handler.process_new_images failed: %s', e, exc_info=True)
+
+        insertion_code(cleaned_df, cursor, cnx, scraper_tag)
 
         cnx_dict, cursor_dict = create_mysql_connection_dictionary(HOST, USER, PWD, DB, PORT) 
 
