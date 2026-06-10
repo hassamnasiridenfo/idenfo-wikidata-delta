@@ -377,11 +377,45 @@ def run_delta_for_country(
 
   
 
-    if new_df.empty: 
+    if new_df.empty:
 
-        logger.info('No new records for %s — DB is up to date', scraper_tag) 
+        logger.info('No new records for %s — DB is up to date', scraper_tag)
 
-        return True 
+        # Changed By Hassam Nasir
+        # Previously this branch returned True immediately, so when delta=0 NO email
+        # was sent. send_emails() already handles the empty case (sends "No Delta Found"
+        # since no _DELTA_<date>.xlsx exists), but it was never called here.
+        # Now send the "No Delta Found" email + the log file email on 0-delta runs too.
+        try:
+            send_emails(
+                EMAIL_FROM,
+                EMAIL_NAME,
+                EMAIL_TO,
+                EMAIL_CC,
+                SMTP_SERVER,
+                SMTP_PORT,
+                SMTP_USER,
+                SMTP_PASSWORD,
+                EMAIL_SUBJECT,
+                FILE_PATHS,
+            )
+            send_main_delta_logs(
+                EMAIL_FROM,
+                EMAIL_NAME,
+                EMAIL_TO,
+                DELTA_LOG_EMAIL_CC,
+                SMTP_SERVER,
+                SMTP_PORT,
+                SMTP_USER,
+                SMTP_PASSWORD,
+                LOG_EMAIL_SUBJECT,
+                ERROR_LOG_EMAIL_SUBJECT,
+                LOGS_DIR,
+            )
+        except Exception as e:
+            logger.error('Failed to send No-Delta email for %s: %s', scraper_tag, e, exc_info=True)
+
+        return True
 
   
 
@@ -413,7 +447,18 @@ def run_delta_for_country(
 
         insertion_code(cleaned_df, cursor, cnx, scraper_tag)
 
-        cnx_dict, cursor_dict = create_mysql_connection_dictionary(HOST, USER, PWD, DB, PORT) 
+        cnx_dict, cursor_dict = create_mysql_connection_dictionary(HOST, USER, PWD, DB, PORT)
+
+        # ── Step 4.6: Retry any pending images in DB ──────────────────
+        # Catches records where process_new_images failed (429 exhausted)
+        # AND old records from previous weekly runs still stuck with a URL.
+        # Uses cursor_dict so row['customer_id'] / row['img_tag'] work.
+        try:
+            from image_handler import process_pending_db_images
+            process_pending_db_images(scraper_tag, cursor_dict, cnx_dict, logger)
+            logger.info('[IMAGE] Pending image retry complete')
+        except Exception as e:
+            logger.error('image_handler.process_pending_db_images failed: %s', e, exc_info=True)
 
         delta_excel_df_creator(scraper_tag, cursor_dict, cnx_dict) 
 

@@ -39,7 +39,9 @@ def send_emails(email_from, email_name, email_to, email_cc, smtp_server, smtp_po
                     df = pd.read_excel(file_path)
 
                     unique_scraper_tags = ", ".join(map(str, df['Scraper Tag'].dropna().unique())) if 'Scraper Tag' in df.columns else "N/A"
+                    unique_list_name = ", ".join(map(str, df['Category'].dropna().unique())) if 'Category' in df.columns else "N/A"
                     unique_source_lists = ", ".join(map(str, df['Source List'].dropna().unique())) if 'Source List' in df.columns else "N/A"
+                    unique_list_categories = ", ".join(map(str, df['List Category'].dropna().unique())) if 'List Category' in df.columns else "N/A" 
                     total_records = len(df)
 
                     row_color = "#ffffff" if counter % 2 != 0 else "#f9f9f9"
@@ -48,7 +50,9 @@ def send_emails(email_from, email_name, email_to, email_cc, smtp_server, smtp_po
                         <tr style="background-color: {row_color};">
                             <td>{counter}</td>
                             <td>{unique_scraper_tags}</td>
+                            <td>{unique_list_name}</td>
                             <td>{unique_source_lists}</td>
+                            <td>{unique_list_categories}</td>
                             <td style="text-align: right;">{total_records}</td>
                         </tr>
                     """)
@@ -57,8 +61,8 @@ def send_emails(email_from, email_name, email_to, email_cc, smtp_server, smtp_po
                     table_rows.append(f"""
                         <tr style="background-color: #ffe6e6;">
                             <td>{counter}</td>
-                            <td colspan="3">Could not read file '{file}': {e}</td>
-                        </tr>
+                            <td colspan="4">Could not read file '{file}': {e}</td>
+                        </tr>   
                     """)
                     counter += 1
 
@@ -71,7 +75,9 @@ def send_emails(email_from, email_name, email_to, email_cc, smtp_server, smtp_po
             <tr style="background-color: #f2f2f2; font-weight: bold;">
                 <th>#</th>
                 <th>Scraper Tags</th>
+                <th>List Name</th>
                 <th>Source Lists</th>
+                <th>List Category</th>
                 <th>Total Records</th>
             </tr>
             {''.join(table_rows)}

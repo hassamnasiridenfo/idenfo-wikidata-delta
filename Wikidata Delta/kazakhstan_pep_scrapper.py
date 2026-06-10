@@ -727,17 +727,26 @@ def get_aliases(
     )
     nonEngLabel_list = []
     paren_pattern = r"\((.*?)\)"
+    # ── OLD nonEngLabel parsing (commented out — was only extracting index [0],
+    #    discarding all Arabic/Urdu/Bengali aliases after the first English entry)
+    # if nonEngLabel and not pd.isna(nonEngLabel):
+    #     if nonEngLabel.startswith('["') and nonEngLabel.endswith('"]'):
+    #         nonEngLabel = literal_eval(nonEngLabel)
+    #         if isinstance(nonEngLabel, list):
+    #             nonEngLabel = nonEngLabel[0]
+    #     nonEngLabel = re.sub(paren_pattern, "", nonEngLabel).strip()
+    #     if ";" in nonEngLabel:
+    #         parts = [part.strip() for part in nonEngLabel.split(";") if part.strip()]
+    #         nonEngLabel_list.extend(parts)
+    #     else:
+    #         nonEngLabel_list.append(nonEngLabel)
+
+    # ── NEW nonEngLabel parsing ───────────────────────────────────────────────
+    # raw format: '["alias1"], ["Arabic alias"], ["Urdu alias"], ...'
+    # re.findall extracts EVERY entry individually — no Arabic/non-English loss
     if nonEngLabel and not pd.isna(nonEngLabel):
-        if nonEngLabel.startswith('["') and nonEngLabel.endswith('"]'):
-            nonEngLabel = literal_eval(nonEngLabel)
-            if isinstance(nonEngLabel, list):
-                nonEngLabel = nonEngLabel[0]
-        nonEngLabel = re.sub(paren_pattern, "", nonEngLabel).strip()
-        if ";" in nonEngLabel:
-            parts = [part.strip() for part in nonEngLabel.split(";") if part.strip()]
-            nonEngLabel_list.extend(parts)
-        else:
-            nonEngLabel_list.append(nonEngLabel)
+        extracted = re.findall(r'\["([^"]+?)"\]', str(nonEngLabel))
+        nonEngLabel_list.extend([e.strip() for e in extracted if e.strip()])
 
     aka_list = [re.sub(paren_pattern, "", alias).strip() for alias in aka_list]
     complete_aliases = set()

@@ -7,6 +7,7 @@ import requests
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
 from PIL import Image
+from urllib.parse import quote, unquote, urlparse, urlunparse
 
 load_dotenv()
 
@@ -18,10 +19,18 @@ s3_client = boto3.client(
     aws_secret_access_key = os.getenv('aws_secret_access_key'),
 )
 
-TARGET_PX    = 500   # resize longest side to this many pixels
-TOTAL_DELAY  = 3.0   # starting delay between requests (seconds)
-MIN_DELAY    = 0.5   # floor — never go below this
-DELAY_STEP   = 0.5   # reduce delay by this much after each success
+TARGET_PX           = 500   # resize longest side to this many pixels
+TOTAL_DELAY         = float(os.getenv('image_total_delay', '0.0'))
+MIN_DELAY           = float(os.getenv('image_min_delay', '0.5'))
+DELAY_STEP          = float(os.getenv('image_delay_step', '0.5'))
+# Changed By Hassam Nasir
+# MAX_DELAY         = float(os.getenv('image_max_delay', '30.0'))  # old: climbed to 30s
+MAX_DELAY           = float(os.getenv('image_max_delay', '10.0'))  # hard cap 10s — never exceed
+MAX_RATE_LIMIT_WAIT = float(os.getenv('image_max_rate_limit_wait', '10'))
+RECOVERY_FLOOR_429  = float(os.getenv('image_recovery_floor_429', '8.5'))
+DOWNLOAD_RETRIES    = int(os.getenv('image_download_retries', '2'))
+MAX_429_RETRY_ROUNDS = int(os.getenv('image_max_429_retry_rounds', '10'))
+PENDING_START_DELAY = float(os.getenv('image_pending_start_delay', str(RECOVERY_FLOOR_429)))
 
 _log = logging.getLogger('image_handler')
 
@@ -126,30 +135,134 @@ class TooManyRequestsError(Exception):
         super().__init__(f'429 Too Many Requests — retry after {retry_after}s')
 
 
+def _parse_retry_after(value) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return MAX_RATE_LIMIT_WAIT
+
+
+def _delay_after_429(current_delay: float, retry_after: float) -> float:
+    # Changed By Hassam Nasir
+    # OLD: climbed by +1 every 429 and floored at RECOVERY_FLOOR_429 → ran away to 30s
+    # wait_seconds = min(float(retry_after or MAX_RATE_LIMIT_WAIT), MAX_RATE_LIMIT_WAIT)
+    # return min(
+    #     max(current_delay + 1.0, wait_seconds, RECOVERY_FLOOR_429),
+    #     MAX_DELAY,
+    # )
+    # NEW: delay = exactly the server's Retry-After value, capped at MAX_DELAY (10s)
+    wait_seconds = min(float(retry_after or MAX_RATE_LIMIT_WAIT), MAX_RATE_LIMIT_WAIT)
+    return min(wait_seconds, MAX_DELAY)
+
+
+# ── Wikimedia thumbnail URL helpers ────────────────────────────────────────────
+
+def _normalize_url(url: str) -> str:
+    parsed = urlparse(url.strip())
+    path  = quote(unquote(parsed.path),  safe="/:%")
+    query = quote(unquote(parsed.query), safe="=&?/:+,%")
+    return urlunparse((parsed.scheme, parsed.netloc, path, parsed.params, query, parsed.fragment))
+
+
+def _wikimedia_thumbnail_url(url: str, width: int = TARGET_PX) -> str:
+    """Convert a Wikimedia Commons full-size URL to its 500px thumbnail equivalent."""
+    parsed     = urlparse(url.strip())
+    path_parts = parsed.path.split("/")
+    if parsed.netloc.lower() != "upload.wikimedia.org":
+        return url
+    if len(path_parts) < 6:
+        return url
+    if path_parts[1:3] != ["wikipedia", "commons"]:
+        return url
+    if path_parts[3] == "thumb":
+        return url     # already a thumbnail
+    filename           = path_parts[-1]
+    thumb_filename     = f"{width}px-{filename}"
+    if filename.lower().endswith(".svg"):
+        thumb_filename += ".png"
+    thumb_path = "/".join(path_parts[:3] + ["thumb"] + path_parts[3:] + [thumb_filename])
+    return urlunparse((parsed.scheme, parsed.netloc, thumb_path, parsed.params, parsed.query, parsed.fragment))
+
+
+def _download_url_candidates(url: str) -> list:
+    """Return [thumbnail_url, original_url] for Wikimedia, or [original_url] for others."""
+    original  = _normalize_url(url)
+    thumbnail = _normalize_url(_wikimedia_thumbnail_url(url, TARGET_PX))
+    if thumbnail != original:
+        return [thumbnail, original]
+    return [original]
+
+
 # ── Download + resize ───────────────────────────────────────────────────────────
 
-def _download_and_resize(url: str, save_path: str, delay: float) -> None:
+def _download_and_resize(url: str, save_path: str, delay: float, img_log=None) -> float:
+    """
+    Try Wikimedia thumbnail URL first, then original URL (on 400 only).
+    On 429: sleeps Retry-After and retries the same candidate up to
+            DOWNLOAD_RETRIES times; if all retries exhausted → raises
+            TooManyRequestsError immediately (does NOT fall through to
+            original URL — same IP rate limit applies to both).
+    On 400 for a thumbnail URL: skips to the original URL.
+    Other errors: raised immediately (no retry).
+
+    Returns max_retry_after (float):
+      0.0  → clean download, no 429 encountered at all
+      >0.0 → 429 was hit but eventually recovered; value = max Retry-After seen
+    Raises TooManyRequestsError when all candidates + all retries exhausted on 429.
+    """
     time.sleep(delay)
-    resp = requests.get(
-        url,
-        timeout=30,
-        headers={'User-Agent': 'Mozilla/5.0 (compatible; WikidataDelta/1.0)'},
-    )
 
-    if resp.status_code == 429:
-        retry_after = float(resp.headers.get('Retry-After', 10))
-        raise TooManyRequestsError(retry_after)
+    candidates        = _download_url_candidates(url)
+    original_url      = _normalize_url(url)
+    max_retry_after   = 0.0
 
-    resp.raise_for_status()
+    logger = img_log or _log   # write to image log file when available
 
-    img = Image.open(io.BytesIO(resp.content))
-    img.thumbnail((TARGET_PX, TARGET_PX), Image.LANCZOS)
+    for candidate_url in candidates:
+        is_thumbnail = candidate_url != original_url
+        if is_thumbnail:
+            logger.info('THUMBNAIL | Using Wikimedia thumbnail URL: %s', candidate_url)
 
-    # JPEG does not support alpha — convert if needed
-    if img.mode in ('RGBA', 'P', 'LA'):
-        img = img.convert('RGB')
+        for attempt in range(DOWNLOAD_RETRIES + 1):
+            resp = requests.get(
+                candidate_url,
+                timeout=30,
+                headers={
+                    'User-Agent': (
+                        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+                        'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+                    )
+                },
+            )
 
-    img.save(save_path, 'JPEG')  # default quality (75)
+            if resp.status_code == 429:
+                retry_after  = _parse_retry_after(resp.headers.get('Retry-After'))
+                capped       = min(retry_after, MAX_RATE_LIMIT_WAIT)
+                max_retry_after = max(max_retry_after, capped)
+                if attempt < DOWNLOAD_RETRIES:
+                    logger.warning('Rate limited. Waiting %.0fs before retrying.', capped)
+                    time.sleep(capped)
+                    continue                 # retry same candidate
+                # Changed By Hassam Nasir
+                # break                     # old: tried next candidate on 429 exhaustion — same IP
+                #                           # gets same rate limit, wastes extra retries
+                raise TooManyRequestsError(max_retry_after or MAX_RATE_LIMIT_WAIT)
+
+            if resp.status_code == 400 and is_thumbnail:
+                break                       # thumbnail rejected → try original URL (400 only)
+
+            resp.raise_for_status()         # other 4xx/5xx: raise immediately
+
+            # ── Success: decode and save ─────────────────────────────────────
+            img = Image.open(io.BytesIO(resp.content))
+            img.thumbnail((TARGET_PX, TARGET_PX), Image.LANCZOS)
+            if img.mode in ('RGBA', 'P', 'LA'):
+                img = img.convert('RGB')
+            img.save(save_path, 'JPEG')
+            return max_retry_after          # 0.0 = clean, >0.0 = 429 but recovered
+
+    # All candidates exhausted on 429
+    raise TooManyRequestsError(max_retry_after or MAX_RATE_LIMIT_WAIT)
 
 
 # ── Public API ──────────────────────────────────────────────────────────────────
@@ -179,7 +292,7 @@ def _do_download_upload(url: str, record_id: str, scraper_tag: str,
 
     img_log.info(f'DOWNLOAD | {record_id} | {url}')
     t0 = time.time()
-    _download_and_resize(url, local_path, delay)
+    max_retry_after = _download_and_resize(url, local_path, delay, img_log=img_log)
     download_time = time.time() - t0 - delay
     img_log.info(f'DOWNLOAD OK | {record_id} | took {download_time:.2f}s (delay={delay:.2f}s)')
 
@@ -194,9 +307,7 @@ def _do_download_upload(url: str, record_id: str, scraper_tag: str,
 
     img_log.info(f'UPLOAD OK | {key}')
     log.info(f'[IMAGE] Uploaded: {key}')
-
-    # Success → reduce delay by DELAY_STEP (floor = MIN_DELAY)
-    return max(MIN_DELAY, delay - DELAY_STEP)
+    return max_retry_after   # pass back to caller for adaptive delay adjustment
 
 
 def process_new_images(new_df, scraper_tag: str, logger=None):
@@ -213,7 +324,7 @@ def process_new_images(new_df, scraper_tag: str, logger=None):
       - On 429: new_delay = server's Retry-After + 1s
       - On success: new_delay = max(MIN_DELAY, current - DELAY_STEP)
 
-    Failed downloads are retried once at the end.
+    429 downloads are retried in adaptive rounds at the end.
     Images saved locally to <scraper_tag>_excels/<scraper_tag>/ (deleted after upload).
     Returns modified new_df.
     """
@@ -228,11 +339,15 @@ def process_new_images(new_df, scraper_tag: str, logger=None):
 
     _ensure_s3_folder(scraper_tag, img_log)
 
-    uploaded    = 0
-    skipped     = 0
-    copied      = 0
-    failed      = 0
-    retry_queue = []   # [(idx, url, record_id), ...]
+    uploaded       = 0
+    skipped        = 0
+    copied         = 0
+    failed         = 0
+    retry_queue    = []            # [(idx, url, record_id), ...] — 429 only
+    # Changed By Hassam Nasir
+    # recovery_floor = TOTAL_DELAY   # old: bumped to 8.5s after any 429, blocking recovery
+    recovery_floor = MIN_DELAY       # delay reduces by 0.5 down to MIN_DELAY after each success
+    clean_streak   = 0
 
     for idx, row in new_df.iterrows():
         img_tag   = str(row.get('Image Tag', '')).strip()
@@ -278,57 +393,114 @@ def process_new_images(new_df, scraper_tag: str, logger=None):
             continue
 
         try:
-            delay = _do_download_upload(img_tag, record_id, scraper_tag,
-                                        local_dir, delay, img_log, log)
+            max_retry_after = _do_download_upload(img_tag, record_id, scraper_tag,
+                                                   local_dir, delay, img_log, log)
             new_df.at[idx, 'Image Tag'] = record_id
             uploaded += 1
 
+            if max_retry_after > 0:
+                # 429 hit internally but recovered via thumbnail/retry — increase delay
+                delay = _delay_after_429(delay, max_retry_after)
+                # Changed By Hassam Nasir
+                # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+                clean_streak = 0
+                img_log.info(f'DELAY SET | {delay:.1f}s (429 during download, Retry-After={max_retry_after}s)')
+            else:
+                # Clean download — no 429 at all
+                clean_streak += 1
+                if clean_streak >= 3 and delay > recovery_floor:
+                    delay = max(delay - DELAY_STEP, recovery_floor)
+                    img_log.info(f'DELAY REDUCED | {delay:.1f}s after {clean_streak} clean downloads')
+
         except TooManyRequestsError as e:
-            # Server told us to wait — increase delay, queue for retry
-            new_delay = e.retry_after + 1
+            # All internal retries on all candidates exhausted — queue for end retry
+            delay = _delay_after_429(delay, e.retry_after)
+            # Changed By Hassam Nasir
+            # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+            clean_streak = 0
             img_log.warning(
-                f'429 | {record_id} | server Retry-After={e.retry_after}s '
-                f'→ delay {delay:.1f}s → {new_delay:.1f}s | queued for retry'
+                f'429 | {record_id} | all retries exhausted → delay={delay:.1f}s | queued for retry'
             )
-            log.warning(f'[IMAGE] 429 for {record_id}, delay raised to {new_delay:.1f}s')
-            delay = new_delay
+            log.warning(f'[IMAGE] 429 for {record_id}, delay set to {delay:.1f}s')
             retry_queue.append((idx, img_tag, record_id))
 
         except Exception as exc:
             img_log.error(f'FAILED | {record_id} | {img_tag} | {exc}')
             log.warning(f'[IMAGE] Failed for {record_id}: {exc}')
-            retry_queue.append((idx, img_tag, record_id))
+            delay = min(delay + 2.0, MAX_DELAY)
+            clean_streak = 0
+            failed += 1
 
-    # ── Retry pass ────────────────────────────────────────────────────
+    # ── Retry pass (429-only) ─────────────────────────────────────────
     if retry_queue:
-        img_log.info(f'RETRY START | {len(retry_queue)} image(s) to retry')
-        delay = max(delay, TOTAL_DELAY)   # reset to safe delay before retrying
+        img_log.info(
+            f'RETRY START | {len(retry_queue)} image(s) to retry | '
+            f'max_rounds={MAX_429_RETRY_ROUNDS}'
+        )
+        # Changed By Hassam Nasir
+        # delay = max(delay, RECOVERY_FLOOR_429)   # old: forced retry pass to start at 8.5s
+        delay = min(delay, MAX_DELAY)              # carry current delay, capped at 10s
+        clean_streak = 0
+        retry_round = 0
 
-        for idx, url, record_id in retry_queue:
-            key = _s3_key(scraper_tag, record_id)
-            if _s3_exists(key):
-                img_log.info(f'RETRY SKIP | already on S3 | {key}')
-                new_df.at[idx, 'Image Tag'] = record_id
-                skipped += 1
-                continue
-            try:
-                delay = _do_download_upload(url, record_id, scraper_tag,
-                                            local_dir, delay, img_log, log)
-                new_df.at[idx, 'Image Tag'] = record_id
-                uploaded += 1
-                img_log.info(f'RETRY OK | {record_id}')
+        while retry_queue and retry_round < MAX_429_RETRY_ROUNDS:
+            retry_round += 1
+            current_retry_queue = retry_queue
+            retry_queue = []
+            img_log.info(
+                f'RETRY ROUND {retry_round}/{MAX_429_RETRY_ROUNDS} | '
+                f'images={len(current_retry_queue)} | delay={delay:.1f}s'
+            )
 
-            except TooManyRequestsError as e:
-                new_delay = e.retry_after + 1
-                img_log.warning(f'RETRY 429 | {record_id} | delay → {new_delay:.1f}s')
-                delay = new_delay
-                failed += 1
+            for idx, url, record_id in current_retry_queue:
+                key = _s3_key(scraper_tag, record_id)
+                if _s3_exists(key):
+                    img_log.info(f'RETRY SKIP | already on S3 | {key}')
+                    new_df.at[idx, 'Image Tag'] = record_id
+                    skipped += 1
+                    continue
+                try:
+                    max_retry_after = _do_download_upload(url, record_id, scraper_tag,
+                                                           local_dir, delay, img_log, log)
+                    new_df.at[idx, 'Image Tag'] = record_id
+                    uploaded += 1
+                    img_log.info(f'RETRY OK | {record_id}')
 
-            except Exception as exc:
-                img_log.error(f'RETRY FAILED | {record_id} | {exc}')
-                failed += 1
+                    if max_retry_after > 0:
+                        delay = _delay_after_429(delay, max_retry_after)
+                        # Changed By Hassam Nasir
+                        # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+                        clean_streak = 0
+                    else:
+                        clean_streak += 1
+                        if clean_streak >= 3 and delay > recovery_floor:
+                            delay = max(delay - DELAY_STEP, recovery_floor)
 
-        img_log.info(f'RETRY END | retried={len(retry_queue)}')
+                except TooManyRequestsError as e:
+                    delay = _delay_after_429(delay, e.retry_after)
+                    # Changed By Hassam Nasir
+                    # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+                    clean_streak = 0
+                    retry_queue.append((idx, url, record_id))
+                    img_log.warning(
+                        f'RETRY 429 | {record_id} | delay={delay:.1f}s | '
+                        f'requeued for same run'
+                    )
+
+                except Exception as exc:
+                    img_log.error(f'RETRY FAILED | {record_id} | {exc}')
+                    delay = min(delay + 2.0, MAX_DELAY)
+                    clean_streak = 0
+                    failed += 1
+
+        if retry_queue:
+            failed += len(retry_queue)
+            img_log.warning(
+                f'RETRY GIVEUP | {len(retry_queue)} image(s) still rate-limited '
+                f'after {MAX_429_RETRY_ROUNDS} round(s); left as URL for DB pending retry'
+            )
+
+        img_log.info(f'RETRY END | rounds={retry_round}')
 
     img_log.info(
         f'DONE process_new_images | '
@@ -337,6 +509,147 @@ def process_new_images(new_df, scraper_tag: str, logger=None):
     )
     img_log.info('='*60)
     return new_df
+
+
+def process_pending_db_images(scraper_tag: str, cursor, cnx, logger=None) -> None:
+    """
+    Called from orchestrator AFTER insertion_code().
+
+    Queries the DB for ANY active record of this scraper_tag where img_tag
+    still contains a URL (i.e. image download failed in process_new_images,
+    or failed in a previous weekly run and was never retried).
+
+    For each such record:
+      - Downloads, resizes, uploads to S3
+      - On success: UPDATE main SET img_tag = <record_id> WHERE customer_id = <record_id>
+
+    This retries failed images inside the same pipeline run with adaptive delay.
+    If the remote server keeps returning 429 after the configured retry rounds,
+    the URL is left in img_tag so the next run can still detect it.
+    """
+    log     = logger or _log
+    img_log = _setup_image_logger(scraper_tag)
+
+    img_log.info('='*60)
+    img_log.info(f'START process_pending_db_images | scraper_tag={scraper_tag}')
+
+    try:
+        cursor.execute(
+            "SELECT customer_id, img_tag FROM main "
+            "WHERE scraper_tag = %s AND img_tag LIKE 'http%%' AND status = 1",
+            (scraper_tag,)
+        )
+        rows = cursor.fetchall()
+    except Exception as exc:
+        img_log.error(f'DB query failed: {exc}')
+        log.error('[IMAGE] process_pending_db_images DB query failed: %s', exc)
+        img_log.info('='*60)
+        return
+
+    if not rows:
+        img_log.info('No pending image URLs found in DB — nothing to retry')
+        img_log.info('='*60)
+        return
+
+    img_log.info(f'Found {len(rows)} record(s) with pending image URLs in DB')
+
+    local_dir      = _local_images_dir(scraper_tag)
+    _ensure_s3_folder(scraper_tag, img_log)
+
+    # Changed By Hassam Nasir
+    # delay          = max(TOTAL_DELAY, PENDING_START_DELAY)   # old: forced start at 8.5s
+    # recovery_floor = max(TOTAL_DELAY, RECOVERY_FLOOR_429)    # old: locked floor at 8.5s
+    delay          = TOTAL_DELAY
+    recovery_floor = MIN_DELAY        # delay reduces by 0.5 down to MIN_DELAY after each success
+    clean_streak   = 0
+    updated        = 0
+    failed         = 0
+    pending_queue = [
+        (str(row['customer_id']).strip(), str(row['img_tag']).strip())
+        for row in rows
+    ]
+    pending_round = 0
+
+    while pending_queue and pending_round < MAX_429_RETRY_ROUNDS:
+        pending_round += 1
+        current_pending_queue = pending_queue
+        pending_queue = []
+        img_log.info(
+            f'PENDING ROUND {pending_round}/{MAX_429_RETRY_ROUNDS} | '
+            f'images={len(current_pending_queue)} | delay={delay:.1f}s'
+        )
+
+        for record_id, img_url in current_pending_queue:
+            # If already on S3 (uploaded by a parallel process), just fix the DB column
+            key = _s3_key(scraper_tag, record_id)
+            if _s3_exists(key):
+                img_log.info(f'PENDING SKIP | already on S3 | updating DB | {key}')
+                try:
+                    cursor.execute(
+                        "UPDATE main SET img_tag = %s WHERE customer_id = %s",
+                        (record_id, record_id)
+                    )
+                    cnx.commit()
+                    updated += 1
+                except Exception as exc:
+                    img_log.error(f'PENDING DB UPDATE failed for {record_id}: {exc}')
+                continue
+
+            img_log.info(f'PENDING | {record_id} | {img_url}')
+            try:
+                max_retry_after = _do_download_upload(img_url, record_id, scraper_tag,
+                                                       local_dir, delay, img_log, log)
+                cursor.execute(
+                    "UPDATE main SET img_tag = %s WHERE customer_id = %s",
+                    (record_id, record_id)
+                )
+                cnx.commit()
+                updated += 1
+                img_log.info(f'PENDING OK | {record_id} | DB updated')
+                log.info(f'[IMAGE] Pending image resolved: {record_id}')
+
+                if max_retry_after > 0:
+                    delay = _delay_after_429(delay, max_retry_after)
+                    # Changed By Hassam Nasir
+                    # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+                    clean_streak = 0
+                    img_log.info(f'DELAY SET | {delay:.1f}s')
+                else:
+                    clean_streak += 1
+                    if clean_streak >= 3 and delay > recovery_floor:
+                        delay = max(delay - DELAY_STEP, recovery_floor)
+                        img_log.info(f'DELAY REDUCED | {delay:.1f}s after {clean_streak} clean downloads')
+
+            except TooManyRequestsError as e:
+                delay = _delay_after_429(delay, e.retry_after)
+                # Changed By Hassam Nasir
+                # recovery_floor = max(recovery_floor, RECOVERY_FLOOR_429)  # old: locked floor at 8.5s
+                clean_streak = 0
+                pending_queue.append((record_id, img_url))
+                img_log.warning(
+                    f'PENDING 429 | {record_id} | delay={delay:.1f}s | '
+                    f'requeued for same run'
+                )
+                log.warning(f'[IMAGE] Pending 429 for {record_id}, requeued')
+
+            except Exception as exc:
+                img_log.error(f'PENDING FAILED | {record_id} | {exc}')
+                delay = min(delay + 2.0, MAX_DELAY)
+                clean_streak = 0
+                failed += 1
+
+    if pending_queue:
+        failed += len(pending_queue)
+        img_log.warning(
+            f'PENDING GIVEUP | {len(pending_queue)} image(s) still rate-limited '
+            f'after {MAX_429_RETRY_ROUNDS} round(s); DB img_tag remains URL'
+        )
+
+    img_log.info(
+        f'DONE process_pending_db_images | updated={updated} failed={failed} '
+        f'rounds={pending_round} final_delay={delay:.1f}s'
+    )
+    img_log.info('='*60)
 
 
 def delete_inactive_images(df2, scraper_tag: str, logger=None) -> None:

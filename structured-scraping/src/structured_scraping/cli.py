@@ -55,6 +55,47 @@ def _setup_logging(ctx: click.Context) -> None:
         logger.debug("Debug logging enabled")
 
 
+# Changed By Hassam Nasir
+def _setup_extraction_file_logging(country_name: str) -> None:
+    """
+    Create extraction_logs/ folder inside the structured-scraping project root,
+    delete any existing .log files in it (only the latest country log is kept),
+    then attach a FileHandler to the root logger so ALL terminal output is also
+    saved to extraction_logs/<country>.log for this run.
+
+    Behaviour:
+      - Run oman  → extraction_logs/oman.log  created
+      - Run qatar → extraction_logs/oman.log  deleted, extraction_logs/qatar.log created
+      - Run pak   → extraction_logs/qatar.log deleted, extraction_logs/pakistan.log created
+    """
+    # structured-scraping/src/structured_scraping/cli.py
+    #   .parent → structured_scraping/
+    #   .parent.parent → src/
+    #   .parent.parent.parent → structured-scraping/  (project root)
+    log_dir = Path(__file__).parent.parent.parent / "extraction_logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    # Delete all previous .log files so only the current country's log remains
+    for old_log in log_dir.glob("*.log"):
+        try:
+            old_log.unlink()
+        except OSError:
+            pass
+
+    # "United Kingdom" → "united_kingdom.log"
+    safe_name = country_name.lower().replace(" ", "_")
+    log_file  = log_dir / f"{safe_name}.log"
+
+    # Attach FileHandler to root logger — captures output from ALL modules
+    root_logger  = logging.getLogger()
+    file_handler = logging.FileHandler(log_file, mode="w", encoding="utf-8")
+    file_handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    )
+    root_logger.addHandler(file_handler)
+    logger.info("Extraction log saved to: %s", log_file)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # OUTPUT PATH BUILDER  (NEW)
 # ─────────────────────────────────────────────────────────────────────────────
@@ -413,6 +454,11 @@ def scrape(
         # ── Resolve country ───────────────────────────────────────────────
         country_id   = get_country_id(country)
         country_name = get_country_name(country)
+
+        # Changed By Hassam Nasir
+        # Set up file logging now that we know the country name.
+        # Deletes previous country's log and creates a fresh one for this run.
+        _setup_extraction_file_logging(country_name)
 
         click.echo(f"🌍 Target: {country_name} ({country_id})")
 
