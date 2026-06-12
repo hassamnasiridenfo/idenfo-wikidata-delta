@@ -43,6 +43,10 @@ EMAIL_SUBJECT = os.getenv("email_subject")
 ERROR_LOG_EMAIL_SUBJECT = os.getenv("error_log_email_subject")
 LOG_EMAIL_SUBJECT = os.getenv("log_email_subject")
 DELTA_LOG_EMAIL_CC = os.getenv("delta_log_email_cc").split(",")
+# Changed By Hassam nasir — separate recipients/subject for the images URL→ID Excel email
+IMAGE_EMAIL_TO = os.getenv("image_email_to").split(",") if os.getenv("image_email_to") else []
+IMAGE_EMAIL_CC = os.getenv("image_email_cc").split(",") if os.getenv("image_email_cc") else []
+IMAGE_EMAIL_SUBJECT = os.getenv("image_email_subject", "WikiData Image URLs for Manual S3 Upload")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -450,17 +454,18 @@ def run_delta_for_country(
         cnx_dict, cursor_dict = create_mysql_connection_dictionary(HOST, USER, PWD, DB, PORT)
 
         # ── Step 4.6: Retry any pending images in DB ──────────────────
-        # Catches records where process_new_images failed (429 exhausted)
-        # AND old records from previous weekly runs still stuck with a URL.
-        # Uses cursor_dict so row['customer_id'] / row['img_tag'] work.
-        try:
-            from image_handler import process_pending_db_images
-            process_pending_db_images(scraper_tag, cursor_dict, cnx_dict, logger)
-            logger.info('[IMAGE] Pending image retry complete')
-        except Exception as e:
-            logger.error('image_handler.process_pending_db_images failed: %s', e, exc_info=True)
+        # Changed By Hassam nasir — DISABLED in manual-upload mode (no image downloading).
+        # process_pending_db_images() downloads URLs from Wikidata, which is exactly the
+        # throttled work we are now avoiding. Images are handled manually via the emailed
+        # <scraper_tag>_images_url_<date>.xlsx instead.
+        # try:
+        #     from image_handler import process_pending_db_images
+        #     process_pending_db_images(scraper_tag, cursor_dict, cnx_dict, logger)
+        #     logger.info('[IMAGE] Pending image retry complete')
+        # except Exception as e:
+        #     logger.error('image_handler.process_pending_db_images failed: %s', e, exc_info=True)
 
-        delta_excel_df_creator(scraper_tag, cursor_dict, cnx_dict) 
+        delta_excel_df_creator(scraper_tag, cursor_dict, cnx_dict)
 
         logger.info('Inserted %d records for %s', len(cleaned_df), scraper_tag) 
 
@@ -489,6 +494,28 @@ def run_delta_for_country(
         ERROR_LOG_EMAIL_SUBJECT,
         LOGS_DIR,
     )
+
+        # Changed By Hassam nasir — email the URL→ID images Excel to a separate recipient list
+        try:
+            from sending_image_excel_email import send_image_url_emails
+            if IMAGE_EMAIL_TO:
+                send_image_url_emails(
+                    EMAIL_FROM,
+                    EMAIL_NAME,
+                    IMAGE_EMAIL_TO,
+                    IMAGE_EMAIL_CC,
+                    SMTP_SERVER,
+                    SMTP_PORT,
+                    SMTP_USER,
+                    SMTP_PASSWORD,
+                    IMAGE_EMAIL_SUBJECT,
+                    FILE_PATHS,
+                )
+                logger.info('[IMAGE] Images-URL Excel email sent')
+            else:
+                logger.info('[IMAGE] image_email_to not set in .env — skipping images-URL email')
+        except Exception as e:
+            logger.error('send_image_url_emails failed: %s', e, exc_info=True)
 
         return True 
 
