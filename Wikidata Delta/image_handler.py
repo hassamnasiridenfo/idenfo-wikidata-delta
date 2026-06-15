@@ -6,7 +6,10 @@ import boto3
 import requests
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
-from PIL import Image
+# Changed By Hassam Nasir
+# PIL moved to lazy import inside _download_and_resize() — not needed in manual-upload mode
+# and a top-level import crash blocks the whole module even when PIL is unused.
+# from PIL import Image
 from urllib.parse import quote, unquote, urlparse, urlunparse
 
 load_dotenv()
@@ -224,6 +227,8 @@ def _download_and_resize(url: str, save_path: str, delay: float, img_log=None) -
       >0.0 → 429 was hit but eventually recovered; value = max Retry-After seen
     Raises TooManyRequestsError when all candidates + all retries exhausted on 429.
     """
+    # Changed By Hassam Nasir
+    from PIL import Image  # lazy import — only needed when actually downloading
     time.sleep(delay)
 
     candidates        = _download_url_candidates(url)

@@ -88,6 +88,7 @@ dependencies:
       - schedule
       - python-dotenv
       - boto3
+      - Pillow
 prefix: /home/idenfo-ns-hassam/miniconda3/envs/idenfo-wikidata-scrape
 
 
