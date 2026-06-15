@@ -87,6 +87,7 @@ dependencies:
       - unidecode
       - schedule
       - python-dotenv
+      - boto3
 prefix: /home/idenfo-ns-hassam/miniconda3/envs/idenfo-wikidata-scrape
 
 
