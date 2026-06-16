@@ -13,6 +13,7 @@ from datetime import datetime
 from ast import literal_eval
 
 
+
 # BASE_DIR = Path(__file__).parent.parent
 # CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
 # os.makedirs(CLEANED_DIR, exist_ok=True)
@@ -287,7 +288,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["gr_gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2025-12-27"] * num_rows,
+            "Added On": ["2026-02-03"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -1378,7 +1379,7 @@ def get_clean_df() -> pd.DataFrame:
                 elif col in ["Scraper Tag"]:
                     rca_df_clean[col] = "gr_gen"
                 elif col in ["Added On"]:
-                    rca_df_clean[col] = "2025-12-24"
+                    rca_df_clean[col] = "2026-02-03"
                 else:
                     rca_df_clean[col] = ""
 
@@ -1533,5 +1534,4 @@ def greece_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         )
         raise
 
-
-greece_pep_scrapper()
+        

@@ -13,19 +13,26 @@ from datetime import datetime
 from ast import literal_eval
 
 
-BASE_DIR = Path(__file__).parent.parent.parent
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-os.makedirs(CLEANED_DIR, exist_ok=True)
-RAW_DIR = os.path.join(BASE_DIR, "Raw")
-os.makedirs(RAW_DIR, exist_ok=True)
-# CLEANED_DIR = BASE_DIR
-# RAW_DIR = BASE_DIR
-CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_pakistan_living_relevant_cleaned.xlsx")
-RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_pakistan_living_relevant_raw.xlsx")
-RCA_FILE_PATH = os.path.join(
-    CLEANED_DIR, "pep_pakistan_living_relevant_rca_lookup.xlsx"
-)
+BASE_DIR = Path(__file__).parent
+RAW_DIR = BASE_DIR / "pk_gen_excels"
+CLEANED_DIR = BASE_DIR / "pk_gen_excels"
+UTILS_DIR = BASE_DIR
+
+# Ensure directories exist
+RAW_DIR.mkdir(parents=True, exist_ok=True)
+CLEANED_DIR.mkdir(parents=True, exist_ok=True)
+# ============================================
+# LOGGING SETUP (Scraper-specific log file)
+# ============================================
+
+#  PATHS
+RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_pakistan_living_relevant_raw.xlsx")
+CLEAN_XLSX   = os.path.join(CLEANED_DIR, "pep_pakistan_living_relevant_clean.xlsx")
+RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_pakistan_living_relevant_rca_lookup.xlsx")
+COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
+LOG_FILE = BASE_DIR / "pk_gen_excels"/ "pk_pep_gen.log"
+
+
 
 logger = logging.getLogger("PakistanPEPScrapper")
 if not logger.hasHandlers():
@@ -248,7 +255,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["pk_gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2025-12-17"] * num_rows,
+            "Added On": ["'2025-12-22'"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -1195,6 +1202,8 @@ def get_clean_df() -> pd.DataFrame:
                     rca_df_clean[col] = "Individual"
                 elif col in ["Scraper Tag"]:
                     rca_df_clean[col] = "pk_gen"
+                elif col in ["Added On"]:
+                    rca_df_clean[col] = "2025-12-22"
                 else:
                     rca_df_clean[col] = ""
 
@@ -1222,16 +1231,133 @@ def get_clean_df() -> pd.DataFrame:
     return clean_df
 
 
-def pakistan_pep_scrapper() -> pd.DataFrame:
-    try:
-        logger.info("Starting Pakistan PEP scraper...")
-        clean_df = get_clean_df()
-        logger.info("Pakistan PEP scraper completed successfully.")
+def common_cleaning(df):
+    columns_to_strip = [
+        "ID",
+        "Name",
+        "Father Name",
+        "Gender",
+        "Description",
+        "Place of Birth",
+        "Deceased Dissolved Status",
+        "Head Bounty",
+        "Source List",
+        "Category",
+        "List Category",
+        "List Type",
+        "Image Tag",
+        "Scraper Tag",
+        "Status",
+        "Charges",
+        "Case Details",
+        "Notification Reference",
+    ]
+    df[columns_to_strip] = df[columns_to_strip].apply(
+        lambda col: col.apply(lambda x: x.strip() if isinstance(x, str) else x)
+    )
+    columns_with_lists = [
+        "ID Type",
+        "ID Number",
+        "Nationality",
+        "Alias Type",
+        "Alias",
+        "Primary Address",
+        "Street",
+        "City",
+        "State",
+        "Country of Residence",
+        "ZIP",
+        "Other Details",
+        "Primary Occupation",
+        "Designation",
+        "Relationship Type",
+        "Relation With",
+    ]
+    for col in columns_with_lists:
+        df[col] = df[col].apply(
+            lambda x: ([element.strip() for element in x] if isinstance(x, list) else x)
+        )
+
+    df = df[
+        [
+            "Name",
+            "Father Name",
+            "Gender",
+            "Description",
+            "Head Bounty",
+            "Category",
+            "Source List",
+            "List Category",
+            "List Type",
+            "Updated On",
+            "Added On",
+            "Image Tag",
+            "Scraper Tag",
+            "ID",
+            "Date of Exclusion",
+            "Date of Inclusion",
+            "Deceased Dissolved Status",
+            "Deceased Dissolved Date",
+            "Registration Date",
+            "Extra Information",
+            "Status",
+            "Place of Birth",
+            "ID Type",
+            "ID Number",
+            "Date of Birth",
+            "Nationality",
+            "Alias Type",
+            "Alias",
+            "Primary Address",
+            "Street",
+            "City",
+            "State",
+            "Country of Residence",
+            "ZIP",
+            "Other Details",
+            "Charges",
+            "Case Details",
+            "Notification Reference",
+            "Primary Occupation",
+            "Designation",
+            "Start Date",
+            "End Date",
+            "Relationship Type",
+            "Relation With",
+        ]
+    ]
+
+    df.fillna("", inplace=True)
+    df.drop(index=df[df["Name"] == ""].index, inplace=True)
+    return df
+
+def replacements_for_delta(df):
+    df.replace('', 'NULL', inplace=True)
+    replacement_values = {'Deceased Dissolved Date': {'NULL': '1890-01-01'},
+                        'Registration Date': {'NULL': '1890-01-01'},
+                        'Date of Inclusion': {'NULL': '1890-01-01'},
+                        'Date of Exclusion': {'NULL': '1890-01-01'},
+                        'Updated On': {'NULL': '1890-01-01'}}
+    df.replace(replacement_values, inplace=True)
+    return df
+
+
+def pakistan_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame: 
+    global RAW_FILE_PATH                    # the variable declared at top of file 
+    if raw_file_path is not None: 
+        RAW_FILE_PATH = raw_file_path       # override with the path passed in 
+    try: 
+        logger.info('Starting pakistan PEP scraper...') 
+
+        clean_df = get_clean_df()  
+        clean_df = common_cleaning(clean_df)
+        clean_df = replacements_for_delta(clean_df)
+        logger.info("pakistan PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
         logger.error(
             get_standard_logger_message(
-                "pakistan_pep_scrapper()", e, "Error in Pakistan PEP scraper"
+                "pakistan_pep_scrapper()", e, "Error in pakistan PEP scraper"
             )
         )
         raise

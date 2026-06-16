@@ -322,7 +322,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["fr_gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2025-12-27"] * num_rows,
+            "Added On": ["2026-02-25"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -1398,7 +1398,7 @@ def get_clean_df() -> pd.DataFrame:
                 elif col in ["Scraper Tag"]:
                     rca_df_clean[col] = "fr_gen"
                 elif col in ["Added On"]:
-                    rca_df_clean[col] = "2025-12-24"
+                    rca_df_clean[col] = "2026-02-25"
                 else:
                     rca_df_clean[col] = ""
 
@@ -1548,5 +1548,3 @@ def france_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
                 )
             )
             raise
-
-france_pep_scrapper()

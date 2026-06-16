@@ -28,8 +28,12 @@ from ast import literal_eval
 
 
 BASE_DIR = Path(__file__).parent
-RAW_DIR = BASE_DIR / "uae_gen_excels"
-CLEANED_DIR = BASE_DIR / "uae_gen_excels"
+# Changed By Hassam Nasir — folder 'uae_gen_excels' → 'ae_gen_excels' to match scraper_tag (ae_gen);
+# clean/rca files ab delta + image files ke SAME folder (ae_gen_excels) mein banengi.
+# RAW_DIR = BASE_DIR / "uae_gen_excels"
+# CLEANED_DIR = BASE_DIR / "uae_gen_excels"
+RAW_DIR = BASE_DIR / "ae_gen_excels"
+CLEANED_DIR = BASE_DIR / "ae_gen_excels"
 UTILS_DIR = BASE_DIR
 
 # Ensure directories exist
@@ -44,7 +48,9 @@ RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_united_arab_emirates_living_relev
 CLEAN_FILE_PATH   = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_cleaned.xlsx")
 RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_rca_lookup.xlsx")
 COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
-LOG_FILE = BASE_DIR / "uae_gen_excels"/ "united_arab_emirates_pep.log"
+# Changed By Hassam Nasir — log folder 'uae_gen_excels' → 'ae_gen_excels'
+# LOG_FILE = BASE_DIR / "uae_gen_excels"/ "united_arab_emirates_pep.log"
+LOG_FILE = BASE_DIR / "ae_gen_excels"/ "united_arab_emirates_pep.log"
 
 
 logger = logging.getLogger("uaePEPScrapper")
@@ -1492,7 +1498,3 @@ def uae_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         )
         raise
 
-
-uae_pep_scrapper()
-
-# print(clean_alias(translator.translate("عفراء البسطي")))

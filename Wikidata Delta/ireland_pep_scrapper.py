@@ -19,8 +19,26 @@ import pandas as pd
 if TYPE_CHECKING:
     from collections.abc import Callable
 
-BASE_DIR = Path(__file__).parent.parent
-CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
+BASE_DIR = Path(__file__).parent
+RAW_DIR = BASE_DIR / "ie_gen_excels"
+CLEANED_DIR = BASE_DIR / "ie_gen_excels"
+UTILS_DIR = BASE_DIR
+
+# Ensure directories exist
+RAW_DIR.mkdir(parents=True, exist_ok=True)
+CLEANED_DIR.mkdir(parents=True, exist_ok=True)
+# ============================================
+# LOGGING SETUP (Scraper-specific log file)
+# ============================================
+
+#  PATHS
+RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_ireland_living_relevant_raw.xlsx")
+CLEAN_XLSX   = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_clean.xlsx")
+RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_rca_lookup.xlsx")
+COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
+LOG_FILE = BASE_DIR / "ie_gen_excels"/ "ie_pep_gen.log"
+
+
 
 
 logger = logging.getLogger("Ireland_PEP_Scrapper")
@@ -123,6 +141,8 @@ LIST_OUTPUT_COLUMNS: tuple[str, ...] = (
     "Primary Occupation",
     "Nationality",
 )
+def get_standard_logger_message(func_name, err, message):
+    return f"""{func_name}| Error: {err} Message: {message}"""
 
 
 def _capitalise_first_character(text: str) -> str:
@@ -3294,19 +3314,138 @@ def pep_to_ireland44(
     _write_rca_lookup_file(rca_rows, output_path, existing_lookup_df=existing_lookup_df)
     return ireland_df
 
-
-def ireland_pep_scrapper():
-    logging.basicConfig(level=logging.INFO)
-    df = pep_to_ireland44()
-
-    def replaceNone(x):
-        return [None if item == "None" else item for item in x]
-
-    df["End Date"] = df["End Date"].apply(replaceNone)
-    df["Added On"] = "2025-11-11"
-    df.to_excel(
-        os.path.join(CLEANED_DIR, "ireland_pep_scrapper_check.xlsx"),
-        index=False,
-        sheet_name="Ireland",
+def common_cleaning(df):
+    columns_to_strip = [
+        "ID",
+        "Name",
+        "Father Name",
+        "Gender",
+        "Description",
+        "Place of Birth",
+        "Deceased Dissolved Status",
+        "Head Bounty",
+        "Source List",
+        "Category",
+        "List Category",
+        "List Type",
+        "Image Tag",
+        "Scraper Tag",
+        "Status",
+        "Charges",
+        "Case Details",
+        "Notification Reference",
+    ]
+    df[columns_to_strip] = df[columns_to_strip].apply(
+        lambda col: col.apply(lambda x: x.strip() if isinstance(x, str) else x)
     )
+    columns_with_lists = [
+        "ID Type",
+        "ID Number",
+        "Nationality",
+        "Alias Type",
+        "Alias",
+        "Primary Address",
+        "Street",
+        "City",
+        "State",
+        "Country of Residence",
+        "ZIP",
+        "Other Details",
+        "Primary Occupation",
+        "Designation",
+        "Relationship Type",
+        "Relation With",
+    ]
+    for col in columns_with_lists:
+        df[col] = df[col].apply(
+            lambda x: ([element.strip() for element in x] if isinstance(x, list) else x)
+        )
+
+    df = df[
+        [
+            "Name",
+            "Father Name",
+            "Gender",
+            "Description",
+            "Head Bounty",
+            "Category",
+            "Source List",
+            "List Category",
+            "List Type",
+            "Updated On",
+            "Added On",
+            "Image Tag",
+            "Scraper Tag",
+            "ID",
+            "Date of Exclusion",
+            "Date of Inclusion",
+            "Deceased Dissolved Status",
+            "Deceased Dissolved Date",
+            "Registration Date",
+            "Extra Information",
+            "Status",
+            "Place of Birth",
+            "ID Type",
+            "ID Number",
+            "Date of Birth",
+            "Nationality",
+            "Alias Type",
+            "Alias",
+            "Primary Address",
+            "Street",
+            "City",
+            "State",
+            "Country of Residence",
+            "ZIP",
+            "Other Details",
+            "Charges",
+            "Case Details",
+            "Notification Reference",
+            "Primary Occupation",
+            "Designation",
+            "Start Date",
+            "End Date",
+            "Relationship Type",
+            "Relation With",
+        ]
+    ]
+
+    df.fillna("", inplace=True)
+    df.drop(index=df[df["Name"] == ""].index, inplace=True)
     return df
+
+def replacements_for_delta(df):
+    df.replace('', 'NULL', inplace=True)
+    replacement_values = {'Deceased Dissolved Date': {'NULL': '1890-01-01'},
+                        'Registration Date': {'NULL': '1890-01-01'},
+                        'Date of Inclusion': {'NULL': '1890-01-01'},
+                        'Date of Exclusion': {'NULL': '1890-01-01'},
+                        'Updated On': {'NULL': '1890-01-01'}}
+    df.replace(replacement_values, inplace=True)
+    return df
+
+
+def ireland_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame: 
+    global RAW_FILE_PATH                    # the variable declared at top of file 
+    if raw_file_path is not None: 
+        RAW_FILE_PATH = raw_file_path       # override with the path passed in 
+    try: 
+        logger.info('Starting ireland PEP scraper...') 
+
+        # Changed By Hassam Nasir
+        # Ireland mein 'get_clean_df' function define hi nahi tha (yeh wrapper kisi aur scraper
+        # se copy hua tha). Ireland ka asli clean-df banane wala function 'pep_to_ireland44' hai,
+        # jo ireland_df return karta hai (line ~3315). RAW_FILE_PATH = orchestrator se aaya raw file.
+        # clean_df = get_clean_df()
+        clean_df = pep_to_ireland44(RAW_FILE_PATH)
+        clean_df = common_cleaning(clean_df)
+        clean_df = replacements_for_delta(clean_df)
+        logger.info("ireland PEP scraper completed successfully.")
+        return clean_df
+    except Exception as e:
+        logger.error(
+            get_standard_logger_message(
+                "ireland_pep_scrapper()", e, "Error in ireland PEP scraper"
+            )
+        )
+        raise

@@ -272,7 +272,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["lt_gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2025-12-27"] * num_rows,
+            "Added On": ["2026-01-12"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -1314,7 +1314,7 @@ def get_clean_df() -> pd.DataFrame:
                 elif col in ["Scraper Tag"]:
                     rca_df_clean[col] = "lt_gen"
                 elif col in ["Added On"]:
-                    rca_df_clean[col] = "2025-12-24"
+                    rca_df_clean[col] = "2026-01-12"
                 else:
                     rca_df_clean[col] = ""
 

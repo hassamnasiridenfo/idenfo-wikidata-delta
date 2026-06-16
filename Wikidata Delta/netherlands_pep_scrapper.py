@@ -290,7 +290,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "Image Tag": [""] * num_rows,
             "Scraper Tag": ["kg-nl-gen"] * num_rows,
             "Updated On": [""] * num_rows,
-            "Added On": ["2026-02-07"] * num_rows,
+            "Added On": ["2026-02-10"] * num_rows,
             "Status": [1] * num_rows,
             "Charges": [""] * num_rows,
             "Case Details": [""] * num_rows,
@@ -1554,4 +1554,3 @@ def netherlands_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         raise
 
 
-netherlands_pep_scrapper()

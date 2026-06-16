@@ -1320,7 +1320,7 @@ def get_clean_df() -> pd.DataFrame:
                 elif col in ["Scraper Tag"]:
                     rca_df_clean[col] = "qa_gen"
                 elif col in ["Added On"]:
-                    rca_df_clean[col] = "2025-12-24"
+                    rca_df_clean[col] = "2026-01-26"
                 else:
                     rca_df_clean[col] = ""
 

@@ -6,7 +6,7 @@ import boto3
 import requests
 from botocore.exceptions import ClientError
 from dotenv import load_dotenv
-# Changed By Hassam Nasir
+
 # PIL moved to lazy import inside _download_and_resize() — not needed in manual-upload mode
 # and a top-level import crash blocks the whole module even when PIL is unused.
 # from PIL import Image
@@ -292,7 +292,11 @@ def _local_images_dir(scraper_tag: str) -> str:
     This is the same folder where the cleaned Excel and RCA lookup are saved.
     """
     folder = os.path.join(BASE_DIR, f'{scraper_tag}_excels', scraper_tag)
-    os.makedirs(folder, exist_ok=True)
+    # Changed By Hassam Nasir
+    # Manual-upload mode: images download nahi hote, isliye yeh temporary folder
+    # ('<scraper_tag>_excels/<scraper_tag>/') ab create nahi karte (khaali folder banta tha).
+    # Folder ab sirf tab banega jab actually image download ho (_do_download_upload mein).
+    # os.makedirs(folder, exist_ok=True)
     return folder
 
 
@@ -305,6 +309,8 @@ def _do_download_upload(url: str, record_id: str, scraper_tag: str,
     """
     key        = _s3_key(scraper_tag, record_id)
     local_path = os.path.join(local_dir, f'{record_id}.jpg')
+    # Changed By Hassam Nasir — temp image folder ab yahan (download ke waqt) banta hai, pehle se khaali nahi
+    os.makedirs(local_dir, exist_ok=True)
 
     img_log.info(f'DOWNLOAD | {record_id} | {url}')
     t0 = time.time()

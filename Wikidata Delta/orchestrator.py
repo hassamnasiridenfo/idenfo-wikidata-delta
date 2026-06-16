@@ -111,9 +111,9 @@ COUNTRY_REGISTRY = {
 
     'pk':             ('pakistan', 'pk_gen',   'pakistan_pep_scrapper', 'pakistan_pep_scrapper'), 
 
-    'united kingdom': ('uk',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
+    'united kingdom': ('united_kingdom',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
 
-    'uk':             ('uk',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
+    'uk':             ('united_kingdom',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
     
     'lithuania':      ('lithuania', 'lt_gen',  'lithuania_pep_scrapper','lithuania_pep_scrapper'), 
     
@@ -163,9 +163,9 @@ COUNTRY_REGISTRY = {
 
     'ch':             ('switzerland','ch_gen',   'switzerland_pep_scrapper',    'switzerland_pep_scrapper'), 
 
-    'united arab emirates': ('uae',  'ae_gen',   'uae_pep_scrapper',    'uae_pep_scrapper'), 
+    'united arab emirates': ('united_arab_emirates',  'ae_gen',   'uae_pep_scrapper',    'uae_pep_scrapper'), 
 
-    'ae': ('uae',       'ae_gen',   'uae_pep_scrapper',    'uae_pep_scrapper'), 
+    'ae': ('united_arab_emirates','ae_gen',   'uae_pep_scrapper',    'uae_pep_scrapper'), 
 
     'uzbekistan': ('uzbekistan',       'uz_gen',   'uzbekistan_pep_scrapper',    'uzbekistan_pep_scrapper'), 
 
@@ -385,11 +385,6 @@ def run_delta_for_country(
 
         logger.info('No new records for %s — DB is up to date', scraper_tag)
 
-        # Changed By Hassam Nasir
-        # Previously this branch returned True immediately, so when delta=0 NO email
-        # was sent. send_emails() already handles the empty case (sends "No Delta Found"
-        # since no _DELTA_<date>.xlsx exists), but it was never called here.
-        # Now send the "No Delta Found" email + the log file email on 0-delta runs too.
         try:
             send_emails(
                 EMAIL_FROM,
@@ -494,8 +489,6 @@ def run_delta_for_country(
         ERROR_LOG_EMAIL_SUBJECT,
         LOGS_DIR,
     )
-
-        # Changed By Hassam nasir — email the URL→ID images Excel to a separate recipient list
         try:
             from sending_image_excel_email import send_image_url_emails
             if IMAGE_EMAIL_TO:
