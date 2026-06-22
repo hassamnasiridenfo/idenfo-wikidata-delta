@@ -111,9 +111,9 @@ COUNTRY_REGISTRY = {
 
     'pk':             ('pakistan', 'pk_gen',   'pakistan_pep_scrapper', 'pakistan_pep_scrapper'), 
 
-    'united kingdom': ('united_kingdom',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
+    'united kingdom': ('united_kingdom',       'uk_gen',   'uk_pep_scraper',    'united_kingdom_pep_scrapper'),
 
-    'uk':             ('united_kingdom',       'uk_gen',   'uk_pep_scrapper',    'uk_pep_scrapper'), 
+    'uk':             ('united_kingdom',       'uk_gen',   'uk_pep_scraper',    'united_kingdom_pep_scrapper'),
     
     'lithuania':      ('lithuania', 'lt_gen',  'lithuania_pep_scrapper','lithuania_pep_scrapper'), 
     
@@ -135,9 +135,9 @@ COUNTRY_REGISTRY = {
 
     'gr':             ('greece',    'gr_gen',   'greece_pep_scrapper',    'greece_pep_scrapper'), 
 
-    'india':          ('india',     'in_gen',   'indian_pep_scrapper',    'indian_pep_scrapper'), 
+    'india':          ('india',     'in_gen',   'indian_pep_scrapper',    'india_pep_scrapper'),
 
-    'in':             ('india',     'in_gen',   'indian_pep_scrapper',    'indian_pep_scrapper'), 
+    'in':             ('india',     'in_gen',   'indian_pep_scrapper',    'india_pep_scrapper'),
 
     'ireland':        ('ireland',   'ie_gen',   'ireland_pep_scrapper',    'ireland_pep_scrapper'), 
 

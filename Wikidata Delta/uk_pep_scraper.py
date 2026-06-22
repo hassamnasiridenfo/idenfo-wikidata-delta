@@ -31,9 +31,11 @@ SCRAPER_NAME = SCRAPER_DIR.name
 # CLEANED_DIR = BASE_DIR / "Cleaned"
 # UTILS_DIR = BASE_DIR / "Util_excels"
 
-# just for dev
-RAW_DIR = SCRAPER_DIR
-CLEANED_DIR = SCRAPER_DIR
+# Changed By Hassam Nasir — raw/cleaned apne uk_gen_excels folder mein; UTILS main folder mein (Updated CountryList.xlsx wahan hai)
+# RAW_DIR = SCRAPER_DIR
+# CLEANED_DIR = SCRAPER_DIR
+RAW_DIR = SCRAPER_DIR / "uk_gen_excels"
+CLEANED_DIR = SCRAPER_DIR / "uk_gen_excels"
 UTILS_DIR = SCRAPER_DIR
 
 
@@ -44,7 +46,9 @@ CLEANED_DIR.mkdir(parents=True, exist_ok=True)
 # ============================================
 # LOGGING SETUP (Scraper-specific log file)
 # ============================================
-LOG_FILE = SCRAPER_DIR / f"{METADATA['Tag']}.log"
+# Changed By Hassam Nasir — log apne uk_gen_excels folder ke andar save ho
+# LOG_FILE = SCRAPER_DIR / f"{METADATA['Tag']}.log"
+LOG_FILE = CLEANED_DIR / f"{METADATA['Tag']}.log"
 translator = GoogleTranslator(source="auto", target="en")
 
 logger = logging.getLogger(METADATA["Tag"])
@@ -1422,32 +1426,134 @@ def get_clean_df() -> pd.DataFrame:
     return clean_df
 
 
-def scrape() -> pd.DataFrame:
+def common_cleaning(df):
+    columns_to_strip = [
+        "ID",
+        "Name",
+        "Father Name",
+        "Gender",
+        "Description",
+        "Place of Birth",
+        "Deceased Dissolved Status",
+        "Head Bounty",
+        "Source List",
+        "Category",
+        "List Category",
+        "List Type",
+        "Image Tag",
+        "Scraper Tag",
+        "Status",
+        "Charges",
+        "Case Details",
+        "Notification Reference",
+    ]
+    df[columns_to_strip] = df[columns_to_strip].apply(
+        lambda col: col.apply(lambda x: x.strip() if isinstance(x, str) else x)
+    )
+    columns_with_lists = [
+        "ID Type",
+        "ID Number",
+        "Nationality",
+        "Alias Type",
+        "Alias",
+        "Primary Address",
+        "Street",
+        "City",
+        "State",
+        "Country of Residence",
+        "ZIP",
+        "Other Details",
+        "Primary Occupation",
+        "Designation",
+        "Relationship Type",
+        "Relation With",
+    ]
+    for col in columns_with_lists:
+        df[col] = df[col].apply(
+            lambda x: ([element.strip() for element in x] if isinstance(x, list) else x)
+        )
+
+    df = df[
+        [
+            "Name",
+            "Father Name",
+            "Gender",
+            "Description",
+            "Head Bounty",
+            "Category",
+            "Source List",
+            "List Category",
+            "List Type",
+            "Updated On",
+            "Added On",
+            "Image Tag",
+            "Scraper Tag",
+            "ID",
+            "Date of Exclusion",
+            "Date of Inclusion",
+            "Deceased Dissolved Status",
+            "Deceased Dissolved Date",
+            "Registration Date",
+            "Extra Information",
+            "Status",
+            "Place of Birth",
+            "ID Type",
+            "ID Number",
+            "Date of Birth",
+            "Nationality",
+            "Alias Type",
+            "Alias",
+            "Primary Address",
+            "Street",
+            "City",
+            "State",
+            "Country of Residence",
+            "ZIP",
+            "Other Details",
+            "Charges",
+            "Case Details",
+            "Notification Reference",
+            "Primary Occupation",
+            "Designation",
+            "Start Date",
+            "End Date",
+            "Relationship Type",
+            "Relation With",
+        ]
+    ]
+
+    df.fillna("", inplace=True)
+    df.drop(index=df[df["Name"] == ""].index, inplace=True)
+    return df
+
+def replacements_for_delta(df):
+    df.replace('', 'NULL', inplace=True)
+    replacement_values = {'Deceased Dissolved Date': {'NULL': '1890-01-01'},
+                        'Registration Date': {'NULL': '1890-01-01'},
+                        'Date of Inclusion': {'NULL': '1890-01-01'},
+                        'Date of Exclusion': {'NULL': '1890-01-01'},
+                        'Updated On': {'NULL': '1890-01-01'}}
+    df.replace(replacement_values, inplace=True)
+    return df
+
+
+
+def united_kingdom_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame: 
+
+    global RAW_FILE_PATH                    # the variable declared at top of file 
+    if raw_file_path is not None: 
+        RAW_FILE_PATH = raw_file_path 
     try:
-        logger.info("Starting United kingdom PEP scraper...")
+        logger.info("Starting united_kingdom PEP scraper...")
         clean_df = get_clean_df()
-        logger.info("United kingdom PEP scraper completed successfully.")
+        clean_df = common_cleaning(clean_df)
+        clean_df = replacements_for_delta(clean_df)
+        logger.info("united_kingdom  PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
         logger.error(
             get_standard_logger_message(
-                "united_kingdom_pep_scrapper()",
-                e,
-                "Error in United kingdom PEP scraper",
+                "united_kingdom_pep_scrapper()", e, "Error in united_kingdom PEP scraper"
             )
         )
         raise
-
-
-# PL = """["member of the House of Lords"]"""
-# ST = """"""
-# ET = """["1999-11-11T00:00:00Z"]"""
-# PPL = """["banker"], ["botanist"], ["horticulturist"], ["politician"]"""
-
-# st,et,d = get_role_details(PL, PPL, ST, ET)
-
-# print("Start Dates:", st)
-# print("\n")
-# print("End Dates:", et)
-
-# scrape()

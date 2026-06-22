@@ -1533,7 +1533,11 @@ def replacements_for_delta(df):
     df.replace(replacement_values, inplace=True)
     return df
 
-def france_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame: 
+def france_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
+        # Changed By Hassam Nasir — orchestrator se aaya raw_file_path use ho (global override), warna default file padhti thi (baqi countries jaisa)
+        global RAW_FILE_PATH
+        if raw_file_path is not None:
+            RAW_FILE_PATH = raw_file_path
         try:
             logger.info("Starting france PEP scraper...")
             clean_df = get_clean_df()

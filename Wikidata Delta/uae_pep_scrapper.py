@@ -56,7 +56,9 @@ LOG_FILE = BASE_DIR / "ae_gen_excels"/ "united_arab_emirates_pep.log"
 logger = logging.getLogger("uaePEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    handler = logging.FileHandler(os.path.join(BASE_DIR, "united_arab_emirates_pep.log"))
+    # Changed By Hassam Nasir — log ab LOG_FILE (ae_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
+    # handler = logging.FileHandler(os.path.join(BASE_DIR, "united_arab_emirates_pep.log"))
+    handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%d-%m-%Y %I:%M:%S %p",

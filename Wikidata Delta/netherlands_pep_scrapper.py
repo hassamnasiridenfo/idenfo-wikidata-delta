@@ -13,19 +13,6 @@ from datetime import datetime
 from ast import literal_eval
 
 
-# BASE_DIR = Path(__file__).parent.parent
-# CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-# os.makedirs(CLEANED_DIR, exist_ok=True)
-# RAW_DIR = os.path.join(BASE_DIR, "Raw")
-# os.makedirs(RAW_DIR, exist_ok=True)
-
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# CLEANED_DIR = BASE_DIR
-# RAW_DIR = BASE_DIR
-# CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_kingdom-of-the-netherlands_living_relevant_cleaned.xlsx")
-# RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_kingdom-of-the-netherlands_living_relevant_raw.xlsx")
-# RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_kingdom-of-the-netherlands_living_relevant_rca_lookup.xlsx")
-
 
 BASE_DIR = Path(__file__).parent
 RAW_DIR = BASE_DIR / "kg_nl_gen_excels"
@@ -50,7 +37,9 @@ LOG_FILE = BASE_DIR / "kg_nl_gen_excels"/ "netherlands_pep.log"
 logger = logging.getLogger("netherlandsPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    handler = logging.FileHandler(os.path.join(BASE_DIR, "netherlands_pep.log"))
+    # Changed By Hassam Nasir — log ab LOG_FILE (kg_nl_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
+    # handler = logging.FileHandler(os.path.join(BASE_DIR, "netherlands_pep.log"))
+    handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%d-%m-%Y %I:%M:%S %p",

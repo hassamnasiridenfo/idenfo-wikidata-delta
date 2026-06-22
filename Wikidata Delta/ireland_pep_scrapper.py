@@ -44,7 +44,9 @@ LOG_FILE = BASE_DIR / "ie_gen_excels"/ "ie_pep_gen.log"
 logger = logging.getLogger("Ireland_PEP_Scrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.DEBUG)
-    handler = logging.FileHandler(os.path.join(BASE_DIR, "ireland_pep_scrapper.log"))
+    # Changed By Hassam Nasir — log ab LOG_FILE (ie_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
+    # handler = logging.FileHandler(os.path.join(BASE_DIR, "ireland_pep_scrapper.log"))
+    handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%d-%m-%Y %I:%M:%S %p",
@@ -3431,12 +3433,6 @@ def ireland_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         RAW_FILE_PATH = raw_file_path       # override with the path passed in 
     try: 
         logger.info('Starting ireland PEP scraper...') 
-
-        # Changed By Hassam Nasir
-        # Ireland mein 'get_clean_df' function define hi nahi tha (yeh wrapper kisi aur scraper
-        # se copy hua tha). Ireland ka asli clean-df banane wala function 'pep_to_ireland44' hai,
-        # jo ireland_df return karta hai (line ~3315). RAW_FILE_PATH = orchestrator se aaya raw file.
-        # clean_df = get_clean_df()
         clean_df = pep_to_ireland44(RAW_FILE_PATH)
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)

@@ -37,7 +37,9 @@ LOG_FILE = BASE_DIR / "ng_gen_excels"/ "ng_pep_gen.log"
 logger = logging.getLogger("NigeriaPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    handler = logging.FileHandler(os.path.join(BASE_DIR, "nigeria_pep.log"))
+    # Changed By Hassam Nasir — log ab LOG_FILE (ng_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
+    # handler = logging.FileHandler(os.path.join(BASE_DIR, "nigeria_pep.log"))
+    handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%d-%m-%Y %I:%M:%S %p",
