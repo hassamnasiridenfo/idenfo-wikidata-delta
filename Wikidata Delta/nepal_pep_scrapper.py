@@ -24,13 +24,32 @@ METADATA = {
 }
 
 
+BASE_DIR = Path(__file__).parent
+RAW_DIR = BASE_DIR / "np_gen_excels"
+CLEANED_DIR = BASE_DIR / "np_gen_excels"
+UTILS_DIR = BASE_DIR
 
-SCRAPER_DIR = Path(__file__).parent
-SCRAPER_NAME = SCRAPER_DIR.name
-BASE_DIR = SCRAPER_DIR.parent.parent
-RAW_DIR = BASE_DIR / "Raw"
-CLEANED_DIR = BASE_DIR / "Cleaned"
-UTILS_DIR = BASE_DIR / "Util_excels"
+# Ensure directories exist
+RAW_DIR.mkdir(parents=True, exist_ok=True)
+CLEANED_DIR.mkdir(parents=True, exist_ok=True)
+# ============================================
+# LOGGING SETUP (Scraper-specific log file)
+# ============================================
+
+#  PATHS
+RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_nepal_living_relevant_raw.xlsx")
+CLEAN_FILE_PATH   = os.path.join(CLEANED_DIR, "pep_nepal_living_relevant_cleaned.xlsx")
+RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_nepal_living_relevant_rca_lookup.xlsx")
+COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
+# LOG_FILE = BASE_DIR / "kg_nl_gen_excels"/ "netherlands_pep.log"
+LOG_FILE = BASE_DIR / "np_gen_excels"/ "nepal_pep.log"
+
+# SCRAPER_DIR = Path(__file__).parent
+# SCRAPER_NAME = SCRAPER_DIR.name
+# BASE_DIR = SCRAPER_DIR.parent.parent
+# RAW_DIR = BASE_DIR / "Raw"
+# CLEANED_DIR = BASE_DIR / "Cleaned"
+# UTILS_DIR = BASE_DIR / "Util_excels"
 
 # Ensure directories exist
 RAW_DIR.mkdir(parents=True, exist_ok=True)
@@ -39,7 +58,7 @@ CLEANED_DIR.mkdir(parents=True, exist_ok=True)
 # ============================================
 # LOGGING SETUP (Scraper-specific log file)
 # ============================================
-LOG_FILE = SCRAPER_DIR / f"{METADATA['Tag']}.log"
+
 translator = GoogleTranslator(source="auto", target="en")
 
 logger = logging.getLogger(METADATA["Tag"])
@@ -64,10 +83,6 @@ def get_metadata():
     This function is REQUIRED and called by main.py
     """
     return METADATA
-
-CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_nepal_living_relevant_cleaned.xlsx")
-RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_nepal_living_relevant_raw.xlsx")
-RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_nepal_living_relevant_rca_lookup.xlsx")
 
 
 
@@ -1385,12 +1400,126 @@ def get_clean_df() -> pd.DataFrame:
 
     return clean_df
 
+def common_cleaning(df):
+    columns_to_strip = [
+        "ID",
+        "Name",
+        "Father Name",
+        "Gender",
+        "Description",
+        "Place of Birth",
+        "Deceased Dissolved Status",
+        "Head Bounty",
+        "Source List",
+        "Category",
+        "List Category",
+        "List Type",
+        "Image Tag",
+        "Scraper Tag",
+        "Status",
+        "Charges",
+        "Case Details",
+        "Notification Reference",
+    ]
+    df[columns_to_strip] = df[columns_to_strip].apply(
+        lambda col: col.apply(lambda x: x.strip() if isinstance(x, str) else x)
+    )
+    columns_with_lists = [
+        "ID Type",
+        "ID Number",
+        "Nationality",
+        "Alias Type",
+        "Alias",
+        "Primary Address",
+        "Street",
+        "City",
+        "State",
+        "Country of Residence",
+        "ZIP",
+        "Other Details",
+        "Primary Occupation",
+        "Designation",
+        "Relationship Type",
+        "Relation With",
+    ]
+    for col in columns_with_lists:
+        df[col] = df[col].apply(
+            lambda x: ([element.strip() for element in x] if isinstance(x, list) else x)
+        )
 
-def scrape() -> pd.DataFrame:
+    df = df[
+        [
+            "Name",
+            "Father Name",
+            "Gender",
+            "Description",
+            "Head Bounty",
+            "Category",
+            "Source List",
+            "List Category",
+            "List Type",
+            "Updated On",
+            "Added On",
+            "Image Tag",
+            "Scraper Tag",
+            "ID",
+            "Date of Exclusion",
+            "Date of Inclusion",
+            "Deceased Dissolved Status",
+            "Deceased Dissolved Date",
+            "Registration Date",
+            "Extra Information",
+            "Status",
+            "Place of Birth",
+            "ID Type",
+            "ID Number",
+            "Date of Birth",
+            "Nationality",
+            "Alias Type",
+            "Alias",
+            "Primary Address",
+            "Street",
+            "City",
+            "State",
+            "Country of Residence",
+            "ZIP",
+            "Other Details",
+            "Charges",
+            "Case Details",
+            "Notification Reference",
+            "Primary Occupation",
+            "Designation",
+            "Start Date",
+            "End Date",
+            "Relationship Type",
+            "Relation With",
+        ]
+    ]
+
+    df.fillna("", inplace=True)
+    df.drop(index=df[df["Name"] == ""].index, inplace=True)
+    return df
+
+def replacements_for_delta(df):
+    df.replace('', 'NULL', inplace=True)
+    replacement_values = {'Deceased Dissolved Date': {'NULL': '1890-01-01'},
+                        'Registration Date': {'NULL': '1890-01-01'},
+                        'Date of Inclusion': {'NULL': '1890-01-01'},
+                        'Date of Exclusion': {'NULL': '1890-01-01'},
+                        'Updated On': {'NULL': '1890-01-01'}}
+    df.replace(replacement_values, inplace=True)
+    return df
+
+def nepal_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
+    global RAW_FILE_PATH                    # the variable declared at top of file 
+    if raw_file_path is not None: 
+        RAW_FILE_PATH = raw_file_path 
     try:
         logger.info("Starting nepal PEP scraper...")
         clean_df = get_clean_df()
-        logger.info("nepal PEP scraper completed successfully.")
+        clean_df = common_cleaning(clean_df)
+        clean_df = replacements_for_delta(clean_df)
+        logger.info("nepal   PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
         logger.error(
