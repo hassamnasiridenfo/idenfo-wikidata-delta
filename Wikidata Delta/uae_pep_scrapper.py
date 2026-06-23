@@ -13,25 +13,9 @@ from datetime import datetime
 from ast import literal_eval
 
 
-# BASE_DIR = Path(__file__).parent.parent
-# CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-# os.makedirs(CLEANED_DIR, exist_ok=True)
-# RAW_DIR = os.path.join(BASE_DIR, "Raw")
-# os.makedirs(RAW_DIR, exist_ok=True)
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# CLEANED_DIR = BASE_DIR
-# RAW_DIR = BASE_DIR
-# CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_cleaned.xlsx")
-# RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_united_arab_emirates_living_relevant_raw.xlsx")
-# RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_rca_lookup.xlsx")
-
 
 
 BASE_DIR = Path(__file__).parent
-# Changed By Hassam Nasir — folder 'uae_gen_excels' → 'ae_gen_excels' to match scraper_tag (ae_gen);
-# clean/rca files ab delta + image files ke SAME folder (ae_gen_excels) mein banengi.
-# RAW_DIR = BASE_DIR / "uae_gen_excels"
-# CLEANED_DIR = BASE_DIR / "uae_gen_excels"
 RAW_DIR = BASE_DIR / "ae_gen_excels"
 CLEANED_DIR = BASE_DIR / "ae_gen_excels"
 UTILS_DIR = BASE_DIR
@@ -48,16 +32,13 @@ RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_united_arab_emirates_living_relev
 CLEAN_FILE_PATH   = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_cleaned.xlsx")
 RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_united_arab_emirates_living_relevant_rca_lookup.xlsx")
 COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
-# Changed By Hassam Nasir — log folder 'uae_gen_excels' → 'ae_gen_excels'
-# LOG_FILE = BASE_DIR / "uae_gen_excels"/ "united_arab_emirates_pep.log"
+
 LOG_FILE = BASE_DIR / "ae_gen_excels"/ "united_arab_emirates_pep.log"
 
 
 logger = logging.getLogger("uaePEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (ae_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
-    # handler = logging.FileHandler(os.path.join(BASE_DIR, "united_arab_emirates_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",

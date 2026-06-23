@@ -213,3 +213,16 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ── Wikidata Delta — generated pipeline data (not source code) ──
+# Raw extraction outputs (PEP data) — folder .gitkeep stays tracked
+Wikidata Delta/raw_data/**/*.xlsx
+Wikidata Delta/raw_data/**/*.inprogress
+# Delta output copies + per-tag generated excels (DELTA / cleaned / images_url / rca_lookup / raw)
+Wikidata Delta/Delta Record/
+Wikidata Delta/*_excels/
+# Logs
+Wikidata Delta/Logs/
+Wikidata Delta/Insertion Logs/
+Wikidata Delta/images-Logs/
+Wikidata Delta/**/*.log
