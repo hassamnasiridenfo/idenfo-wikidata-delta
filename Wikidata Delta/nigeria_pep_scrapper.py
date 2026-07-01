@@ -37,8 +37,6 @@ LOG_FILE = BASE_DIR / "ng_gen_excels"/ "ng_pep_gen.log"
 logger = logging.getLogger("NigeriaPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (ng_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
-    # handler = logging.FileHandler(os.path.join(BASE_DIR, "nigeria_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -318,7 +316,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
 
 def get_sheet_df(sheet: str, raw_file_path: str | None = None) -> pd.DataFrame:
     if raw_file_path is None:
-        raw_file_path = os.path.join(RAW_DIR, "pep_nigeria_living_relevant_raw.xlsx")
+        raw_file_path = RAW_FILE_PATH
     return pd.read_excel(raw_file_path, sheet_name=sheet, engine="openpyxl")
 
 

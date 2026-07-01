@@ -43,7 +43,6 @@ EMAIL_SUBJECT = os.getenv("email_subject")
 ERROR_LOG_EMAIL_SUBJECT = os.getenv("error_log_email_subject")
 LOG_EMAIL_SUBJECT = os.getenv("log_email_subject")
 DELTA_LOG_EMAIL_CC = os.getenv("delta_log_email_cc").split(",")
-# Changed By Hassam nasir — separate recipients/subject for the images URL→ID Excel email
 IMAGE_EMAIL_TO = os.getenv("image_email_to").split(",") if os.getenv("image_email_to") else []
 IMAGE_EMAIL_CC = os.getenv("image_email_cc").split(",") if os.getenv("image_email_cc") else []
 IMAGE_EMAIL_SUBJECT = os.getenv("image_email_subject", "WikiData Image URLs for Manual S3 Upload")

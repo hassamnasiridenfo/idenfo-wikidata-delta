@@ -17,6 +17,7 @@ from typing import TYPE_CHECKING
 import pandas as pd
 
 if TYPE_CHECKING:
+
     from collections.abc import Callable
 
 BASE_DIR = Path(__file__).parent
@@ -32,12 +33,11 @@ CLEANED_DIR.mkdir(parents=True, exist_ok=True)
 # ============================================
 
 #  PATHS
-RAW_FILE_PATH     = os.path.join(RAW_DIR, "pep_ireland_living_relevant_raw.xlsx")
-CLEAN_XLSX   = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_clean.xlsx")
+RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_ireland_living_relevant_raw.xlsx")
+CLEAN_XLSX   = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_cleaned.xlsx")
 RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_rca_lookup.xlsx")
 COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
 LOG_FILE = BASE_DIR / "ie_gen_excels"/ "ie_pep_gen.log"
-
 
 
 
@@ -3114,7 +3114,7 @@ def _write_rca_lookup_file(
         Path: File path of the generated RCA lookup workbook.
 
     """
-    lookup_path = os.path.join(CLEANED_DIR, "ireland_pep_rca_lookup.xlsx")
+    lookup_path = os.path.join(CLEANED_DIR, "pep_ireland_living_relevant_rca_lookup.xlsx")
 
     ordered_lookup: dict[str, tuple[str, str]] = {}
 
@@ -3413,6 +3413,29 @@ def common_cleaning(df):
     ]
 
     df.fillna("", inplace=True)
+    #Changed By Hassam Nasir
+    # Raw Wikidata endTime stores ongoing roles as the literal text ["None"]. That string survives
+    # into the Start/End Date lists and MySQL rejects 'None' for the DATE column (1292 error).
+    # Convert junk placeholders to real Python None (keeps list position aligned with Start Date,
+    # so each role's start/end stay paired) -> inserts as SQL NULL instead of crashing.
+    def _sanitise_date_list(value):
+        if not isinstance(value, list):
+            return value
+        cleaned = []
+        for item in value:
+            if item is None:
+                cleaned.append(None)
+            elif isinstance(item, str) and item.strip().lower() in (
+                "none", "null", "nan", "nat", ""
+            ):
+                cleaned.append(None)
+            else:
+                cleaned.append(item)
+        return cleaned
+
+    for date_col in ["Start Date", "End Date"]:
+        if date_col in df.columns:
+            df[date_col] = df[date_col].apply(_sanitise_date_list)
     df.drop(index=df[df["Name"] == ""].index, inplace=True)
     return df
 
@@ -3422,7 +3445,8 @@ def replacements_for_delta(df):
                         'Registration Date': {'NULL': '1890-01-01'},
                         'Date of Inclusion': {'NULL': '1890-01-01'},
                         'Date of Exclusion': {'NULL': '1890-01-01'},
-                        'Updated On': {'NULL': '1890-01-01'}}
+                        'Updated On': {'NULL': '1890-01-01'},
+                        'Added On': {'NULL': '2025-11-11'}}
     df.replace(replacement_values, inplace=True)
     return df
 
@@ -3436,6 +3460,8 @@ def ireland_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = pep_to_ireland44(RAW_FILE_PATH)
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
+        #Changed By Hassam Nasir
+        clean_df.to_excel(CLEAN_XLSX, index=False)
         logger.info("ireland PEP scraper completed successfully.")
         return clean_df
     except Exception as e:

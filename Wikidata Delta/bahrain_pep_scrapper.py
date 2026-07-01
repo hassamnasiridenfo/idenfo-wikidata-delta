@@ -360,24 +360,35 @@ def get_raw_df(
     sheet: str = None, raw_file_path: str | None = None
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Load raw data, returning main df and separate RCA df"""
-    main_df = get_sheet_df(sheet="Main")
-    dob_df = get_sheet_df(sheet="DOB")
-    nat_df = get_sheet_df(sheet="Nationality")
-    alias_df = get_sheet_df(sheet="Alias")
-    address_df = get_sheet_df(sheet="Address")
-    case_df = get_sheet_df(sheet="Case Details")
-    role_df = get_sheet_df(sheet="Role Type")
-    rca_df = get_sheet_df(sheet="RCA")  # Keep separate
+    #Changed By Hassam Nasir
+    # Pehle get_sheet_df() bina raw_file_path ke call hoti thi.
+    # Orchestrator date-stamped file path deta hai → bahrain_pep_scrapper() global RAW_FILE_PATH set karta hai.
+    # Ab RAW_FILE_PATH global pass karte hain taake sahi file read ho.
+    # main_df = get_sheet_df(sheet="Main")  # old: ignored orchestrator path → file not found error
+    main_df = get_sheet_df(sheet="Main", raw_file_path=RAW_FILE_PATH)
+    dob_df = get_sheet_df(sheet="DOB", raw_file_path=RAW_FILE_PATH)
+    nat_df = get_sheet_df(sheet="Nationality", raw_file_path=RAW_FILE_PATH)
+    alias_df = get_sheet_df(sheet="Alias", raw_file_path=RAW_FILE_PATH)
+    address_df = get_sheet_df(sheet="Address", raw_file_path=RAW_FILE_PATH)
+    case_df = get_sheet_df(sheet="Case Details", raw_file_path=RAW_FILE_PATH)
+    role_df = get_sheet_df(sheet="Role Type", raw_file_path=RAW_FILE_PATH)
+    rca_df = get_sheet_df(sheet="RCA", raw_file_path=RAW_FILE_PATH)
 
     # remove familyLabel column from rca_df if exists
     if "familyLabel" in rca_df.columns:
         rca_df = rca_df.drop(columns=["familyLabel"])
 
-    rca_df["childLabel"] = rca_df["childLabel"].apply(
-        lambda x: x if x != '["7"]' else None
-    )
+    #Changed By Hassam Nasir
+    # rca_df["childLabel"] = rca_df["childLabel"].apply(...)  # old: crashed if column missing (empty df)
+    if "childLabel" in rca_df.columns:
+        rca_df["childLabel"] = rca_df["childLabel"].apply(
+            lambda x: x if x != '["7"]' else None
+        )
 
-    rca_df["siblingLabel"] = rca_df["siblingLabel"].apply(clean_siblings)
+    #Changed By Hassam Nasir
+    # rca_df["siblingLabel"] = rca_df["siblingLabel"].apply(clean_siblings)  # old: crashed if column missing
+    if "siblingLabel" in rca_df.columns:
+        rca_df["siblingLabel"] = rca_df["siblingLabel"].apply(clean_siblings)
 
     combined_raw_df = main_df
     sheets = [dob_df, nat_df, alias_df, address_df, case_df, role_df]
@@ -854,43 +865,64 @@ def normalize_rca_lookup_name(value: object) -> str:
     return " ".join(flat.strip().split()).casefold()
 
 
-def load_rca_lookup() -> tuple[dict[str, str], pd.DataFrame | None]:
-    """Load existing RCA lookup workbook."""
+def load_rca_lookup() -> tuple[dict[str, str], dict[str, str], pd.DataFrame | None]:
+    """Load existing RCA lookup workbook.
+
+    #Changed By Hassam Nasir — returns 3 values now (was 2):
+    #   mapping:       {stable_key -> rca_id}
+    #   id_to_display: {rca_id -> cached display name} — avoids re-translation each run
+    #   lookup_df:     raw DataFrame passed back to save_rca_lookup
+    """
 
     try:
         df = pd.read_excel(RCA_FILE_PATH)
     except Exception:
         logger.warning(f"Unable to read RCA lookup at {CLEANED_DIR}")
-        return {}, None
+        #Changed By Hassam Nasir
+        # return {}, None
+        return {}, {}, None
 
     if df.empty:
-        return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        #Changed By Hassam Nasir
+        # return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        return {}, {}, pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
-    # Find name and ID columns
     cols_lower = {str(c).strip().casefold(): str(c) for c in df.columns}
     name_col = cols_lower.get("rca name") or cols_lower.get("name")
     id_col = cols_lower.get("rca id") or cols_lower.get("id")
+    #Changed By Hassam Nasir — cached translated display name column
+    display_col = cols_lower.get("rca display name")
 
     if not name_col or not id_col:
-        return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        #Changed By Hassam Nasir
+        # return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        return {}, {}, pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
     mapping = {}
-    for name, rca_id in zip(df[name_col], df[id_col], strict=False):
+    #Changed By Hassam Nasir — id_to_display cache: rca_id → display name
+    id_to_display = {}
+
+    display_vals = df[display_col].tolist() if display_col else df[name_col].tolist()
+
+    for name, rca_id, display in zip(df[name_col], df[id_col], display_vals, strict=False):
         if is_missing_value(rca_id):
             continue
-
         id_str = str(rca_id).strip()
         if not id_str:
             continue
-
         key = normalize_rca_lookup_name(name)
         if key:
             mapping[key] = id_str
+        #Changed By Hassam Nasir — cache display name
+        if not is_missing_value(display):
+            display_str = str(display).strip()
+            if display_str:
+                id_to_display[id_str] = display_str
 
-    lookup_df = df.rename(columns={name_col: "RCA Name", id_col: "RCA ID"})[
-        ["RCA Name", "RCA ID"]
-    ]
-    return mapping, lookup_df
+    lookup_df = df.copy()
+    #Changed By Hassam Nasir
+    # return mapping, lookup_df
+    return mapping, id_to_display, lookup_df
 
 
 def generate_initials(name: str) -> str:
@@ -940,10 +972,24 @@ def get_or_create_rca_id(
     """Get existing or create new RCA identifier."""
     formatted = format_name_value(entity_name)
     flat = flatten_list_value(formatted) if formatted else None
-    lookup_key = normalize_rca_lookup_name(flat or entity_name)
 
-    if lookup_key in lookup:
-        return lookup[lookup_key]
+    #Changed By Hassam Nasir
+    # lookup_key = normalize_rca_lookup_name(flat or entity_name)
+    # Masla: flat = translator.translate() ka result — har run alag ho sakta hai
+    # → alag key → existing entry nahi milti → naya random ID → re-insert cycle.
+    # Fix: entity_name (original, stable) se key banao.
+    stable_key = normalize_rca_lookup_name(entity_name)
+
+    if stable_key in lookup:
+        return lookup[stable_key]
+
+    # Backward compat: pehle ka lookup file translated name se save hua tha
+    formatted_key = normalize_rca_lookup_name(flat or entity_name)
+    if formatted_key and formatted_key != stable_key and formatted_key in lookup:
+        rca_id = lookup[formatted_key]
+        #Changed By Hassam Nasir — stable key pe migrate karo
+        lookup[stable_key] = rca_id
+        return rca_id
 
     initials = generate_initials(flat or entity_name)
     combo = generate_random_combo()
@@ -955,7 +1001,9 @@ def get_or_create_rca_id(
     sequence[key] = sequence.get(key, 0) + 1
 
     rca_id = f"{country_code}-GEN-{initials}-{combo}-RCA-{sequence[key]}"
-    lookup[lookup_key] = rca_id
+    #Changed By Hassam Nasir
+    # lookup[lookup_key] = rca_id  # old: translated key
+    lookup[stable_key] = rca_id  # new: stable key
     return rca_id
 
 
@@ -983,22 +1031,27 @@ def is_valid_rca_name(name: str, category: str) -> bool:
 
 
 def build_rca_rows(
-    rca_df: pd.DataFrame, existing_lookup: dict[str, str], country_code: str = "BH"
+    rca_df: pd.DataFrame,
+    existing_lookup: dict[str, str],
+    #Changed By Hassam Nasir — cached display names: {rca_id -> display name}
+    existing_id_to_display: dict[str, str] | None = None,
+    country_code: str = "BH",
 ) -> tuple[list[dict], dict[str, list[tuple[str, str]]]]:
     """
     Build RCA rows and track parent-child relationships.
-    CORRECTED to match bahrain_pep_scrapper.py logic exactly.
     Returns: (rca_records, parent_links)
     """
     if rca_df.empty or "ID" not in rca_df.columns:
         return [], {}
 
     lookup = existing_lookup.copy()
+    #Changed By Hassam Nasir — use cached display names to avoid re-translation
+    id_to_name: dict[str, str] = existing_id_to_display.copy() if existing_id_to_display else {}
     used_combos = set()
     sequence = {}
-    created_ids = set()  # Track which RCA IDs we've already created
+    created_ids = set()
     rca_records = []
-    parent_links = {}  # {parent_id: [(relationship_type, rca_id), ...]}
+    parent_links = {}
 
     for col in rca_df.columns:
         if col == "ID" or col.lower() in EXCLUDED_RELATIONSHIP_COLUMNS:
@@ -1014,41 +1067,42 @@ def build_rca_rows(
             if is_missing_value(parent_id) or is_missing_value(value):
                 continue
 
-            # Parse RCA names using proper list parsing
             entries = parse_list_entries(value)
             if not entries:
                 entries = [str(value).strip()]
 
             for entity_name in entries:
-                # Validate RCA name
                 if not is_valid_rca_name(entity_name, category):
                     continue
 
-                # Get or create RCA ID
                 rca_id = get_or_create_rca_id(
                     entity_name, lookup, used_combos, sequence, country_code
                 )
 
-                # Only create record if we haven't already
                 if rca_id not in created_ids:
-                    # Format the name properly
-                    formatted_name = format_name_value(entity_name)
-                    if not formatted_name:
-                        continue
+                    #Changed By Hassam Nasir
+                    # formatted_name = format_name_value(entity_name)  # old: translator — non-deterministic
+                    # Fix: agar cached name hai tou wahi use karo, warna translate karo aur cache mein save karo
+                    if rca_id in id_to_name:
+                        formatted_name = id_to_name[rca_id]
+                    else:
+                        formatted_name = format_name_value(entity_name)
+                        if not formatted_name:
+                            continue
+                        id_to_name[rca_id] = formatted_name
 
-                    # Create RCA record
                     rca_record = {
                         "ID": rca_id,
                         "Name": formatted_name,
+                        #Changed By Hassam Nasir — original name for stable key in save_rca_lookup
+                        "_orig_name": entity_name,
                         "List Category": "Relative Close Associate",
                         "Deceased Dissolved Status": 0,
                         "Alias": [],
                         "Alias Type": [],
                     }
 
-                    # Handle special characters - add as alias with proper type
                     if contains_special_chars(entity_name):
-                        # Store original non-ASCII name as alias
                         alias_val = truncate_after_comma(entity_name)
                         rca_record["Alias"] = [alias_val]
                         rca_record["Alias Type"] = ["Original Script Name"]
@@ -1056,7 +1110,6 @@ def build_rca_rows(
                     rca_records.append(rca_record)
                     created_ids.add(rca_id)
 
-                # Track parent link using original parent ID (will be mapped later)
                 parent_id_str = str(parent_id)
                 if parent_id_str not in parent_links:
                     parent_links[parent_id_str] = []
@@ -1066,41 +1119,64 @@ def build_rca_rows(
 
 
 def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -> None:
-    """Save RCA lookup workbook - matches bahrain_pep_scrapper.py"""
+    """Save RCA lookup workbook.
+
+    #Changed By Hassam Nasir — 3-column format:
+    #   RCA Name        = original entity name (stable lookup key)
+    #   RCA Display Name = cached translated name (avoids re-translation)
+    #   RCA ID          = identifier
+    #
+    # Pehle 2-column tha: "RCA Name" (translated) + "RCA ID"
+    # Masla: translated name alag ho sakta tha → key mismatch → naya ID → re-insert.
+    """
     lookup_path = os.path.join(RCA_FILE_PATH)
+    ordered = {}  # {stable_key: (rca_id, orig_name, display_name)}
 
-    ordered = {}
-
-    # Add existing entries
+    # Carry over existing 3-column entries (stable keys already)
     if existing_df is not None and not existing_df.empty:
-        for name, rca_id in zip(
-            existing_df["RCA Name"], existing_df["RCA ID"], strict=False
-        ):
-            if not is_missing_value(name) and not is_missing_value(rca_id):
-                id_str = str(rca_id).strip()
-                key = normalize_rca_lookup_name(name)
-                if key and key not in ordered:
-                    display = str(name).strip()
-                    ordered[key] = (id_str, display)
+        cols_lower = {str(c).strip().casefold(): str(c) for c in existing_df.columns}
+        ex_name_col = cols_lower.get("rca name")
+        ex_id_col = cols_lower.get("rca id")
+        ex_display_col = cols_lower.get("rca display name")
+        #Changed By Hassam Nasir — sirf 3-col entries carry karo (stable keys hain)
+        # 2-col format (pehle wala) mein "rca display name" nahi hota → skip (incompatible keys)
+        if ex_name_col and ex_id_col and ex_display_col:
+            for orig, rca_id, disp in zip(
+                existing_df[ex_name_col], existing_df[ex_id_col], existing_df[ex_display_col], strict=False
+            ):
+                if not is_missing_value(orig) and not is_missing_value(rca_id):
+                    id_str = str(rca_id).strip()
+                    key = normalize_rca_lookup_name(orig)
+                    if key and key not in ordered:
+                        disp_str = str(disp).strip() if not is_missing_value(disp) else str(orig).strip()
+                        ordered[key] = (id_str, str(orig).strip(), disp_str)
 
-    # Add new entries from RCA records
     for record in rca_records:
-        name = record.get("Name", "")
+        display_name = record.get("Name", "")
+        #Changed By Hassam Nasir — _orig_name se stable key
+        orig_name = record.get("_orig_name", display_name)
         rca_id = record.get("ID", "")
-        if name and rca_id:
-            key = normalize_rca_lookup_name(name)
+        if display_name and rca_id:
+            #Changed By Hassam Nasir
+            # key = normalize_rca_lookup_name(name)           # old: translated name as key
+            # ordered[key] = (rca_id, name)                  # old: save translated name
+            key = normalize_rca_lookup_name(orig_name)        # new: original name as stable key
             if key and key not in ordered:
-                ordered[key] = (str(rca_id).strip(), str(name).strip())
+                ordered[key] = (str(rca_id).strip(), str(orig_name).strip(), str(display_name).strip())
 
     lookup_df = pd.DataFrame(
         {
+            #Changed By Hassam Nasir — 3 columns
             "RCA Name": [v[1] for v in ordered.values()],
+            "RCA Display Name": [v[2] for v in ordered.values()],
             "RCA ID": [v[0] for v in ordered.values()],
         }
     )
 
     if lookup_df.empty:
-        lookup_df = pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        #Changed By Hassam Nasir
+        # lookup_df = pd.DataFrame(columns=["RCA Name", "RCA ID"])
+        lookup_df = pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
     lookup_df.to_excel(lookup_path, index=False, sheet_name="RCA Lookup")
     logger.info(f"RCA lookup saved: {lookup_path}")
@@ -1109,7 +1185,9 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
 def get_clean_df() -> pd.DataFrame:
     # Load data
     raw_df, rca_df = get_raw_df()
-    existing_lookup, existing_lookup_df = load_rca_lookup()
+    #Changed By Hassam Nasir
+    # existing_lookup, existing_lookup_df = load_rca_lookup()  # old: 2 values
+    existing_lookup, existing_id_to_display, existing_lookup_df = load_rca_lookup()  # new: 3 values
 
     # Initialize clean df for main records only
     clean_df = initalize_clean_df(len(raw_df))
@@ -1234,8 +1312,9 @@ def get_clean_df() -> pd.DataFrame:
                 translated_name = translator.translate(first_alias)
                 clean_df.at[idx, "Name"] = translated_name
 
-    # Build RCA rows using corrected function
-    rca_records, parent_links = build_rca_rows(rca_df, existing_lookup)
+    #Changed By Hassam Nasir
+    # rca_records, parent_links = build_rca_rows(rca_df, existing_lookup)  # old: 2 args
+    rca_records, parent_links = build_rca_rows(rca_df, existing_lookup, existing_id_to_display)  # new: pass cached names
 
     # Add relationships to parent rows
     for original_parent_id, links in parent_links.items():
