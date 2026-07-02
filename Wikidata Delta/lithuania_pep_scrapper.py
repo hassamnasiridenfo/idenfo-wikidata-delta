@@ -1462,10 +1462,16 @@ def replacements_for_delta(df):
     df.replace(replacement_values, inplace=True)
     return df
 
-def lithuania_pep_scrapper() -> pd.DataFrame:
-    try:
-        logger.info("Starting lithuania PEP scraper...")
-        clean_df = get_clean_df()
+def lithuania_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame: 
+    global RAW_FILE_PATH                    # the variable declared at top of file 
+    if raw_file_path is not None: 
+        RAW_FILE_PATH = raw_file_path       # override with the path passed in 
+    try: 
+        logger.info('Starting lithuania PEP scraper...') 
+
+        clean_df = get_clean_df()  
+        clean_df = common_cleaning(clean_df)
+        clean_df = replacements_for_delta(clean_df)
         logger.info("lithuania PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
@@ -1475,6 +1481,4 @@ def lithuania_pep_scrapper() -> pd.DataFrame:
             )
         )
         raise
-
-
 

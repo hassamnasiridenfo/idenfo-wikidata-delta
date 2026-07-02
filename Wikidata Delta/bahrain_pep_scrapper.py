@@ -47,7 +47,6 @@ LOG_FILE = BASE_DIR / "bh_gen_excels"/ "bh_pep_gen.log"
 logger = logging.getLogger("BahrainPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (bh_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
     # handler = logging.FileHandler(os.path.join(BASE_DIR, "bahrain_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
@@ -58,6 +57,54 @@ if not logger.hasHandlers():
     logger.addHandler(handler)
 
 translator = GoogleTranslator(source="auto", target="en")
+
+#Changed By Hassam Nasir
+# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
+# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
+# agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
+TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_bahrain_translation_cache.xlsx")
+
+
+def _load_translation_cache() -> dict:
+    if os.path.exists(TRANSLATION_CACHE_PATH):
+        try:
+            _df = pd.read_excel(TRANSLATION_CACHE_PATH)
+            return {
+                str(s): str(t)
+                for s, t in zip(_df["Source"], _df["Translation"])
+                if pd.notna(s) and pd.notna(t)
+            }
+        except Exception as _e:
+            logger.warning(f"Translation cache read failed: {_e}")
+    return {}
+
+
+_TRANSLATION_CACHE = _load_translation_cache()
+
+
+def cached_translate(text: str) -> str:
+    """Translate via cache first; on miss, call Google once and store it."""
+    key = str(text).strip()
+    if not key:
+        return text
+    if key in _TRANSLATION_CACHE:
+        return _TRANSLATION_CACHE[key]
+    result = translator.translate(key)
+    if result:
+        _TRANSLATION_CACHE[key] = result
+    return result
+
+
+def _save_translation_cache() -> None:
+    try:
+        pd.DataFrame(
+            {
+                "Source": list(_TRANSLATION_CACHE.keys()),
+                "Translation": list(_TRANSLATION_CACHE.values()),
+            }
+        ).to_excel(TRANSLATION_CACHE_PATH, index=False)
+    except Exception as _e:
+        logger.warning(f"Translation cache save failed: {_e}")
 
 
 # RCA Configuration
@@ -211,6 +258,16 @@ def normalize_name_tokens(text: str) -> str:
     return " ".join(text.split())
 
 
+def strip_honorifics(text: str) -> str:
+    """Remove leading honorifics/titles (Mr., Dr., Sheikh...) that translation adds."""
+    return re.sub(
+        r"^\s*(mr|mrs|ms|dr|prof|sheikh|shaikh|sir)\.?\s+",
+        "",
+        str(text),
+        flags=re.IGNORECASE,
+    )
+
+
 def truncate_after_comma(text: str) -> str:
     """Remove everything after the first comma."""
     text = text.strip()
@@ -237,7 +294,10 @@ def format_name_value(value: object) -> str | None:
         return None
 
     if contains_special_chars(base):
-        cleaned = translator.translate(base)
+        #Changed By Hassam Nasir
+        # pehle translate (cache se, deterministic), phir honorific (Mr./Dr.) hatao, phir cleaning
+        cleaned = cached_translate(base)
+        cleaned = strip_honorifics(cleaned)
         cleaned = normalize_name_tokens(cleaned)
     else:
         cleaned = normalize_name_tokens(base)
@@ -360,7 +420,6 @@ def get_raw_df(
     sheet: str = None, raw_file_path: str | None = None
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Load raw data, returning main df and separate RCA df"""
-    #Changed By Hassam Nasir
     # Pehle get_sheet_df() bina raw_file_path ke call hoti thi.
     # Orchestrator date-stamped file path deta hai → bahrain_pep_scrapper() global RAW_FILE_PATH set karta hai.
     # Ab RAW_FILE_PATH global pass karte hain taake sahi file read ho.
@@ -378,14 +437,12 @@ def get_raw_df(
     if "familyLabel" in rca_df.columns:
         rca_df = rca_df.drop(columns=["familyLabel"])
 
-    #Changed By Hassam Nasir
     # rca_df["childLabel"] = rca_df["childLabel"].apply(...)  # old: crashed if column missing (empty df)
     if "childLabel" in rca_df.columns:
         rca_df["childLabel"] = rca_df["childLabel"].apply(
             lambda x: x if x != '["7"]' else None
         )
 
-    #Changed By Hassam Nasir
     # rca_df["siblingLabel"] = rca_df["siblingLabel"].apply(clean_siblings)  # old: crashed if column missing
     if "siblingLabel" in rca_df.columns:
         rca_df["siblingLabel"] = rca_df["siblingLabel"].apply(clean_siblings)
@@ -827,16 +884,18 @@ def get_aliases(
         nonEngLabel_list.extend([e.strip() for e in extracted if e.strip()])
 
     aka_list = [re.sub(paren_pattern, "", alias).strip() for alias in aka_list]
+    #Changed By Hassam Nasir
+    # old: complete_aliases = set(); return list(complete_aliases) -> list(set) ka order har run
+    #      alag hota hai (hash randomization) = latent non-determinism. sorted() se deterministic.
     complete_aliases = set()
     for alias in aka_list + birthName_list + nativeName_list + nonEngLabel_list:
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    alias_types = []
-    for alias in complete_aliases:
-        alias_types.append(get_alias_type(alias))
+    sorted_aliases = sorted(complete_aliases)
+    alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
-    return list(complete_aliases), alias_types
+    return sorted_aliases, alias_types
 
 
 def get_primary_occupation(occupationLabel: str) -> list[str]:
@@ -868,7 +927,6 @@ def normalize_rca_lookup_name(value: object) -> str:
 def load_rca_lookup() -> tuple[dict[str, str], dict[str, str], pd.DataFrame | None]:
     """Load existing RCA lookup workbook.
 
-    #Changed By Hassam Nasir — returns 3 values now (was 2):
     #   mapping:       {stable_key -> rca_id}
     #   id_to_display: {rca_id -> cached display name} — avoids re-translation each run
     #   lookup_df:     raw DataFrame passed back to save_rca_lookup
@@ -878,28 +936,23 @@ def load_rca_lookup() -> tuple[dict[str, str], dict[str, str], pd.DataFrame | No
         df = pd.read_excel(RCA_FILE_PATH)
     except Exception:
         logger.warning(f"Unable to read RCA lookup at {CLEANED_DIR}")
-        #Changed By Hassam Nasir
         # return {}, None
         return {}, {}, None
 
     if df.empty:
-        #Changed By Hassam Nasir
         # return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
         return {}, {}, pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
     cols_lower = {str(c).strip().casefold(): str(c) for c in df.columns}
     name_col = cols_lower.get("rca name") or cols_lower.get("name")
     id_col = cols_lower.get("rca id") or cols_lower.get("id")
-    #Changed By Hassam Nasir — cached translated display name column
     display_col = cols_lower.get("rca display name")
 
     if not name_col or not id_col:
-        #Changed By Hassam Nasir
         # return {}, pd.DataFrame(columns=["RCA Name", "RCA ID"])
         return {}, {}, pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
     mapping = {}
-    #Changed By Hassam Nasir — id_to_display cache: rca_id → display name
     id_to_display = {}
 
     display_vals = df[display_col].tolist() if display_col else df[name_col].tolist()
@@ -913,14 +966,12 @@ def load_rca_lookup() -> tuple[dict[str, str], dict[str, str], pd.DataFrame | No
         key = normalize_rca_lookup_name(name)
         if key:
             mapping[key] = id_str
-        #Changed By Hassam Nasir — cache display name
         if not is_missing_value(display):
             display_str = str(display).strip()
             if display_str:
                 id_to_display[id_str] = display_str
 
     lookup_df = df.copy()
-    #Changed By Hassam Nasir
     # return mapping, lookup_df
     return mapping, id_to_display, lookup_df
 
@@ -973,7 +1024,6 @@ def get_or_create_rca_id(
     formatted = format_name_value(entity_name)
     flat = flatten_list_value(formatted) if formatted else None
 
-    #Changed By Hassam Nasir
     # lookup_key = normalize_rca_lookup_name(flat or entity_name)
     # Masla: flat = translator.translate() ka result — har run alag ho sakta hai
     # → alag key → existing entry nahi milti → naya random ID → re-insert cycle.
@@ -987,7 +1037,6 @@ def get_or_create_rca_id(
     formatted_key = normalize_rca_lookup_name(flat or entity_name)
     if formatted_key and formatted_key != stable_key and formatted_key in lookup:
         rca_id = lookup[formatted_key]
-        #Changed By Hassam Nasir — stable key pe migrate karo
         lookup[stable_key] = rca_id
         return rca_id
 
@@ -1001,7 +1050,6 @@ def get_or_create_rca_id(
     sequence[key] = sequence.get(key, 0) + 1
 
     rca_id = f"{country_code}-GEN-{initials}-{combo}-RCA-{sequence[key]}"
-    #Changed By Hassam Nasir
     # lookup[lookup_key] = rca_id  # old: translated key
     lookup[stable_key] = rca_id  # new: stable key
     return rca_id
@@ -1033,7 +1081,6 @@ def is_valid_rca_name(name: str, category: str) -> bool:
 def build_rca_rows(
     rca_df: pd.DataFrame,
     existing_lookup: dict[str, str],
-    #Changed By Hassam Nasir — cached display names: {rca_id -> display name}
     existing_id_to_display: dict[str, str] | None = None,
     country_code: str = "BH",
 ) -> tuple[list[dict], dict[str, list[tuple[str, str]]]]:
@@ -1045,7 +1092,6 @@ def build_rca_rows(
         return [], {}
 
     lookup = existing_lookup.copy()
-    #Changed By Hassam Nasir — use cached display names to avoid re-translation
     id_to_name: dict[str, str] = existing_id_to_display.copy() if existing_id_to_display else {}
     used_combos = set()
     sequence = {}
@@ -1080,7 +1126,6 @@ def build_rca_rows(
                 )
 
                 if rca_id not in created_ids:
-                    #Changed By Hassam Nasir
                     # formatted_name = format_name_value(entity_name)  # old: translator — non-deterministic
                     # Fix: agar cached name hai tou wahi use karo, warna translate karo aur cache mein save karo
                     if rca_id in id_to_name:
@@ -1094,7 +1139,6 @@ def build_rca_rows(
                     rca_record = {
                         "ID": rca_id,
                         "Name": formatted_name,
-                        #Changed By Hassam Nasir — original name for stable key in save_rca_lookup
                         "_orig_name": entity_name,
                         "List Category": "Relative Close Associate",
                         "Deceased Dissolved Status": 0,
@@ -1121,7 +1165,6 @@ def build_rca_rows(
 def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -> None:
     """Save RCA lookup workbook.
 
-    #Changed By Hassam Nasir — 3-column format:
     #   RCA Name        = original entity name (stable lookup key)
     #   RCA Display Name = cached translated name (avoids re-translation)
     #   RCA ID          = identifier
@@ -1138,7 +1181,6 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
         ex_name_col = cols_lower.get("rca name")
         ex_id_col = cols_lower.get("rca id")
         ex_display_col = cols_lower.get("rca display name")
-        #Changed By Hassam Nasir — sirf 3-col entries carry karo (stable keys hain)
         # 2-col format (pehle wala) mein "rca display name" nahi hota → skip (incompatible keys)
         if ex_name_col and ex_id_col and ex_display_col:
             for orig, rca_id, disp in zip(
@@ -1153,11 +1195,9 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
 
     for record in rca_records:
         display_name = record.get("Name", "")
-        #Changed By Hassam Nasir — _orig_name se stable key
         orig_name = record.get("_orig_name", display_name)
         rca_id = record.get("ID", "")
         if display_name and rca_id:
-            #Changed By Hassam Nasir
             # key = normalize_rca_lookup_name(name)           # old: translated name as key
             # ordered[key] = (rca_id, name)                  # old: save translated name
             key = normalize_rca_lookup_name(orig_name)        # new: original name as stable key
@@ -1166,7 +1206,6 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
 
     lookup_df = pd.DataFrame(
         {
-            #Changed By Hassam Nasir — 3 columns
             "RCA Name": [v[1] for v in ordered.values()],
             "RCA Display Name": [v[2] for v in ordered.values()],
             "RCA ID": [v[0] for v in ordered.values()],
@@ -1174,7 +1213,6 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
     )
 
     if lookup_df.empty:
-        #Changed By Hassam Nasir
         # lookup_df = pd.DataFrame(columns=["RCA Name", "RCA ID"])
         lookup_df = pd.DataFrame(columns=["RCA Name", "RCA Display Name", "RCA ID"])
 
@@ -1185,7 +1223,6 @@ def save_rca_lookup(rca_records: list[dict], existing_df: pd.DataFrame | None) -
 def get_clean_df() -> pd.DataFrame:
     # Load data
     raw_df, rca_df = get_raw_df()
-    #Changed By Hassam Nasir
     # existing_lookup, existing_lookup_df = load_rca_lookup()  # old: 2 values
     existing_lookup, existing_id_to_display, existing_lookup_df = load_rca_lookup()  # new: 3 values
 
@@ -1309,10 +1346,15 @@ def get_clean_df() -> pd.DataFrame:
 
             if clean_df.at[idx, "Name"] == "":
                 first_alias = aliases[0]
-                translated_name = translator.translate(first_alias)
-                clean_df.at[idx, "Name"] = translated_name
+                #Changed By Hassam Nasir
+                # pehle translate (cache se) PHIR cleaning (Mr./honorific + hyphen/punctuation hatao)
+                # old: translated_name = translator.translate(first_alias)
+                # old: clean_df.at[idx, "Name"] = translated_name
+                translated_name = cached_translate(first_alias)
+                translated_name = strip_honorifics(translated_name)
+                translated_name = normalize_name_tokens(translated_name)
+                clean_df.at[idx, "Name"] = translated_name.strip().title()
 
-    #Changed By Hassam Nasir
     # rca_records, parent_links = build_rca_rows(rca_df, existing_lookup)  # old: 2 args
     rca_records, parent_links = build_rca_rows(rca_df, existing_lookup, existing_id_to_display)  # new: pass cached names
 
@@ -1552,6 +1594,9 @@ def bahrain_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
+        #Changed By Hassam Nasir
+        # is run me jo naye translations bane unhe cache file me save karo (agli run inhe reuse karegi)
+        _save_translation_cache()
         logger.info("bahrain PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
