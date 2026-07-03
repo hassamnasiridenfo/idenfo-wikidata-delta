@@ -13,7 +13,6 @@ from datetime import datetime
 from ast import literal_eval
 
 
-# Changed By Hassam Nasir — BASE_DIR 2-level upar tha aur Raw/Cleaned folders use ho rahe the (Wikidata Delta se bahar).
 # Ab BASE_DIR = scraper ka folder, aur RAW/CLEANED → scraper_tag folder lt_gen_excels.
 # BASE_DIR = Path(__file__).parent.parent
 # CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
@@ -37,7 +36,6 @@ RCA_FILE_PATH = os.path.join(
 logger = logging.getLogger("lithuaniaPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab lt_gen_excels folder mein (CLEANED_DIR), pehle BASE_DIR mein ja raha tha
     # handler = logging.FileHandler(os.path.join(BASE_DIR, "lithuania_pep.log"))
     handler = logging.FileHandler(os.path.join(CLEANED_DIR, "lithuania_pep.log"))
     formatter = logging.Formatter(
@@ -49,7 +47,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Changed By Hassam Nasir
 # Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
 # Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
 # agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
@@ -79,8 +76,13 @@ def cached_translate(text: str) -> str:
     if not key:
         return text
     if key in _TRANSLATION_CACHE:
-        return _TRANSLATION_CACHE[key]
-    result = translator.translate(key)
+        result = _TRANSLATION_CACHE[key]
+    else:
+        result = translator.translate(key)
+    # unidecode se English-alphabet me likho. Cache/output clean ASCII rehta hai;
+    # cache-hit par bhi clean hota hai -> purani accented entries self-heal ho jati hain.
+    if result and not str(result).isascii():
+        result = unidecode(result)
     if result:
         _TRANSLATION_CACHE[key] = result
     return result
@@ -365,7 +367,6 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
 
 
 def get_sheet_df(sheet: str, raw_file_path: str | None = None) -> pd.DataFrame:
-    # Changed By Hassam Nasir — orchestrator module.RAW_FILE_PATH set karta hai; global use karo warna inject kiya raw path ignore ho jata (switzerland/uk wala behaviour)
     # if raw_file_path is None:
     #     raw_file_path = os.path.join(RAW_DIR, "pep_lithuania_living_relevant_raw.xlsx")
     if raw_file_path is None:
@@ -872,7 +873,6 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    # Changed By Hassam Nasir — set() ka order har run par badalta tha (hash randomization)
     # -> alias sequence change -> delta "changed" -> re-insert. sorted() se order fixed.
     sorted_aliases = sorted(complete_aliases)
     alias_types = [get_alias_type(alias) for alias in sorted_aliases]
@@ -1521,7 +1521,6 @@ def lithuania_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()  
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # Changed By Hassam Nasir — run ke aakhir me naye translations disk par save,
         # taake agli run cache se deterministic rahe (churn na ho).
         _save_translation_cache()
         logger.info("lithuania PEP scraper completed successfully.")

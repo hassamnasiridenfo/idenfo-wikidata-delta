@@ -58,7 +58,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-#Changed By Hassam Nasir
 # Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
 # Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
 # agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
@@ -88,8 +87,13 @@ def cached_translate(text: str) -> str:
     if not key:
         return text
     if key in _TRANSLATION_CACHE:
-        return _TRANSLATION_CACHE[key]
-    result = translator.translate(key)
+        result = _TRANSLATION_CACHE[key]
+    else:
+        result = translator.translate(key)
+    # unidecode se English-alphabet me likho. Cache/output clean ASCII rehta hai;
+    # cache-hit par bhi clean hota hai -> purani accented entries self-heal ho jati hain.
+    if result and not str(result).isascii():
+        result = unidecode(result)
     if result:
         _TRANSLATION_CACHE[key] = result
     return result
@@ -294,7 +298,6 @@ def format_name_value(value: object) -> str | None:
         return None
 
     if contains_special_chars(base):
-        #Changed By Hassam Nasir
         # pehle translate (cache se, deterministic), phir honorific (Mr./Dr.) hatao, phir cleaning
         cleaned = cached_translate(base)
         cleaned = strip_honorifics(cleaned)
@@ -884,7 +887,6 @@ def get_aliases(
         nonEngLabel_list.extend([e.strip() for e in extracted if e.strip()])
 
     aka_list = [re.sub(paren_pattern, "", alias).strip() for alias in aka_list]
-    #Changed By Hassam Nasir
     # old: complete_aliases = set(); return list(complete_aliases) -> list(set) ka order har run
     #      alag hota hai (hash randomization) = latent non-determinism. sorted() se deterministic.
     complete_aliases = set()
@@ -1346,7 +1348,6 @@ def get_clean_df() -> pd.DataFrame:
 
             if clean_df.at[idx, "Name"] == "":
                 first_alias = aliases[0]
-                #Changed By Hassam Nasir
                 # pehle translate (cache se) PHIR cleaning (Mr./honorific + hyphen/punctuation hatao)
                 # old: translated_name = translator.translate(first_alias)
                 # old: clean_df.at[idx, "Name"] = translated_name
@@ -1594,7 +1595,6 @@ def bahrain_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        #Changed By Hassam Nasir
         # is run me jo naye translations bane unhe cache file me save karo (agli run inhe reuse karegi)
         _save_translation_cache()
         logger.info("bahrain PEP scraper completed successfully.")

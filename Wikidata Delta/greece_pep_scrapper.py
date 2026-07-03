@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+import hashlib
 import secrets
 import string
 import unicodedata
@@ -48,7 +49,6 @@ LOG_FILE = BASE_DIR / "gr_gen_excels"/ "gr_pep_gen.log"
 logger = logging.getLogger("greecePEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (gr_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
     # handler = logging.FileHandler(os.path.join(BASE_DIR, "greece_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
@@ -59,6 +59,59 @@ if not logger.hasHandlers():
     logger.addHandler(handler)
 
 translator = GoogleTranslator(source="auto", target="en")
+
+# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
+# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
+# agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
+TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_greece_translation_cache.xlsx")
+
+
+def _load_translation_cache() -> dict:
+    if os.path.exists(TRANSLATION_CACHE_PATH):
+        try:
+            _df = pd.read_excel(TRANSLATION_CACHE_PATH)
+            return {
+                str(s): str(t)
+                for s, t in zip(_df["Source"], _df["Translation"])
+                if pd.notna(s) and pd.notna(t)
+            }
+        except Exception as _e:
+            logger.warning(f"Translation cache read failed: {_e}")
+    return {}
+
+
+_TRANSLATION_CACHE = _load_translation_cache()
+
+
+def cached_translate(text: str) -> str:
+    """Translate via cache first; on miss, call Google once and store it."""
+    key = str(text).strip()
+    if not key:
+        return text
+    if key in _TRANSLATION_CACHE:
+        result = _TRANSLATION_CACHE[key]
+    else:
+        result = translator.translate(key)
+    # (jaise "Miltiádis Varvitsiótis", "Kardítsa") to unidecode se English-alphabet me likho.
+    # Isse cache/output clean ASCII rehta hai aur character-mismatch se inconsistency nahi hoti.
+    # Cache-hit par bhi clean hota hai -> purani accented entries agli run par self-heal ho jati hain.
+    if result and not str(result).isascii():
+        result = unidecode(result)
+    if result:
+        _TRANSLATION_CACHE[key] = result
+    return result
+
+
+def _save_translation_cache() -> None:
+    try:
+        pd.DataFrame(
+            {
+                "Source": list(_TRANSLATION_CACHE.keys()),
+                "Translation": list(_TRANSLATION_CACHE.values()),
+            }
+        ).to_excel(TRANSLATION_CACHE_PATH, index=False)
+    except Exception as _e:
+        logger.warning(f"Translation cache save failed: {_e}")
 
 
 # RCA Configuration
@@ -238,7 +291,7 @@ def format_name_value(value: object) -> str | None:
         return None
 
     if contains_special_chars(base):
-        cleaned = translator.translate(base)
+        cleaned = cached_translate(base)
         cleaned = normalize_name_tokens(cleaned)
     else:
         cleaned = normalize_name_tokens(base)
@@ -459,7 +512,7 @@ def get_place_of_birth(birthPlaceLabel: str, extra_info: dict) -> str:
         if check_if_date(place) or re.match(r"^Q\d+$", place):
             return ""
         if not place.isascii():
-            extra_info["POB In Other Language"] = translator.translate(place)
+            extra_info["POB In Other Language"] = cached_translate(place)
         return unidecode(place)
     else:
         # Use parse_list_entries to properly handle bracketed items with commas
@@ -474,7 +527,7 @@ def get_place_of_birth(birthPlaceLabel: str, extra_info: dict) -> str:
         extra_info["POB In Other Language"] = ""
         for place in places[1:]:
             if not place.isascii():
-                extra_info["Extra POB"] += translator.translate(place) + ", "
+                extra_info["Extra POB"] += cached_translate(place) + ", "
                 extra_info["POB In Other Language"] += place + ", "
             else:
                 extra_info["Extra POB"] += place + ", "
@@ -519,7 +572,17 @@ def get_formatted_date(dateStr: str) -> list[str]:
 
         try:
             parsed_date = datetime.strptime(date_only, "%Y-%m-%d")
-            result.append(parsed_date.strftime("%Y-%m-%d"))
+            # ko MySQL ke 2-digit-year rule (00-69 -> 2000s, 70-99 -> 1900s) se normalize karo.
+            # Warna scraper "23-05-26" deta tha jise MySQL "2023-05-26" bana deta hai ->
+            # delta hamesha mismatch -> har run churn. f-string se 4-digit year guarantee
+            # (glibc strftime %Y leading-zero gira deta hai, isliye manual format).
+            if parsed_date.year < 100:
+                parsed_date = parsed_date.replace(
+                    year=parsed_date.year + (2000 if parsed_date.year <= 69 else 1900)
+                )
+            result.append(
+                f"{parsed_date.year:04d}-{parsed_date.month:02d}-{parsed_date.day:02d}"
+            )
         except ValueError:
             # Skip invalid dates silently since they're already filtered
             continue
@@ -813,7 +876,7 @@ def get_father_name(fatherLabel: str) -> str:
         return ""
 
     if not father_name.isascii():
-        father_name = translator.translate(father_name)
+        father_name = cached_translate(father_name)
 
     return unidecode(clean_alias(father_name).strip().title())
 
@@ -881,11 +944,11 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    alias_types = []
-    for alias in complete_aliases:
-        alias_types.append(get_alias_type(alias))
+    # -> alias sequence change -> delta "changed" -> re-insert. sorted() se order fixed.
+    sorted_aliases = sorted(complete_aliases)
+    alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
-    return list(complete_aliases), alias_types
+    return sorted_aliases, alias_types
 
 
 def normalize_rca_lookup_name(value: object) -> str:
@@ -975,6 +1038,17 @@ def generate_random_combo(length: int = 5) -> str:
     return "".join(secrets.choice(alphabet) for _ in range(length))
 
 
+def deterministic_combo(seed: str, length: int = 5) -> str:
+    """Deterministic alphanumeric combo from a stable seed.
+
+    Isse RCA ID kabhi nahi badalti chahe lookup file gum ho / fresh DB dump ho / naya
+    server ho — kyunke ID ab naam se compute hoti hai, file/DB par depend nahi karti.
+    """
+    alphabet = string.ascii_uppercase + string.digits  # 36 chars
+    digest = hashlib.sha256(seed.encode("utf-8")).digest()
+    return "".join(alphabet[b % len(alphabet)] for b in digest[:length])
+
+
 def get_or_create_rca_id(
     entity_name: str,
     lookup: dict[str, str],
@@ -982,25 +1056,35 @@ def get_or_create_rca_id(
     sequence: dict[tuple[str, str], int],
     country_code: str,
 ) -> str:
-    """Get existing or create new RCA identifier."""
+    """Get existing or create a DETERMINISTIC RCA identifier.
+
+    banti thi -> ID sirf lookup file ki wajah se stable rehti thi, aur translation drift ya
+    fresh dump / file gum hone par naye random ID ban jate the (5SNKE -> Q2M3B -> N2P0V).
+    Ab:
+      1) key = ORIGINAL naam (translation-independent, drift nahi karta)
+      2) combo = us naam ka hash (deterministic, random nahi)
+    -> same naam -> HAMESHA same ID (file/DB/dump se azad).
+    """
     formatted = format_name_value(entity_name)
     flat = flatten_list_value(formatted) if formatted else None
-    lookup_key = normalize_rca_lookup_name(flat or entity_name)
 
-    if lookup_key in lookup:
-        return lookup[lookup_key]
+    # Stable key: ORIGINAL naam se (translated se nahi) -> har run same
+    stable_key = normalize_rca_lookup_name(entity_name)
+
+    # Pehle se assigned (isi run me ya file se stable-key match) -> wahi reuse
+    if stable_key in lookup:
+        return lookup[stable_key]
 
     initials = generate_initials(flat or entity_name)
-    combo = generate_random_combo()
-    while combo in used_combos:
-        combo = generate_random_combo()
-    used_combos.add(combo)
+    combo = deterministic_combo(stable_key)  # random ki jagah -> naam se fixed
 
+    # (initials, combo) rare collision -> sequence se disambiguate; raw order stable hai
+    # isliye yeh bhi runs ke darmiyan deterministic rehta hai.
     key = (initials, combo)
     sequence[key] = sequence.get(key, 0) + 1
 
     rca_id = f"{country_code}-GEN-{initials}-{combo}-RCA-{sequence[key]}"
-    lookup[lookup_key] = rca_id
+    lookup[stable_key] = rca_id
     return rca_id
 
 
@@ -1285,7 +1369,7 @@ def get_clean_df() -> pd.DataFrame:
 
             if clean_df.at[idx, "Name"] == "":
                 first_alias = aliases[0]
-                translated_name = translator.translate(first_alias)
+                translated_name = cached_translate(first_alias)
                 clean_df.at[idx, "Name"] = clean_alias(translated_name)
 
     logger.info("Processing RCA records...")
@@ -1506,7 +1590,7 @@ def common_cleaning(df):
     df.drop(index=df[df["Name"] == ""].index, inplace=True)
     return df
 
-def replacements_for_delta(df):
+def replacements_for_delta(df): 
     df.replace('', 'NULL', inplace=True)
     replacement_values = {'Deceased Dissolved Date': {'NULL': '1890-01-01'},
                         'Registration Date': {'NULL': '1890-01-01'},
@@ -1526,6 +1610,8 @@ def greece_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
+        # taake agli run cache se deterministic rahe (churn na ho).
+        _save_translation_cache()
         logger.info("greece PEP scraper completed successfully.")
         return clean_df
     except Exception as e:

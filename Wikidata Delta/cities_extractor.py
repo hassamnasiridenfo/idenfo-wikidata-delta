@@ -49,7 +49,11 @@ def cities_extractor(df):
 
     #     return city_remove_duplicate
         city.extend(temp_city)
-        return city
+        # banti thi -> order har run badalta -> jis record mein 2+ cities hon uska City sequence
+        # change -> delta address (Primary Address <-> City) pairing badalta -> mismatch ->
+        # HAR RUN re-insert (churn). (Arianna Huffington DB mein 6 dafa isi wajah se aayi.)
+        # sorted(set(...)) se dedup + deterministic order -> churn khatam. Saare countries par asar.
+        return sorted(set(city))
 
     df['City'] = df.apply(lambda row: address_filter(row['Primary Address'],row['City']),axis=1)
 
