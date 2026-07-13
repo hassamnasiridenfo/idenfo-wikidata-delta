@@ -37,7 +37,6 @@ LOG_FILE = BASE_DIR / "kg_nl_gen_excels"/ "netherlands_pep.log"
 logger = logging.getLogger("netherlandsPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (kg_nl_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
     # handler = logging.FileHandler(os.path.join(BASE_DIR, "netherlands_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
@@ -48,6 +47,54 @@ if not logger.hasHandlers():
     logger.addHandler(handler)
 
 translator = GoogleTranslator(source="auto", target="en")
+
+
+TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_kingdom-of-the-netherlands_translation_cache.xlsx")
+
+
+def _load_translation_cache() -> dict:
+    if os.path.exists(TRANSLATION_CACHE_PATH):
+        try:
+            _df = pd.read_excel(TRANSLATION_CACHE_PATH)
+            return {
+                str(s): str(t)
+                for s, t in zip(_df["Source"], _df["Translation"])
+                if pd.notna(s) and pd.notna(t)
+            }
+        except Exception as _e:
+            logger.warning(f"Translation cache read failed: {_e}")
+    return {}
+
+
+_TRANSLATION_CACHE = _load_translation_cache()
+
+
+def cached_translate(text: str) -> str:
+    """Translate via cache first; on miss, call Google once and store it (ASCII-normalized)."""
+    key = str(text).strip()
+    if not key:
+        return text
+    if key in _TRANSLATION_CACHE:
+        result = _TRANSLATION_CACHE[key]
+    else:
+        result = translator.translate(key)
+    if result and not str(result).isascii():
+        result = unidecode(result)
+    if result:
+        _TRANSLATION_CACHE[key] = result
+    return result
+
+
+def _save_translation_cache() -> None:
+    try:
+        pd.DataFrame(
+            {
+                "Source": list(_TRANSLATION_CACHE.keys()),
+                "Translation": list(_TRANSLATION_CACHE.values()),
+            }
+        ).to_excel(TRANSLATION_CACHE_PATH, index=False)
+    except Exception as _e:
+        logger.warning(f"Translation cache save failed: {_e}")
 
 
 # RCA Configuration
@@ -227,7 +274,7 @@ def format_name_value(value: object) -> str | None:
         return None
 
     if contains_special_chars(base):
-        cleaned = translator.translate(base)
+        cleaned = cached_translate(base)
         cleaned = normalize_name_tokens(cleaned)
     else:
         cleaned = normalize_name_tokens(base)
@@ -451,7 +498,7 @@ def get_place_of_birth(birthPlaceLabel: str, extra_info: dict) -> str:
         if check_if_date(place) or re.match(r"^Q\d+$", place):
             return ""
         if not place.isascii():
-            extra_info["POB In Other Language"] = translator.translate(place)
+            extra_info["POB In Other Language"] = cached_translate(place)
         return unidecode(place)
     else:
         # Use parse_list_entries to properly handle bracketed items with commas
@@ -466,7 +513,7 @@ def get_place_of_birth(birthPlaceLabel: str, extra_info: dict) -> str:
         extra_info["POB In Other Language"] = ""
         for place in places[1:]:
             if not place.isascii():
-                extra_info["Extra POB"] += translator.translate(place) + ", "
+                extra_info["Extra POB"] += cached_translate(place) + ", "
                 extra_info["POB In Other Language"] += place + ", "
             else:
                 extra_info["Extra POB"] += place + ", "
@@ -805,7 +852,7 @@ def get_father_name(fatherLabel: str) -> str:
         return ""
 
     if not father_name.isascii():
-        father_name = translator.translate(father_name)
+        father_name = cached_translate(father_name)
 
     return unidecode(clean_alias(father_name).strip().title())
 
@@ -873,11 +920,11 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    alias_types = []
-    for alias in complete_aliases:
-        alias_types.append(get_alias_type(alias))
+    # -> alias sequence / empty-name fallback change -> churn. sorted() se order fixed.
+    sorted_aliases = sorted(complete_aliases)
+    alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
-    return list(complete_aliases), alias_types
+    return sorted_aliases, alias_types
 
 
 def normalize_rca_lookup_name(value: object) -> str:
@@ -1293,7 +1340,7 @@ def get_clean_df() -> pd.DataFrame:
 
             if clean_df.at[idx, "Name"] == "":
                 first_alias = aliases[0]
-                translated_name = translator.translate(first_alias)
+                translated_name = cached_translate(first_alias)
                 clean_df.at[idx, "Name"] = clean_alias(translated_name)
 
     logger.info("Processing RCA records...")
@@ -1532,6 +1579,7 @@ def netherlands_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
+        _save_translation_cache()
         logger.info("netherlands PEP scraper completed successfully.")
         return clean_df
     except Exception as e:
