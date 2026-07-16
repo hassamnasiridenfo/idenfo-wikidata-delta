@@ -55,7 +55,6 @@ def _setup_logging(ctx: click.Context) -> None:
         logger.debug("Debug logging enabled")
 
 
-# Changed By Hassam Nasir
 def _setup_extraction_file_logging(country_name: str) -> None:
     """
     Create extraction_logs/ folder inside the structured-scraping project root,
@@ -455,7 +454,6 @@ def scrape(
         country_id   = get_country_id(country)
         country_name = get_country_name(country)
 
-        # Changed By Hassam Nasir
         # Set up file logging now that we know the country name.
         # Deletes previous country's log and creates a fresh one for this run.
         _setup_extraction_file_logging(country_name)

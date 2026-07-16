@@ -49,7 +49,6 @@ LOG_FILE = BASE_DIR / "gr_gen_excels"/ "gr_pep_gen.log"
 logger = logging.getLogger("greecePEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # handler = logging.FileHandler(os.path.join(BASE_DIR, "greece_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -60,9 +59,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_greece_translation_cache.xlsx")
 
 
@@ -92,9 +88,6 @@ def cached_translate(text: str) -> str:
         result = _TRANSLATION_CACHE[key]
     else:
         result = translator.translate(key)
-    # (jaise "Miltiádis Varvitsiótis", "Kardítsa") to unidecode se English-alphabet me likho.
-    # Isse cache/output clean ASCII rehta hai aur character-mismatch se inconsistency nahi hoti.
-    # Cache-hit par bhi clean hota hai -> purani accented entries agli run par self-heal ho jati hain.
     if result and not str(result).isascii():
         result = unidecode(result)
     if result:
@@ -1610,7 +1603,6 @@ def greece_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # taake agli run cache se deterministic rahe (churn na ho).
         _save_translation_cache()
         logger.info("greece PEP scraper completed successfully.")
         return clean_df

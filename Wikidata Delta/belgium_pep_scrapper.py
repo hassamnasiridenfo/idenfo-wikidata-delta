@@ -13,17 +13,7 @@ from datetime import datetime
 from ast import literal_eval
 
 
-# BASE_DIR = Path(__file__).parent.parent
-# CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-# os.makedirs(CLEANED_DIR, exist_ok=True)
-# RAW_DIR = os.path.join(BASE_DIR, "Raw")
-# os.makedirs(RAW_DIR, exist_ok=True)
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# CLEANED_DIR = BASE_DIR
-# RAW_DIR = BASE_DIR
-# CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_belgium_living_relevant_cleaned.xlsx")
-# RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_belgium_living_relevant_raw.xlsx")
-# RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_belgium_living_relevant_rca_lookup.xlsx")
+
 
 BASE_DIR = Path(__file__).parent
 RAW_DIR = BASE_DIR / "be_gen_excels"
@@ -48,7 +38,6 @@ LOG_FILE = BASE_DIR / "be_gen_excels"/ "be_pep_gen.log"
 logger = logging.getLogger("belgiumPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (be_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
     # handler = logging.FileHandler(os.path.join(BASE_DIR, "belgium_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
@@ -60,11 +49,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Changed By Hassam Nasir
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se. unidecode: translate ke baad bhi non-English reh jaye to
-# English-alphabet me likho -> naam har run same -> re-insert (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_belgium_translation_cache.xlsx")
 
 
@@ -895,8 +879,6 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    # Changed By Hassam Nasir — set() ka order har run par badalta tha (hash randomization)
-    # -> alias sequence / empty-name fallback change -> churn. sorted() se order fixed.
     sorted_aliases = sorted(complete_aliases)
     alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
@@ -1539,8 +1521,6 @@ def belgium_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # Changed By Hassam Nasir — run ke aakhir me naye translations disk par save,
-        # taake agli run cache se deterministic rahe (naam churn na ho).
         _save_translation_cache()
         logger.info("belgium PEP scraper completed successfully.")
         return clean_df

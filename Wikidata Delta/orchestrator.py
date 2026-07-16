@@ -150,9 +150,11 @@ COUNTRY_REGISTRY = {
 
     'np':             ('nepal',      'np_gen',   'nepal_pep_scrapper',    'nepal_pep_scrapper'), 
 
-    'netherlands':     ('netherlands', 'kg_nl_gen',   'netherlands_pep_scrapper',  'netherlands_pep_scrapper'), 
+    'netherlands':    ('kingdom-of-the-netherlands', 'kg_nl_gen',   'netherlands_pep_scrapper',  'netherlands_pep_scrapper'),
 
-    'nl':              ('netherlands', 'kg_nl_gen',   'netherlands_pep_scrapper', 'netherlands_pep_scrapper'), 
+    'nl':             ('kingdom-of-the-netherlands', 'kg_nl_gen',   'netherlands_pep_scrapper', 'netherlands_pep_scrapper'),
+
+    'kingdom-of-the-netherlands': ('kingdom-of-the-netherlands', 'kg_nl_gen',   'netherlands_pep_scrapper', 'netherlands_pep_scrapper'),
 
     'nigeria':        ('nigeria',    'ng_gen',   'nigeria_pep_scrapper',    'nigeria_pep_scrapper'), 
 
@@ -448,7 +450,6 @@ def run_delta_for_country(
         cnx_dict, cursor_dict = create_mysql_connection_dictionary(HOST, USER, PWD, DB, PORT)
 
         # ── Step 4.6: Retry any pending images in DB ──────────────────
-        # Changed By Hassam nasir — DISABLED in manual-upload mode (no image downloading).
         # process_pending_db_images() downloads URLs from Wikidata, which is exactly the
         # throttled work we are now avoiding. Images are handled manually via the emailed
         # <scraper_tag>_images_url_<date>.xlsx instead.

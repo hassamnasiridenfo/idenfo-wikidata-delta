@@ -36,8 +36,6 @@ LOG_FILE = BASE_DIR / "uz_gen_excels"/ "uzbekistan_pep.log"
 logger = logging.getLogger("uzbekistanPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
-    # Changed By Hassam Nasir — log ab LOG_FILE (uz_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
-    # handler = logging.FileHandler(os.path.join(BASE_DIR, "uzbekistan_pep.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",

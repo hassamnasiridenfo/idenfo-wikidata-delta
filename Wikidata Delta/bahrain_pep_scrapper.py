@@ -32,18 +32,6 @@ RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_bahrain_living_relevant_rca_looku
 COUNTRY_FILE = os.path.join(UTILS_DIR, "Updated CountryList.xlsx")
 LOG_FILE = BASE_DIR / "bh_gen_excels"/ "bh_pep_gen.log"
 
-# BASE_DIR = Path(__file__).parent.parent
-# CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-# os.makedirs(CLEANED_DIR, exist_ok=True)
-# RAW_DIR = os.path.join(BASE_DIR, "Raw")
-# os.makedirs(RAW_DIR, exist_ok=True)
-# # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# # CLEANED_DIR = BASE_DIR
-# # RAW_DIR = BASE_DIR
-# CLEAN_FILE_PATH = os.path.join(CLEANED_DIR, "pep_bahrain_living_relevant_cleaned.xlsx")
-# RAW_FILE_PATH = os.path.join(RAW_DIR, "pep_bahrain_living_relevant_raw.xlsx")
-# RCA_FILE_PATH = os.path.join(CLEANED_DIR, "pep_bahrain_living_relevant_rca_lookup.xlsx")
-
 logger = logging.getLogger("BahrainPEPScrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.INFO)
@@ -58,9 +46,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_bahrain_translation_cache.xlsx")
 
 
@@ -90,8 +75,6 @@ def cached_translate(text: str) -> str:
         result = _TRANSLATION_CACHE[key]
     else:
         result = translator.translate(key)
-    # unidecode se English-alphabet me likho. Cache/output clean ASCII rehta hai;
-    # cache-hit par bhi clean hota hai -> purani accented entries self-heal ho jati hain.
     if result and not str(result).isascii():
         result = unidecode(result)
     if result:
@@ -423,10 +406,6 @@ def get_raw_df(
     sheet: str = None, raw_file_path: str | None = None
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Load raw data, returning main df and separate RCA df"""
-    # Pehle get_sheet_df() bina raw_file_path ke call hoti thi.
-    # Orchestrator date-stamped file path deta hai → bahrain_pep_scrapper() global RAW_FILE_PATH set karta hai.
-    # Ab RAW_FILE_PATH global pass karte hain taake sahi file read ho.
-    # main_df = get_sheet_df(sheet="Main")  # old: ignored orchestrator path → file not found error
     main_df = get_sheet_df(sheet="Main", raw_file_path=RAW_FILE_PATH)
     dob_df = get_sheet_df(sheet="DOB", raw_file_path=RAW_FILE_PATH)
     nat_df = get_sheet_df(sheet="Nationality", raw_file_path=RAW_FILE_PATH)
@@ -887,8 +866,6 @@ def get_aliases(
         nonEngLabel_list.extend([e.strip() for e in extracted if e.strip()])
 
     aka_list = [re.sub(paren_pattern, "", alias).strip() for alias in aka_list]
-    # old: complete_aliases = set(); return list(complete_aliases) -> list(set) ka order har run
-    #      alag hota hai (hash randomization) = latent non-determinism. sorted() se deterministic.
     complete_aliases = set()
     for alias in aka_list + birthName_list + nativeName_list + nonEngLabel_list:
         clean_alias_str = clean_alias(alias)
@@ -1026,10 +1003,6 @@ def get_or_create_rca_id(
     formatted = format_name_value(entity_name)
     flat = flatten_list_value(formatted) if formatted else None
 
-    # lookup_key = normalize_rca_lookup_name(flat or entity_name)
-    # Masla: flat = translator.translate() ka result — har run alag ho sakta hai
-    # → alag key → existing entry nahi milti → naya random ID → re-insert cycle.
-    # Fix: entity_name (original, stable) se key banao.
     stable_key = normalize_rca_lookup_name(entity_name)
 
     if stable_key in lookup:
@@ -1129,7 +1102,6 @@ def build_rca_rows(
 
                 if rca_id not in created_ids:
                     # formatted_name = format_name_value(entity_name)  # old: translator — non-deterministic
-                    # Fix: agar cached name hai tou wahi use karo, warna translate karo aur cache mein save karo
                     if rca_id in id_to_name:
                         formatted_name = id_to_name[rca_id]
                     else:
@@ -1595,7 +1567,6 @@ def bahrain_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # is run me jo naye translations bane unhe cache file me save karo (agli run inhe reuse karegi)
         _save_translation_cache()
         logger.info("bahrain PEP scraper completed successfully.")
         return clean_df

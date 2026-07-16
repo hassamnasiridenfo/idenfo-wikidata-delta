@@ -324,7 +324,7 @@ def initalize_clean_df(raw_df_len: pd.DataFrame) -> pd.DataFrame:
             "List Category": [""] * num_rows,
             "List Type": ["Individual"] * num_rows,
             "Image Tag": [""] * num_rows,
-            "Scraper Tag": ["kg-nl-gen"] * num_rows,
+            "Scraper Tag": ["kg_nl_gen"] * num_rows,
             "Updated On": [""] * num_rows,
             "Added On": ["2026-02-10"] * num_rows,
             "Status": [1] * num_rows,

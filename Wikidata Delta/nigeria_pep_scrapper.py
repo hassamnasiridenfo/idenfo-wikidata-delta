@@ -839,7 +839,6 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    # -> alias sequence / empty-name fallback change -> churn. sorted() se order fixed.
     sorted_aliases = sorted(complete_aliases)
     alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 

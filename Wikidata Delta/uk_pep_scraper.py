@@ -26,14 +26,8 @@ METADATA = {
 
 SCRAPER_DIR = Path(__file__).parent
 SCRAPER_NAME = SCRAPER_DIR.name
-# BASE_DIR = SCRAPER_DIR.parent.parent
-# RAW_DIR = BASE_DIR / "Raw"
-# CLEANED_DIR = BASE_DIR / "Cleaned"
-# UTILS_DIR = BASE_DIR / "Util_excels"
 
-# Changed By Hassam Nasir — raw/cleaned apne uk_gen_excels folder mein; UTILS main folder mein (Updated CountryList.xlsx wahan hai)
-# RAW_DIR = SCRAPER_DIR
-# CLEANED_DIR = SCRAPER_DIR
+
 RAW_DIR = SCRAPER_DIR / "uk_gen_excels"
 CLEANED_DIR = SCRAPER_DIR / "uk_gen_excels"
 UTILS_DIR = SCRAPER_DIR
@@ -46,16 +40,9 @@ CLEANED_DIR.mkdir(parents=True, exist_ok=True)
 # ============================================
 # LOGGING SETUP (Scraper-specific log file)
 # ============================================
-# Changed By Hassam Nasir — log apne uk_gen_excels folder ke andar save ho
-# LOG_FILE = SCRAPER_DIR / f"{METADATA['Tag']}.log"
 LOG_FILE = CLEANED_DIR / f"{METADATA['Tag']}.log"
 translator = GoogleTranslator(source="auto", target="en")
 
-# Changed By Hassam Nasir
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se. unidecode: translate ke baad bhi non-English reh jaye to
-# English-alphabet me likho -> naam har run same -> re-insert (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_uk_translation_cache.xlsx")
 
 
@@ -952,8 +939,6 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    # Changed By Hassam Nasir — set() ka order har run par badalta tha (hash randomization)
-    # -> alias sequence / empty-name fallback change -> churn. sorted() se order fixed.
     sorted_aliases = sorted(complete_aliases)
     alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
@@ -1601,8 +1586,6 @@ def united_kingdom_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # Changed By Hassam Nasir — run ke aakhir me naye translations disk par save,
-        # taake agli run cache se deterministic rahe (naam churn na ho).
         _save_translation_cache()
         logger.info("united_kingdom  PEP scraper completed successfully.")
         return clean_df

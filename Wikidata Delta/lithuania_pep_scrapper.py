@@ -13,18 +13,13 @@ from datetime import datetime
 from ast import literal_eval
 
 
-# Ab BASE_DIR = scraper ka folder, aur RAW/CLEANED → scraper_tag folder lt_gen_excels.
-# BASE_DIR = Path(__file__).parent.parent
-# CLEANED_DIR = os.path.join(BASE_DIR, "Cleaned")
-# RAW_DIR = os.path.join(BASE_DIR, "Raw")
+
 BASE_DIR = Path(__file__).parent
 CLEANED_DIR = os.path.join(BASE_DIR, "lt_gen_excels")
 RAW_DIR = os.path.join(BASE_DIR, "lt_gen_excels")
 os.makedirs(CLEANED_DIR, exist_ok=True)
 os.makedirs(RAW_DIR, exist_ok=True)
-# BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# CLEANED_DIR = BASE_DIR
-# RAW_DIR = BASE_DIR
+
 CLEAN_FILE_PATH = os.path.join(
     CLEANED_DIR, "pep_lithuania_living_relevant_cleaned.xlsx"
 )
@@ -47,9 +42,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se, taake us naye record pe bhi baar-baar insertion (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_lithuania_translation_cache.xlsx")
 
 
@@ -1521,7 +1513,6 @@ def lithuania_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()  
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # taake agli run cache se deterministic rahe (churn na ho).
         _save_translation_cache()
         logger.info("lithuania PEP scraper completed successfully.")
         return clean_df

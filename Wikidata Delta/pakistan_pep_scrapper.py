@@ -47,11 +47,6 @@ if not logger.hasHandlers():
 
 translator = GoogleTranslator(source="auto", target="en")
 
-# Changed By Hassam Nasir
-# Translation cache: same source naam -> hamesha same English (deterministic) -> churn khatam.
-# Naya record aaye jiska translation cache me nahi -> ek baar translate karke cache me save ->
-# agli run me wahi cache se. unidecode: translate ke baad bhi non-English reh jaye to
-# English-alphabet me likho -> naam har run same -> re-insert (churn) na ho.
 TRANSLATION_CACHE_PATH = os.path.join(CLEANED_DIR, "pep_pakistan_translation_cache.xlsx")
 
 
@@ -769,8 +764,6 @@ def get_aliases(
         clean_alias_str = clean_alias(alias)
         if clean_alias_str:
             complete_aliases.add(clean_alias_str)
-    # Changed By Hassam Nasir — set() ka order har run par badalta tha (hash randomization)
-    # -> alias sequence / empty-name fallback change -> churn. sorted() se order fixed.
     sorted_aliases = sorted(complete_aliases)
     alias_types = [get_alias_type(alias) for alias in sorted_aliases]
 
@@ -1405,8 +1398,6 @@ def pakistan_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = get_clean_df()
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        # Changed By Hassam Nasir — run ke aakhir me naye translations disk par save,
-        # taake agli run cache se deterministic rahe (naam churn na ho).
         _save_translation_cache()
         logger.info("pakistan PEP scraper completed successfully.")
         return clean_df

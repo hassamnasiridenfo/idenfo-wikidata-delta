@@ -44,8 +44,6 @@ LOG_FILE = BASE_DIR / "ie_gen_excels"/ "ie_pep_gen.log"
 logger = logging.getLogger("Ireland_PEP_Scrapper")
 if not logger.hasHandlers():
     logger.setLevel(logging.DEBUG)
-    # Changed By Hassam Nasir — log ab LOG_FILE (ie_gen_excels) mein, pehle BASE_DIR (main folder) mein ja raha tha
-    # handler = logging.FileHandler(os.path.join(BASE_DIR, "ireland_pep_scrapper.log"))
     handler = logging.FileHandler(LOG_FILE)
     formatter = logging.Formatter(
         "\n%(asctime)s - %(levelname)s - %(name)s - %(message)s",
@@ -3413,11 +3411,7 @@ def common_cleaning(df):
     ]
 
     df.fillna("", inplace=True)
-    #Changed By Hassam Nasir
-    # Raw Wikidata endTime stores ongoing roles as the literal text ["None"]. That string survives
-    # into the Start/End Date lists and MySQL rejects 'None' for the DATE column (1292 error).
-    # Convert junk placeholders to real Python None (keeps list position aligned with Start Date,
-    # so each role's start/end stay paired) -> inserts as SQL NULL instead of crashing.
+   
     def _sanitise_date_list(value):
         if not isinstance(value, list):
             return value
@@ -3460,7 +3454,6 @@ def ireland_pep_scrapper(raw_file_path: str = None) -> pd.DataFrame:
         clean_df = pep_to_ireland44(RAW_FILE_PATH)
         clean_df = common_cleaning(clean_df)
         clean_df = replacements_for_delta(clean_df)
-        #Changed By Hassam Nasir
         clean_df.to_excel(CLEAN_XLSX, index=False)
         logger.info("ireland PEP scraper completed successfully.")
         return clean_df

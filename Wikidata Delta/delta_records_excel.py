@@ -158,11 +158,15 @@ def delta_excel_df_creator(log_file, cursor_dict, cnx_dict):
 
 
     # ── S3: delete images for status=0 records ─────────────────────
-    try:
-        from image_handler import delete_inactive_images
-        delete_inactive_images(df2, log_file, _log)
-    except Exception as _img_exc:
-        _log.warning('[IMAGE] delete_inactive_images failed: %s', _img_exc)
+    # TEST MODE (Hassam Nasir) — S3 image deletion TEMPORARILY DISABLED for testing (Netherlands).
+    # ⚠️ Testing ke baad neeche ka block DOBARA UNCOMMENT karna hai (warna prod mein
+    #    status=0 records ki S3 images delete nahi hongi).
+    _log.warning('[IMAGE][TEST MODE] delete_inactive_images SKIPPED — S3 images NOT deleted')
+    # try:
+    #     from image_handler import delete_inactive_images
+    #     delete_inactive_images(df2, log_file, _log)
+    # except Exception as _img_exc:
+    #     _log.warning('[IMAGE] delete_inactive_images failed: %s', _img_exc)
 
     df2.to_excel(os.path.join(output_dir, f"{log_file}_DELTA_{updated_on}.xlsx"),index=False
 )
