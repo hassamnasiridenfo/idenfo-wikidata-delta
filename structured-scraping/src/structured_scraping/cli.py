@@ -308,6 +308,47 @@ def _scrape_and_save(  # noqa: C901
             config=config,
         )
 
+        # ── Occupation/position filter (India / France / UK) — IN-PLACE ──
+        # Runs on the freshly-generated raw file, BEFORE the sentinel is
+        # removed (a filter failure leaves the sentinel → file stays unsafe).
+        # Writes a temp file then atomically replaces the original, so the raw
+        # keeps the SAME path and name (no new / renamed file is created).
+        _filter_key = country_name.strip().lower().replace("_", " ")
+        _FILTERED_COUNTRIES = {
+            "india", "france", "united kingdom", "uk", "gb", "great britain",
+        }
+        if _filter_key in _FILTERED_COUNTRIES:
+            _tmp = None
+            try:
+                import sys as _sys
+                _raw_base = os.getenv("DELTA_RAW_DATA_PATH")
+                _delta_dir = (
+                    str(Path(_raw_base).parent) if _raw_base
+                    else str(Path(output_path).parents[2])
+                )  # .../Wikidata Delta  (where excel_filter.py lives)
+                if _delta_dir not in _sys.path:
+                    _sys.path.insert(0, _delta_dir)
+                from excel_filter import filter_excel_file
+
+                _tmp = output_path.with_name(output_path.name + ".tmp")
+                filter_excel_file(output_path, _tmp, country=_filter_key)
+                os.replace(_tmp, output_path)   # atomic in-place, same name
+                click.echo(
+                    f"🔎 Occupation filter applied in-place: {output_path.name}"
+                )
+            except Exception as _fe:  # noqa: BLE001
+                if _tmp is not None:
+                    try:
+                        _tmp.unlink(missing_ok=True)
+                    except Exception:  # noqa: BLE001
+                        pass
+                click.echo(
+                    f"❌ Occupation filter failed for {_filter_key}: {_fe}",
+                    err=True,
+                )
+                # Sentinel intentionally NOT removed → raw marked unsafe.
+                return None
+
         # ── Remove sentinel ONLY on full success ─────────────────────────
         remove_sentinel(output_path)
         click.echo("🔓 Sentinel removed — extraction complete")

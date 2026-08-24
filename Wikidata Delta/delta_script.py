@@ -7,13 +7,18 @@ def delta_code(df, cursor, cnx,logger):
     new_df = pd.DataFrame(columns=df.columns)
     is_del_list_1 = []
 
+    # scraper_tag for this run — used to SCOPE the NULL<->'NULL' cleanup UPDATEs
+    # to THIS list's rows only, so other services' rows are never locked
+    # (table-wide UPDATE = cross-service lock). None (empty df) -> 0 rows, no-op.
+    scraper_tag = df["Scraper Tag"].iloc[0] if not df.empty and "Scraper Tag" in df.columns else None
+
     disable_safe_updates_query = "SET SQL_SAFE_UPDATES = 0;"
     cursor.execute(disable_safe_updates_query)
     cnx.commit()
 
     try:
-        query_status_change = """UPDATE `main` SET `name` = IFNULL(`name`, 'NULL'),`father_name` = IFNULL(`father_name`, 'NULL'),`gender` = IFNULL(`gender`, 'NULL'),`desc` = IFNULL(`desc`, 'NULL'),`head_bounty` = IFNULL(`head_bounty`, 'NULL'),`category` = IFNULL(`category`, 'NULL'),`source_list` = IFNULL(`source_list`, 'NULL'),`list_category` = IFNULL(`list_category`, 'NULL'),`list_type` = IFNULL(`list_type`, 'NULL'),`updated_on` = IFNULL(`updated_on`, '1890-01-01'),`added_on` = IFNULL(`added_on`, '1890-01-01'),`img_tag` = IFNULL(`img_tag`, 'NULL'),`scraper_tag` = IFNULL(`scraper_tag`, 'NULL'),`customer_id` = IFNULL(`customer_id`, 'NULL'),`date_exclusion` = IFNULL(`date_exclusion`, '1890-01-01'),`date_inclusion` = IFNULL(`date_inclusion`, '1890-01-01'),`deceased_dissolved_date` = IFNULL(`deceased_dissolved_date`, '1890-01-01'),`reg_date` = IFNULL(`reg_date`, '1890-01-01'),`extra_info` = IFNULL(`extra_info`, 'NULL'),`pob` = IFNULL(`pob`, 'NULL') WHERE `name` IS NULL OR `father_name` IS NULL OR `gender` IS NULL OR `desc` IS NULL OR `head_bounty` IS NULL OR `category` IS NULL OR `source_list` IS NULL OR `list_category` IS NULL OR `list_type` IS NULL OR `updated_on` IS NULL OR `added_on` IS NULL OR `img_tag` IS NULL OR `scraper_tag` IS NULL OR `customer_id` IS NULL OR `date_exclusion` IS NULL OR `date_inclusion` IS NULL OR`deceased_dissolved_date` IS NULL OR `reg_date` IS NULL OR `extra_info` IS NULL OR  `pob` IS NULL;"""
-        cursor.execute(query_status_change)
+        query_status_change = """UPDATE `main` SET `name` = IFNULL(`name`, 'NULL'),`father_name` = IFNULL(`father_name`, 'NULL'),`gender` = IFNULL(`gender`, 'NULL'),`desc` = IFNULL(`desc`, 'NULL'),`head_bounty` = IFNULL(`head_bounty`, 'NULL'),`category` = IFNULL(`category`, 'NULL'),`source_list` = IFNULL(`source_list`, 'NULL'),`list_category` = IFNULL(`list_category`, 'NULL'),`list_type` = IFNULL(`list_type`, 'NULL'),`updated_on` = IFNULL(`updated_on`, '1890-01-01'),`added_on` = IFNULL(`added_on`, '1890-01-01'),`img_tag` = IFNULL(`img_tag`, 'NULL'),`scraper_tag` = IFNULL(`scraper_tag`, 'NULL'),`customer_id` = IFNULL(`customer_id`, 'NULL'),`date_exclusion` = IFNULL(`date_exclusion`, '1890-01-01'),`date_inclusion` = IFNULL(`date_inclusion`, '1890-01-01'),`deceased_dissolved_date` = IFNULL(`deceased_dissolved_date`, '1890-01-01'),`reg_date` = IFNULL(`reg_date`, '1890-01-01'),`extra_info` = IFNULL(`extra_info`, 'NULL'),`pob` = IFNULL(`pob`, 'NULL') WHERE `scraper_tag` = %s AND (`name` IS NULL OR `father_name` IS NULL OR `gender` IS NULL OR `desc` IS NULL OR `head_bounty` IS NULL OR `category` IS NULL OR `source_list` IS NULL OR `list_category` IS NULL OR `list_type` IS NULL OR `updated_on` IS NULL OR `added_on` IS NULL OR `img_tag` IS NULL OR `scraper_tag` IS NULL OR `customer_id` IS NULL OR `date_exclusion` IS NULL OR `date_inclusion` IS NULL OR`deceased_dissolved_date` IS NULL OR `reg_date` IS NULL OR `extra_info` IS NULL OR  `pob` IS NULL);"""
+        cursor.execute(query_status_change, (scraper_tag,))
         cnx.commit()
     except Exception as e:
         logger.error(
@@ -21,8 +26,8 @@ def delta_code(df, cursor, cnx,logger):
         )
 
     try:
-        query_status_change = """UPDATE `case_details` SET `charges` = IFNULL(`charges`, 'NULL'),`case_details` = IFNULL(`case_details`, 'NULL'),`notification_ref` = IFNULL(`notification_ref`, 'NULL') WHERE `charges` IS NULL OR `case_details` IS NULL OR `notification_ref` IS NULL;"""
-        cursor.execute(query_status_change)
+        query_status_change = """UPDATE `case_details` c JOIN `main` m ON c.`main_id` = m.`main_id` SET c.`charges` = IFNULL(c.`charges`, 'NULL'), c.`case_details` = IFNULL(c.`case_details`, 'NULL'), c.`notification_ref` = IFNULL(c.`notification_ref`, 'NULL') WHERE m.`scraper_tag` = %s AND (c.`charges` IS NULL OR c.`case_details` IS NULL OR c.`notification_ref` IS NULL);"""
+        cursor.execute(query_status_change, (scraper_tag,))
         cnx.commit()
     except Exception as e:
         logger.error(
@@ -478,11 +483,11 @@ def delta_code(df, cursor, cnx,logger):
     disable_safe_updates_query = "SET SQL_SAFE_UPDATES = 0;"
     cursor.execute(disable_safe_updates_query)
     cnx.commit()
-    query_status_change = """UPDATE `main` SET `name` = NULLIF(`name`, 'NULL'), `father_name` = NULLIF(`father_name`, 'NULL'), `gender` = NULLIF(`gender`, 'NULL'), `desc` = NULLIF(`desc`, 'NULL'), `head_bounty` = NULLIF(`head_bounty`, 'NULL'), `category` = NULLIF(`category`, 'NULL'), `source_list` = NULLIF(`source_list`, 'NULL'), `list_category` = NULLIF(`list_category`, 'NULL'), `list_type` = NULLIF(`list_type`, 'NULL'), `updated_on` = NULLIF(`updated_on`, '1890-01-01'), `added_on` = NULLIF(`added_on`, '1890-01-01'), `img_tag` = NULLIF(`img_tag`, 'NULL'), `scraper_tag` = NULLIF(`scraper_tag`, 'NULL'), `customer_id` = NULLIF(`customer_id`, 'NULL'), `date_exclusion` = NULLIF(`date_exclusion`, '1890-01-01'), `date_inclusion` = NULLIF(`date_inclusion`, '1890-01-01'), `deceased_dissolved_date` = NULLIF(`deceased_dissolved_date`, '1890-01-01'), `reg_date` = NULLIF(`reg_date`, '1890-01-01'), `extra_info` = NULLIF(`extra_info`, 'NULL'), `pob` = NULLIF(`pob`, 'NULL') WHERE `name` = 'NULL' OR `father_name` = 'NULL' OR `gender` = 'NULL' OR `desc` = 'NULL' OR `head_bounty` = 'NULL' OR `category` = 'NULL' OR `source_list` = 'NULL' OR `list_category` = 'NULL' OR `list_type` = 'NULL' OR `updated_on` = '1890-01-01' OR `added_on` = '1890-01-01' OR `img_tag` = 'NULL' OR `scraper_tag` = 'NULL' OR `customer_id` = 'NULL' OR `date_exclusion` = '1890-01-01' OR `date_inclusion` = '1890-01-01' OR `deceased_dissolved_date` = '1890-01-01' OR `reg_date` = '1890-01-01' OR `extra_info` = 'NULL' OR `pob` = 'NULL';"""
-    cursor.execute(query_status_change)
+    query_status_change = """UPDATE `main` SET `name` = NULLIF(`name`, 'NULL'), `father_name` = NULLIF(`father_name`, 'NULL'), `gender` = NULLIF(`gender`, 'NULL'), `desc` = NULLIF(`desc`, 'NULL'), `head_bounty` = NULLIF(`head_bounty`, 'NULL'), `category` = NULLIF(`category`, 'NULL'), `source_list` = NULLIF(`source_list`, 'NULL'), `list_category` = NULLIF(`list_category`, 'NULL'), `list_type` = NULLIF(`list_type`, 'NULL'), `updated_on` = NULLIF(`updated_on`, '1890-01-01'), `added_on` = NULLIF(`added_on`, '1890-01-01'), `img_tag` = NULLIF(`img_tag`, 'NULL'), `scraper_tag` = NULLIF(`scraper_tag`, 'NULL'), `customer_id` = NULLIF(`customer_id`, 'NULL'), `date_exclusion` = NULLIF(`date_exclusion`, '1890-01-01'), `date_inclusion` = NULLIF(`date_inclusion`, '1890-01-01'), `deceased_dissolved_date` = NULLIF(`deceased_dissolved_date`, '1890-01-01'), `reg_date` = NULLIF(`reg_date`, '1890-01-01'), `extra_info` = NULLIF(`extra_info`, 'NULL'), `pob` = NULLIF(`pob`, 'NULL') WHERE `scraper_tag` = %s AND (`name` = 'NULL' OR `father_name` = 'NULL' OR `gender` = 'NULL' OR `desc` = 'NULL' OR `head_bounty` = 'NULL' OR `category` = 'NULL' OR `source_list` = 'NULL' OR `list_category` = 'NULL' OR `list_type` = 'NULL' OR `updated_on` = '1890-01-01' OR `added_on` = '1890-01-01' OR `img_tag` = 'NULL' OR `scraper_tag` = 'NULL' OR `customer_id` = 'NULL' OR `date_exclusion` = '1890-01-01' OR `date_inclusion` = '1890-01-01' OR `deceased_dissolved_date` = '1890-01-01' OR `reg_date` = '1890-01-01' OR `extra_info` = 'NULL' OR `pob` = 'NULL');"""
+    cursor.execute(query_status_change, (scraper_tag,))
     cnx.commit()
-    query_status_change = """UPDATE `case_details` SET `charges` = NULLIF(`charges`, 'NULL'), `case_details` = NULLIF(`case_details`, 'NULL'), `notification_ref` = NULLIF(`notification_ref`, 'NULL') WHERE `charges` = 'NULL' OR `case_details` = 'NULL' OR `notification_ref` = 'NULL';"""
-    cursor.execute(query_status_change)
+    query_status_change = """UPDATE `case_details` c JOIN `main` m ON c.`main_id` = m.`main_id` SET c.`charges` = NULLIF(c.`charges`, 'NULL'), c.`case_details` = NULLIF(c.`case_details`, 'NULL'), c.`notification_ref` = NULLIF(c.`notification_ref`, 'NULL') WHERE m.`scraper_tag` = %s AND (c.`charges` = 'NULL' OR c.`case_details` = 'NULL' OR c.`notification_ref` = 'NULL');"""
+    cursor.execute(query_status_change, (scraper_tag,))
     cnx.commit()
     if is_del_list_1:
         try:
