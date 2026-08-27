@@ -140,29 +140,14 @@ def delta_code(df, cursor, cnx,logger):
             else:
                 logger.info(f"[DELTA]   No existing record found by name+scraper_tag — treating as BRAND NEW.")
 
-            query_update_check = "SELECT main_id FROM main WHERE (name = %s) OR (father_name = %s) OR (gender = %s) OR (category = %s) OR (`desc` = %s) OR (source_list = %s) OR (list_category = %s) OR (list_type = %s) OR (updated_on = %s) OR (img_tag = %s) OR (scraper_tag = %s) OR (date_exclusion = %s) OR (date_inclusion = %s) OR (deceased_dissolved_status = %s) OR (deceased_dissolved_date = %s) OR (reg_date = %s) OR (status = %s) OR (pob = %s)"
-            values_update_check = (
-                row["Name"],
-                row["Father Name"],
-                row["Gender"],
-                row["Category"],
-                row["Description"],
-                row["Source List"],
-                row["List Category"],
-                row["List Type"],
-                row["Updated On"],
-                row["Image Tag"],
-                row["Scraper Tag"],
-                row["Date of Exclusion"],
-                row["Date of Inclusion"],
-                row["Deceased Dissolved Status"],
-                row["Deceased Dissolved Date"],
-                row["Registration Date"],
-                row["Status"],
-                row["Place of Birth"],
-            )
-            cursor.execute(query_update_check, values_update_check)
-            main_update_existss = cursor.fetchall()
+            # REMOVED (perf): the old 18-column OR-query
+            #   "SELECT main_id FROM main WHERE (name=%s) OR ... OR (pob=%s)"
+            # did a FULL main-table scan (minutes/record on big countries — no
+            # index can serve an 18-way OR). Its result (main_update_existss) was
+            # only read by the elif below, whose condition `main_existss is None`
+            # is ALWAYS False (fetchall() returns a list, never None), so it never
+            # fired — and both that elif and the else simply append the row to
+            # new_df. So the scan produced a value that was never used. Dropped.
 
         if main_existss:
             for ids in main_existss:
@@ -471,12 +456,9 @@ def delta_code(df, cursor, cnx,logger):
                 else:
                     continue
 
-        elif (main_update_existss is not None) and (main_existss is None):
-            logger.info(f"[DELTA]   '{name}' — OR-query matched but AND-query missed. Added to new_df.")
-            new_df = pd.concat([new_df, row.to_frame().transpose()], ignore_index=True)
-            continue
-
         else:
+            # AND-query missed -> brand-new record. (The removed OR-query used to
+            # gate a separate elif here, but it was dead code — see note above.)
             logger.info(f"[DELTA]   '{name}' — No match at all (truly new record). Added to new_df.")
             new_df = pd.concat([new_df, row.to_frame().transpose()], ignore_index=True)
 
