@@ -348,6 +348,15 @@ def get_raw_df(
     role_df = get_sheet_df(sheet="Role Type")
     rca_df = get_sheet_df(sheet="RCA")  # Keep separate
     logger.info("Raw data loaded successfully.")
+    # Ensure expected RCA relation columns exist. Wikidata (SPARQL) emits a
+    # relation column ONLY when at least one record has that relation, so sparse
+    # data (e.g. Qatar's single RCA record with no 'child') can miss columns and
+    # crash the direct accesses below (KeyError: 'childLabel'). Add any missing
+    # column as None (= that relation is simply absent).
+    for _rca_col in ("childLabel", "siblingLabel", "motherLabel", "spouseLabel",
+                     "relativeLabel", "significantPersonLabel"):
+        if _rca_col not in rca_df.columns:
+            rca_df[_rca_col] = None
     # remove familyLabel column from rca_df if exists
     if "familyLabel" in rca_df.columns:
         rca_df = rca_df.drop(columns=["familyLabel"])
