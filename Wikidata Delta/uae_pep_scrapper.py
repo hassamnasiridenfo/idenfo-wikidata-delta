@@ -346,6 +346,12 @@ def get_raw_df(
     case_df = get_sheet_df(sheet="Case Details")
     role_df = get_sheet_df(sheet="Role Type")
     rca_df = get_sheet_df(sheet="RCA")  # Keep separate
+    # Ensure expected RCA relation columns exist (Wikidata emits a relation
+    # column only when >=1 record has it; sparse data can miss them -> KeyError).
+    for _rca_col in ("childLabel", "siblingLabel", "motherLabel", "spouseLabel",
+                     "relativeLabel", "significantPersonLabel"):
+        if _rca_col not in rca_df.columns:
+            rca_df[_rca_col] = None
     logger.info("Raw data loaded successfully.")
     # remove familyLabel column from rca_df if exists
     if "familyLabel" in rca_df.columns:
