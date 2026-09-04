@@ -21,7 +21,7 @@ DB_TOTALS_QUERY = """
     FROM main
 """
 
-# changes by Hassam Nasir -- breakdown limited to THIS project's PEP lists
+# breakdown limited to THIS project's PEP lists
 # (scraper_tag ending in "_gen"; the `main` table is shared with other projects).
 # RCA rows (list_category 'Relative Close Associate') are folded into the
 # Politically Exposed Person count -- list_category is dropped from GROUP BY and
@@ -71,12 +71,12 @@ def _fetch_delta_breakdown(db_config, delta_date):
         cnx, cursor = create_mysql_connection_dictionary(**db_config)
         if not cnx or not cursor:
             return None
-        # changes by Hassam Nasir -- "%_gen" limits to this project's PEP scraper_tags
+        # "%_gen" limits to this project's PEP scraper_tags
         cursor.execute(DELTA_BREAKDOWN_QUERY, (delta_date, "%_gen"))
         rows = cursor.fetchall() or []
         return [{
             "scraper_tag":   r.get("scraper_tag") or "",
-            # changes by Hassam Nasir -- List Name comes from `category` (e.g. "General Bahrain")
+            # List Name comes from `category` (e.g. "General Bahrain")
             "list_name":     r.get("list_name") or "",
             "source_list":   r.get("source_list") or "",
             "list_category": r.get("list_category") or "",
