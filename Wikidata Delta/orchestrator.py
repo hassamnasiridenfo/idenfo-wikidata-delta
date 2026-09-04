@@ -398,6 +398,7 @@ def run_delta_for_country(
                 SMTP_PASSWORD,
                 EMAIL_SUBJECT,
                 FILE_PATHS,
+                db_config={"host": HOST_NAME, "user": USER, "password": PASSWORD, "database": DATABASE, "db_port": DB_PORT},
             )
             send_main_delta_logs(
                 EMAIL_FROM,
@@ -475,6 +476,7 @@ def run_delta_for_country(
         SMTP_PASSWORD,
         EMAIL_SUBJECT,
         FILE_PATHS,
+        db_config={"host": HOST_NAME, "user": USER, "password": PASSWORD, "database": DATABASE, "db_port": DB_PORT},
     )
         send_main_delta_logs(
         EMAIL_FROM,

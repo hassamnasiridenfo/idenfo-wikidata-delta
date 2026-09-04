@@ -339,7 +339,6 @@ def _handle_sparql_error(
     
     raise SPARQLError(error_info.message, endpoint_url, query) from exception
 
-# PROXY FUNCTION BY HASSAM NASIR
 # def _query_with_proxy(
 #     endpoint_url: str,
 #     query: str,

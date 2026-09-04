@@ -1,5 +1,4 @@
 # Emails the URL -> ID images Excel(s) for manual S3 upload
-# Created By Hassam nasir
 #
 # Mirrors sending_delta_excel_email.py but:
 #   - scans the per-tag folders for files named *_images_url_<date>.xlsx
